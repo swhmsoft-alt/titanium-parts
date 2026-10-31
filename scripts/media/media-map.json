@@ -1,1360 +1,6 @@
 {
   "_comment": "Media replacement work order. For each slot: set `file` to the incoming asset path relative to assets-incoming/, set `alt` to original copy, and keep `target` as the destination path under public/images/.",
-  "remote": {
-    "https://heletitanium.com/wp-content/uploads/2026/09/HeleTitanium_Website_Video_02_Clean_1080p.mp4": {
-      "file": "products/website-video-02-clean-1080p.webp",
-      "alt": "Website video 02 clean 1080p — production video still",
-      "target": "titanium-anode/website-video-02-clean-1080p.webp",
-      "usedIn": [
-        "pages/titanium-anode/index.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.mp4": {
-      "file": "products/titanium-products-manufacturer.webp",
-      "alt": "Titanium products manufacturer",
-      "target": "titanium-products/titanium-products-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/index.astro",
-        "pages/titanium-products/titanium-balls.astro",
-        "pages/titanium-products/titanium-baskets.astro",
-        "pages/titanium-products/titanium-bolts.astro",
-        "pages/titanium-products/titanium-clad-copper.astro",
-        "pages/titanium-products/titanium-coil.astro",
-        "pages/titanium-products/titanium-diaphragm.astro",
-        "pages/titanium-products/titanium-fittings.astro",
-        "pages/titanium-products/titanium-flanges.astro",
-        "pages/titanium-products/titanium-foil-2.astro",
-        "pages/titanium-products/titanium-forgings.astro",
-        "pages/titanium-products/titanium-mesh.astro",
-        "pages/titanium-products/titanium-plate.astro",
-        "pages/titanium-products/titanium-rod-bar.astro",
-        "pages/titanium-products/titanium-tubing.astro",
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Balls-Spheres-Hele-Titanium.webp": {
-      "file": "products/titanium-balls-spheres.webp",
-      "alt": "Titanium balls spheres",
-      "target": "titanium-products/titanium-balls-spheres.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Requirement-Review-Titanium-Supply.webp": {
-      "file": "products/requirement-review-titanium-supply.webp",
-      "alt": "Requirement review titanium supply at the Titanium Parts workshop",
-      "target": "titanium-products/requirement-review-titanium-supply.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro",
-        "pages/titanium-products/titanium-baskets.astro",
-        "pages/titanium-products/titanium-bolts.astro",
-        "pages/titanium-products/titanium-clad-copper.astro",
-        "pages/titanium-products/titanium-coil.astro",
-        "pages/titanium-products/titanium-diaphragm.astro",
-        "pages/titanium-products/titanium-fittings.astro",
-        "pages/titanium-products/titanium-flanges.astro",
-        "pages/titanium-products/titanium-foil-2.astro",
-        "pages/titanium-products/titanium-forgings.astro",
-        "pages/titanium-products/titanium-mesh.astro",
-        "pages/titanium-products/titanium-tubing.astro",
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Material-Identity-Verification.webp": {
-      "file": "products/material-identity-verification.webp",
-      "alt": "Material identity verification at the Titanium Parts workshop",
-      "target": "titanium-products/material-identity-verification.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro",
-        "pages/titanium-products/titanium-baskets.astro",
-        "pages/titanium-products/titanium-bolts.astro",
-        "pages/titanium-products/titanium-clad-copper.astro",
-        "pages/titanium-products/titanium-coil.astro",
-        "pages/titanium-products/titanium-diaphragm.astro",
-        "pages/titanium-products/titanium-fittings.astro",
-        "pages/titanium-products/titanium-flanges.astro",
-        "pages/titanium-products/titanium-foil-2.astro",
-        "pages/titanium-products/titanium-forgings.astro",
-        "pages/titanium-products/titanium-mesh.astro",
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Processing-Interface-Confirmation.webp": {
-      "file": "products/processing-interface-confirmation.webp",
-      "alt": "Processing interface confirmation at the Titanium Parts workshop",
-      "target": "titanium-products/processing-interface-confirmation.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro",
-        "pages/titanium-products/titanium-baskets.astro",
-        "pages/titanium-products/titanium-bolts.astro",
-        "pages/titanium-products/titanium-clad-copper.astro",
-        "pages/titanium-products/titanium-coil.astro",
-        "pages/titanium-products/titanium-diaphragm.astro",
-        "pages/titanium-products/titanium-fittings.astro",
-        "pages/titanium-products/titanium-flanges.astro",
-        "pages/titanium-products/titanium-foil-2.astro",
-        "pages/titanium-products/titanium-forgings.astro",
-        "pages/titanium-products/titanium-mesh.astro",
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Inspection-Documentation-Records.webp": {
-      "file": "products/inspection-documentation-records.webp",
-      "alt": "Inspection documentation records at the Titanium Parts workshop",
-      "target": "titanium-products/inspection-documentation-records.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro",
-        "pages/titanium-products/titanium-baskets.astro",
-        "pages/titanium-products/titanium-bolts.astro",
-        "pages/titanium-products/titanium-clad-copper.astro",
-        "pages/titanium-products/titanium-coil.astro",
-        "pages/titanium-products/titanium-diaphragm.astro",
-        "pages/titanium-products/titanium-fittings.astro",
-        "pages/titanium-products/titanium-flanges.astro",
-        "pages/titanium-products/titanium-foil-2.astro",
-        "pages/titanium-products/titanium-forgings.astro",
-        "pages/titanium-products/titanium-mesh.astro",
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marking-Packing-Release.webp": {
-      "file": "products/marking-packing-release.webp",
-      "alt": "Marking packing release at the Titanium Parts workshop",
-      "target": "titanium-products/marking-packing-release.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro",
-        "pages/titanium-products/titanium-baskets.astro",
-        "pages/titanium-products/titanium-bolts.astro",
-        "pages/titanium-products/titanium-clad-copper.astro",
-        "pages/titanium-products/titanium-coil.astro",
-        "pages/titanium-products/titanium-diaphragm.astro",
-        "pages/titanium-products/titanium-fittings.astro",
-        "pages/titanium-products/titanium-flanges.astro",
-        "pages/titanium-products/titanium-foil-2.astro",
-        "pages/titanium-products/titanium-forgings.astro",
-        "pages/titanium-products/titanium-mesh.astro",
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Plates-Sheets-Manufacturer.webp": {
-      "file": "products/titanium-plates-sheets-manufacturer.webp",
-      "alt": "Titanium plates sheets manufacturer",
-      "target": "titanium-products/titanium-plates-sheets-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro",
-        "pages/titanium-products/titanium-baskets.astro",
-        "pages/titanium-products/titanium-bolts.astro",
-        "pages/titanium-products/titanium-clad-copper.astro",
-        "pages/titanium-products/titanium-coil.astro",
-        "pages/titanium-products/titanium-diaphragm.astro",
-        "pages/titanium-products/titanium-fittings.astro",
-        "pages/titanium-products/titanium-flanges.astro",
-        "pages/titanium-products/titanium-foil-2.astro",
-        "pages/titanium-products/titanium-forgings.astro",
-        "pages/titanium-products/titanium-mesh.astro",
-        "pages/titanium-products/titanium-plate.astro",
-        "pages/titanium-products/titanium-plate.astro",
-        "pages/titanium-products/titanium-rod-bar.astro",
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Valve-Flow-Control-Ball.webp": {
-      "file": "products/valve-flow-control-ball.webp",
-      "alt": "Valve flow control ball — titanium component in service",
-      "target": "titanium-products/valve-flow-control-ball.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Bearing-Precision-Ball.webp": {
-      "file": "products/bearing-precision-ball.webp",
-      "alt": "Bearing precision ball — titanium component in service",
-      "target": "titanium-products/bearing-precision-ball.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Buoyancy-Hollow-Sphere.webp": {
-      "file": "products/buoyancy-hollow-sphere.webp",
-      "alt": "Buoyancy hollow sphere — titanium component in service",
-      "target": "titanium-products/buoyancy-hollow-sphere.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Implant-Ball.webp": {
-      "file": "products/medical-implant-ball.webp",
-      "alt": "Medical implant ball — titanium component in service",
-      "target": "titanium-products/medical-implant-ball.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Ball.webp": {
-      "file": "products/grade-2-titanium-ball.webp",
-      "alt": "Grade 2 titanium ball",
-      "target": "titanium-products/grade-2-titanium-ball.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Ball.webp": {
-      "file": "products/grade-5-titanium-ball.webp",
-      "alt": "Grade 5 titanium ball",
-      "target": "titanium-products/grade-5-titanium-ball.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Ball.webp": {
-      "file": "products/grade-7-titanium-ball.webp",
-      "alt": "Grade 7 titanium ball",
-      "target": "titanium-products/grade-7-titanium-ball.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Ball.webp": {
-      "file": "products/grade-23-titanium-ball.webp",
-      "alt": "Grade 23 titanium ball",
-      "target": "titanium-products/grade-23-titanium-ball.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-balls.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Anode-Basket-Hele-Titanium.webp": {
-      "file": "products/titanium-anode-basket.webp",
-      "alt": "Titanium anode basket",
-      "target": "titanium-products/titanium-anode-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electroplating-Line-Basket.webp": {
-      "file": "products/electroplating-line-basket.webp",
-      "alt": "Electroplating line basket — titanium component in service",
-      "target": "titanium-products/electroplating-line-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electrowinning-Basket.webp": {
-      "file": "products/electrowinning-basket.webp",
-      "alt": "Electrowinning basket — titanium component in service",
-      "target": "titanium-products/electrowinning-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Surface-Finishing-Basket.webp": {
-      "file": "products/surface-finishing-basket.webp",
-      "alt": "Surface finishing basket at the Titanium Parts workshop",
-      "target": "titanium-products/surface-finishing-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Pickling-Cleaning-Basket.webp": {
-      "file": "products/pickling-cleaning-basket.webp",
-      "alt": "Pickling cleaning basket — titanium product",
-      "target": "titanium-products/pickling-cleaning-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Titanium-Basket.webp": {
-      "file": "products/grade-1-titanium-basket.webp",
-      "alt": "Grade 1 titanium basket",
-      "target": "titanium-products/grade-1-titanium-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Basket.webp": {
-      "file": "products/grade-2-titanium-basket.webp",
-      "alt": "Grade 2 titanium basket",
-      "target": "titanium-products/grade-2-titanium-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Basket.webp": {
-      "file": "products/grade-7-titanium-basket.webp",
-      "alt": "Grade 7 titanium basket",
-      "target": "titanium-products/grade-7-titanium-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Basket.webp": {
-      "file": "products/grade-12-titanium-basket.webp",
-      "alt": "Grade 12 titanium basket",
-      "target": "titanium-products/grade-12-titanium-basket.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-baskets.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Industrial-Titanium-Fastener-Hele-Titanium.webp": {
-      "file": "products/industrial-titanium-fastener.webp",
-      "alt": "Industrial titanium fastener — titanium component in service",
-      "target": "titanium-products/industrial-titanium-fastener.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Plant-Fastener.webp": {
-      "file": "products/chemical-plant-fastener.webp",
-      "alt": "Chemical plant fastener — titanium component in service",
-      "target": "titanium-products/chemical-plant-fastener.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore-Fastener.webp": {
-      "file": "products/marine-offshore-fastener.webp",
-      "alt": "Marine offshore fastener — titanium component in service",
-      "target": "titanium-products/marine-offshore-fastener.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-Racing-Fastener.webp": {
-      "file": "products/aerospace-racing-fastener.webp",
-      "alt": "Aerospace racing fastener — titanium component in service",
-      "target": "titanium-products/aerospace-racing-fastener.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Device-Fastener.webp": {
-      "file": "products/medical-device-fastener.webp",
-      "alt": "Medical device fastener — titanium component in service",
-      "target": "titanium-products/medical-device-fastener.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Bolt.webp": {
-      "file": "products/grade-2-titanium-bolt.webp",
-      "alt": "Grade 2 titanium bolt",
-      "target": "titanium-products/grade-2-titanium-bolt.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Bolt.webp": {
-      "file": "products/grade-5-titanium-bolt.webp",
-      "alt": "Grade 5 titanium bolt",
-      "target": "titanium-products/grade-5-titanium-bolt.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Bolt.webp": {
-      "file": "products/grade-7-titanium-bolt.webp",
-      "alt": "Grade 7 titanium bolt",
-      "target": "titanium-products/grade-7-titanium-bolt.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Bolt.webp": {
-      "file": "products/grade-23-titanium-bolt.webp",
-      "alt": "Grade 23 titanium bolt",
-      "target": "titanium-products/grade-23-titanium-bolt.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-bolts.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Clad-Copper-Hele-Titanium.webp": {
-      "file": "products/titanium-clad-copper.webp",
-      "alt": "Titanium clad copper",
-      "target": "titanium-products/titanium-clad-copper.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electroplating-Clad-Copper.webp": {
-      "file": "products/electroplating-clad-copper.webp",
-      "alt": "Electroplating clad copper — titanium component in service",
-      "target": "titanium-products/electroplating-clad-copper.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chlor-Alkali-Clad-Copper.webp": {
-      "file": "products/chlor-alkali-clad-copper.webp",
-      "alt": "Chlor alkali clad copper — titanium product",
-      "target": "titanium-products/chlor-alkali-clad-copper.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electrowinning-Clad-Copper.webp": {
-      "file": "products/electrowinning-clad-copper.webp",
-      "alt": "Electrowinning clad copper — titanium component in service",
-      "target": "titanium-products/electrowinning-clad-copper.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Cathodic-Protection-Clad-Copper.webp": {
-      "file": "products/cathodic-protection-clad-copper.webp",
-      "alt": "Cathodic protection clad copper — titanium product",
-      "target": "titanium-products/cathodic-protection-clad-copper.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-2.webp": {
-      "file": "products/clad-copper-grade-2.webp",
-      "alt": "Clad copper grade 2",
-      "target": "titanium-products/clad-copper-grade-2.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-7.webp": {
-      "file": "products/clad-copper-grade-7.webp",
-      "alt": "Clad copper grade 7",
-      "target": "titanium-products/clad-copper-grade-7.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-12.webp": {
-      "file": "products/clad-copper-grade-12.webp",
-      "alt": "Clad copper grade 12",
-      "target": "titanium-products/clad-copper-grade-12.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-1.webp": {
-      "file": "products/clad-copper-grade-1.webp",
-      "alt": "Clad copper grade 1",
-      "target": "titanium-products/clad-copper-grade-1.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-clad-copper.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Foil-Manufacturer-Hele-Titanium.webp": {
-      "file": "products/titanium-foil-manufacturer.webp",
-      "alt": "Titanium foil manufacturer",
-      "target": "titanium-products/titanium-foil-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Welded-Tube-Production-Coil.webp": {
-      "file": "products/welded-tube-production-coil.webp",
-      "alt": "Welded tube production coil",
-      "target": "titanium-products/welded-tube-production-coil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Plate-Heat-Exchanger-Coil.webp": {
-      "file": "products/plate-heat-exchanger-coil.webp",
-      "alt": "Plate heat exchanger coil — titanium component in service",
-      "target": "titanium-products/plate-heat-exchanger-coil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electrochemical-Hydrogen-Coil.webp": {
-      "file": "products/electrochemical-hydrogen-coil.webp",
-      "alt": "Electrochemical hydrogen coil — titanium component in service",
-      "target": "titanium-products/electrochemical-hydrogen-coil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Processing-Coil.webp": {
-      "file": "products/chemical-processing-coil.webp",
-      "alt": "Chemical processing coil — titanium component in service",
-      "target": "titanium-products/chemical-processing-coil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Coil-Strip.webp": {
-      "file": "products/grade-2-titanium-coil-strip.webp",
-      "alt": "Grade 2 titanium coil strip",
-      "target": "titanium-products/grade-2-titanium-coil-strip.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Coil.webp": {
-      "file": "products/grade-5-ti-6al-4v-coil.webp",
-      "alt": "Grade 5 ti 6al 4v coil",
-      "target": "titanium-products/grade-5-ti-6al-4v-coil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Coil.webp": {
-      "file": "products/grade-7-titanium-coil.webp",
-      "alt": "Grade 7 titanium coil",
-      "target": "titanium-products/grade-7-titanium-coil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Coil.webp": {
-      "file": "products/grade-23-eli-coil.webp",
-      "alt": "Grade 23 eli coil",
-      "target": "titanium-products/grade-23-eli-coil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Diaphragm-Hele-Titanium.webp": {
-      "file": "products/titanium-diaphragm.webp",
-      "alt": "Titanium diaphragm",
-      "target": "titanium-products/titanium-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Audio-Acoustic-Diaphragm.webp": {
-      "file": "products/audio-acoustic-diaphragm.webp",
-      "alt": "Audio acoustic diaphragm — titanium component in service",
-      "target": "titanium-products/audio-acoustic-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Pressure-Sensor-Diaphragm.webp": {
-      "file": "products/pressure-sensor-diaphragm.webp",
-      "alt": "Pressure sensor diaphragm — titanium component in service",
-      "target": "titanium-products/pressure-sensor-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Industrial-Pump-Diaphragm.webp": {
-      "file": "products/industrial-pump-diaphragm.webp",
-      "alt": "Industrial pump diaphragm — titanium component in service",
-      "target": "titanium-products/industrial-pump-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Device-Diaphragm.webp": {
-      "file": "products/medical-device-diaphragm.webp",
-      "alt": "Medical device diaphragm — titanium component in service",
-      "target": "titanium-products/medical-device-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Titanium-Diaphragm.webp": {
-      "file": "products/grade-1-titanium-diaphragm.webp",
-      "alt": "Grade 1 titanium diaphragm",
-      "target": "titanium-products/grade-1-titanium-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Diaphragm.webp": {
-      "file": "products/grade-2-titanium-diaphragm.webp",
-      "alt": "Grade 2 titanium diaphragm",
-      "target": "titanium-products/grade-2-titanium-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Diaphragm.webp": {
-      "file": "products/grade-5-titanium-diaphragm.webp",
-      "alt": "Grade 5 titanium diaphragm",
-      "target": "titanium-products/grade-5-titanium-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Diaphragm.webp": {
-      "file": "products/grade-23-titanium-diaphragm.webp",
-      "alt": "Grade 23 titanium diaphragm",
-      "target": "titanium-products/grade-23-titanium-diaphragm.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-diaphragm.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Pipe-Fittings-Hele-Titanium.webp": {
-      "file": "products/titanium-pipe-fittings.webp",
-      "alt": "Titanium pipe fittings",
-      "target": "titanium-products/titanium-pipe-fittings.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Piping-Fitting.webp": {
-      "file": "products/chemical-piping-fitting.webp",
-      "alt": "Chemical piping fitting — titanium component in service",
-      "target": "titanium-products/chemical-piping-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Piping-Fitting.webp": {
-      "file": "products/marine-piping-fitting.webp",
-      "alt": "Marine piping fitting — titanium component in service",
-      "target": "titanium-products/marine-piping-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Pharma-Food-Fitting.webp": {
-      "file": "products/pharma-food-fitting.webp",
-      "alt": "Pharma food fitting — titanium component in service",
-      "target": "titanium-products/pharma-food-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Power-Desalination-Fitting.webp": {
-      "file": "products/power-desalination-fitting.webp",
-      "alt": "Power desalination fitting — titanium component in service",
-      "target": "titanium-products/power-desalination-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Fitting.webp": {
-      "file": "products/grade-2-titanium-fitting.webp",
-      "alt": "Grade 2 titanium fitting",
-      "target": "titanium-products/grade-2-titanium-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Fitting.webp": {
-      "file": "products/grade-5-titanium-fitting.webp",
-      "alt": "Grade 5 titanium fitting",
-      "target": "titanium-products/grade-5-titanium-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Fitting.webp": {
-      "file": "products/grade-7-titanium-fitting.webp",
-      "alt": "Grade 7 titanium fitting",
-      "target": "titanium-products/grade-7-titanium-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Fitting.webp": {
-      "file": "products/grade-12-titanium-fitting.webp",
-      "alt": "Grade 12 titanium fitting",
-      "target": "titanium-products/grade-12-titanium-fitting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-fittings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Pipe-Flange-Hele-Titanium.webp": {
-      "file": "products/titanium-pipe-flange.webp",
-      "alt": "Titanium pipe flange",
-      "target": "titanium-products/titanium-pipe-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Flange.webp": {
-      "file": "products/chemical-flange.webp",
-      "alt": "Chemical flange — titanium component in service",
-      "target": "titanium-products/chemical-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore-Flange.webp": {
-      "file": "products/marine-offshore-flange.webp",
-      "alt": "Marine offshore flange — titanium component in service",
-      "target": "titanium-products/marine-offshore-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Power-Desalination-Flange.webp": {
-      "file": "products/power-desalination-flange.webp",
-      "alt": "Power desalination flange — titanium component in service",
-      "target": "titanium-products/power-desalination-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Pharma-Food-Flange.webp": {
-      "file": "products/pharma-food-flange.webp",
-      "alt": "Pharma food flange — titanium component in service",
-      "target": "titanium-products/pharma-food-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Flange.webp": {
-      "file": "products/grade-2-titanium-flange.webp",
-      "alt": "Grade 2 titanium flange",
-      "target": "titanium-products/grade-2-titanium-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Flange.webp": {
-      "file": "products/grade-5-titanium-flange.webp",
-      "alt": "Grade 5 titanium flange",
-      "target": "titanium-products/grade-5-titanium-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Flange.webp": {
-      "file": "products/grade-7-titanium-flange.webp",
-      "alt": "Grade 7 titanium flange",
-      "target": "titanium-products/grade-7-titanium-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Flange.webp": {
-      "file": "products/grade-12-titanium-flange.webp",
-      "alt": "Grade 12 titanium flange",
-      "target": "titanium-products/grade-12-titanium-flange.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-flanges.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Foil-Manufacturer-HELE-Titanium.webp": {
-      "file": "products/titanium-foil-manufacturer.webp",
-      "alt": "Titanium foil manufacturer",
-      "target": "titanium-products/titanium-foil-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Speaker-Diaphragm-Foil.webp": {
-      "file": "products/speaker-diaphragm-foil.webp",
-      "alt": "Speaker diaphragm foil — titanium component in service",
-      "target": "titanium-products/speaker-diaphragm-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Energy-Storage-Foil.webp": {
-      "file": "products/energy-storage-foil.webp",
-      "alt": "Energy storage foil — titanium component in service",
-      "target": "titanium-products/energy-storage-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electronics-Shielding-Foil.webp": {
-      "file": "products/electronics-shielding-foil.webp",
-      "alt": "Electronics shielding foil — titanium component in service",
-      "target": "titanium-products/electronics-shielding-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Processing-Foil.webp": {
-      "file": "products/chemical-processing-foil.webp",
-      "alt": "Chemical processing foil — titanium component in service",
-      "target": "titanium-products/chemical-processing-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Foil.webp": {
-      "file": "products/grade-1-foil.webp",
-      "alt": "Grade 1 foil",
-      "target": "titanium-products/grade-1-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Foil.webp": {
-      "file": "products/grade-2-foil.webp",
-      "alt": "Grade 2 foil",
-      "target": "titanium-products/grade-2-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Foil.webp": {
-      "file": "products/grade-5-foil.webp",
-      "alt": "Grade 5 foil",
-      "target": "titanium-products/grade-5-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Foil.webp": {
-      "file": "products/grade-23-foil.webp",
-      "alt": "Grade 23 foil",
-      "target": "titanium-products/grade-23-foil.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-foil-2.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Custom-Titanium-Forgings-Hele-Titanium.webp": {
-      "file": "products/custom-titanium-forgings.webp",
-      "alt": "Custom titanium forgings — titanium component in service",
-      "target": "titanium-products/custom-titanium-forgings.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-Forging.webp": {
-      "file": "products/aerospace-forging.webp",
-      "alt": "Aerospace forging — titanium component in service",
-      "target": "titanium-products/aerospace-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Pressure-Forging.webp": {
-      "file": "products/chemical-pressure-forging.webp",
-      "alt": "Chemical pressure forging — titanium component in service",
-      "target": "titanium-products/chemical-pressure-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore-Forging.webp": {
-      "file": "products/marine-offshore-forging.webp",
-      "alt": "Marine offshore forging — titanium component in service",
-      "target": "titanium-products/marine-offshore-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Implant-Forging.webp": {
-      "file": "products/medical-implant-forging.webp",
-      "alt": "Medical implant forging — titanium component in service",
-      "target": "titanium-products/medical-implant-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Forging.webp": {
-      "file": "products/grade-2-titanium-forging.webp",
-      "alt": "Grade 2 titanium forging",
-      "target": "titanium-products/grade-2-titanium-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Forging.webp": {
-      "file": "products/grade-5-titanium-forging.webp",
-      "alt": "Grade 5 titanium forging",
-      "target": "titanium-products/grade-5-titanium-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Forging.webp": {
-      "file": "products/grade-7-titanium-forging.webp",
-      "alt": "Grade 7 titanium forging",
-      "target": "titanium-products/grade-7-titanium-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Forging.webp": {
-      "file": "products/grade-23-titanium-forging.webp",
-      "alt": "Grade 23 titanium forging",
-      "target": "titanium-products/grade-23-titanium-forging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-forgings.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Mesh-Manufacturer-Hele-Titanium.webp": {
-      "file": "products/titanium-mesh-manufacturer.webp",
-      "alt": "Titanium mesh manufacturer",
-      "target": "titanium-products/titanium-mesh-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electrochemical-Anode-Mesh.webp": {
-      "file": "products/electrochemical-anode-mesh.webp",
-      "alt": "Electrochemical anode mesh — titanium component in service",
-      "target": "titanium-products/electrochemical-anode-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Filtration-Mesh.webp": {
-      "file": "products/chemical-filtration-mesh.webp",
-      "alt": "Chemical filtration mesh — titanium component in service",
-      "target": "titanium-products/chemical-filtration-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Architectural-Decorative-Mesh.webp": {
-      "file": "products/architectural-decorative-mesh.webp",
-      "alt": "Architectural decorative mesh — titanium component in service",
-      "target": "titanium-products/architectural-decorative-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Bioprocessing-Mesh.webp": {
-      "file": "products/medical-bioprocessing-mesh.webp",
-      "alt": "Medical bioprocessing mesh — titanium component in service",
-      "target": "titanium-products/medical-bioprocessing-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Wire-Mesh.webp": {
-      "file": "products/grade-2-titanium-wire-mesh.webp",
-      "alt": "Grade 2 titanium wire mesh",
-      "target": "titanium-products/grade-2-titanium-wire-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Mesh.webp": {
-      "file": "products/grade-5-titanium-mesh.webp",
-      "alt": "Grade 5 titanium mesh",
-      "target": "titanium-products/grade-5-titanium-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Mesh.webp": {
-      "file": "products/grade-7-titanium-mesh.webp",
-      "alt": "Grade 7 titanium mesh",
-      "target": "titanium-products/grade-7-titanium-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Mesh.webp": {
-      "file": "products/grade-23-eli-mesh.webp",
-      "alt": "Grade 23 eli mesh",
-      "target": "titanium-products/grade-23-eli-mesh.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-mesh.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Sheet.webp": {
-      "file": "products/grade-2-titanium-sheet.webp",
-      "alt": "Grade 2 titanium sheet",
-      "target": "titanium-products/grade-2-titanium-sheet.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Plate-Sheet.webp": {
-      "file": "products/grade-5-ti-6al-4v-plate-sheet.webp",
-      "alt": "Grade 5 ti 6al 4v plate sheet",
-      "target": "titanium-products/grade-5-ti-6al-4v-plate-sheet.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Grade-Sheet.webp": {
-      "file": "products/marine-grade-sheet.webp",
-      "alt": "Marine grade sheet — titanium component in service",
-      "target": "titanium-products/marine-grade-sheet.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Medical-Sheet.webp": {
-      "file": "products/grade-23-eli-medical-sheet.webp",
-      "alt": "Grade 23 eli medical sheet",
-      "target": "titanium-products/grade-23-eli-medical-sheet.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Precision-Processing-Cutting.webp": {
-      "file": "products/precision-processing-cutting.webp",
-      "alt": "Precision processing cutting at the Titanium Parts workshop",
-      "target": "titanium-products/precision-processing-cutting.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Slab-Preparation-scaled.webp": {
-      "file": "products/titanium-slab-preparation-scaled.webp",
-      "alt": "Titanium slab preparation scaled",
-      "target": "titanium-products/titanium-slab-preparation-scaled.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Rolling-Precision.webp": {
-      "file": "products/rolling-precision.webp",
-      "alt": "Rolling precision at the Titanium Parts workshop",
-      "target": "titanium-products/rolling-precision.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Thermal-Surface-Integrity.webp": {
-      "file": "products/thermal-surface-integrity.webp",
-      "alt": "Thermal surface integrity — titanium product",
-      "target": "titanium-products/thermal-surface-integrity.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Inspection-Documentation.webp": {
-      "file": "products/inspection-documentation.webp",
-      "alt": "Inspection documentation at the Titanium Parts workshop",
-      "target": "titanium-products/inspection-documentation.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Final-Dimension-Packaging.webp": {
-      "file": "products/final-dimension-packaging.webp",
-      "alt": "Final dimension packaging at the Titanium Parts workshop",
-      "target": "titanium-products/final-dimension-packaging.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Processing01.webp": {
-      "file": "products/chemical-processing01.webp",
-      "alt": "Chemical processing01 — titanium component in service",
-      "target": "titanium-products/chemical-processing01.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro",
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore02.webp": {
-      "file": "products/marine-offshore02.webp",
-      "alt": "Marine offshore02 — titanium component in service",
-      "target": "titanium-products/marine-offshore02.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro",
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-High-Performance-Engineering04.webp": {
-      "file": "products/aerospace-high-performance-engineering04.webp",
-      "alt": "Aerospace high performance engineering04 — titanium component in service",
-      "target": "titanium-products/aerospace-high-performance-engineering04.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro",
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Precision-Engineering03.webp": {
-      "file": "products/medical-precision-engineering03.webp",
-      "alt": "Medical precision engineering03 — titanium component in service",
-      "target": "titanium-products/medical-precision-engineering03.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-plate.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Precision-Titanium-Rods-Bars-Manufacturer.webp": {
-      "file": "products/precision-titanium-rods-bars-manufacturer.webp",
-      "alt": "Precision titanium rods bars manufacturer",
-      "target": "titanium-products/precision-titanium-rods-bars-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Round-Bar-Rod.webp": {
-      "file": "products/titanium-round-bar-rod.webp",
-      "alt": "Titanium round bar rod",
-      "target": "titanium-products/titanium-round-bar-rod.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Precision-Ground-Titanium-Bar.webp": {
-      "file": "products/precision-ground-titanium-bar.webp",
-      "alt": "Precision ground titanium bar",
-      "target": "titanium-products/precision-ground-titanium-bar.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Hollow-Bar.webp": {
-      "file": "products/titanium-hollow-bar.webp",
-      "alt": "Titanium hollow bar",
-      "target": "titanium-products/titanium-hollow-bar.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Square-Rectangular-Bar.webp": {
-      "file": "products/titanium-square-rectangular-bar.webp",
-      "alt": "Titanium square rectangular bar",
-      "target": "titanium-products/titanium-square-rectangular-bar.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Hex-Bar-1.webp": {
-      "file": "products/titanium-hex-bar-1.webp",
-      "alt": "Titanium hex bar 1",
-      "target": "titanium-products/titanium-hex-bar-1.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Forged-Custom-Titanium-Bar.webp": {
-      "file": "products/forged-custom-titanium-bar.webp",
-      "alt": "Forged custom titanium bar",
-      "target": "titanium-products/forged-custom-titanium-bar.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/CNC-Machining-Precision-Components.webp": {
-      "file": "products/cnc-machining-precision-components.webp",
-      "alt": "Cnc machining precision components — titanium product",
-      "target": "titanium-products/cnc-machining-precision-components.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Grade-2-Round-Bar.webp": {
-      "file": "products/titanium-grade-2-round-bar.webp",
-      "alt": "Titanium grade 2 round bar",
-      "target": "titanium-products/titanium-grade-2-round-bar.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Rod.webp": {
-      "file": "products/grade-5-ti-6al-4v-rod.webp",
-      "alt": "Grade 5 ti 6al 4v rod",
-      "target": "titanium-products/grade-5-ti-6al-4v-rod.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Ti-Pd-Alloy-Rod.webp": {
-      "file": "products/grade-7-ti-pd-alloy-rod.webp",
-      "alt": "Grade 7 ti pd alloy rod",
-      "target": "titanium-products/grade-7-ti-pd-alloy-rod.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Grade-23-ELI-Rod.webp": {
-      "file": "products/medical-grade-23-eli-rod.webp",
-      "alt": "Medical grade 23 eli rod — titanium component in service",
-      "target": "titanium-products/medical-grade-23-eli-rod.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-rod-bar.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Tube-Pipe-Manufacturer-1.webp": {
-      "file": "products/titanium-tube-pipe-manufacturer-1.webp",
-      "alt": "Titanium tube pipe manufacturer 1",
-      "target": "titanium-products/titanium-tube-pipe-manufacturer-1.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Heat-Exchanger-Tube.webp": {
-      "file": "products/heat-exchanger-tube.webp",
-      "alt": "Heat exchanger tube — titanium component in service",
-      "target": "titanium-products/heat-exchanger-tube.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro",
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Seamless-Pipe.webp": {
-      "file": "products/titanium-seamless-pipe.webp",
-      "alt": "Titanium seamless pipe",
-      "target": "titanium-products/titanium-seamless-pipe.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Welded-Pipe.webp": {
-      "file": "products/titanium-welded-pipe.webp",
-      "alt": "Titanium welded pipe",
-      "target": "titanium-products/titanium-welded-pipe.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-Thin-Wall-Tube.webp": {
-      "file": "products/aerospace-thin-wall-tube.webp",
-      "alt": "Aerospace thin wall tube — titanium component in service",
-      "target": "titanium-products/aerospace-thin-wall-tube.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Capillary-Tube.webp": {
-      "file": "products/titanium-capillary-tube.webp",
-      "alt": "Titanium capillary tube",
-      "target": "titanium-products/titanium-capillary-tube.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Square-Rectangular-Tube.webp": {
-      "file": "products/square-rectangular-tube.webp",
-      "alt": "Square rectangular tube — titanium component in service",
-      "target": "titanium-products/square-rectangular-tube.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Custom-Fabricated-U-Bend.webp": {
-      "file": "products/custom-fabricated-u-bend.webp",
-      "alt": "Custom fabricated u bend — titanium component in service",
-      "target": "titanium-products/custom-fabricated-u-bend.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Seamless-Welded-Route.webp": {
-      "file": "products/seamless-welded-route.webp",
-      "alt": "Seamless welded route at the Titanium Parts workshop",
-      "target": "titanium-products/seamless-welded-route.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Sizing-Fabrication-Tube.webp": {
-      "file": "products/sizing-fabrication-tube.webp",
-      "alt": "Sizing fabrication tube at the Titanium Parts workshop",
-      "target": "titanium-products/sizing-fabrication-tube.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Inspection-Tests-Tube.webp": {
-      "file": "products/inspection-tests-tube.webp",
-      "alt": "Inspection tests tube — titanium product",
-      "target": "titanium-products/inspection-tests-tube.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Marking-Release-Tube.webp": {
-      "file": "products/marking-release-tube.webp",
-      "alt": "Marking release tube at the Titanium Parts workshop",
-      "target": "titanium-products/marking-release-tube.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.webp": {
-      "file": "products/titanium-products-manufacturer.webp",
-      "alt": "Titanium products manufacturer",
-      "target": "titanium-products/titanium-products-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Heat-Exchangers-Condensers.png": {
-      "file": "products/heat-exchangers-condensers.webp",
-      "alt": "Heat exchangers condensers — titanium component in service",
-      "target": "titanium-products/heat-exchangers-condensers.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Petrochemical-Processing.webp": {
-      "file": "products/chemical-petrochemical-processing.webp",
-      "alt": "Chemical petrochemical processing — titanium component in service",
-      "target": "titanium-products/chemical-petrochemical-processing.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Have-a-Non-Standard-Requirement.webp": {
-      "file": "products/have-a-non-standard-requirement.webp",
-      "alt": "Have a non standard requirement — titanium component in service",
-      "target": "titanium-products/have-a-non-standard-requirement.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Wire-Manufacturer-Hele-Titanium.webp": {
-      "file": "products/titanium-wire-manufacturer.webp",
-      "alt": "Titanium wire manufacturer",
-      "target": "titanium-products/titanium-wire-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Welding-Fabrication-Wire.webp": {
-      "file": "products/welding-fabrication-wire.webp",
-      "alt": "Welding fabrication wire — titanium product",
-      "target": "titanium-products/welding-fabrication-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Device-Wire.webp": {
-      "file": "products/medical-device-wire.webp",
-      "alt": "Medical device wire — titanium component in service",
-      "target": "titanium-products/medical-device-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Electroplating-Anodizing-Wire.webp": {
-      "file": "products/electroplating-anodizing-wire.webp",
-      "alt": "Electroplating anodizing wire — titanium component in service",
-      "target": "titanium-products/electroplating-anodizing-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Spring-Forming-Wire.webp": {
-      "file": "products/spring-forming-wire.webp",
-      "alt": "Spring forming wire — titanium product",
-      "target": "titanium-products/spring-forming-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Wire.webp": {
-      "file": "products/grade-2-titanium-wire.webp",
-      "alt": "Grade 2 titanium wire",
-      "target": "titanium-products/grade-2-titanium-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Wire.webp": {
-      "file": "products/grade-5-ti-6al-4v-wire.webp",
-      "alt": "Grade 5 ti 6al 4v wire",
-      "target": "titanium-products/grade-5-ti-6al-4v-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Wire.webp": {
-      "file": "products/grade-7-titanium-wire.webp",
-      "alt": "Grade 7 titanium wire",
-      "target": "titanium-products/grade-7-titanium-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    },
-    "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Wire.webp": {
-      "file": "products/grade-23-eli-wire.webp",
-      "alt": "Grade 23 eli wire",
-      "target": "titanium-products/grade-23-eli-wire.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-wire.astro"
-      ]
-    }
-  },
+  "remote": {},
   "local": {
     "/images/og-default.jpg": {
       "file": "products/og-default.webp",
@@ -2258,6 +904,1351 @@
       "target": "service/engineering-review.webp",
       "usedIn": [
         "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/titanium-anode/website-video-02-clean-1080p.mp4": {
+      "file": "local/website-video-02-clean-1080p.mp4",
+      "alt": "Website video 02 clean 1080p — production video still",
+      "target": "titanium-anode/website-video-02-clean-1080p.mp4",
+      "usedIn": [
+        "pages/titanium-anode/index.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-products-manufacturer.mp4": {
+      "file": "local/titanium-products-manufacturer.mp4",
+      "alt": "Titanium products manufacturer",
+      "target": "titanium-products/titanium-products-manufacturer.mp4",
+      "usedIn": [
+        "pages/titanium-products/index.astro",
+        "pages/titanium-products/titanium-balls.astro",
+        "pages/titanium-products/titanium-baskets.astro",
+        "pages/titanium-products/titanium-bolts.astro",
+        "pages/titanium-products/titanium-clad-copper.astro",
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-diaphragm.astro",
+        "pages/titanium-products/titanium-fittings.astro",
+        "pages/titanium-products/titanium-flanges.astro",
+        "pages/titanium-products/titanium-foil-2.astro",
+        "pages/titanium-products/titanium-forgings.astro",
+        "pages/titanium-products/titanium-mesh.astro",
+        "pages/titanium-products/titanium-plate.astro",
+        "pages/titanium-products/titanium-rod-bar.astro",
+        "pages/titanium-products/titanium-tubing.astro",
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-balls-spheres.webp": {
+      "file": "local/titanium-balls-spheres.webp",
+      "alt": "Titanium balls spheres",
+      "target": "titanium-products/titanium-balls-spheres.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/requirement-review-titanium-supply.webp": {
+      "file": "local/requirement-review-titanium-supply.webp",
+      "alt": "Requirement review titanium supply at the Titanium Parts workshop",
+      "target": "titanium-products/requirement-review-titanium-supply.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro",
+        "pages/titanium-products/titanium-baskets.astro",
+        "pages/titanium-products/titanium-bolts.astro",
+        "pages/titanium-products/titanium-clad-copper.astro",
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-diaphragm.astro",
+        "pages/titanium-products/titanium-fittings.astro",
+        "pages/titanium-products/titanium-flanges.astro",
+        "pages/titanium-products/titanium-foil-2.astro",
+        "pages/titanium-products/titanium-forgings.astro",
+        "pages/titanium-products/titanium-mesh.astro",
+        "pages/titanium-products/titanium-tubing.astro",
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/material-identity-verification.webp": {
+      "file": "local/material-identity-verification.webp",
+      "alt": "Material identity verification at the Titanium Parts workshop",
+      "target": "titanium-products/material-identity-verification.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro",
+        "pages/titanium-products/titanium-baskets.astro",
+        "pages/titanium-products/titanium-bolts.astro",
+        "pages/titanium-products/titanium-clad-copper.astro",
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-diaphragm.astro",
+        "pages/titanium-products/titanium-fittings.astro",
+        "pages/titanium-products/titanium-flanges.astro",
+        "pages/titanium-products/titanium-foil-2.astro",
+        "pages/titanium-products/titanium-forgings.astro",
+        "pages/titanium-products/titanium-mesh.astro",
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/processing-interface-confirmation.webp": {
+      "file": "local/processing-interface-confirmation.webp",
+      "alt": "Processing interface confirmation at the Titanium Parts workshop",
+      "target": "titanium-products/processing-interface-confirmation.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro",
+        "pages/titanium-products/titanium-baskets.astro",
+        "pages/titanium-products/titanium-bolts.astro",
+        "pages/titanium-products/titanium-clad-copper.astro",
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-diaphragm.astro",
+        "pages/titanium-products/titanium-fittings.astro",
+        "pages/titanium-products/titanium-flanges.astro",
+        "pages/titanium-products/titanium-foil-2.astro",
+        "pages/titanium-products/titanium-forgings.astro",
+        "pages/titanium-products/titanium-mesh.astro",
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/inspection-documentation-records.webp": {
+      "file": "local/inspection-documentation-records.webp",
+      "alt": "Inspection documentation records at the Titanium Parts workshop",
+      "target": "titanium-products/inspection-documentation-records.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro",
+        "pages/titanium-products/titanium-baskets.astro",
+        "pages/titanium-products/titanium-bolts.astro",
+        "pages/titanium-products/titanium-clad-copper.astro",
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-diaphragm.astro",
+        "pages/titanium-products/titanium-fittings.astro",
+        "pages/titanium-products/titanium-flanges.astro",
+        "pages/titanium-products/titanium-foil-2.astro",
+        "pages/titanium-products/titanium-forgings.astro",
+        "pages/titanium-products/titanium-mesh.astro",
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/marking-packing-release.webp": {
+      "file": "local/marking-packing-release.webp",
+      "alt": "Marking packing release at the Titanium Parts workshop",
+      "target": "titanium-products/marking-packing-release.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro",
+        "pages/titanium-products/titanium-baskets.astro",
+        "pages/titanium-products/titanium-bolts.astro",
+        "pages/titanium-products/titanium-clad-copper.astro",
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-diaphragm.astro",
+        "pages/titanium-products/titanium-fittings.astro",
+        "pages/titanium-products/titanium-flanges.astro",
+        "pages/titanium-products/titanium-foil-2.astro",
+        "pages/titanium-products/titanium-forgings.astro",
+        "pages/titanium-products/titanium-mesh.astro",
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-plates-sheets-manufacturer.webp": {
+      "file": "local/titanium-plates-sheets-manufacturer.webp",
+      "alt": "Titanium plates sheets manufacturer",
+      "target": "titanium-products/titanium-plates-sheets-manufacturer.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro",
+        "pages/titanium-products/titanium-baskets.astro",
+        "pages/titanium-products/titanium-bolts.astro",
+        "pages/titanium-products/titanium-clad-copper.astro",
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-diaphragm.astro",
+        "pages/titanium-products/titanium-fittings.astro",
+        "pages/titanium-products/titanium-flanges.astro",
+        "pages/titanium-products/titanium-foil-2.astro",
+        "pages/titanium-products/titanium-forgings.astro",
+        "pages/titanium-products/titanium-mesh.astro",
+        "pages/titanium-products/titanium-plate.astro",
+        "pages/titanium-products/titanium-plate.astro",
+        "pages/titanium-products/titanium-rod-bar.astro",
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/valve-flow-control-ball.webp": {
+      "file": "local/valve-flow-control-ball.webp",
+      "alt": "Valve flow control ball — titanium component in service",
+      "target": "titanium-products/valve-flow-control-ball.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/bearing-precision-ball.webp": {
+      "file": "local/bearing-precision-ball.webp",
+      "alt": "Bearing precision ball — titanium component in service",
+      "target": "titanium-products/bearing-precision-ball.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/buoyancy-hollow-sphere.webp": {
+      "file": "local/buoyancy-hollow-sphere.webp",
+      "alt": "Buoyancy hollow sphere — titanium component in service",
+      "target": "titanium-products/buoyancy-hollow-sphere.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/medical-implant-ball.webp": {
+      "file": "local/medical-implant-ball.webp",
+      "alt": "Medical implant ball — titanium component in service",
+      "target": "titanium-products/medical-implant-ball.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-ball.webp": {
+      "file": "local/grade-2-titanium-ball.webp",
+      "alt": "Grade 2 titanium ball",
+      "target": "titanium-products/grade-2-titanium-ball.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-titanium-ball.webp": {
+      "file": "local/grade-5-titanium-ball.webp",
+      "alt": "Grade 5 titanium ball",
+      "target": "titanium-products/grade-5-titanium-ball.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-ball.webp": {
+      "file": "local/grade-7-titanium-ball.webp",
+      "alt": "Grade 7 titanium ball",
+      "target": "titanium-products/grade-7-titanium-ball.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-titanium-ball.webp": {
+      "file": "local/grade-23-titanium-ball.webp",
+      "alt": "Grade 23 titanium ball",
+      "target": "titanium-products/grade-23-titanium-ball.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-balls.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-anode-basket.webp": {
+      "file": "local/titanium-anode-basket.webp",
+      "alt": "Titanium anode basket",
+      "target": "titanium-products/titanium-anode-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/electroplating-line-basket.webp": {
+      "file": "local/electroplating-line-basket.webp",
+      "alt": "Electroplating line basket — titanium component in service",
+      "target": "titanium-products/electroplating-line-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/electrowinning-basket.webp": {
+      "file": "local/electrowinning-basket.webp",
+      "alt": "Electrowinning basket — titanium component in service",
+      "target": "titanium-products/electrowinning-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/surface-finishing-basket.webp": {
+      "file": "local/surface-finishing-basket.webp",
+      "alt": "Surface finishing basket at the Titanium Parts workshop",
+      "target": "titanium-products/surface-finishing-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/pickling-cleaning-basket.webp": {
+      "file": "local/pickling-cleaning-basket.webp",
+      "alt": "Pickling cleaning basket — titanium product",
+      "target": "titanium-products/pickling-cleaning-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/grade-1-titanium-basket.webp": {
+      "file": "local/grade-1-titanium-basket.webp",
+      "alt": "Grade 1 titanium basket",
+      "target": "titanium-products/grade-1-titanium-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-basket.webp": {
+      "file": "local/grade-2-titanium-basket.webp",
+      "alt": "Grade 2 titanium basket",
+      "target": "titanium-products/grade-2-titanium-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-basket.webp": {
+      "file": "local/grade-7-titanium-basket.webp",
+      "alt": "Grade 7 titanium basket",
+      "target": "titanium-products/grade-7-titanium-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/grade-12-titanium-basket.webp": {
+      "file": "local/grade-12-titanium-basket.webp",
+      "alt": "Grade 12 titanium basket",
+      "target": "titanium-products/grade-12-titanium-basket.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-baskets.astro"
+      ]
+    },
+    "/images/titanium-products/industrial-titanium-fastener.webp": {
+      "file": "local/industrial-titanium-fastener.webp",
+      "alt": "Industrial titanium fastener — titanium component in service",
+      "target": "titanium-products/industrial-titanium-fastener.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-plant-fastener.webp": {
+      "file": "local/chemical-plant-fastener.webp",
+      "alt": "Chemical plant fastener — titanium component in service",
+      "target": "titanium-products/chemical-plant-fastener.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/marine-offshore-fastener.webp": {
+      "file": "local/marine-offshore-fastener.webp",
+      "alt": "Marine offshore fastener — titanium component in service",
+      "target": "titanium-products/marine-offshore-fastener.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/aerospace-racing-fastener.webp": {
+      "file": "local/aerospace-racing-fastener.webp",
+      "alt": "Aerospace racing fastener — titanium component in service",
+      "target": "titanium-products/aerospace-racing-fastener.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/medical-device-fastener.webp": {
+      "file": "local/medical-device-fastener.webp",
+      "alt": "Medical device fastener — titanium component in service",
+      "target": "titanium-products/medical-device-fastener.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-bolt.webp": {
+      "file": "local/grade-2-titanium-bolt.webp",
+      "alt": "Grade 2 titanium bolt",
+      "target": "titanium-products/grade-2-titanium-bolt.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-titanium-bolt.webp": {
+      "file": "local/grade-5-titanium-bolt.webp",
+      "alt": "Grade 5 titanium bolt",
+      "target": "titanium-products/grade-5-titanium-bolt.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-bolt.webp": {
+      "file": "local/grade-7-titanium-bolt.webp",
+      "alt": "Grade 7 titanium bolt",
+      "target": "titanium-products/grade-7-titanium-bolt.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-titanium-bolt.webp": {
+      "file": "local/grade-23-titanium-bolt.webp",
+      "alt": "Grade 23 titanium bolt",
+      "target": "titanium-products/grade-23-titanium-bolt.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-bolts.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-clad-copper.webp": {
+      "file": "local/titanium-clad-copper.webp",
+      "alt": "Titanium clad copper",
+      "target": "titanium-products/titanium-clad-copper.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/electroplating-clad-copper.webp": {
+      "file": "local/electroplating-clad-copper.webp",
+      "alt": "Electroplating clad copper — titanium component in service",
+      "target": "titanium-products/electroplating-clad-copper.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/chlor-alkali-clad-copper.webp": {
+      "file": "local/chlor-alkali-clad-copper.webp",
+      "alt": "Chlor alkali clad copper — titanium product",
+      "target": "titanium-products/chlor-alkali-clad-copper.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/electrowinning-clad-copper.webp": {
+      "file": "local/electrowinning-clad-copper.webp",
+      "alt": "Electrowinning clad copper — titanium component in service",
+      "target": "titanium-products/electrowinning-clad-copper.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/cathodic-protection-clad-copper.webp": {
+      "file": "local/cathodic-protection-clad-copper.webp",
+      "alt": "Cathodic protection clad copper — titanium product",
+      "target": "titanium-products/cathodic-protection-clad-copper.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/clad-copper-grade-2.webp": {
+      "file": "local/clad-copper-grade-2.webp",
+      "alt": "Clad copper grade 2",
+      "target": "titanium-products/clad-copper-grade-2.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/clad-copper-grade-7.webp": {
+      "file": "local/clad-copper-grade-7.webp",
+      "alt": "Clad copper grade 7",
+      "target": "titanium-products/clad-copper-grade-7.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/clad-copper-grade-12.webp": {
+      "file": "local/clad-copper-grade-12.webp",
+      "alt": "Clad copper grade 12",
+      "target": "titanium-products/clad-copper-grade-12.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/clad-copper-grade-1.webp": {
+      "file": "local/clad-copper-grade-1.webp",
+      "alt": "Clad copper grade 1",
+      "target": "titanium-products/clad-copper-grade-1.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-clad-copper.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-foil-manufacturer.webp": {
+      "file": "local/titanium-foil-manufacturer.webp",
+      "alt": "Titanium foil manufacturer",
+      "target": "titanium-products/titanium-foil-manufacturer.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/welded-tube-production-coil.webp": {
+      "file": "local/welded-tube-production-coil.webp",
+      "alt": "Welded tube production coil",
+      "target": "titanium-products/welded-tube-production-coil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/plate-heat-exchanger-coil.webp": {
+      "file": "local/plate-heat-exchanger-coil.webp",
+      "alt": "Plate heat exchanger coil — titanium component in service",
+      "target": "titanium-products/plate-heat-exchanger-coil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/electrochemical-hydrogen-coil.webp": {
+      "file": "local/electrochemical-hydrogen-coil.webp",
+      "alt": "Electrochemical hydrogen coil — titanium component in service",
+      "target": "titanium-products/electrochemical-hydrogen-coil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-processing-coil.webp": {
+      "file": "local/chemical-processing-coil.webp",
+      "alt": "Chemical processing coil — titanium component in service",
+      "target": "titanium-products/chemical-processing-coil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-coil-strip.webp": {
+      "file": "local/grade-2-titanium-coil-strip.webp",
+      "alt": "Grade 2 titanium coil strip",
+      "target": "titanium-products/grade-2-titanium-coil-strip.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-ti-6al-4v-coil.webp": {
+      "file": "local/grade-5-ti-6al-4v-coil.webp",
+      "alt": "Grade 5 ti 6al 4v coil",
+      "target": "titanium-products/grade-5-ti-6al-4v-coil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-coil.webp": {
+      "file": "local/grade-7-titanium-coil.webp",
+      "alt": "Grade 7 titanium coil",
+      "target": "titanium-products/grade-7-titanium-coil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-eli-coil.webp": {
+      "file": "local/grade-23-eli-coil.webp",
+      "alt": "Grade 23 eli coil",
+      "target": "titanium-products/grade-23-eli-coil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-coil.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-diaphragm.webp": {
+      "file": "local/titanium-diaphragm.webp",
+      "alt": "Titanium diaphragm",
+      "target": "titanium-products/titanium-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/audio-acoustic-diaphragm.webp": {
+      "file": "local/audio-acoustic-diaphragm.webp",
+      "alt": "Audio acoustic diaphragm — titanium component in service",
+      "target": "titanium-products/audio-acoustic-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/pressure-sensor-diaphragm.webp": {
+      "file": "local/pressure-sensor-diaphragm.webp",
+      "alt": "Pressure sensor diaphragm — titanium component in service",
+      "target": "titanium-products/pressure-sensor-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/industrial-pump-diaphragm.webp": {
+      "file": "local/industrial-pump-diaphragm.webp",
+      "alt": "Industrial pump diaphragm — titanium component in service",
+      "target": "titanium-products/industrial-pump-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/medical-device-diaphragm.webp": {
+      "file": "local/medical-device-diaphragm.webp",
+      "alt": "Medical device diaphragm — titanium component in service",
+      "target": "titanium-products/medical-device-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/grade-1-titanium-diaphragm.webp": {
+      "file": "local/grade-1-titanium-diaphragm.webp",
+      "alt": "Grade 1 titanium diaphragm",
+      "target": "titanium-products/grade-1-titanium-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-diaphragm.webp": {
+      "file": "local/grade-2-titanium-diaphragm.webp",
+      "alt": "Grade 2 titanium diaphragm",
+      "target": "titanium-products/grade-2-titanium-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-titanium-diaphragm.webp": {
+      "file": "local/grade-5-titanium-diaphragm.webp",
+      "alt": "Grade 5 titanium diaphragm",
+      "target": "titanium-products/grade-5-titanium-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-titanium-diaphragm.webp": {
+      "file": "local/grade-23-titanium-diaphragm.webp",
+      "alt": "Grade 23 titanium diaphragm",
+      "target": "titanium-products/grade-23-titanium-diaphragm.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-diaphragm.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-pipe-fittings.webp": {
+      "file": "local/titanium-pipe-fittings.webp",
+      "alt": "Titanium pipe fittings",
+      "target": "titanium-products/titanium-pipe-fittings.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-piping-fitting.webp": {
+      "file": "local/chemical-piping-fitting.webp",
+      "alt": "Chemical piping fitting — titanium component in service",
+      "target": "titanium-products/chemical-piping-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/marine-piping-fitting.webp": {
+      "file": "local/marine-piping-fitting.webp",
+      "alt": "Marine piping fitting — titanium component in service",
+      "target": "titanium-products/marine-piping-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/pharma-food-fitting.webp": {
+      "file": "local/pharma-food-fitting.webp",
+      "alt": "Pharma food fitting — titanium component in service",
+      "target": "titanium-products/pharma-food-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/power-desalination-fitting.webp": {
+      "file": "local/power-desalination-fitting.webp",
+      "alt": "Power desalination fitting — titanium component in service",
+      "target": "titanium-products/power-desalination-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-fitting.webp": {
+      "file": "local/grade-2-titanium-fitting.webp",
+      "alt": "Grade 2 titanium fitting",
+      "target": "titanium-products/grade-2-titanium-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-titanium-fitting.webp": {
+      "file": "local/grade-5-titanium-fitting.webp",
+      "alt": "Grade 5 titanium fitting",
+      "target": "titanium-products/grade-5-titanium-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-fitting.webp": {
+      "file": "local/grade-7-titanium-fitting.webp",
+      "alt": "Grade 7 titanium fitting",
+      "target": "titanium-products/grade-7-titanium-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-12-titanium-fitting.webp": {
+      "file": "local/grade-12-titanium-fitting.webp",
+      "alt": "Grade 12 titanium fitting",
+      "target": "titanium-products/grade-12-titanium-fitting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-fittings.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-pipe-flange.webp": {
+      "file": "local/titanium-pipe-flange.webp",
+      "alt": "Titanium pipe flange",
+      "target": "titanium-products/titanium-pipe-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-flange.webp": {
+      "file": "local/chemical-flange.webp",
+      "alt": "Chemical flange — titanium component in service",
+      "target": "titanium-products/chemical-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/marine-offshore-flange.webp": {
+      "file": "local/marine-offshore-flange.webp",
+      "alt": "Marine offshore flange — titanium component in service",
+      "target": "titanium-products/marine-offshore-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/power-desalination-flange.webp": {
+      "file": "local/power-desalination-flange.webp",
+      "alt": "Power desalination flange — titanium component in service",
+      "target": "titanium-products/power-desalination-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/pharma-food-flange.webp": {
+      "file": "local/pharma-food-flange.webp",
+      "alt": "Pharma food flange — titanium component in service",
+      "target": "titanium-products/pharma-food-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-flange.webp": {
+      "file": "local/grade-2-titanium-flange.webp",
+      "alt": "Grade 2 titanium flange",
+      "target": "titanium-products/grade-2-titanium-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-titanium-flange.webp": {
+      "file": "local/grade-5-titanium-flange.webp",
+      "alt": "Grade 5 titanium flange",
+      "target": "titanium-products/grade-5-titanium-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-flange.webp": {
+      "file": "local/grade-7-titanium-flange.webp",
+      "alt": "Grade 7 titanium flange",
+      "target": "titanium-products/grade-7-titanium-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/grade-12-titanium-flange.webp": {
+      "file": "local/grade-12-titanium-flange.webp",
+      "alt": "Grade 12 titanium flange",
+      "target": "titanium-products/grade-12-titanium-flange.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-flanges.astro"
+      ]
+    },
+    "/images/titanium-products/speaker-diaphragm-foil.webp": {
+      "file": "local/speaker-diaphragm-foil.webp",
+      "alt": "Speaker diaphragm foil — titanium component in service",
+      "target": "titanium-products/speaker-diaphragm-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/energy-storage-foil.webp": {
+      "file": "local/energy-storage-foil.webp",
+      "alt": "Energy storage foil — titanium component in service",
+      "target": "titanium-products/energy-storage-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/electronics-shielding-foil.webp": {
+      "file": "local/electronics-shielding-foil.webp",
+      "alt": "Electronics shielding foil — titanium component in service",
+      "target": "titanium-products/electronics-shielding-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-processing-foil.webp": {
+      "file": "local/chemical-processing-foil.webp",
+      "alt": "Chemical processing foil — titanium component in service",
+      "target": "titanium-products/chemical-processing-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/grade-1-foil.webp": {
+      "file": "local/grade-1-foil.webp",
+      "alt": "Grade 1 foil",
+      "target": "titanium-products/grade-1-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-foil.webp": {
+      "file": "local/grade-2-foil.webp",
+      "alt": "Grade 2 foil",
+      "target": "titanium-products/grade-2-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-foil.webp": {
+      "file": "local/grade-5-foil.webp",
+      "alt": "Grade 5 foil",
+      "target": "titanium-products/grade-5-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-foil.webp": {
+      "file": "local/grade-23-foil.webp",
+      "alt": "Grade 23 foil",
+      "target": "titanium-products/grade-23-foil.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-foil-2.astro"
+      ]
+    },
+    "/images/titanium-products/custom-titanium-forgings.webp": {
+      "file": "local/custom-titanium-forgings.webp",
+      "alt": "Custom titanium forgings — titanium component in service",
+      "target": "titanium-products/custom-titanium-forgings.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/aerospace-forging.webp": {
+      "file": "local/aerospace-forging.webp",
+      "alt": "Aerospace forging — titanium component in service",
+      "target": "titanium-products/aerospace-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-pressure-forging.webp": {
+      "file": "local/chemical-pressure-forging.webp",
+      "alt": "Chemical pressure forging — titanium component in service",
+      "target": "titanium-products/chemical-pressure-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/marine-offshore-forging.webp": {
+      "file": "local/marine-offshore-forging.webp",
+      "alt": "Marine offshore forging — titanium component in service",
+      "target": "titanium-products/marine-offshore-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/medical-implant-forging.webp": {
+      "file": "local/medical-implant-forging.webp",
+      "alt": "Medical implant forging — titanium component in service",
+      "target": "titanium-products/medical-implant-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-forging.webp": {
+      "file": "local/grade-2-titanium-forging.webp",
+      "alt": "Grade 2 titanium forging",
+      "target": "titanium-products/grade-2-titanium-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-titanium-forging.webp": {
+      "file": "local/grade-5-titanium-forging.webp",
+      "alt": "Grade 5 titanium forging",
+      "target": "titanium-products/grade-5-titanium-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-forging.webp": {
+      "file": "local/grade-7-titanium-forging.webp",
+      "alt": "Grade 7 titanium forging",
+      "target": "titanium-products/grade-7-titanium-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-titanium-forging.webp": {
+      "file": "local/grade-23-titanium-forging.webp",
+      "alt": "Grade 23 titanium forging",
+      "target": "titanium-products/grade-23-titanium-forging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-forgings.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-mesh-manufacturer.webp": {
+      "file": "local/titanium-mesh-manufacturer.webp",
+      "alt": "Titanium mesh manufacturer",
+      "target": "titanium-products/titanium-mesh-manufacturer.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/electrochemical-anode-mesh.webp": {
+      "file": "local/electrochemical-anode-mesh.webp",
+      "alt": "Electrochemical anode mesh — titanium component in service",
+      "target": "titanium-products/electrochemical-anode-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-filtration-mesh.webp": {
+      "file": "local/chemical-filtration-mesh.webp",
+      "alt": "Chemical filtration mesh — titanium component in service",
+      "target": "titanium-products/chemical-filtration-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/architectural-decorative-mesh.webp": {
+      "file": "local/architectural-decorative-mesh.webp",
+      "alt": "Architectural decorative mesh — titanium component in service",
+      "target": "titanium-products/architectural-decorative-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/medical-bioprocessing-mesh.webp": {
+      "file": "local/medical-bioprocessing-mesh.webp",
+      "alt": "Medical bioprocessing mesh — titanium component in service",
+      "target": "titanium-products/medical-bioprocessing-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-wire-mesh.webp": {
+      "file": "local/grade-2-titanium-wire-mesh.webp",
+      "alt": "Grade 2 titanium wire mesh",
+      "target": "titanium-products/grade-2-titanium-wire-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-titanium-mesh.webp": {
+      "file": "local/grade-5-titanium-mesh.webp",
+      "alt": "Grade 5 titanium mesh",
+      "target": "titanium-products/grade-5-titanium-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-mesh.webp": {
+      "file": "local/grade-7-titanium-mesh.webp",
+      "alt": "Grade 7 titanium mesh",
+      "target": "titanium-products/grade-7-titanium-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-eli-mesh.webp": {
+      "file": "local/grade-23-eli-mesh.webp",
+      "alt": "Grade 23 eli mesh",
+      "target": "titanium-products/grade-23-eli-mesh.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-mesh.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-sheet.webp": {
+      "file": "local/grade-2-titanium-sheet.webp",
+      "alt": "Grade 2 titanium sheet",
+      "target": "titanium-products/grade-2-titanium-sheet.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-ti-6al-4v-plate-sheet.webp": {
+      "file": "local/grade-5-ti-6al-4v-plate-sheet.webp",
+      "alt": "Grade 5 ti 6al 4v plate sheet",
+      "target": "titanium-products/grade-5-ti-6al-4v-plate-sheet.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/marine-grade-sheet.webp": {
+      "file": "local/marine-grade-sheet.webp",
+      "alt": "Marine grade sheet — titanium component in service",
+      "target": "titanium-products/marine-grade-sheet.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-eli-medical-sheet.webp": {
+      "file": "local/grade-23-eli-medical-sheet.webp",
+      "alt": "Grade 23 eli medical sheet",
+      "target": "titanium-products/grade-23-eli-medical-sheet.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/precision-processing-cutting.webp": {
+      "file": "local/precision-processing-cutting.webp",
+      "alt": "Precision processing cutting at the Titanium Parts workshop",
+      "target": "titanium-products/precision-processing-cutting.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-slab-preparation-scaled.webp": {
+      "file": "local/titanium-slab-preparation-scaled.webp",
+      "alt": "Titanium slab preparation scaled",
+      "target": "titanium-products/titanium-slab-preparation-scaled.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/rolling-precision.webp": {
+      "file": "local/rolling-precision.webp",
+      "alt": "Rolling precision at the Titanium Parts workshop",
+      "target": "titanium-products/rolling-precision.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/thermal-surface-integrity.webp": {
+      "file": "local/thermal-surface-integrity.webp",
+      "alt": "Thermal surface integrity — titanium product",
+      "target": "titanium-products/thermal-surface-integrity.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/inspection-documentation.webp": {
+      "file": "local/inspection-documentation.webp",
+      "alt": "Inspection documentation at the Titanium Parts workshop",
+      "target": "titanium-products/inspection-documentation.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/final-dimension-packaging.webp": {
+      "file": "local/final-dimension-packaging.webp",
+      "alt": "Final dimension packaging at the Titanium Parts workshop",
+      "target": "titanium-products/final-dimension-packaging.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-processing01.webp": {
+      "file": "local/chemical-processing01.webp",
+      "alt": "Chemical processing01 — titanium component in service",
+      "target": "titanium-products/chemical-processing01.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro",
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/marine-offshore02.webp": {
+      "file": "local/marine-offshore02.webp",
+      "alt": "Marine offshore02 — titanium component in service",
+      "target": "titanium-products/marine-offshore02.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro",
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/aerospace-high-performance-engineering04.webp": {
+      "file": "local/aerospace-high-performance-engineering04.webp",
+      "alt": "Aerospace high performance engineering04 — titanium component in service",
+      "target": "titanium-products/aerospace-high-performance-engineering04.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro",
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/medical-precision-engineering03.webp": {
+      "file": "local/medical-precision-engineering03.webp",
+      "alt": "Medical precision engineering03 — titanium component in service",
+      "target": "titanium-products/medical-precision-engineering03.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-plate.astro"
+      ]
+    },
+    "/images/titanium-products/precision-titanium-rods-bars-manufacturer.webp": {
+      "file": "local/precision-titanium-rods-bars-manufacturer.webp",
+      "alt": "Precision titanium rods bars manufacturer",
+      "target": "titanium-products/precision-titanium-rods-bars-manufacturer.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-round-bar-rod.webp": {
+      "file": "local/titanium-round-bar-rod.webp",
+      "alt": "Titanium round bar rod",
+      "target": "titanium-products/titanium-round-bar-rod.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/precision-ground-titanium-bar.webp": {
+      "file": "local/precision-ground-titanium-bar.webp",
+      "alt": "Precision ground titanium bar",
+      "target": "titanium-products/precision-ground-titanium-bar.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-hollow-bar.webp": {
+      "file": "local/titanium-hollow-bar.webp",
+      "alt": "Titanium hollow bar",
+      "target": "titanium-products/titanium-hollow-bar.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-square-rectangular-bar.webp": {
+      "file": "local/titanium-square-rectangular-bar.webp",
+      "alt": "Titanium square rectangular bar",
+      "target": "titanium-products/titanium-square-rectangular-bar.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-hex-bar-1.webp": {
+      "file": "local/titanium-hex-bar-1.webp",
+      "alt": "Titanium hex bar 1",
+      "target": "titanium-products/titanium-hex-bar-1.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/forged-custom-titanium-bar.webp": {
+      "file": "local/forged-custom-titanium-bar.webp",
+      "alt": "Forged custom titanium bar",
+      "target": "titanium-products/forged-custom-titanium-bar.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/cnc-machining-precision-components.webp": {
+      "file": "local/cnc-machining-precision-components.webp",
+      "alt": "Cnc machining precision components — titanium product",
+      "target": "titanium-products/cnc-machining-precision-components.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-grade-2-round-bar.webp": {
+      "file": "local/titanium-grade-2-round-bar.webp",
+      "alt": "Titanium grade 2 round bar",
+      "target": "titanium-products/titanium-grade-2-round-bar.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-ti-6al-4v-rod.webp": {
+      "file": "local/grade-5-ti-6al-4v-rod.webp",
+      "alt": "Grade 5 ti 6al 4v rod",
+      "target": "titanium-products/grade-5-ti-6al-4v-rod.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-ti-pd-alloy-rod.webp": {
+      "file": "local/grade-7-ti-pd-alloy-rod.webp",
+      "alt": "Grade 7 ti pd alloy rod",
+      "target": "titanium-products/grade-7-ti-pd-alloy-rod.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/medical-grade-23-eli-rod.webp": {
+      "file": "local/medical-grade-23-eli-rod.webp",
+      "alt": "Medical grade 23 eli rod — titanium component in service",
+      "target": "titanium-products/medical-grade-23-eli-rod.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-rod-bar.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-tube-pipe-manufacturer-1.webp": {
+      "file": "local/titanium-tube-pipe-manufacturer-1.webp",
+      "alt": "Titanium tube pipe manufacturer 1",
+      "target": "titanium-products/titanium-tube-pipe-manufacturer-1.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/heat-exchanger-tube.webp": {
+      "file": "local/heat-exchanger-tube.webp",
+      "alt": "Heat exchanger tube — titanium component in service",
+      "target": "titanium-products/heat-exchanger-tube.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro",
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-seamless-pipe.webp": {
+      "file": "local/titanium-seamless-pipe.webp",
+      "alt": "Titanium seamless pipe",
+      "target": "titanium-products/titanium-seamless-pipe.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-welded-pipe.webp": {
+      "file": "local/titanium-welded-pipe.webp",
+      "alt": "Titanium welded pipe",
+      "target": "titanium-products/titanium-welded-pipe.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/aerospace-thin-wall-tube.webp": {
+      "file": "local/aerospace-thin-wall-tube.webp",
+      "alt": "Aerospace thin wall tube — titanium component in service",
+      "target": "titanium-products/aerospace-thin-wall-tube.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-capillary-tube.webp": {
+      "file": "local/titanium-capillary-tube.webp",
+      "alt": "Titanium capillary tube",
+      "target": "titanium-products/titanium-capillary-tube.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/square-rectangular-tube.webp": {
+      "file": "local/square-rectangular-tube.webp",
+      "alt": "Square rectangular tube — titanium component in service",
+      "target": "titanium-products/square-rectangular-tube.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/custom-fabricated-u-bend.webp": {
+      "file": "local/custom-fabricated-u-bend.webp",
+      "alt": "Custom fabricated u bend — titanium component in service",
+      "target": "titanium-products/custom-fabricated-u-bend.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/seamless-welded-route.webp": {
+      "file": "local/seamless-welded-route.webp",
+      "alt": "Seamless welded route at the Titanium Parts workshop",
+      "target": "titanium-products/seamless-welded-route.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/sizing-fabrication-tube.webp": {
+      "file": "local/sizing-fabrication-tube.webp",
+      "alt": "Sizing fabrication tube at the Titanium Parts workshop",
+      "target": "titanium-products/sizing-fabrication-tube.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/inspection-tests-tube.webp": {
+      "file": "local/inspection-tests-tube.webp",
+      "alt": "Inspection tests tube — titanium product",
+      "target": "titanium-products/inspection-tests-tube.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/marking-release-tube.webp": {
+      "file": "local/marking-release-tube.webp",
+      "alt": "Marking release tube at the Titanium Parts workshop",
+      "target": "titanium-products/marking-release-tube.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-products-manufacturer.webp": {
+      "file": "local/titanium-products-manufacturer.webp",
+      "alt": "Titanium products manufacturer",
+      "target": "titanium-products/titanium-products-manufacturer.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/heat-exchangers-condensers.webp": {
+      "file": "local/heat-exchangers-condensers.webp",
+      "alt": "Heat exchangers condensers — titanium component in service",
+      "target": "titanium-products/heat-exchangers-condensers.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/chemical-petrochemical-processing.webp": {
+      "file": "local/chemical-petrochemical-processing.webp",
+      "alt": "Chemical petrochemical processing — titanium component in service",
+      "target": "titanium-products/chemical-petrochemical-processing.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/have-a-non-standard-requirement.webp": {
+      "file": "local/have-a-non-standard-requirement.webp",
+      "alt": "Have a non standard requirement — titanium component in service",
+      "target": "titanium-products/have-a-non-standard-requirement.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-tubing.astro"
+      ]
+    },
+    "/images/titanium-products/titanium-wire-manufacturer.webp": {
+      "file": "local/titanium-wire-manufacturer.webp",
+      "alt": "Titanium wire manufacturer",
+      "target": "titanium-products/titanium-wire-manufacturer.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/welding-fabrication-wire.webp": {
+      "file": "local/welding-fabrication-wire.webp",
+      "alt": "Welding fabrication wire — titanium product",
+      "target": "titanium-products/welding-fabrication-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/medical-device-wire.webp": {
+      "file": "local/medical-device-wire.webp",
+      "alt": "Medical device wire — titanium component in service",
+      "target": "titanium-products/medical-device-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/electroplating-anodizing-wire.webp": {
+      "file": "local/electroplating-anodizing-wire.webp",
+      "alt": "Electroplating anodizing wire — titanium component in service",
+      "target": "titanium-products/electroplating-anodizing-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/spring-forming-wire.webp": {
+      "file": "local/spring-forming-wire.webp",
+      "alt": "Spring forming wire — titanium product",
+      "target": "titanium-products/spring-forming-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/grade-2-titanium-wire.webp": {
+      "file": "local/grade-2-titanium-wire.webp",
+      "alt": "Grade 2 titanium wire",
+      "target": "titanium-products/grade-2-titanium-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/grade-5-ti-6al-4v-wire.webp": {
+      "file": "local/grade-5-ti-6al-4v-wire.webp",
+      "alt": "Grade 5 ti 6al 4v wire",
+      "target": "titanium-products/grade-5-ti-6al-4v-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/grade-7-titanium-wire.webp": {
+      "file": "local/grade-7-titanium-wire.webp",
+      "alt": "Grade 7 titanium wire",
+      "target": "titanium-products/grade-7-titanium-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/grade-23-eli-wire.webp": {
+      "file": "local/grade-23-eli-wire.webp",
+      "alt": "Grade 23 eli wire",
+      "target": "titanium-products/grade-23-eli-wire.webp",
+      "usedIn": [
+        "pages/titanium-products/titanium-wire.astro"
       ]
     }
   }
