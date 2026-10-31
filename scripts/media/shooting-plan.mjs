@@ -74,9 +74,68 @@ const rows = parseCsv(fs.readFileSync(CSV_FILE, 'utf8'));
  *
  *   video     — a video clip
  *   matrix    — one of several grades of the same product form
- *   process   — a shared production/inspection step, used across pages
- *   unique    — a specific application shot
+ *   process   — a shared production/inspection step
+ *   form      — a product form, photographed once and reused across the
+ *               sectors it appears in (a titanium sheet shot serves both
+ *               the chemical and the marine page)
+ *   unique    — a shot that genuinely stands on its own
  */
+
+/** Product forms, matched from the tail of the file name. */
+const FORMS = [
+  'sheet',
+  'plate',
+  'coil',
+  'strip',
+  'bar',
+  'rod',
+  'tube',
+  'pipe',
+  'wire',
+  'mesh',
+  'ball',
+  'sphere',
+  'bolt',
+  'fastener',
+  'basket',
+  'diaphragm',
+  'fitting',
+  'flange',
+  'forging',
+  'foil',
+  'clad-copper',
+  'basket',
+];
+
+/** Sector prefixes that describe the application rather than the form. */
+const SECTORS = [
+  'aerospace',
+  'chemical',
+  'marine',
+  'medical',
+  'pharma',
+  'power',
+  'electro',
+  'electroplating',
+  'electrowinning',
+  'electrochemical',
+  'electronics',
+  'energy',
+  'heat',
+  'bearing',
+  'buoyancy',
+  'valve',
+  'speaker',
+  'industrial',
+  'architectural',
+  'audio',
+  'pressure',
+  'oil',
+  'gas',
+  'paper',
+  'food',
+];
+
 function classify(file, pageCount) {
   const name = file.split('/').pop();
 
@@ -96,7 +155,23 @@ function classify(file, pageCount) {
   // A shot used on several pages is a shared one.
   if (pageCount >= 2) return `shared:${name.replace(/\.\w+$/, '')}`;
 
-  return 'unique';
+  // "<sector>-<form>" — one photograph of the form serves every sector
+  // that shows the same product in a different setting.
+  const stem = name.replace(/\.\w+$/, '');
+  for (const sector of SECTORS) {
+    if (!stem.startsWith(sector + '-')) continue;
+    const rest = stem.slice(sector.length + 1);
+    for (const form of FORMS) {
+      if (rest === form || rest.endsWith('-' + form)) {
+        return `form:${form}`;
+      }
+    }
+    return `unique:${stem}`;
+  }
+
+  // Everything else is its own shot, keyed by file name so that two
+  // different application photographs are never merged.
+  return `unique:${stem}`;
 }
 
 /** Group slots by classification key. */
@@ -123,6 +198,7 @@ const buckets = {
   process: [],
   shared: [],
   matrix: [],
+  form: [],
   unique: [],
 };
 for (const [key, g] of groups) {
@@ -135,6 +211,7 @@ const shotsNeeded =
   buckets.process.length +
   buckets.shared.length +
   buckets.matrix.length +
+  buckets.form.length +
   buckets.unique.length;
 
 /* ------------------------------------------------------------------ */
@@ -152,6 +229,7 @@ out.push('| | Slots | Photographs |');
 out.push('|---|---|---|');
 out.push(`| Shared production steps (one shot, used across pages) | ${countSlots(buckets.process)} | ${buckets.process.length} |`);
 out.push(`| Product form shots (one per form, covering every grade) | ${countSlots(buckets.matrix)} | ${buckets.matrix.length} |`);
+out.push(`| Form shots reused across sectors | ${countSlots(buckets.form)} | ${buckets.form.length} |`);
 out.push(`| Shots used on several pages | ${countSlots(buckets.shared)} | ${buckets.shared.length} |`);
 out.push(`| Application shots (one each) | ${countSlots(buckets.unique)} | ${buckets.unique.length} |`);
 out.push(`| Video | ${countSlots(buckets.video)} | ${buckets.video.length} |`);
@@ -199,8 +277,25 @@ if (buckets.matrix.length) {
   out.push('');
 }
 
+if (buckets.form.length) {
+  out.push('## 3. Form Shots Reused Across Sectors');
+  out.push('');
+  out.push(
+    'The same product form is photographed once and used for each sector it',
+    'appears in, so one sheet shot covers the chemical, marine and medical pages.'
+  );
+  out.push('');
+  out.push('| Form | Save as | Covers |');
+  out.push('|---|---|---|');
+  for (const g of buckets.form) {
+    const r = g.slots[0];
+    out.push(`| ${title(g.subject)} | \`${r.file}\` | ${g.slots.length} sector slots |`);
+  }
+  out.push('');
+}
+
 if (buckets.shared.length) {
-  out.push('## 3. Shots Used On Several Pages');
+  out.push('## 4. Shots Used On Several Pages');
   out.push('');
   out.push('| Photograph | Save as | Appears on |');
   out.push('|---|---|---|');
@@ -212,7 +307,7 @@ if (buckets.shared.length) {
 }
 
 if (buckets.unique.length) {
-  out.push('## 4. Application Shots');
+  out.push('## 5. Application Shots');
   out.push('');
   out.push('One photograph each, used on a single page.');
   out.push('');
@@ -226,7 +321,7 @@ if (buckets.unique.length) {
 }
 
 if (buckets.video.length) {
-  out.push('## 5. Video');
+  out.push('## 6. Video');
   out.push('');
   out.push('| Clip | Save as | Appears on |');
   out.push('|---|---|---|');
@@ -263,6 +358,7 @@ console.log(`  photographs needed: ${shotsNeeded}`);
 console.log('');
 console.log('  shared steps    :', buckets.process.length);
 console.log('  product forms   :', buckets.matrix.length);
+console.log('  form shots      :', buckets.form.length);
 console.log('  shared pages    :', buckets.shared.length);
 console.log('  application     :', buckets.unique.length);
 console.log('  videos          :', buckets.video.length);
