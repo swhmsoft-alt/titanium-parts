@@ -115,6 +115,7 @@ for (const file of walk(DIST).filter((f) => f.endsWith('.html'))) {
 
 let created = 0;
 let existing = 0;
+let nested = 0;
 const skippedVideo = [];
 
 for (const slot of [...slots].sort()) {
@@ -125,6 +126,12 @@ for (const slot of [...slots].sort()) {
   const dest = path.join(PUBLIC_IMAGES, slot);
   if (fs.existsSync(dest) && fs.statSync(dest).size > 1000) {
     existing++;
+    continue;
+  }
+  // Guard against a nested path such as "images/images/..." silently
+  // creating a second copy somewhere else.
+  if (slot.startsWith('images/')) {
+    nested++;
     continue;
   }
   if (!DRY) {
@@ -139,6 +146,7 @@ for (const slot of [...slots].sort()) {
 console.log(DRY ? '[dry run]' : '[applied]');
 console.log(`  placeholders created : ${created}`);
 console.log(`  already had a file   : ${existing}`);
+if (nested) console.log(`  nested path skipped  : ${nested}`);
 if (skippedVideo.length) {
   console.log(`  video (needs a clip) : ${skippedVideo.length}`);
   for (const v of skippedVideo) console.log(`      ${v}`);
