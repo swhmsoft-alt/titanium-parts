@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { site } from '../../data/site';
+---
+
+<BaseLayout title="Terms of Use | Titanium Parts" description="Terms governing the use of this website and the quotation, ordering and liability framework for titanium products, anodes and PEM electrolyzer systems supplied by Titanium Parts.">
+  <PageHero eyebrow="Legal" title="Terms of Use" description="The basis on which this website is provided, and how quotations, orders and responsibilities are handled." />
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="terms-wrap">
+        <h2>1. About This Website</h2>
+        <p>This website is published by {site.legalName} to present our titanium product range, anode engineering services and PEM electrolyzer capability. The content is provided for technical and commercial evaluation. Nothing on this site constitutes a binding offer, a design certification, or an approval for any specific installation.</p>
+
+        <h2>2. Quotations and Order Basis</h2>
+        <p>Product pages describe typical capability. The binding scope of any supply is the written quotation and the confirmed purchase order, which together define grade, specification and revision, dimensions, condition, quantity, processing, inspection, documentation, packing, delivery terms and price. Where this site and the quotation differ, the quotation governs.</p>
+
+        <h2>3. Technical Responsibility</h2>
+        <p>Material certificates and inspection reports evidence conformity to the stated order basis only. Selection of grade, suitability for the operating environment, compliance with applicable codes, component qualification and final installation approval remain the responsibility of the buyer or system integrator unless expressly included in the confirmed quotation.</p>
+
+        <h2>4. Lead Times, Stock and Availability</h2>
+        <p>Lead times, minimum order quantities, dimensional tolerances and availability depend on grade, product form, dimension, condition, quantity, processing, testing and current material supply. These are confirmed per quotation rather than published as fixed values.</p>
+
+        <h2>5. Intellectual Property</h2>
+        <p>All text, images, drawings, logos and other materials on this site are the property of {site.legalName} or are used with permission. Product photography, technical descriptions and documentation may not be reproduced, published or used to build a competing offering without written consent. Brand names and trademarks referenced for engineering reference remain the property of their respective owners and are not a claim of association.</p>
+
+        <h2>6. Images and Media</h2>
+        <p>Photographs and video on this site show our own production and material handling. Where a visual reference is indicative of a product form rather than a specific delivered item, the delivered goods are governed by the order specification.</p>
+
+        <h2>7. Liability</h2>
+        <p>To the extent permitted by law, {site.legalName} is not liable for indirect or consequential loss arising from the use of this website or from reliance on general information published on it. Any liability for delivered goods is defined in the confirmed order terms and applicable law.</p>
+
+        <h2>8. Governing Law</h2>
+        <p>These terms are governed by the laws of the jurisdiction in which {site.legalName} is registered. Any dispute arising from this website is subject to the exclusive jurisdiction of the competent courts of that jurisdiction.</p>
+
+        <h2>9. Contact</h2>
+        <p>Questions about these terms can be sent to <a href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a> or by phone to <a href={`tel:${site.contact.phone.replace(/[^0-9+]/g, '')}`}>{site.contact.phoneDisplay}</a>.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section { padding: 5rem 0; }
+  .section-white { background: #fff; }
+  .terms-wrap { max-width: 820px; }
+  .terms-wrap h2 { font-size: 1.25rem; font-weight: 700; color: var(--color-slate-900); margin: 2.5rem 0 0.75rem; }
+  .terms-wrap h2:first-child { margin-top: 0; }
+  .terms-wrap p { font-size: 0.9375rem; line-height: 1.8; color: var(--color-slate-600); margin: 0 0 1rem; }
+  .terms-wrap a { color: var(--color-primary); }
+</style>

@@ -1,59 +1,83 @@
-export interface TeamMember {
+/**
+ * Team and capability data — single source of truth.
+ *
+ * `photo` is intentionally optional. Entries without a photo render as a
+ * role card with initials only, which is the safe default until the
+ * company's own staff photography is available. Never substitute images
+ * of people who are not part of this company.
+ */
+
+export interface TeamRole {
+  /** Display name. Leave empty to publish the role without a name. */
   name: string;
+  /** Job title shown on the card. */
   title: string;
+  /** Department grouping used for the department summary. */
   department: string;
-  experience: string;
-  bio: string;
+  /** Short scope statement describing what this role owns. */
+  scope: string;
+  /** Initials shown when no photo is supplied. */
   initials: string;
+  /** Optional path to a photograph in public/images. */
+  photo?: string;
 }
 
-export const teamMembers: TeamMember[] = [
+export const teamRoles: TeamRole[] = [
   {
-    name: 'Alex Chen',
-    title: 'Anode Engineering Specialist',
-    department: 'Anode Team',
-    experience: '10+ years combined experience',
-    bio: 'Alex supports substrate design and electrochemical review for custom anodes, including geometry and operating conditions.',
-    initials: 'AC',
+    name: '',
+    title: 'Managing Director',
+    department: 'Leadership',
+    scope:
+      'Owns company direction, key accounts and long-term supply programmes, and is the escalation point for commercial commitments.',
+    initials: 'MD',
   },
   {
-    name: 'Tony Qi',
-    title: 'Welding & Coating Operator',
-    department: 'Anode Team',
-    experience: '7+ years average experience',
-    bio: 'Tony works on preparation, coating and welding steps that need controlled execution and inspection during anode production.',
-    initials: 'TQ',
+    name: '',
+    title: 'Technical Director',
+    department: 'Leadership',
+    scope:
+      'Approves material specifications, joining procedures and engineering deviations before they enter a quotation.',
+    initials: 'TD',
   },
   {
-    name: 'Jakey Lu',
-    title: 'Lead PEM Systems Engineer',
-    department: 'PEM Electrolyzer Team',
-    experience: '10+ years with Titanium Parts',
-    bio: 'Jakey leads PEM stack and hydrogen-system technical work, reviewing system performance, interfaces and the production basis for each project.',
-    initials: 'JL',
+    name: '',
+    title: 'Anode Engineering Manager',
+    department: 'Anode Engineering',
+    scope:
+      'Reviews substrate geometry, coating selection and current density assumptions for mixed-metal-oxide and platinized anodes.',
+    initials: 'AE',
   },
   {
-    name: 'Grace Zhang',
-    title: 'Customer Service Manager',
-    department: 'PEM Electrolyzer Team',
-    experience: '6 years with Titanium Parts',
-    bio: 'Grace supports PEM customers from inquiry and quotation through order coordination and after-sales communication.',
-    initials: 'GZ',
+    name: '',
+    title: 'PEM Systems Engineer',
+    department: 'Hydrogen Systems',
+    scope:
+      'Defines stack architecture, balance-of-plant interfaces and control scope for PEM electrolyzer projects, and plans factory testing.',
+    initials: 'PE',
   },
   {
-    name: 'Tom Yang',
-    title: 'PEM Assembly Engineer',
-    department: 'PEM Electrolyzer Team',
-    experience: '8+ years of experience',
-    bio: 'Tom works on PEM stack assembly and system integration, including mechanical and electrical interfaces defined in the approved design.',
-    initials: 'TY',
+    name: '',
+    title: 'Quality & Documentation Lead',
+    department: 'Quality',
+    scope:
+      'Runs the material certificate, inspection report, coating record and release document flow for every shipment.',
+    initials: 'QD',
   },
   {
-    name: 'Kim Liu',
-    title: 'Hydrogen System Tester',
-    department: 'PEM Electrolyzer Team',
-    experience: '7+ years of experience',
-    bio: 'Kim supports system testing, including hydrogen output, pressure stability and the checks specified for release or FAT.',
-    initials: 'KL',
+    name: '',
+    title: 'Project Engineer',
+    department: 'Commercial',
+    scope:
+      'Handles day-to-day buyer communication, drawing review, sample coordination and order scheduling.',
+    initials: 'PE',
   },
+];
+
+/** Department summary shown beneath the role cards. */
+export const departments = [
+  { key: 'Leadership', desc: 'Company direction and technical approval authority' },
+  { key: 'Anode Engineering', desc: 'Substrate design, coating selection and electrochemical review' },
+  { key: 'Hydrogen Systems', desc: 'PEM stack design, system integration and testing' },
+  { key: 'Quality', desc: 'Inspection, traceability and release documentation' },
+  { key: 'Commercial', desc: 'Buyer communication, order coordination and documentation' },
 ];

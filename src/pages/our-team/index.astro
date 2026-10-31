@@ -2,55 +2,32 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import RFQForm from '../../components/RFQForm.astro';
-
-interface Member {
-  name: string;
-  title: string;
-  department: string;
-  experience: string;
-  bio: string;
-  initials: string;
-  image: string;
-}
-
-const team: Member[] = [
-  { name: 'Bobby Fu', title: 'Co-Founder & Managing Director', department: 'Leadership', experience: '12+ years titanium industry', bio: `Bobby leads Titanium Parts' global strategy, partner relationships and major project direction. He works directly with EPC contractors, OEMs and system integrators on long-term supply programs.`, initials: 'BF', image: '/images/team/bobby-fu.webp' },
-  { name: 'Stephen Fu', title: 'Co-Founder & Technical Director', department: 'Leadership', experience: '15+ years titanium engineering', bio: `Stephen oversees the technical foundation of Titanium Parts' titanium material and machining operations. He reviews critical specifications, supplier approval programs and engineering escalations.`, initials: 'SF', image: '/images/team/stephen-fu.webp' },
-  { name: 'Alex Liu', title: 'Anode Engineering Manager', department: 'Anode Team', experience: '10+ years electrochemical engineering', bio: `Alex leads engineering for MMO and platinized titanium anodes - substrate design, coating selection, current density review and accelerated life validation for cathodic protection and electrolysis projects.`, initials: 'AL', image: '/images/team/alex-liu.webp' },
-  { name: 'Roger Liu', title: 'PEM Systems Lead', department: 'PEM Electrolyzer Team', experience: '10+ years hydrogen systems', bio: `Roger leads PEM stack and system engineering, including stack architecture, BoP configuration, control philosophy and FAT planning for laboratory, mid-scale and industrial hydrogen projects.`, initials: 'RL', image: '/images/team/roger-liu.webp' },
-  { name: 'Tom Liu', title: 'Quality & Documentation Lead', department: 'Quality Team', experience: '9+ years industrial QA', bio: `Tom coordinates Titanium Parts' quality documentation flow - MTC review, inspection reports, coating records and shipment evidence - aligned to each project's approval and document package.`, initials: 'TL', image: '/images/team/tom-liu.webp' },
-  { name: 'Bobby Fu', title: 'Marketing & Customer Programs', department: 'Commercial Team', experience: '8+ years industrial marketing', bio: `Bobby runs Titanium Parts' customer programs, digital presence and exhibition strategy. He supports international buyers with technical communication, sample coordination and project visibility.`, initials: 'BF', image: '/images/team/bobby-fu-marketing.webp' },
-];
-
-const departments = [
-  { key: 'Leadership', count: 2, desc: 'Co-founders and company direction' },
-  { key: 'Anode Team', count: 1, desc: 'MMO / Pt anodes and electrochemical engineering' },
-  { key: 'PEM Electrolyzer Team', count: 1, desc: 'Hydrogen stack and system engineering' },
-  { key: 'Quality Team', count: 1, desc: 'Inspection, documentation and release' },
-  { key: 'Commercial Team', count: 1, desc: 'Customer programs and partnerships' },
-];
+import { teamRoles, departments } from '../../data/team-data';
 ---
 
-<BaseLayout title="Our Team | Titanium Parts" description="Meet the engineering, quality and project team behind Titanium Parts - titanium materials, anode engineering, PEM hydrogen systems, and OEM/EPC support.">
-  <PageHero eyebrow="Our Team" title="The People Behind Every Titanium Parts Order" description="An engineering-first team covering titanium materials, custom anodes, PEM hydrogen systems and global project coordination." />
+<BaseLayout title="Our Team | Titanium Parts" description="Meet the engineering, quality and project roles behind Titanium Parts - titanium materials, anode engineering, PEM hydrogen systems, and OEM/EPC support.">
+  <PageHero eyebrow="Our Team" title="Named Responsibility For Every Titanium Parts Order" description="An engineering-first team covering titanium materials, custom anodes, PEM hydrogen systems and global project coordination." />
   <section class="section section-white">
     <div class="container">
       <div class="section-header">
         <span class="section-title-eyebrow">Leadership & Engineering</span>
-        <h2 class="section-title">Co-Founders & Department Leads</h2>
-        <p class="section-desc">The people accountable for technical decisions, project coordination and customer outcomes across every Titanium Parts order.</p>
+        <h2 class="section-title">Department Leads &amp; Project Roles</h2>
+        <p class="section-desc">Every Titanium Parts order is owned by a named role with clear responsibility for materials, manufacturing, quality and communication.</p>
       </div>
       <div class="team-grid">
 
-        {team.map((m) => (
+        {teamRoles.map((m) => (
           <div class="team-card">
-            <div class="team-photo"><img src={m.image} alt={m.name} loading="lazy" /></div>
+            {m.photo ? (
+              <div class="team-photo"><img src={m.photo} alt={m.name || m.title} loading="lazy" width="400" height="300" /></div>
+            ) : (
+              <div class="team-photo team-photo-initials" aria-hidden="true">{m.initials}</div>
+            )}
             <div class="team-info">
               <span class="team-dept">{m.department}</span>
-              <h3>{m.name}</h3>
-              <p class="team-title">{m.title}</p>
-              <p class="team-exp">{m.experience}</p>
-              <p class="team-bio">{m.bio}</p>
+              <h3>{m.name || m.title}</h3>
+              {m.name && <p class="team-title">{m.title}</p>}
+              <p class="team-bio">{m.scope}</p>
             </div>
           </div>
         ))}
@@ -69,19 +46,10 @@ const departments = [
       <div class="dept-grid">
         {departments.map((d) => (
           <div class="dept-card">
-            <div class="dept-count">{d.count}</div>
             <h3>{d.key}</h3>
             <p>{d.desc}</p>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-white">
-    <div class="container">
-      <div class="team-photo-banner">
-        <img src="/images/team/wechat-team.webp" alt="Titanium Parts team" loading="lazy" />
       </div>
     </div>
   </section>
@@ -137,6 +105,7 @@ const departments = [
   .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); border-color: var(--color-primary); }
   .team-photo { aspect-ratio: 4/3; background: var(--color-slate-100); overflow: hidden; }
   .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-photo-initials { display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; letter-spacing: 0.05em; color: var(--color-primary); background: var(--color-primary-50); }
   .team-info { padding: 1.5rem; }
   .team-dept { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary); background: rgba(37,99,235,0.08); padding: 0.25rem 0.625rem; border-radius: 999px; margin-bottom: 0.625rem; }
   .team-info h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.25rem; }

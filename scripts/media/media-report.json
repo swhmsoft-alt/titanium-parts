@@ -1,0 +1,1080 @@
+{
+  "generatedAt": "2026-10-31T10:26:15.538Z",
+  "applied": [
+    {
+      "from": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Sheet.webp",
+      "to": "/images/titanium-products/grade-2-titanium-sheet.webp",
+      "target": "titanium-products/grade-2-titanium-sheet.webp"
+    }
+  ],
+  "missing": [
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/HeleTitanium_Website_Video_02_Clean_1080p.mp4",
+      "expected": "products/website-video-02-clean-1080p.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.mp4",
+      "expected": "products/titanium-products-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Balls-Spheres-Hele-Titanium.webp",
+      "expected": "products/titanium-balls-spheres.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Requirement-Review-Titanium-Supply.webp",
+      "expected": "products/requirement-review-titanium-supply.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Material-Identity-Verification.webp",
+      "expected": "products/material-identity-verification.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Processing-Interface-Confirmation.webp",
+      "expected": "products/processing-interface-confirmation.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Inspection-Documentation-Records.webp",
+      "expected": "products/inspection-documentation-records.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marking-Packing-Release.webp",
+      "expected": "products/marking-packing-release.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Plates-Sheets-Manufacturer.webp",
+      "expected": "products/titanium-plates-sheets-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Valve-Flow-Control-Ball.webp",
+      "expected": "products/valve-flow-control-ball.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Bearing-Precision-Ball.webp",
+      "expected": "products/bearing-precision-ball.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Buoyancy-Hollow-Sphere.webp",
+      "expected": "products/buoyancy-hollow-sphere.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Implant-Ball.webp",
+      "expected": "products/medical-implant-ball.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Ball.webp",
+      "expected": "products/grade-2-titanium-ball.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Ball.webp",
+      "expected": "products/grade-5-titanium-ball.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Ball.webp",
+      "expected": "products/grade-7-titanium-ball.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Ball.webp",
+      "expected": "products/grade-23-titanium-ball.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Anode-Basket-Hele-Titanium.webp",
+      "expected": "products/titanium-anode-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electroplating-Line-Basket.webp",
+      "expected": "products/electroplating-line-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electrowinning-Basket.webp",
+      "expected": "products/electrowinning-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Surface-Finishing-Basket.webp",
+      "expected": "products/surface-finishing-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Pickling-Cleaning-Basket.webp",
+      "expected": "products/pickling-cleaning-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Titanium-Basket.webp",
+      "expected": "products/grade-1-titanium-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Basket.webp",
+      "expected": "products/grade-2-titanium-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Basket.webp",
+      "expected": "products/grade-7-titanium-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Basket.webp",
+      "expected": "products/grade-12-titanium-basket.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Industrial-Titanium-Fastener-Hele-Titanium.webp",
+      "expected": "products/industrial-titanium-fastener.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Plant-Fastener.webp",
+      "expected": "products/chemical-plant-fastener.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore-Fastener.webp",
+      "expected": "products/marine-offshore-fastener.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-Racing-Fastener.webp",
+      "expected": "products/aerospace-racing-fastener.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Device-Fastener.webp",
+      "expected": "products/medical-device-fastener.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Bolt.webp",
+      "expected": "products/grade-2-titanium-bolt.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Bolt.webp",
+      "expected": "products/grade-5-titanium-bolt.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Bolt.webp",
+      "expected": "products/grade-7-titanium-bolt.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Bolt.webp",
+      "expected": "products/grade-23-titanium-bolt.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Clad-Copper-Hele-Titanium.webp",
+      "expected": "products/titanium-clad-copper.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electroplating-Clad-Copper.webp",
+      "expected": "products/electroplating-clad-copper.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chlor-Alkali-Clad-Copper.webp",
+      "expected": "products/chlor-alkali-clad-copper.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electrowinning-Clad-Copper.webp",
+      "expected": "products/electrowinning-clad-copper.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Cathodic-Protection-Clad-Copper.webp",
+      "expected": "products/cathodic-protection-clad-copper.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-2.webp",
+      "expected": "products/clad-copper-grade-2.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-7.webp",
+      "expected": "products/clad-copper-grade-7.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-12.webp",
+      "expected": "products/clad-copper-grade-12.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-1.webp",
+      "expected": "products/clad-copper-grade-1.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Foil-Manufacturer-Hele-Titanium.webp",
+      "expected": "products/titanium-foil-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Welded-Tube-Production-Coil.webp",
+      "expected": "products/welded-tube-production-coil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Plate-Heat-Exchanger-Coil.webp",
+      "expected": "products/plate-heat-exchanger-coil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electrochemical-Hydrogen-Coil.webp",
+      "expected": "products/electrochemical-hydrogen-coil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Processing-Coil.webp",
+      "expected": "products/chemical-processing-coil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Coil-Strip.webp",
+      "expected": "products/grade-2-titanium-coil-strip.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Coil.webp",
+      "expected": "products/grade-5-ti-6al-4v-coil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Coil.webp",
+      "expected": "products/grade-7-titanium-coil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Coil.webp",
+      "expected": "products/grade-23-eli-coil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Diaphragm-Hele-Titanium.webp",
+      "expected": "products/titanium-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Audio-Acoustic-Diaphragm.webp",
+      "expected": "products/audio-acoustic-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Pressure-Sensor-Diaphragm.webp",
+      "expected": "products/pressure-sensor-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Industrial-Pump-Diaphragm.webp",
+      "expected": "products/industrial-pump-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Device-Diaphragm.webp",
+      "expected": "products/medical-device-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Titanium-Diaphragm.webp",
+      "expected": "products/grade-1-titanium-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Diaphragm.webp",
+      "expected": "products/grade-2-titanium-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Diaphragm.webp",
+      "expected": "products/grade-5-titanium-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Diaphragm.webp",
+      "expected": "products/grade-23-titanium-diaphragm.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Pipe-Fittings-Hele-Titanium.webp",
+      "expected": "products/titanium-pipe-fittings.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Piping-Fitting.webp",
+      "expected": "products/chemical-piping-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Piping-Fitting.webp",
+      "expected": "products/marine-piping-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Pharma-Food-Fitting.webp",
+      "expected": "products/pharma-food-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Power-Desalination-Fitting.webp",
+      "expected": "products/power-desalination-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Fitting.webp",
+      "expected": "products/grade-2-titanium-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Fitting.webp",
+      "expected": "products/grade-5-titanium-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Fitting.webp",
+      "expected": "products/grade-7-titanium-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Fitting.webp",
+      "expected": "products/grade-12-titanium-fitting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Pipe-Flange-Hele-Titanium.webp",
+      "expected": "products/titanium-pipe-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Flange.webp",
+      "expected": "products/chemical-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore-Flange.webp",
+      "expected": "products/marine-offshore-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Power-Desalination-Flange.webp",
+      "expected": "products/power-desalination-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Pharma-Food-Flange.webp",
+      "expected": "products/pharma-food-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Flange.webp",
+      "expected": "products/grade-2-titanium-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Flange.webp",
+      "expected": "products/grade-5-titanium-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Flange.webp",
+      "expected": "products/grade-7-titanium-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Flange.webp",
+      "expected": "products/grade-12-titanium-flange.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Foil-Manufacturer-HELE-Titanium.webp",
+      "expected": "products/titanium-foil-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Speaker-Diaphragm-Foil.webp",
+      "expected": "products/speaker-diaphragm-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Energy-Storage-Foil.webp",
+      "expected": "products/energy-storage-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electronics-Shielding-Foil.webp",
+      "expected": "products/electronics-shielding-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Processing-Foil.webp",
+      "expected": "products/chemical-processing-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Foil.webp",
+      "expected": "products/grade-1-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Foil.webp",
+      "expected": "products/grade-2-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Foil.webp",
+      "expected": "products/grade-5-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Foil.webp",
+      "expected": "products/grade-23-foil.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Custom-Titanium-Forgings-Hele-Titanium.webp",
+      "expected": "products/custom-titanium-forgings.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-Forging.webp",
+      "expected": "products/aerospace-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Pressure-Forging.webp",
+      "expected": "products/chemical-pressure-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore-Forging.webp",
+      "expected": "products/marine-offshore-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Implant-Forging.webp",
+      "expected": "products/medical-implant-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Forging.webp",
+      "expected": "products/grade-2-titanium-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Forging.webp",
+      "expected": "products/grade-5-titanium-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Forging.webp",
+      "expected": "products/grade-7-titanium-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Forging.webp",
+      "expected": "products/grade-23-titanium-forging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Mesh-Manufacturer-Hele-Titanium.webp",
+      "expected": "products/titanium-mesh-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electrochemical-Anode-Mesh.webp",
+      "expected": "products/electrochemical-anode-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Filtration-Mesh.webp",
+      "expected": "products/chemical-filtration-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Architectural-Decorative-Mesh.webp",
+      "expected": "products/architectural-decorative-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Bioprocessing-Mesh.webp",
+      "expected": "products/medical-bioprocessing-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Wire-Mesh.webp",
+      "expected": "products/grade-2-titanium-wire-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Mesh.webp",
+      "expected": "products/grade-5-titanium-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Mesh.webp",
+      "expected": "products/grade-7-titanium-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Mesh.webp",
+      "expected": "products/grade-23-eli-mesh.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Plate-Sheet.webp",
+      "expected": "products/grade-5-ti-6al-4v-plate-sheet.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Grade-Sheet.webp",
+      "expected": "products/marine-grade-sheet.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Medical-Sheet.webp",
+      "expected": "products/grade-23-eli-medical-sheet.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Precision-Processing-Cutting.webp",
+      "expected": "products/precision-processing-cutting.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Slab-Preparation-scaled.webp",
+      "expected": "products/titanium-slab-preparation-scaled.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Rolling-Precision.webp",
+      "expected": "products/rolling-precision.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Thermal-Surface-Integrity.webp",
+      "expected": "products/thermal-surface-integrity.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Inspection-Documentation.webp",
+      "expected": "products/inspection-documentation.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Final-Dimension-Packaging.webp",
+      "expected": "products/final-dimension-packaging.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Processing01.webp",
+      "expected": "products/chemical-processing01.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore02.webp",
+      "expected": "products/marine-offshore02.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-High-Performance-Engineering04.webp",
+      "expected": "products/aerospace-high-performance-engineering04.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Precision-Engineering03.webp",
+      "expected": "products/medical-precision-engineering03.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Precision-Titanium-Rods-Bars-Manufacturer.webp",
+      "expected": "products/precision-titanium-rods-bars-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Round-Bar-Rod.webp",
+      "expected": "products/titanium-round-bar-rod.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Precision-Ground-Titanium-Bar.webp",
+      "expected": "products/precision-ground-titanium-bar.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Hollow-Bar.webp",
+      "expected": "products/titanium-hollow-bar.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Square-Rectangular-Bar.webp",
+      "expected": "products/titanium-square-rectangular-bar.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Hex-Bar-1.webp",
+      "expected": "products/titanium-hex-bar-1.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Forged-Custom-Titanium-Bar.webp",
+      "expected": "products/forged-custom-titanium-bar.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/CNC-Machining-Precision-Components.webp",
+      "expected": "products/cnc-machining-precision-components.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Grade-2-Round-Bar.webp",
+      "expected": "products/titanium-grade-2-round-bar.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Rod.webp",
+      "expected": "products/grade-5-ti-6al-4v-rod.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Ti-Pd-Alloy-Rod.webp",
+      "expected": "products/grade-7-ti-pd-alloy-rod.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Grade-23-ELI-Rod.webp",
+      "expected": "products/medical-grade-23-eli-rod.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Tube-Pipe-Manufacturer-1.webp",
+      "expected": "products/titanium-tube-pipe-manufacturer-1.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Heat-Exchanger-Tube.webp",
+      "expected": "products/heat-exchanger-tube.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Seamless-Pipe.webp",
+      "expected": "products/titanium-seamless-pipe.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Welded-Pipe.webp",
+      "expected": "products/titanium-welded-pipe.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-Thin-Wall-Tube.webp",
+      "expected": "products/aerospace-thin-wall-tube.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Capillary-Tube.webp",
+      "expected": "products/titanium-capillary-tube.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Square-Rectangular-Tube.webp",
+      "expected": "products/square-rectangular-tube.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Custom-Fabricated-U-Bend.webp",
+      "expected": "products/custom-fabricated-u-bend.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Seamless-Welded-Route.webp",
+      "expected": "products/seamless-welded-route.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Sizing-Fabrication-Tube.webp",
+      "expected": "products/sizing-fabrication-tube.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Inspection-Tests-Tube.webp",
+      "expected": "products/inspection-tests-tube.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Marking-Release-Tube.webp",
+      "expected": "products/marking-release-tube.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.webp",
+      "expected": "products/titanium-products-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Heat-Exchangers-Condensers.png",
+      "expected": "products/heat-exchangers-condensers.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Petrochemical-Processing.webp",
+      "expected": "products/chemical-petrochemical-processing.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Have-a-Non-Standard-Requirement.webp",
+      "expected": "products/have-a-non-standard-requirement.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Wire-Manufacturer-Hele-Titanium.webp",
+      "expected": "products/titanium-wire-manufacturer.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Welding-Fabrication-Wire.webp",
+      "expected": "products/welding-fabrication-wire.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Medical-Device-Wire.webp",
+      "expected": "products/medical-device-wire.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Electroplating-Anodizing-Wire.webp",
+      "expected": "products/electroplating-anodizing-wire.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Spring-Forming-Wire.webp",
+      "expected": "products/spring-forming-wire.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Wire.webp",
+      "expected": "products/grade-2-titanium-wire.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Wire.webp",
+      "expected": "products/grade-5-ti-6al-4v-wire.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Wire.webp",
+      "expected": "products/grade-7-titanium-wire.webp"
+    },
+    {
+      "slot": "https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Wire.webp",
+      "expected": "products/grade-23-eli-wire.webp"
+    },
+    {
+      "slot": "/images/og-default.jpg",
+      "expected": "products/og-default.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/ru-ir-mmo-anodes.webp",
+      "expected": "products/ru-ir-mmo-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/ir-ta-mmo-anodes.webp",
+      "expected": "products/ir-ta-mmo-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/platinized-titanium-anodes.webp",
+      "expected": "products/platinized-titanium-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/pbo2-coated-anodes.webp",
+      "expected": "products/pbo2-coated-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/mesh-anodes.webp",
+      "expected": "products/mesh-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/plate-anodes.webp",
+      "expected": "products/plate-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/tubular-anodes.webp",
+      "expected": "products/tubular-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/rod-anodes.webp",
+      "expected": "products/rod-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/ribbon-strip-anodes.webp",
+      "expected": "products/ribbon-strip-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/wire-anodes.webp",
+      "expected": "products/wire-anodes.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/disc-special-geometry.webp",
+      "expected": "products/disc-special-geometry.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/titanium-anode-manufacturer.webp",
+      "expected": "products/titanium-anode-manufacturer.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/titanium-substrate-traceability.webp",
+      "expected": "products/titanium-substrate-traceability.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/surface-preparation-control.webp",
+      "expected": "products/surface-preparation-control.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/coating-process-loading-control.webp",
+      "expected": "products/coating-process-loading-control.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/geometry-electrical-connection-inspection.webp",
+      "expected": "products/geometry-electrical-connection-inspection.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/iccp-marine-protection.webp",
+      "expected": "products/iccp-marine-protection.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/electrowinning-surface-finishing.webp",
+      "expected": "products/electrowinning-surface-finishing.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-plate.webp",
+      "expected": "products/titanium-plate.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-coil-strip.webp",
+      "expected": "products/titanium-coil-strip.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-rod-bar.webp",
+      "expected": "products/titanium-rod-bar.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-tubes-pipes.webp",
+      "expected": "products/titanium-tubes-pipes.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-wire.webp",
+      "expected": "products/titanium-wire.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-foil.webp",
+      "expected": "products/titanium-foil.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-mesh.webp",
+      "expected": "products/titanium-mesh.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-fasteners.webp",
+      "expected": "products/titanium-fasteners.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-fittings.webp",
+      "expected": "products/titanium-fittings.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-flanges.webp",
+      "expected": "products/titanium-flanges.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-forgings.webp",
+      "expected": "products/titanium-forgings.webp"
+    },
+    {
+      "slot": "/images/titanium-products/titanium-machined-parts.webp",
+      "expected": "products/titanium-machined-parts.webp"
+    },
+    {
+      "slot": "/images/titanium-products/industry-chemical-processing.webp",
+      "expected": "products/industry-chemical-processing.webp"
+    },
+    {
+      "slot": "/images/titanium-products/industry-marine-offshore.webp",
+      "expected": "products/industry-marine-offshore.webp"
+    },
+    {
+      "slot": "/images/titanium-products/industry-medical-precision.webp",
+      "expected": "products/industry-medical-precision.webp"
+    },
+    {
+      "slot": "/images/titanium-products/industry-aerospace.webp",
+      "expected": "products/industry-aerospace.webp"
+    },
+    {
+      "slot": "/images/titanium-products/industry-electrochemical-systems.webp",
+      "expected": "products/industry-electrochemical-systems.webp"
+    },
+    {
+      "slot": "/images/titanium-products/industry-green-hydrogen.webp",
+      "expected": "products/industry-green-hydrogen.webp"
+    },
+    {
+      "slot": "/images/applications/cathodic-protection.webp",
+      "expected": "products/cathodic-protection.webp"
+    },
+    {
+      "slot": "/images/applications/electrochlorination.webp",
+      "expected": "products/electrochlorination.webp"
+    },
+    {
+      "slot": "/images/applications/chlor-alkali.webp",
+      "expected": "products/chlor-alkali.webp"
+    },
+    {
+      "slot": "/images/applications/sodium-chlorate.webp",
+      "expected": "products/sodium-chlorate.webp"
+    },
+    {
+      "slot": "/images/applications/electrowinning.webp",
+      "expected": "products/electrowinning.webp"
+    },
+    {
+      "slot": "/images/applications/copper-foil.webp",
+      "expected": "products/copper-foil.webp"
+    },
+    {
+      "slot": "/images/applications/pcb-plating.webp",
+      "expected": "products/pcb-plating.webp"
+    },
+    {
+      "slot": "/images/applications/water-treatment.webp",
+      "expected": "products/water-treatment.webp"
+    },
+    {
+      "slot": "/images/applications/marine-antifouling.webp",
+      "expected": "products/marine-antifouling.webp"
+    },
+    {
+      "slot": "/images/applications/hero.webp",
+      "expected": "products/hero.webp"
+    },
+    {
+      "slot": "/images/applications/evidence.webp",
+      "expected": "products/evidence.webp"
+    },
+    {
+      "slot": "/images/industries/cathodic-protection.webp",
+      "expected": "products/cathodic-protection.webp"
+    },
+    {
+      "slot": "/images/scenarios/system-integration.webp",
+      "expected": "products/system-integration.webp"
+    },
+    {
+      "slot": "/images/products/titanium-anodes.webp",
+      "expected": "products/titanium-anodes.webp"
+    },
+    {
+      "slot": "/images/products/pem-electrolyzer.webp",
+      "expected": "products/pem-electrolyzer.webp"
+    },
+    {
+      "slot": "/images/products/titanium-rod-bar.webp",
+      "expected": "products/titanium-rod-bar.webp"
+    },
+    {
+      "slot": "/images/products/titanium-plates-sheets.webp",
+      "expected": "products/titanium-plates-sheets.webp"
+    },
+    {
+      "slot": "/images/products/titanium-tubes.webp",
+      "expected": "products/titanium-tubes.webp"
+    },
+    {
+      "slot": "/images/products/titanium-fittings.webp",
+      "expected": "products/titanium-fittings.webp"
+    },
+    {
+      "slot": "/images/products/titanium-fasteners.webp",
+      "expected": "products/titanium-fasteners.webp"
+    },
+    {
+      "slot": "/images/products/titanium-parts.webp",
+      "expected": "products/titanium-parts.webp"
+    },
+    {
+      "slot": "/images/industries/energy-hydrogen.webp",
+      "expected": "products/energy-hydrogen.webp"
+    },
+    {
+      "slot": "/images/industries/water-treatment.webp",
+      "expected": "products/water-treatment.webp"
+    },
+    {
+      "slot": "/images/industries/marine-offshore.webp",
+      "expected": "products/marine-offshore.webp"
+    },
+    {
+      "slot": "/images/industries/metal-electrowinning.webp",
+      "expected": "products/metal-electrowinning.webp"
+    },
+    {
+      "slot": "/images/industries/aerospace.webp",
+      "expected": "products/aerospace.webp"
+    },
+    {
+      "slot": "/images/quality/mtc.webp",
+      "expected": "products/mtc.webp"
+    },
+    {
+      "slot": "/images/quality/pmi.webp",
+      "expected": "products/pmi.webp"
+    },
+    {
+      "slot": "/images/quality/continuous-verification.webp",
+      "expected": "products/continuous-verification.webp"
+    },
+    {
+      "slot": "/images/quality/dimensional-inspection.webp",
+      "expected": "products/dimensional-inspection.webp"
+    },
+    {
+      "slot": "/images/quality/coating-verification.webp",
+      "expected": "products/coating-verification.webp"
+    },
+    {
+      "slot": "/images/quality/final-inspection.webp",
+      "expected": "products/final-inspection.webp"
+    },
+    {
+      "slot": "/images/quality/assembly-testing.jpeg",
+      "expected": "products/assembly-testing.webp"
+    },
+    {
+      "slot": "/images/quality/export-packing.webp",
+      "expected": "products/export-packing.webp"
+    },
+    {
+      "slot": "/images/hero-bg.webp",
+      "expected": "products/hero-bg.webp"
+    },
+    {
+      "slot": "/images/manufacturing/precision-machining.webp",
+      "expected": "products/precision-machining.webp"
+    },
+    {
+      "slot": "/images/team/bobby-fu.webp",
+      "expected": "products/bobby-fu.webp"
+    },
+    {
+      "slot": "/images/team/stephen-fu.webp",
+      "expected": "products/stephen-fu.webp"
+    },
+    {
+      "slot": "/images/team/alex-liu.webp",
+      "expected": "products/alex-liu.webp"
+    },
+    {
+      "slot": "/images/team/roger-liu.webp",
+      "expected": "products/roger-liu.webp"
+    },
+    {
+      "slot": "/images/team/tom-liu.webp",
+      "expected": "products/tom-liu.webp"
+    },
+    {
+      "slot": "/images/team/bobby-fu-marketing.webp",
+      "expected": "products/bobby-fu-marketing.webp"
+    },
+    {
+      "slot": "/images/team/wechat-team.webp",
+      "expected": "products/wechat-team.webp"
+    },
+    {
+      "slot": "/images/titanium-anode/titanium-anodes-video-poster.webp",
+      "expected": "products/titanium-anodes-video-poster.webp"
+    },
+    {
+      "slot": "/images/machining/cnc-milled-titanium-parts.webp",
+      "expected": "products/cnc-milled-titanium-parts.webp"
+    },
+    {
+      "slot": "/images/machining/cnc-turned-titanium-parts.webp",
+      "expected": "products/cnc-turned-titanium-parts.webp"
+    },
+    {
+      "slot": "/images/machining/brackets-structural.webp",
+      "expected": "products/brackets-structural.webp"
+    },
+    {
+      "slot": "/images/machining/complex-geometry.webp",
+      "expected": "products/complex-geometry.webp"
+    },
+    {
+      "slot": "/images/machining/discs-plates-housings.webp",
+      "expected": "products/discs-plates-housings.webp"
+    },
+    {
+      "slot": "/images/machining/shafts-sleeves-pins.webp",
+      "expected": "products/shafts-sleeves-pins.webp"
+    },
+    {
+      "slot": "/images/machining/threaded-components.webp",
+      "expected": "products/threaded-components.webp"
+    },
+    {
+      "slot": "/images/machining/valve-flow-control.webp",
+      "expected": "products/valve-flow-control.webp"
+    },
+    {
+      "slot": "/images/machining/chemical-processing.webp",
+      "expected": "products/chemical-processing.webp"
+    },
+    {
+      "slot": "/images/machining/marine-offshore.webp",
+      "expected": "products/marine-offshore.webp"
+    },
+    {
+      "slot": "/images/machining/energy-electrochemical.webp",
+      "expected": "products/energy-electrochemical.webp"
+    },
+    {
+      "slot": "/images/machining/industrial-oem.webp",
+      "expected": "products/industrial-oem.webp"
+    },
+    {
+      "slot": "/images/machining/hero-precision-cnc.webp",
+      "expected": "products/hero-precision-cnc.webp"
+    },
+    {
+      "slot": "/images/machining/cnc-solutions.webp",
+      "expected": "products/cnc-solutions.webp"
+    },
+    {
+      "slot": "/images/machining/custom-titanium-parts.webp",
+      "expected": "products/custom-titanium-parts.webp"
+    },
+    {
+      "slot": "/images/titanium-products/hero-bg.webp",
+      "expected": "products/hero-bg.webp"
+    },
+    {
+      "slot": "/images/titanium-products/inspection-qa.webp",
+      "expected": "products/inspection-qa.webp"
+    },
+    {
+      "slot": "/images/service/cnc-machining.webp",
+      "expected": "products/cnc-machining.webp"
+    },
+    {
+      "slot": "/images/service/cutting-sizing.webp",
+      "expected": "products/cutting-sizing.webp"
+    },
+    {
+      "slot": "/images/service/forming-bending.webp",
+      "expected": "products/forming-bending.webp"
+    },
+    {
+      "slot": "/images/service/welding-assembly.webp",
+      "expected": "products/welding-assembly.webp"
+    },
+    {
+      "slot": "/images/service/surface-finishing.webp",
+      "expected": "products/surface-finishing.webp"
+    },
+    {
+      "slot": "/images/service/additive-manufacturing.jpg",
+      "expected": "products/additive-manufacturing.webp"
+    },
+    {
+      "slot": "/images/service/inspection-docs.webp",
+      "expected": "products/inspection-docs.webp"
+    },
+    {
+      "slot": "/images/service/oem-supply.webp",
+      "expected": "products/oem-supply.webp"
+    },
+    {
+      "slot": "/images/service/export-packing.jpeg",
+      "expected": "products/export-packing.webp"
+    },
+    {
+      "slot": "/images/service/hero-fabrication.webp",
+      "expected": "products/hero-fabrication.webp"
+    },
+    {
+      "slot": "/images/service/engineering-review.webp",
+      "expected": "products/engineering-review.webp"
+    }
+  ],
+  "skipped": [],
+  "filesTouched": [
+    "src/pages/titanium-products/titanium-plate.astro"
+  ]
+}

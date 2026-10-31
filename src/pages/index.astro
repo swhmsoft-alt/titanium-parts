@@ -11,15 +11,13 @@ const products = [
   { slug: 'titanium-fasteners', title: 'Titanium Fasteners', desc: 'Bolts & Nuts & Washers', img: '/images/products/titanium-fasteners.webp', href: '/titanium-products/titanium-fasteners/', points: ['DIN & ISO', 'High Fatigue Resistance'] },
   { slug: 'titanium-machined-parts', title: 'Custom CNC Parts', desc: 'Precision Machining', img: '/images/products/titanium-parts.webp', href: '/titanium-products/titanium-machined-parts/', points: ['Per Drawing Specifications', 'Rapid Prototyping Support'] },
 ];
-const partnerLogos = [
-  { src: '/images/logos/sespi.png', alt: 'SESPI' },
-  { src: '/images/logos/waterair.png', alt: 'Waterair' },
-  { src: '/images/logos/mainfraim.png', alt: 'Mainfraim' },
-  { src: '/images/logos/electra.png', alt: 'Electra' },
-  { src: '/images/logos/pss.png', alt: 'PSS' },
-  { src: '/images/logos/ventil-aqua.png', alt: 'VENTIL AQUA' },
-  { src: '/images/logos/h2o.png', alt: 'H2O' },
-  { src: '/images/logos/gonvarri.png', alt: 'GONVARRI' },
+const partnerSectors = [
+  'Chemical Processing',
+  'Chlor-Alkali & Electrolysis',
+  'Water Treatment & Desalination',
+  'Marine & Offshore',
+  'Aerospace & Medical',
+  'Electroplating & Finishing',
 ];
 const stats = [
   { num: '10+', label: 'YEARS INDUSTRY EXPERIENCE' },
@@ -79,7 +77,7 @@ const faqTitles = ['What information is needed before Titanium Parts recommends 
       </div>
     </div>
   </section>
-  <section class="partners"><div class="container"><p class="partners-label">SUPPORTING OEM, EPC AND SYSTEM-INTEGRATION REQUIREMENTS</p><div class="partners-grid">{partnerLogos.map((logo) => <div class="partner-logo"><img src={logo.src} alt={logo.alt} loading="lazy" /></div>)}</div></div></section>
+  <section class="partners"><div class="container"><p class="partners-label">SUPPORTING OEM, EPC AND SYSTEM-INTEGRATION REQUIREMENTS</p><ul class="partners-grid">{partnerSectors.map((sector) => <li class="partner-sector">{sector}</li>)}</ul></div></section>
 
   <section class="section section-slate-50"><div class="container"><div class="section-header"><h2 class="section-title">What We Manufacture</h2><p class="section-desc">From titanium materials to engineered anodes and PEM systems, each category can be reviewed by grade, dimension, coating type, or application — with full specifications and traceable documentation available on every product page.</p></div><div class="products-grid">{products.map((product) => <a href={product.href} class={`product-card ${product.featured ? 'featured' : ''}`}><div class="product-image"><img src={product.img} alt={product.title} loading="lazy" /></div><div class="product-content"><h3 class="product-title">{product.title}</h3><p class="product-desc">{product.desc}</p><ul class="product-points">{product.points.map((p) => <li><Icon name="check" size={14} /> {p}</li>)}</ul><span class="product-link">View Details <Icon name="arrow-right" size={14} /></span></div></a>)}</div></div></section>
 

@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+import { homeFAQs, titaniumFAQs, anodeFAQs } from '../../data/faqs-data';
+
+const groups = [
+  {
+    id: 'general',
+    title: 'General Ordering',
+    intro: 'How an inquiry is handled from first contact to a confirmed order basis.',
+    items: homeFAQs,
+  },
+  {
+    id: 'titanium',
+    title: 'Titanium Materials & Parts',
+    intro: 'Grade selection, processing scope, availability and documentation.',
+    items: titaniumFAQs,
+  },
+  {
+    id: 'anode',
+    title: 'Titanium Anodes',
+    intro: 'Coating selection, loading metrics, service life and recoating.',
+    items: anodeFAQs,
+  },
+];
+---
+
+<BaseLayout title="Frequently Asked Questions | Titanium Parts" description="Answers to common questions about titanium grades, processing scope, MMO and platinized anode coatings, documentation, lead times and how to submit an inquiry.">
+  <PageHero eyebrow="FAQ" title="Frequently Asked Questions" description="Straight answers on how requirements are reviewed, what is confirmed in a quotation, and what stays the buyer's responsibility." />
+
+  <section class="section section-white">
+    <div class="container">
+      <nav class="faq-jump" aria-label="FAQ sections">
+        {groups.map((g) => <a href={`#${g.id}`}>{g.title}</a>)}
+      </nav>
+
+      {groups.map((group) => (
+        <div class="faq-group" id={group.id}>
+          <div class="faq-group-head">
+            <h2 class="faq-group-title">{group.title}</h2>
+            <p class="faq-group-intro">{group.intro}</p>
+          </div>
+          <div class="faq-list">
+            {group.items.map((item) => (
+              <details class="faq-item">
+                <summary class="faq-q">
+                  <span>{item.question}</span>
+                  <span class="faq-mark" aria-hidden="true"><Icon name="plus" size={18} /></span>
+                </summary>
+                <div class="faq-a"><p>{item.answer}</p></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section-slate-50">
+    <div class="container">
+      <div class="faq-cta">
+        <div>
+          <span class="section-title-eyebrow">Still Have a Question</span>
+          <h2 class="section-title">Send The Requirement Instead</h2>
+          <p class="section-desc">If your situation is not covered here, describe the application, material, dimensions and approval requirements and the relevant engineer will respond.</p>
+        </div>
+        <RFQForm title="Ask an Engineer" subtitle="A project engineer will respond within 1 business day." />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section { padding: 5rem 0; }
+  .section-white { background: #fff; }
+  .section-slate-50 { background: var(--color-slate-50); }
+  .section-title-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+  .section-title { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .section-desc { font-size: 1rem; line-height: 1.65; color: var(--color-slate-600); }
+
+  .faq-jump { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-slate-200); }
+  .faq-jump a { display: inline-flex; align-items: center; padding: 0.5rem 1rem; border: 1px solid var(--color-slate-200); border-radius: 999px; background: #fff; font-size: 0.875rem; font-weight: 600; color: var(--color-slate-700); text-decoration: none; }
+  .faq-jump a:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+  .faq-group { margin-bottom: 4rem; scroll-margin-top: 5rem; }
+  .faq-group:last-child { margin-bottom: 0; }
+  .faq-group-head { margin-bottom: 1.75rem; }
+  .faq-group-title { font-size: 1.5rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
+  .faq-group-intro { font-size: 0.9375rem; color: var(--color-slate-600); }
+
+  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .faq-item { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; }
+  .faq-item[open] { border-color: var(--color-primary-200); box-shadow: 0 6px 20px -12px rgba(15, 23, 42, 0.25); }
+  .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--color-slate-900); list-style: none; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-mark { flex-shrink: 0; display: inline-flex; color: var(--color-primary); transition: transform 0.25s; }
+  .faq-item[open] .faq-mark { transform: rotate(45deg); }
+  .faq-a { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--color-slate-100); }
+  .faq-a p { margin: 0; padding-top: 1rem; font-size: 0.9375rem; line-height: 1.75; color: var(--color-slate-600); }
+
+  .faq-cta { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .faq-cta { grid-template-columns: 1fr; gap: 2rem; } }
+</style>
