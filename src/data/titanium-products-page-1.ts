@@ -1,4 +1,4 @@
-// /titanium-products/ page data - 100% replica
+// /titanium-products/ page data
 
 export const productRange = [
   { title: 'Titanium Plate & Sheet', material: 'Material: Gr 1, 2, 5, 7, 12 and project-specified grades', orderBasis: 'Order basis: ASTM B265 / ASME SB-265 when specified', supply: 'Supply: Plate, sheet and cut-to-size blanks', href: '/titanium-products/titanium-plate/', img: '/images/titanium-products/titanium-plate.webp', alt: 'Titanium Plate & Sheet' },
