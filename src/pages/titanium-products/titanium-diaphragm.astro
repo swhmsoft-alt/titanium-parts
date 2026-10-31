@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Diaphragms";
 const slug = "titanium-diaphragm";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a Titanium Diaphragms quotatio
 
 const rfqOptions = ["Tweeter Dome","Sensor Diaphragm","Corrugated Diaphragm","Custom / Drawing","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Titanium-Diaphragm.webp","alt":"Grade 1 Diaphragm","title":"Grade 1 Titanium","spec":"UNS R50250 · ASTM B265 within scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Diaphragm.webp","alt":"Grade 2 Diaphragm","title":"Grade 2 Titanium","spec":"UNS R50400 · ASTM B265 within scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Diaphragm.webp","alt":"Grade 5 Diaphragm","title":"Grade 5 / Ti-6Al-4V","spec":"UNS R56400 · ASTM B265 / AMS 4911"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Titanium-Diaphragm.webp","alt":"Grade 23 Diaphragm","title":"Grade 23 / Ti-6Al-4V ELI","spec":"UNS R56407 · ASTM B265 / F136"}];
+
+const meta = productMeta['titanium-diaphragm'] ?? { title: M, description: M, sku: 'TITANIUM-DIAPHRAGM' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

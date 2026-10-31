@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = 'Titanium Tube &amp; Pipe';
 
@@ -176,8 +177,14 @@ const rfqOptions = [
   'Shaped / Fabricated Tube',
   'Grade / Specification Review'
 ];
+
+const meta = productMeta['titanium-tubing'] ?? { title: M, description: M, sku: 'TITANIUM-TUBING' };
 ---
-<BaseLayout title={M + ' Manufacturer in China — Seamless & Welded'} description={hero.desc}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />

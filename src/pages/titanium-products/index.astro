@@ -8,11 +8,17 @@ import { productRangeExtra } from '../../data/titanium-products-page-2';
 import { productRangeTail } from '../../data/titanium-products-page-3';
 import { selectionSteps, supplyOptions, industries, grades, processingSteps, evidenceChecks, purchaseGuard } from '../../data/titanium-products-page-4';
 import { faqItems, faqItemsExtra, rfqBenefits } from '../../data/titanium-products-page-5';
+import { pageMeta } from '../../data/page-meta';
 const allProducts = [...productRange, ...productRangeExtra, ...productRangeTail];
 const allFaq = [...faqItems, ...faqItemsExtra];
+
+const meta = pageMeta['titaniumProducts'];
 ---
 
-<BaseLayout title="Industrial Titanium Products Manufacturer & Supplier | Titanium Parts" description="Source titanium mill products and drawing-based components with the product form, grade, dimensions, condition, processing, inspection and documentation reviewed against your purchase requirements.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <!-- HERO -->
   <section class="prod-hero">
     <div class="prod-hero-bg" aria-hidden="true"><img src="/images/titanium-products/hero-bg.webp" alt="Titanium mill products and custom titanium components" loading="eager" /><div class="prod-hero-overlay"></div></div>

@@ -1,10 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
+import { pageMeta } from '../../data/page-meta';
 import { site } from '../../data/site';
+
+const meta = pageMeta['terms'];
 ---
 
-<BaseLayout title="Terms of Use | Titanium Parts" description="Terms governing the use of this website and the quotation, ordering and liability framework for titanium products, anodes and PEM electrolyzer systems supplied by Titanium Parts.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <PageHero eyebrow="Legal" title="Terms of Use" description="The basis on which this website is provided, and how quotations, orders and responsibilities are handled." />
 
   <section class="section section-white">

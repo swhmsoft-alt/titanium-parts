@@ -278,16 +278,25 @@ const srcFiles = walk(SRC).filter((f) => /\.(astro|ts|json)$/.test(f));
 /* 10. JSON-LD present on every page                                    */
 /* ------------------------------------------------------------------ */
 {
-  const pages = srcFiles.filter((f) => f.endsWith('.astro'));
-  const withLd = pages.filter((f) =>
-    fs.readFileSync(f, 'utf8').includes('application/ld+json')
-  );
-  if (!withLd.length) {
-    warn('structured-data-present', 'no page declares JSON-LD yet');
-  } else if (withLd.length < pages.length) {
-    warn('structured-data-present', `${withLd.length}/${pages.length} pages carry JSON-LD`);
+  // Structured data is emitted by the shared layout, so it is verified on
+  // the built output rather than on individual page sources.
+  if (!fs.existsSync(DIST)) {
+    warn('structured-data-present', 'dist/ not built yet — skipped');
   } else {
-    pass('structured-data-present');
+    const built = walk(DIST).filter((f) => f.endsWith('.html'));
+    const withLd = built.filter((f) =>
+      fs.readFileSync(f, 'utf8').includes('application/ld+json')
+    );
+    if (!withLd.length) {
+      fail('structured-data-present', 'no built page declares JSON-LD');
+    } else if (withLd.length < built.length) {
+      fail(
+        'structured-data-present',
+        `${withLd.length}/${built.length} built pages carry JSON-LD`
+      );
+    } else {
+      pass('structured-data-present');
+    }
   }
 }
 

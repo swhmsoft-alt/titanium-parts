@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RFQForm from '../../components/RFQForm.astro';
+import { pageMeta } from '../../data/page-meta';
 
 const objectives = [
   { title: 'Protect Assets', desc: 'Control corrosion on pipelines, tanks, buried infrastructure, reinforced concrete, marine structures or other defined assets, or manage biological fouling within seawater circuits.' },
@@ -54,9 +55,14 @@ const faqs = [
   { q: 'How should I provide existing electrode information?', a: 'Provide the drawing, markings, substrate and coating if known, electrical connection, process chemistry, operating data, service history and observed failure mode. A visual match alone is insufficient for a meaningful review.' },
   { q: 'Does the quotation include a complete system?', a: 'Not automatically. Some inquiries may cover an electrode or component; others may involve a cell or selected system scope. The quotation must state inclusions, exclusions, design responsibility and documentation scope for each item.' },
 ];
+
+const meta = pageMeta['applications'];
 ---
 
-<BaseLayout title="Electrochemical Process Solutions & Electrode Selection | Titanium Parts" description="Electrochemical process solutions, electrode selection guide and project-based engineering for chlor-alkali, electrochlorination, electrowinning, water treatment and marine anti-fouling duties.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
 
   <!-- ============ HERO ============ -->
   <section class="app-hero">

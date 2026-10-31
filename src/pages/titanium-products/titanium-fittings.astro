@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Pipe Fittings";
 const slug = "titanium-fittings";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a Titanium Pipe Fittings quota
 
 const rfqOptions = ["Elbows","Tees","Reducers","Caps / Stub Ends","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Fitting.webp","alt":"Grade 2 Fitting","title":"Grade 2 Titanium","spec":"UNS R50400 · ASTM B363 / B16.9"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Titanium-Fitting.webp","alt":"Grade 5 Fitting","title":"Grade 5 / Ti-6Al-4V","spec":"UNS R56400 · ASTM B363 / B16.9"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Fitting.webp","alt":"Grade 7 Fitting","title":"Grade 7 Titanium","spec":"UNS R52400 · ASTM B363 / B16.9"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Fitting.webp","alt":"Grade 12 Fitting","title":"Grade 12 Titanium","spec":"UNS R53400 · ASTM B363 / B16.9"}];
+
+const meta = productMeta['titanium-fittings'] ?? { title: M, description: M, sku: 'TITANIUM-FITTINGS' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

@@ -3,9 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import RFQForm from '../../components/RFQForm.astro';
+import { pageMeta } from '../../data/page-meta';
 import Icon from '../../components/Icon.astro';
+
+const meta = pageMeta['cathodicProtection'];
 ---
-<BaseLayout title="Cathodic Protection Anodes Manufacturer | ICCP & Sacrificial" description="ICCP, sacrificial and reference electrodes for soil, marine, concrete and tank-bottom corrosion protection systems.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <PageHero eyebrow="Cathodic Protection" title="Cathodic Protection Anodes | ICCP, Sacrificial & Reference" description="ICCP, sacrificial and reference electrodes for soil, marine, concrete and tank-bottom corrosion protection systems. Engineering review and application-specific design." image="/images/industries/cathodic-protection.webp" />
 
   <section class="section">

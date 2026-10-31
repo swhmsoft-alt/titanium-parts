@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Coil & Strip";
 const slug = "titanium-coil";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a Titanium Coil & Strip quotat
 
 const rfqOptions = ["Master Coil","Slit Strip","Cut Sheet","Thin-Gauge Coil","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Coil-Strip.webp","alt":"Grade 2 Titanium Coil","title":"Grade 2 Titanium","spec":"UNS R50400 · ASTM B265 applicable scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Coil.webp","alt":"Grade 5 / Ti-6Al-4V Coil","title":"Grade 5 / Ti-6Al-4V","spec":"UNS R56400 · ASTM B265 applicable scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Coil.webp","alt":"Grade 7 Titanium Coil","title":"Grade 7 Titanium","spec":"UNS R52400 · ASTM B265 applicable scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Coil.webp","alt":"Grade 23 ELI Coil","title":"Grade 23 / Ti-6Al-4V ELI","spec":"UNS R56407 · ASTM B265 / F136 as ordered"}];
+
+const meta = productMeta['titanium-coil'] ?? { title: M, description: M, sku: 'TITANIUM-COIL' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

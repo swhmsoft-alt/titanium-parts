@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = 'Titanium Plate & Sheet';
+const meta = productMeta['titanium-plate'] ?? { title: M, description: M, sku: 'TP-PLATE-SHEET' };
 
 const hero = {
   eyebrow: 'ASTM B265 Titanium Flat Products',
@@ -176,7 +178,11 @@ const faq = [
 
 const rfqOptions = ['Titanium Plate', 'Titanium Sheet', 'Cut-to-Size Blank', 'Grade / Specification Review', 'Drawing / Specification (Optional)'];
 ---
-<BaseLayout title={M + ' | Titanium Plate & Sheet Manufacturer — Grade 2, Grade 5 & Custom Cut Sizes'} description={hero.desc}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section id="plate-hero" class="tp-hero">
     <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />

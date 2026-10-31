@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { company } from '@data/company';
+import { pageMeta } from '../data/page-meta';
 
 const pageTitle = 'Titanium Machined Parts | Custom CNC Titanium Parts to Your Drawing | Titanium Parts';
 const pageDescription = 'Align the controlled drawing or model, titanium Grade or UNS, starting-material form, datums and GD&T, threads, secondary processes, inspection evidence and quantity before comparing quotations.';
@@ -90,8 +91,13 @@ const productOptions = [
   'Housing / Disc / Plate Component',
   'Drawing-Based Custom Part',
 ];
+
+const meta = pageMeta['titaniumMachiningParts'];
 ---
-<BaseLayout title={pageTitle} description={pageDescription} canonical="https://titanium-parts.com/titanium-machining-parts/">
+<BaseLayout
+    title={meta.title}
+    description={meta.description} canonical="https://titanium-parts.com/titanium-machining-parts/"
+  >
   <!-- Hero -->
   <section id="cnc-parts-hero" class="mp-hero">
     <img src="/images/machining/hero-precision-cnc.webp" alt="Drawing-based CNC machined titanium parts" class="mp-hero-bg" width="1920" height="1080" fetchpriority="high" decoding="async" />

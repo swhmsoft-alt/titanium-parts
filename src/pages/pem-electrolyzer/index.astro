@@ -3,9 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import RFQForm from '../../components/RFQForm.astro';
+import { pageMeta } from '../../data/page-meta';
 import Icon from '../../components/Icon.astro';
+
+const meta = pageMeta['pemElectrolyzer'];
 ---
-<BaseLayout title="PEM Electrolyzer Manufacturer | Green Hydrogen Systems | Titanium Parts" description="PEM hydrogen stacks, lab generators, mid-range systems and industrial-scale containerized electrolyzers for green H2 production.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <PageHero eyebrow="PEM Electrolyzer" title="PEM Electrolyzer Manufacturer | Green Hydrogen Systems" description="PEM hydrogen stacks, lab generators, mid-range systems and industrial-scale containerized electrolyzers." image="/images/products/pem-electrolyzer.webp" />
 
   <section class="section">

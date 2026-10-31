@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Anode Baskets";
 const slug = "titanium-baskets";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a Titanium Anode Baskets quota
 
 const rfqOptions = ["Mesh Anode Basket","Perforated Basket","Framed / Reinforced","Custom Hook / Contact","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Titanium-Basket.webp","alt":"Grade 1 Basket","title":"Grade 1 Titanium","spec":"UNS R50250 · ASTM B265 applicable scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Basket.webp","alt":"Grade 2 Basket","title":"Grade 2 Titanium","spec":"UNS R50400 · ASTM B265 / B348"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Basket.webp","alt":"Grade 7 Basket","title":"Grade 7 Titanium","spec":"UNS R52400 · ASTM B265 / B348"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-12-Titanium-Basket.webp","alt":"Grade 12 Basket","title":"Grade 12 Titanium","spec":"UNS R53400 · ASTM B265 / B348"}];
+
+const meta = productMeta['titanium-baskets'] ?? { title: M, description: M, sku: 'TITANIUM-BASKETS' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

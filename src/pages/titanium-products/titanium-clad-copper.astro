@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium-Clad Copper";
 const slug = "titanium-clad-copper";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a Titanium-Clad Copper quotati
 
 const rfqOptions = ["Clad Bar / Busbar","Clad Rod","Clad Tube","Custom / Connector","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-2.webp","alt":"Clad Grade 2","title":"Grade 2 Cladding","spec":"UNS R50400 · ASTM B898 / B265 as applicable"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-7.webp","alt":"Clad Grade 7","title":"Grade 7 Cladding","spec":"UNS R52400 · ASTM B898 / B265"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-12.webp","alt":"Clad Grade 12","title":"Grade 12 Cladding","spec":"UNS R53400 · ASTM B898 / B265"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Clad-Copper-Grade-1.webp","alt":"Clad Grade 1","title":"Grade 1 Cladding","spec":"UNS R50250 · ASTM B898 / B265"}];
+
+const meta = productMeta['titanium-clad-copper'] ?? { title: M, description: M, sku: 'TITANIUM-CLAD-COPPER' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

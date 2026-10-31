@@ -3,9 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import RFQForm from '../../components/RFQForm.astro';
+import { pageMeta } from '../../data/page-meta';
 import Icon from '../../components/Icon.astro';
+
+const meta = pageMeta['saltChlorinator'];
 ---
-<BaseLayout title="Commercial Pool Salt Chlorinator & OEM Salt Chlorine Systems" description="Commercial and OEM salt chlorinator systems, replacement cells, and titanium electrolytic cells for pool and water treatment.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <PageHero eyebrow="Water Treatment" title="Commercial Pool Salt Chlorinator & OEM Salt Chlorine Systems" description="Commercial and OEM salt chlorinator platforms, replacement cells, and titanium electrolytic cells for pool, spa, and water treatment applications." />
   <section class="section">
     <div class="container">

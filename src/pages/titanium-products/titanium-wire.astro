@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Wire";
 const slug = "titanium-wire";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a Titanium Wire quotation?","a
 
 const rfqOptions = ["B863 General Wire","Welding Wire / Rod","Straight / Cut Wire","Fine / Precision Wire","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Titanium-Wire.webp","alt":"Grade 2 Titanium Wire","title":"Grade 2 Titanium","spec":"UNS R50400 · ASTM B863 / AWS A5.16 ERTi-2"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Wire.webp","alt":"Grade 5 Wire","title":"Grade 5 / Ti-6Al-4V","spec":"UNS R56400 · ASTM B863 / AWS A5.16 ERTi-5"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Titanium-Wire.webp","alt":"Grade 7 Wire","title":"Grade 7 Titanium","spec":"UNS R52400 · ASTM B863"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-ELI-Wire.webp","alt":"Grade 23 ELI Wire","title":"Grade 23 / Ti-6Al-4V ELI","spec":"UNS R56407 · ASTM F136 / AWS A5.16"}];
+
+const meta = productMeta['titanium-wire'] ?? { title: M, description: M, sku: 'TITANIUM-WIRE' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Bar & Rod";
 const slug = "titanium-rod-bar";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a titanium bar or rod quotatio
 
 const rfqOptions = ["Round Titanium Bar / Rod","Precision-Ground Titanium Bar","Titanium Hollow Bar","Square / Rectangular / Hex Bar","Forged or Custom Machining Blank","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Grade-2-Round-Bar.webp","alt":"Grade 2 Titanium bar and rod","title":"Grade 2 Titanium","spec":"ASTM B348 / B348M when specified · UNS R50400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Rod.webp","alt":"Grade 5 / Ti-6Al-4V bar and rod","title":"Grade 5 / Ti-6Al-4V","spec":"ASTM B348 or AMS 4928 as ordered · UNS R56400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Ti-Pd-Alloy-Rod.webp","alt":"Grade 7 Titanium bar and rod","title":"Grade 7 Titanium","spec":"ASTM B348 / B348M when specified · UNS R52400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Medical-Grade-23-ELI-Rod.webp","alt":"Grade 23 / Ti-6Al-4V ELI bar and rod","title":"Grade 23 / Ti-6Al-4V ELI","spec":"ASTM B348 / B348M when specified · UNS R56407","body":"Profile, dimensions, condition and availability: confirmed by quotation."}];
+
+const meta = productMeta['titanium-rod-bar'] ?? { title: M, description: M, sku: 'TITANIUM-ROD-BAR' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

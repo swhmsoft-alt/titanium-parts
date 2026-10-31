@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RFQForm from '../../components/RFQForm.astro';
+import { pageMeta } from '../../data/page-meta';
 
 const services = [
   { category: 'Precision Machining', title: 'CNC Titanium Machining', desc: 'Review drawing-based titanium components requiring turning, milling, drilling, threading or other confirmed machining operations.', send: 'Send: 2D/3D drawing, grade, tolerances, surface finish, quantity, critical features and inspection plan.', image: '/images/service/cnc-machining.webp' },
@@ -90,9 +91,14 @@ const faqs = [
   { q: 'Is every process completed in-house?', a: 'Process ownership depends on the service and project. Titanium Parts should identify whether an operation is directly controlled, completed by a qualified external processor or arranged on a project-specific basis during quotation review.' },
   { q: 'How quickly will I receive a quotation?', a: 'Timing depends on drawing completeness, technical complexity and the required supplier or inspection review. After receiving the inquiry, the team will confirm missing information and the next technical step.' },
 ];
+
+const meta = pageMeta['titaniumService'];
 ---
 
-<BaseLayout title="Custom Titanium Fabrication Services | Titanium Parts" description="Custom titanium fabrication, OEM machining, forming, welding, surface finishing, inspection documentation and export logistics for industrial OEMs, EPC contractors and system integrators.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
 
   <!-- ============ HERO ============ -->
   <section class="ts-hero">

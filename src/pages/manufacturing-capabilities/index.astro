@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import RFQForm from '../../components/RFQForm.astro';
 import Icon from '../../components/Icon.astro';
+import { pageMeta } from '../../data/page-meta';
 
 const capabilities = [
   { title: 'Titanium Material Processing', image: '/images/products/titanium-fasteners.webp', desc: 'Mill products, custom blanks and project-specific forms manufactured from traceable titanium feedstock.' },
@@ -18,9 +19,14 @@ const hubs = [
   { name: 'Ningbo - Project Coordination', role: 'Engineering, documentation, export', desc: 'Application engineering, drawing review, quality documentation and global shipment coordination.' },
   { name: 'Dongguan - PEM Assembly', role: 'Stack and system integration', desc: 'Clean PEM stack assembly, BoP integration, control cabinet assembly and FAT environment.' },
 ];
+
+const meta = pageMeta['manufacturingCapabilities'];
 ---
 
-<BaseLayout title="Manufacturing & Capabilities | Titanium Parts" description="Titanium Parts' manufacturing network covers titanium material processing, CNC machining, MMO anode manufacturing, and PEM electrolyzer assembly across Ningbo, Baoji, and Dongguan.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <PageHero eyebrow="Manufacturing" title="Inside Our Manufacturing & Quality System" description="A visual overview of the assembly, system-integration, inspection, documentation and release environment. The exact manufacturing ownership, tests and records for an order are confirmed in the quotation, approved quality plan and supply-chain documentation." />
 
   <section class="section section-white">

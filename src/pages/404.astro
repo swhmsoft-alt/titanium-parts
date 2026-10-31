@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { pageMeta } from '../data/page-meta';
 import Icon from '../components/Icon.astro';
+
+const meta = pageMeta['notFound'];
 ---
-<BaseLayout title="Page Not Found | Titanium Parts" description="The page you are looking for could not be found.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <section class="error-section">
     <div class="container">
       <div class="error-content">

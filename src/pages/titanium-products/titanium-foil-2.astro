@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Foil";
 const slug = "titanium-foil-2";
@@ -35,8 +36,14 @@ const faq = [{"q":"What information is needed for a Titanium Foil quotation?","a
 
 const rfqOptions = ["CP Titanium Foil","Alloy Foil","Foil Coil","Cut Sheet / Blank","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-1-Foil.webp","alt":"Grade 1 Foil","title":"Grade 1 Titanium","spec":"UNS R50250 · ASTM B265 within scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-2-Foil.webp","alt":"Grade 2 Foil","title":"Grade 2 Titanium","spec":"UNS R50400 · ASTM B265 within scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Foil.webp","alt":"Grade 5 Foil","title":"Grade 5 / Ti-6Al-4V","spec":"UNS R56400 · ASTM B265 within scope"},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-23-Foil.webp","alt":"Grade 23 Foil","title":"Grade 23 / Ti-6Al-4V ELI","spec":"UNS R56407 · ASTM B265 / F136"}];
+
+const meta = productMeta['titanium-foil-2'] ?? { title: M, description: M, sku: 'TITANIUM-FOIL-2' };
 ---
-<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    product={{ name: M, description: meta.description, sku: meta.sku }}
+  >
   <!-- HERO -->
   <section class="tp-hero">
     {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}

@@ -8,9 +8,15 @@ import { evidenceCards, applications } from '../../data/titanium-anode-page-4';
 import { beforeQuoteDo, beforeQuoteDont, recoatingCards } from '../../data/titanium-anode-page-5';
 import { faqItems } from '../../data/titanium-anode-page-6';
 import { faqItemsExtra, quickPoints, rfqChecks } from '../../data/titanium-anode-page-7';
+import { pageMeta } from '../../data/page-meta';
 const allFaq = [...faqItems, ...faqItemsExtra];
+
+const meta = pageMeta['titaniumAnode'];
 ---
-<BaseLayout title="Titanium Anode Manufacturer | MMO, Pt/Ti & Custom | Titanium Parts" description="Source custom MMO, Ru-Ir, Ir-Ta and platinized titanium anodes by reaction, electrolyte, current density, geometry and design-life requirements. Send your process data for engineering review.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <!-- placeholder, sections inserted below -->
 <!-- HERO ====================================================== -->
   <section id="anode-hero" class="anode-hero">

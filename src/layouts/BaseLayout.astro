@@ -2,6 +2,7 @@
 import '../styles/main.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
 
 interface Props {
   title: string;
@@ -9,18 +10,130 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   noindex?: boolean;
+  /** Extra JSON-LD nodes merged into the page graph. */
+  jsonLd?: Record<string, unknown>[];
+  /** When set, the page is announced as a product with an offer. */
+  product?: {
+    name: string;
+    description: string;
+    sku?: string;
+  };
 }
 
-const { title, description = 'Titanium Parts is a factory-direct manufacturer and engineering supplier of titanium products, titanium anodes, and PEM electrolyzer systems for global OEMs, EPC contractors, and system integrators.', ogImage = '/images/og-default.jpg', canonical, noindex = false } = Astro.props;
+const {
+  title,
+  description = site.description,
+  ogImage = site.seo.ogImage,
+  canonical,
+  noindex = false,
+  jsonLd = [],
+  product,
+} = Astro.props;
 
-const brandName = 'Titanium Parts';
-// 品牌已作为标题片段出现（前导 "About Titanium Parts | ..." 或结尾 "... | Titanium Parts"）时不重复追加
-const hasBrand = title.split('|').some((seg) => seg.trim().startsWith(brandName) || seg.trim().endsWith(brandName));
+const brandName = site.name;
+// The brand already appears as a title segment — don't append it twice.
+const hasBrand = title
+  .split('|')
+  .some((seg) => seg.trim().startsWith(brandName) || seg.trim().endsWith(brandName));
 const fullTitle = hasBrand ? title : `${title} | ${brandName}`;
-const canonicalUrl = canonical || Astro.url.href;
+
+// Canonical must be absolute and point at the production origin, never the
+// preview host, so search engines consolidate on the canonical domain.
+const origin = site.url.replace(/\/$/, '');
+const canonicalUrl = canonical
+  ? new URL(canonical, origin).href
+  : new URL(Astro.url.pathname, origin).href;
+const ogImageUrl = new URL(ogImage, origin).href;
+
+// --- Structured data ----------------------------------------------------
+const organizationId = `${origin}/#organization`;
+const websiteId = `${origin}/#website`;
+
+const graph: Record<string, unknown>[] = [
+  {
+    '@type': 'Organization',
+    '@id': organizationId,
+    name: site.legalName,
+    url: origin,
+    logo: new URL('/favicon.svg', origin).href,
+    description: site.description,
+    email: site.contact.salesEmail,
+    telephone: site.contact.phone,
+    sameAs: Object.values(site.social).filter((v) => v && v !== '#'),
+    address: [
+      { ...site.locations.hq, addressLocality: site.locations.hq.city, addressRegion: site.locations.hq.region, addressCountry: site.locations.hq.country },
+      { ...site.locations.office, addressLocality: site.locations.office.city, addressCountry: site.locations.office.country },
+      { ...site.locations.pem, addressLocality: site.locations.pem.city, addressCountry: site.locations.pem.country },
+    ].map((loc) => ({
+      '@type': 'PostalAddress',
+      streetAddress: loc.detail,
+      addressLocality: loc.addressLocality,
+      ...(loc.addressRegion ? { addressRegion: loc.addressRegion } : {}),
+      addressCountry: loc.addressCountry,
+    })),
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: site.contact.salesEmail,
+        telephone: site.contact.phone,
+        availableLanguage: ['English', 'Chinese'],
+      },
+    ],
+  },
+  {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    url: origin,
+    name: brandName,
+    description: site.description,
+    publisher: { '@id': organizationId },
+    inLanguage: site.locale,
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: (() => {
+      const path = Astro.url.pathname.replace(/\/$/, '');
+      const segments = path.split('/').filter(Boolean);
+      const items = [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` }];
+      let acc = '';
+      segments.forEach((seg, i) => {
+        acc += `/${seg}`;
+        const label = seg
+          .split('-')
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(' ');
+        items.push({
+          '@type': 'ListItem',
+          position: i + 2,
+          name: label,
+          item: `${origin}${acc}/`,
+        });
+      });
+      return items;
+    })(),
+  },
+];
+
+if (product) {
+  graph.push({
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    url: canonicalUrl,
+    brand: { '@type': 'Brand', name: brandName },
+    manufacturer: { '@id': organizationId },
+    ...(product.sku ? { sku: product.sku } : {}),
+  });
+}
+
+for (const node of jsonLd) graph.push(node);
+
+const jsonLdPayload = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
 ---
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang={site.locale}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,14 +147,15 @@ const canonicalUrl = canonical || Astro.url.href;
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:image" content={ogImage} />
-  <meta property="og:site_name" content="Titanium Parts" />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:site_name" content={brandName} />
+  <meta property="og:locale" content={site.localeCode} />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image" content={ogImageUrl} />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -50,6 +164,8 @@ const canonicalUrl = canonical || Astro.url.href;
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json" is:inline set:html={jsonLdPayload} />
 </head>
 <body>
   <Header />

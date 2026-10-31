@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import { pageMeta } from '../data/page-meta';
 const products = [
   { slug: 'titanium-anode', title: 'Titanium Anodes', desc: 'MMO & Platinized Coatings', img: '/images/products/titanium-anodes.webp', href: '/titanium-anode/', featured: true, points: ['Optimized for Electroplating', 'Extended Operating Lifespan'] },
   { slug: 'pem-electrolyzer', title: 'PEM Electrolyzers', desc: 'Stack & Systems', img: '/images/products/pem-electrolyzer.webp', href: '/pem-electrolyzer/', featured: true, points: ['Turnkey Integrated Solutions', 'Low Maintenance Operation'] },
@@ -56,8 +57,13 @@ const scenarios = [
   { title: 'Precision Manufacturing Buyer', desc: 'Drawing-Controlled Supply — A drawing-based titanium part can be reviewed by grade, revision, dimensions, tolerances, process route, inspection points and repeat-supply requirements.' },
 ];
 const faqTitles = ['What information is needed before Titanium Parts recommends a product?', 'How is the supply boundary defined?', 'Which inspection and quality documents may be available?', 'Can Titanium Parts manufacture from controlled drawings?', 'Can Titanium Parts match an installed or replacement component?', 'Can third-party inspection or FAT be included?', 'What remains the responsibility of the buyer or system integrator?', 'What should be included in the first RFQ?'];
+
+const meta = pageMeta['home'];
 ---
-<BaseLayout title="Titanium Products Manufacturer & Engineering Supplier | Titanium Parts" description="Factory-direct titanium materials, components, anodes, and PEM electrolyzer systems.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <section class="hero">
     <div class="hero-bg"><img src="/images/hero-bg.webp" alt="Titanium Parts engineer" class="hero-bg-img" /><div class="hero-bg-overlay"></div></div>
     <div class="container">

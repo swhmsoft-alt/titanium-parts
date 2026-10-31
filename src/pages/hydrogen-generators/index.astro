@@ -3,9 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import RFQForm from '../../components/RFQForm.astro';
+import { pageMeta } from '../../data/page-meta';
 import Icon from '../../components/Icon.astro';
+
+const meta = pageMeta['hydrogenGenerators'];
 ---
-<BaseLayout title="PEM Hydrogen Generator for High-Purity Lab & OEM Supply" description="PEM hydrogen generators for laboratory, analytical instrument, fuel cell testing, and OEM supply.">
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+  >
   <PageHero eyebrow="Hydrogen Generators" title="PEM Hydrogen Generator for High-Purity Lab & OEM Supply" description="PEM hydrogen generators for laboratory, analytical instrument, fuel cell testing, and OEM supply." />
   <section class="section">
     <div class="container">
