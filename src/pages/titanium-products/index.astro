@@ -1,0 +1,403 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+import { productRange } from '../../data/titanium-products-page-1';
+import { productRangeExtra } from '../../data/titanium-products-page-2';
+import { productRangeTail } from '../../data/titanium-products-page-3';
+import { selectionSteps, supplyOptions, industries, grades, processingSteps, evidenceChecks, purchaseGuard } from '../../data/titanium-products-page-4';
+import { faqItems, faqItemsExtra, rfqBenefits } from '../../data/titanium-products-page-5';
+const allProducts = [...productRange, ...productRangeExtra, ...productRangeTail];
+const allFaq = [...faqItems, ...faqItemsExtra];
+---
+
+<BaseLayout title="Industrial Titanium Products Manufacturer & Supplier | Titanium Parts" description="Source titanium mill products and drawing-based components with the product form, grade, dimensions, condition, processing, inspection and documentation reviewed against your purchase requirements.">
+  <!-- HERO -->
+  <section class="prod-hero">
+    <div class="prod-hero-bg" aria-hidden="true"><img src="/images/titanium-products/hero-bg.webp" alt="Titanium mill products and custom titanium components" loading="eager" /><div class="prod-hero-overlay"></div></div>
+    <div class="prod-hero-inner">
+      <p class="prod-eyebrow-light">Titanium Materials &amp; Drawing-Based Parts</p>
+      <h1 class="prod-hero-title">Industrial Titanium Products Manufacturer &amp; Supplier</h1>
+      <p class="prod-hero-lede">Source titanium mill products and drawing-based components with the product form, grade, dimensions, condition, processing, inspection and documentation reviewed against your purchase requirements.</p>
+      <ul class="prod-hero-meta">
+        <li><strong>Plate &middot; Bar &middot; Tube &middot; Wire</strong> Mill products in common industrial forms.</li>
+        <li><strong>Gr 1 &middot; 2 &middot; 5 &middot; 7 &middot; 9 &middot; 12 &middot; 23</strong> Project-specified grades available.</li>
+        <li><strong>Cut-to-Size &amp; Drawing-Based Parts</strong> Order-specific dimensions.</li>
+        <li><strong>Order-Specific Documents</strong> MTC, test reports, packing list.</li>
+      </ul>
+      <div class="prod-hero-cta">
+        <a href="#product-range" class="prod-btn-primary">Explore Titanium Products</a>
+        <a href="#product-rfq" class="prod-btn-secondary-outline">Request a Titanium Quote</a>
+      </div>
+    </div>
+  </section>
+  <!-- SELECTION GUIDE (blue) ============================== -->
+  <section class="prod-section prod-section-blue">
+    <div class="prod-inner">
+      <p class="prod-eyebrow">Product Selection Guide</p>
+      <h2 class="prod-h2">Start with Product Form, Service Conditions and Order Requirements</h2>
+      <p class="prod-lede">"Titanium" alone is not a complete purchasing specification. The required form, grade, standard revision, condition, dimensions, tolerance, surface, processing route and acceptance evidence must work together.</p>
+      <ol class="prod-steps">
+        {selectionSteps.map((s) => (
+          <li class="prod-step">
+            <span class="prod-step-num">{s.n}</span>
+            <div>
+              <strong>{s.title}</strong>
+              <p>{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- PRODUCT RANGE ============================== -->
+  <section id="product-range" class="prod-section">
+    <div class="prod-inner">
+      <header class="prod-section-head">
+        <p class="prod-eyebrow">Titanium Product Range</p>
+        <h2 class="prod-h2">Choose the Product Form That Matches the Next Process</h2>
+        <p class="prod-lede">Use each product page to review common grades, forms and quotation inputs. Final availability and compliance remain order-specific.</p>
+      </header>
+      <div class="prod-range-grid">
+        {allProducts.map((p) => (
+          <a href={p.href} class="prod-range-card">
+            <div class="prod-range-img"><img src={p.img} alt={p.alt} loading="lazy" /></div>
+            <div class="prod-range-body">
+              <h3>{p.title}</h3>
+              <p class="prod-range-line"><strong>Material:</strong> {p.material.replace(/^Material:\s*/, '')}</p>
+              <p class="prod-range-line"><strong>Order basis:</strong> {p.orderBasis.replace(/^Order basis:\s*/, '')}</p>
+              <p class="prod-range-line"><strong>Supply:</strong> {p.supply.replace(/^Supply:\s*/, '')}</p>
+              <span class="prod-range-link">View {p.title} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPLY OPTIONS ============================== -->
+  <section class="prod-section prod-section-alt">
+    <div class="prod-inner">
+      <header class="prod-section-head">
+        <p class="prod-eyebrow">Supply Options</p>
+        <h2 class="prod-h2">Define the Supply Boundary Before Quotation</h2>
+        <p class="prod-lede">A mill product, cut blank and finished component carry different processing, inspection and responsibility boundaries.</p>
+      </header>
+      <div class="prod-supply-grid">
+        {supplyOptions.map((o) => (
+          <article class="prod-supply-card">
+            <h3>{o.title}</h3>
+            <p>{o.body}</p>
+          </article>
+        ))}
+      </div>
+      <p class="prod-callout">Before requesting a quote: state whether Titanium Parts is quoting raw material, a processed blank, a finished component or an assembly. List inclusions, exclusions and customer-supplied design inputs explicitly.</p>
+    </div>
+  </section>
+
+  <!-- MANUFACTURING VIDEO (dark) ============================== -->
+  <section class="prod-section prod-section-dark">
+    <div class="prod-inner prod-two-col">
+      <div>
+        <h2 class="prod-h2 prod-h-light">Inside Titanium Parts Manufacturing</h2>
+        <p class="prod-lede prod-lede-light">See the people, equipment and production environment behind our titanium mill products and custom components.</p>
+      </div>
+      <figure class="prod-video-frame">
+        <video controls playsinline preload="metadata" poster="/images/titanium-products/hero-bg.webp">
+          <source src="https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </figure>
+    </div>
+  </section>
+
+  <!-- INDUSTRY CONTEXT ============================== -->
+  <section class="prod-section">
+    <div class="prod-inner">
+      <header class="prod-section-head">
+        <p class="prod-eyebrow">Industry Context</p>
+        <h2 class="prod-h2">Choose Titanium by Operating Environment</h2>
+        <p class="prod-lede">Industry names provide context, but service conditions and governing specifications determine the final material and product route.</p>
+      </header>
+      <div class="prod-industry-grid">
+        {industries.map((i) => (
+          <article class="prod-industry-card">
+            <div class="prod-industry-img"><img src={i.img} alt={i.title} loading="lazy" /></div>
+            <div class="prod-industry-body">
+              <h3>{i.title}</h3>
+              <p>{i.body}</p>
+              <span class="prod-range-link">Explore the industry context →</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GRADE GUIDE (dark with table) -->
+  <section class="prod-section prod-section-dark">
+    <div class="prod-inner prod-two-col prod-grade-grid">
+      <div>
+        <p class="prod-eyebrow prod-eyebrow-light">Material &amp; Standard Guide</p>
+        <h2 class="prod-h2 prod-h-light">Match the Grade to the Product Form and Purchase Specification</h2>
+        <p class="prod-lede prod-lede-light">A grade name does not replace a product-form standard, condition, drawing or acceptance plan. Start from the actual media, concentration, temperature, pressure and mechanical duty, then confirm the applicable standard revision in the purchase order.</p>
+        <a href="/support/knowledge-center/titanium-products/#grades-standards" class="prod-btn-primary">Read the Grade &amp; Standard Guide</a>
+      </div>
+      <div class="prod-grade-wrap">
+        <table class="prod-grade-table">
+          <thead><tr><th>Grade</th><th>Material family</th><th>Selection note</th></tr></thead>
+          <tbody>
+            {grades.map((g) => (
+              <tr>
+                <td><strong>{g.grade}</strong></td>
+                <td>{g.family}</td>
+                <td>{g.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSING STEPS -->
+  <section class="prod-section">
+    <div class="prod-inner">
+      <header class="prod-section-head">
+        <p class="prod-eyebrow">Custom Titanium Processing</p>
+        <h2 class="prod-h2">Plan Processing Around the Material, Drawing and Acceptance Criteria</h2>
+        <p class="prod-lede">Cutting, machining, forming, welding, surface finishing and inspection should be reviewed as one process chain. Capability depends on grade, form, geometry, tolerance, quantity and evidence requirements.</p>
+      </header>
+      <div class="prod-processing-buttons">
+        {processingSteps.map((p) => (
+          <a href={p.href} class="prod-process-btn">{p.label} →</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE + IMAGE -->
+  <section class="prod-section prod-section-blue">
+    <div class="prod-inner prod-two-col">
+      <div>
+        <p class="prod-eyebrow">Quality Records &amp; Shipment Documents</p>
+        <h2 class="prod-h2">Specify the Evidence Required for the Exact Order</h2>
+        <p class="prod-lede">The available records depend on the product form, source material, processing route, standard and agreed inspection scope. Required evidence should be listed before quotation—not assumed after production.</p>
+      </div>
+      <figure class="prod-evidence-img">
+        <img src="/images/titanium-products/inspection-qa.webp" alt="Titanium inspection records and shipment documentation" loading="lazy" />
+      </figure>
+    </div>
+    <div class="prod-inner">
+      <ul class="prod-evidence-list">
+        {evidenceChecks.map((e) => (
+          <li><Icon name="check-circle" size={18} className="prod-check" /> {e}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- PURCHASE GUARD -->
+  <section class="prod-section">
+    <div class="prod-inner">
+      <header class="prod-section-head">
+        <p class="prod-eyebrow">Titanium Products Purchase Guard</p>
+        <h2 class="prod-h2">Confirm the Order Basis Before You Buy</h2>
+        <p class="prod-lede">Use this short check before comparing price or issuing a purchase order. The complete guide explains the evidence, acceptance and supplier-review steps in detail.</p>
+      </header>
+      <div class="prod-guard-grid">
+        {purchaseGuard.map((g) => (
+          <article class="prod-guard-card">
+            <h3>{g.title}</h3>
+            <p>{g.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="prod-guard-cta">
+        <a href="/support/knowledge-center/titanium-products/" class="prod-btn-primary">Read the Complete Titanium Purchase Guide</a>
+        <a href="#product-rfq" class="prod-btn-secondary">Prepare Your RFQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="prod-section prod-section-alt">
+    <div class="prod-inner prod-faq-wrap">
+      <header class="prod-section-head prod-section-head-narrow">
+        <p class="prod-eyebrow">Titanium Products FAQ</p>
+        <h2 class="prod-h2">Questions Before Product Selection and Quotation</h2>
+      </header>
+      <div class="prod-faq-grid">
+        {allFaq.map((f) => (
+          <details class="prod-faq-item">
+            <summary>
+              <span>{f.q}</span>
+              <span class="prod-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="prod-faq-answer"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- RFQ (dark with form) -->
+  <section id="product-rfq" class="prod-section prod-section-dark">
+    <div class="prod-inner prod-rfq-wrap">
+      <header class="prod-section-head">
+        <p class="prod-eyebrow prod-eyebrow-light">Titanium Product Inquiry</p>
+        <h2 class="prod-h2 prod-h-light">Need Help Selecting the Right Titanium Product?</h2>
+        <p class="prod-lede prod-lede-light">Tell us your application, grade requirement, dimensions, quantity, standard and documentation needs. Our team will help you choose the right titanium product form and prepare a quotation.</p>
+      </header>
+      <div class="prod-rfq-grid">
+        <div class="prod-rfq-side">
+          <ul class="prod-rfq-checks">
+            {rfqBenefits.map((c) => (
+              <li><Icon name="check-circle" size={20} className="prod-rfq-check" /> {c}</li>
+            ))}
+          </ul>
+          <p class="prod-rfq-prefer">PREFER EMAIL? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
+        </div>
+        <div class="prod-rfq-form">
+          <RFQForm title="Send Titanium Product Inquiry" subtitle="We typically respond within 1 business day." variant="titanium" />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+</BaseLayout>
+<style>/* Tokens + Hero */
+.prod-section { background: #fff; padding: 5rem 0; }
+.prod-inner { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+.prod-section-alt { background: #f8fafc; }
+.prod-section-dark { background: #0a1428; color: #fff; }
+.prod-section-blue { background: #eff6ff; }
+.prod-two-col { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: center; }
+@media (max-width: 900px) { .prod-two-col { grid-template-columns: 1fr; } }
+.prod-eyebrow { display: inline-block; padding: 0.375rem 0.875rem; margin-bottom: 1rem; background: rgba(37,99,235,0.08); color: #2563eb; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+.prod-eyebrow-light { display: inline-block; padding: 0.375rem 0.875rem; margin-bottom: 1.25rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #93c5fd; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+.prod-h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; color: #0f172a; margin: 0 0 1rem; line-height: 1.15; letter-spacing: -0.02em; }
+.prod-h-light { color: #fff; }
+.prod-lede { font-size: 1.0625rem; color: #475569; line-height: 1.65; margin: 0 0 2rem; max-width: 800px; }
+.prod-lede-light { color: #cbd5e1; }
+.prod-section-head { max-width: 800px; margin-bottom: 3rem; }
+.prod-section-head-narrow { max-width: 640px; }
+.prod-section-head .prod-h2 { margin-bottom: 1rem; }
+.prod-section-head .prod-lede { margin-bottom: 0; }
+.prod-btn-primary { display: inline-block; background: #2563eb; color: #fff; padding: 0.875rem 1.5rem; border-radius: 6px; font-weight: 600; text-decoration: none; }
+.prod-btn-primary:hover { background: #1d4ed8; }
+.prod-btn-secondary { display: inline-block; background: #fff; color: #2563eb; padding: 0.875rem 1.5rem; border: 1px solid #2563eb; border-radius: 6px; font-weight: 600; text-decoration: none; }
+.prod-btn-secondary:hover { background: #2563eb; color: #fff; }
+.prod-btn-secondary-outline { display: inline-block; background: transparent; color: #fff; padding: 0.875rem 1.5rem; border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; font-weight: 600; text-decoration: none; }
+.prod-btn-secondary-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+.prod-hero { position: relative; padding: 7rem 0 5rem; min-height: 640px; background: #020617; color: #fff; overflow: hidden; }
+.prod-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.prod-hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+.prod-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,6,23,0.7) 0%, rgba(15,23,42,0.55) 100%); }
+.prod-hero-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+.prod-hero-title { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; color: #fff; margin: 0 0 1.5rem; line-height: 1.1; letter-spacing: -0.02em; max-width: 900px; }
+.prod-hero-lede { font-size: clamp(1rem, 1.4vw, 1.25rem); color: rgba(255,255,255,0.9); line-height: 1.6; max-width: 900px; margin: 0 0 2rem; }
+.prod-hero-meta { list-style: none; padding: 0; margin: 0 0 2.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1100px; }
+@media (max-width: 900px) { .prod-hero-meta { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .prod-hero-meta { grid-template-columns: 1fr; } }
+.prod-hero-meta li { padding: 1rem 1.25rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 0.875rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+.prod-hero-meta strong { display: block; color: #93c5fd; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.25rem; }
+.prod-hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+/* Selection steps + Product range */
+.prod-steps { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 768px) { .prod-steps { grid-template-columns: 1fr; } }
+.prod-step { display: flex; gap: 1rem; padding: 1.25rem; background: #fff; border: 1px solid #bfdbfe; border-radius: 8px; }
+.prod-step-num { flex-shrink: 0; width: 36px; height: 36px; background: #2563eb; color: #fff; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9375rem; }
+.prod-step strong { display: block; color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem; }
+.prod-step p { margin: 0; font-size: 0.875rem; color: #475569; line-height: 1.5; }
+.prod-range-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+@media (max-width: 1100px) { .prod-range-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px) { .prod-range-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .prod-range-grid { grid-template-columns: 1fr; } }
+.prod-range-card { display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; text-decoration: none; transition: all 0.25s; }
+.prod-range-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(15,23,42,0.08); border-color: #2563eb; }
+.prod-range-img { aspect-ratio: 4/3; background: #f1f5f9; overflow: hidden; }
+.prod-range-img img { width: 100%; height: 100%; object-fit: cover; }
+.prod-range-body { padding: 1.25rem; }
+.prod-range-body h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.prod-range-line { font-size: 0.8125rem; color: #475569; line-height: 1.45; margin: 0 0 0.375rem; }
+.prod-range-line strong { color: #0f172a; }
+.prod-range-link { display: inline-block; color: #2563eb; font-weight: 600; font-size: 0.875rem; margin-top: 0.5rem; }
+.prod-range-card:hover .prod-range-link { text-decoration: underline; }
+.prod-supply-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 768px) { .prod-supply-grid { grid-template-columns: 1fr; } }
+.prod-supply-card { padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; border-top: 3px solid #2563eb; }
+.prod-supply-card h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.prod-supply-card p { font-size: 0.9375rem; color: #475569; line-height: 1.6; margin: 0; }
+.prod-callout { margin-top: 1.5rem; padding: 1.25rem 1.5rem; background: #fff; border-left: 4px solid #2563eb; font-size: 0.9375rem; color: #334155; line-height: 1.6; border-radius: 6px; }
+
+/* Video + Grade table */
+.prod-video-frame { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 16px 32px rgba(0,0,0,0.4); background: #020617; padding: 0.5rem; }
+.prod-video-frame video { aspect-ratio: 16/9; width: 100%; border-radius: 12px; background: #020617; object-fit: cover; display: block; }
+.prod-grade-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; }
+.prod-grade-grid .prod-btn-primary { margin-top: 1.5rem; }
+.prod-grade-wrap { background: #fff; border-radius: 12px; overflow-x: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.prod-grade-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.prod-grade-table th { background: #1d4ed8; color: #fff; padding: 1rem 1.25rem; text-align: left; font-weight: 700; }
+.prod-grade-table td { padding: 1rem 1.25rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; line-height: 1.5; }
+.prod-grade-table tr:last-child td { border-bottom: none; }
+.prod-grade-table tr:nth-child(even) { background: #f8fafc; }
+
+/* Industry cards */
+.prod-industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+@media (max-width: 1000px) { .prod-industry-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .prod-industry-grid { grid-template-columns: 1fr; } }
+.prod-industry-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+.prod-industry-img { aspect-ratio: 16/10; overflow: hidden; background: #f1f5f9; }
+.prod-industry-img img { width: 100%; height: 100%; object-fit: cover; }
+.prod-industry-body { padding: 1.5rem; }
+.prod-industry-body h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.625rem; }
+.prod-industry-body p { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin: 0 0 1rem; }
+
+/* Processing buttons */
+.prod-processing-buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
+.prod-process-btn { display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #fff; color: #2563eb; border: 1px solid #e2e8f0; border-radius: 999px; font-weight: 600; font-size: 0.9375rem; text-decoration: none; transition: all 0.2s; }
+.prod-process-btn:hover { background: #2563eb; color: #fff; border-color: #2563eb; transform: translateY(-2px); }
+
+/* Evidence section */
+.prod-evidence-img { border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(15,23,42,0.08); }
+.prod-evidence-img img { width: 100%; height: auto; display: block; }
+.prod-evidence-list { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+@media (max-width: 768px) { .prod-evidence-list { grid-template-columns: 1fr; } }
+.prod-evidence-list li { display: flex; align-items: center; gap: 0.625rem; padding: 1rem 1.25rem; background: #fff; border: 1px solid #dbeafe; border-radius: 6px; font-size: 0.9375rem; color: #1e3a8a; line-height: 1.5; }
+.prod-check { color: #2563eb; flex-shrink: 0; }
+
+/* Purchase guard */
+.prod-guard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 768px) { .prod-guard-grid { grid-template-columns: 1fr; } }
+.prod-guard-card { padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; border-radius: 8px; }
+.prod-guard-card h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.625rem; }
+.prod-guard-card p { font-size: 0.9375rem; color: #475569; line-height: 1.6; margin: 0; }
+.prod-guard-cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+
+/* FAQ */
+.prod-faq-wrap { max-width: 1100px; }
+.prod-faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; align-items: start; }
+@media (max-width: 900px) { .prod-faq-grid { grid-template-columns: 1fr; } }
+.prod-faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.25s; }
+.prod-faq-item[open] { box-shadow: 0 8px 20px rgba(15,23,42,0.06); border-color: #2563eb; }
+.prod-faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; font-size: 1rem; font-weight: 600; color: #0f172a; list-style: none; line-height: 1.4; }
+.prod-faq-item summary::-webkit-details-marker { display: none; }
+.prod-faq-icon { color: #2563eb; font-size: 1.5rem; font-weight: 400; flex-shrink: 0; transition: transform 0.3s; line-height: 1; }
+.prod-faq-item[open] .prod-faq-icon { transform: rotate(45deg); }
+.prod-faq-answer { padding: 0 1.5rem 1.25rem; border-top: 1px solid #f1f5f9; }
+.prod-faq-answer p { margin: 0; padding-top: 1rem; font-size: 0.9375rem; color: #475569; line-height: 1.7; }
+
+/* RFQ (dark) */
+.prod-rfq-wrap { max-width: 1200px; }
+.prod-rfq-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 3rem; align-items: start; }
+@media (max-width: 900px) { .prod-rfq-grid { grid-template-columns: 1fr; } }
+.prod-rfq-checks { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.prod-rfq-checks li { display: flex; align-items: center; gap: 0.625rem; font-size: 1rem; color: rgba(255,255,255,0.9); line-height: 1.5; }
+.prod-rfq-check { color: #4ade80 !important; flex-shrink: 0; }
+.prod-rfq-prefer { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin: 0; letter-spacing: 0.05em; }
+.prod-rfq-prefer a { color: #93c5fd; font-weight: 600; }
+</style>

@@ -1,0 +1,13 @@
+
+> hele-titanium-clone@1.0.0 build
+> astro build
+
+07:46:58 [content] Syncing content
+07:46:58 [content] Synced content
+07:46:58 [types] Generated 157ms
+07:46:58 [build] output: "static"
+07:46:58 [build] mode: "static"
+07:46:58 [build] directory: C:\Users\User\Desktop\titanium-cnc\dist\
+07:46:58 [build] Collecting build info...
+07:46:58 [build] ✓ Completed in 263ms.
+07:46:58 [build] Building static entrypoints...

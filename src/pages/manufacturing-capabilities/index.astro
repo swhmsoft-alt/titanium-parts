@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+
+const capabilities = [
+  { title: 'Titanium Material Processing', image: '/images/products/titanium-fasteners.webp', desc: 'Mill products, custom blanks and project-specific forms manufactured from traceable titanium feedstock.' },
+  { title: 'CNC Precision Machining', image: '/images/manufacturing/precision-machining.webp', desc: 'Multi-axis CNC turning and milling for custom titanium parts, prototypes and serial production.' },
+  { title: 'MMO Anode Manufacturing', image: '/images/products/titanium-anodes.webp', desc: 'Substrate preparation, multi-coat MMO application and controlled sintering for ICCP and electrolysis anodes.' },
+  { title: 'PEM System Integration', image: '/images/scenarios/system-integration.webp', desc: 'Stack assembly, BoP integration, control cabinet wiring and factory acceptance testing for hydrogen systems.' },
+  { title: 'Surface & Coating Engineering', image: '/images/quality/coating-verification.webp', desc: 'Pt, MMO and specialty coatings applied under controlled process parameters with XRF composition records.' },
+  { title: 'Final Inspection & Export Packing', image: '/images/quality/export-packing.webp', desc: 'Dimensional inspection, surface review, documentation compilation and export-grade packing.' },
+];
+
+const hubs = [
+  { name: 'Baoji - Titanium Valley', role: 'Materials, machining, anode production', desc: 'Our materials foundation in Chinas titanium cluster with full traceable feedstock and CNC capacity.' },
+  { name: 'Ningbo - Project Coordination', role: 'Engineering, documentation, export', desc: 'Application engineering, drawing review, quality documentation and global shipment coordination.' },
+  { name: 'Dongguan - PEM Assembly', role: 'Stack and system integration', desc: 'Clean PEM stack assembly, BoP integration, control cabinet assembly and FAT environment.' },
+];
+---
+
+<BaseLayout title="Manufacturing & Capabilities | Titanium Parts" description="Titanium Parts' manufacturing network covers titanium material processing, CNC machining, MMO anode manufacturing, and PEM electrolyzer assembly across Ningbo, Baoji, and Dongguan.">
+  <PageHero eyebrow="Manufacturing" title="Inside Our Manufacturing & Quality System" description="A visual overview of the assembly, system-integration, inspection, documentation and release environment. The exact manufacturing ownership, tests and records for an order are confirmed in the quotation, approved quality plan and supply-chain documentation." />
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Six Core Capabilities</span>
+        <h2 class="section-title">From Titanium Material to Finished System</h2>
+        <p class="section-desc">Titanium Parts operates the full chain - from traceable titanium feedstock and CNC machining to MMO coating, PEM stack assembly and system integration.</p>
+      </div>
+      <div class="cap-grid">
+        {capabilities.map((c) => (
+          <div class="cap-card">
+            <div class="cap-image\"><img src={c.image} alt={c.title} loading="lazy" /></div>
+            <div class="cap-body\">
+              <h3>{c.title}</h3>
+              <p>{c.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-slate-50">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Three Manufacturing Hubs</span>
+        <h2 class="section-title">Coordinated Manufacturing Across China</h2>
+        <p class="section-desc">Titanium Parts coordinates three specialized hubs to keep titanium materials, anode production and PEM system assembly aligned to a single project plan.</p>
+      </div>
+      <div class="hub-grid">
+        {hubs.map((h) => (
+          <div class="hub-card">
+            <h3>{h.name}</h3>
+            <p class="hub-role">{h.role}</p>
+            <p class="hub-desc">{h.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Inspection & Documentation</span>
+        <h2 class="section-title">Continuous Verification During Production</h2>
+        <p class="section-desc">Titanium Parts' quality system covers the inspection and documentation chain from incoming material to release, aligned to the agreed quotation and quality plan.</p>
+      </div>
+      <div class="insp-grid">
+        <div class="insp-item"><Icon name="check-circle" size={24} /><h3>Incoming Material Verification</h3><p>MTC review, heat / lot traceability, grade verification and dimensional records.</p></div>
+        <div class="insp-item"><Icon name="check-circle" size={24} /><h3>In-Process Dimensional Checks</h3><p>CMM, surface and tolerance review at defined manufacturing stages.</p></div>
+        <div class="insp-item"><Icon name="check-circle" size={24} /><h3>Coating & Performance Records</h3><p>XRF composition records, coating loading and adhesion review for anodes.</p></div>
+        <div class="insp-item"><Icon name="check-circle" size={24} /><h3>Pressure & Leak Testing</h3><p>Pressure and leak tests to the agreed acceptance basis before release.</p></div>
+        <div class="insp-item"><Icon name="check-circle" size={24} /><h3>Material & Document Traceability</h3><p>Traceability records and source documents for every order.</p></div>
+        <div class="insp-item"><Icon name="check-circle" size={24} /><h3>Third-Party Inspection Support</h3><p>Coordination of witness points and third-party inspection as defined before order release.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <div class="rfq-grid">
+        <div>
+          <span class="section-title-eyebrow" style="color: var(--color-primary-200);">Plan a Project</span>
+          <h2 class="rfq-title">Tell us your product family, scope and approval requirements - we will route you to the right manufacturing hub.</h2>
+          <ul class="rfq-benefits">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Material family and application</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Quantity, drawing, and delivery target</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Inspection and document scope</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Approval and supply-chain needs</li>
+          </ul>
+          <p class="rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
+        </div>
+        <RFQForm title="Project Inquiry" subtitle="Engineering team will respond within 1 business day." variant="default" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .section-white { background: #fff; }
+  .section-slate-50 { background: var(--color-slate-50); }
+  .section-dark { background: var(--color-slate-900); color: #fff; }
+  .section { padding: 6rem 0; }
+  .section-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
+  .section-title-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.875rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.025em; }
+  .section-dark .section-title { color: #fff; }
+  .section-desc { font-size: 1rem; line-height: 1.6; color: var(--color-slate-600); }
+  .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .cap-grid { grid-template-columns: 1fr; } }
+  .cap-card { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; transition: all 0.25s; }
+  .cap-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); border-color: var(--color-primary); }
+  .cap-image { aspect-ratio: 16/9; background: var(--color-slate-100); overflow: hidden; }
+  .cap-image img { width: 100%; height: 100%; object-fit: cover; }
+  .cap-body { padding: 1.5rem; }
+  .cap-body h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
+  .cap-body p { font-size: 0.9375rem; color: var(--color-slate-600); line-height: 1.6; }
+  .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 768px) { .hub-grid { grid-template-columns: 1fr; } }
+  .hub-card { background: #fff; padding: 2rem; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .hub-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-primary); }
+  .hub-role { font-size: 0.9375rem; color: var(--color-primary); font-weight: 600; margin-bottom: 0.75rem; }
+  .hub-desc { font-size: 0.9375rem; color: var(--color-slate-600); line-height: 1.6; }
+  .insp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .insp-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .insp-grid { grid-template-columns: 1fr; } }
+  .insp-item { padding: 1.5rem; background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .insp-item :global(svg) { color: var(--color-primary); margin-bottom: 0.5rem; }
+  .insp-item h3 { font-size: 1rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
+  .insp-item p { font-size: 0.875rem; color: var(--color-slate-600); line-height: 1.6; }
+  .rfq-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-grid { grid-template-columns: 1fr; } }
+  .rfq-title { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.025em; }
+  .rfq-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+  .rfq-benefits li { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9); font-size: 0.9375rem; }
+  .rfq-prefer { color: rgba(255,255,255,0.85); font-size: 0.9375rem; margin-bottom: 0.75rem; }
+  .rfq-prefer a { color: #fff; font-weight: 600; text-decoration: underline; }
+</style>

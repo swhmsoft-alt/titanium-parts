@@ -1,0 +1,523 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RFQForm from '../../components/RFQForm.astro';
+
+const services = [
+  { category: 'Precision Machining', title: 'CNC Titanium Machining', desc: 'Review drawing-based titanium components requiring turning, milling, drilling, threading or other confirmed machining operations.', send: 'Send: 2D/3D drawing, grade, tolerances, surface finish, quantity, critical features and inspection plan.', image: '/images/service/cnc-machining.webp' },
+  { category: 'Material Preparation', title: 'Material Cutting & Sizing', desc: 'Cut titanium plate, sheet, bar, rod, tube or other material forms to order-defined dimensions for subsequent machining, fabrication or project supply.', send: 'Send: grade, standard product form, dimensions, quantity, edge or surface requirement.', image: '/images/service/cutting-sizing.webp' },
+  { category: 'Formed Components', title: 'Forming & Bending', desc: 'Review formed titanium sheet, plate or tube components against geometry, material condition, bend requirements and downstream assembly needs.', send: 'Send: drawing, grade, thickness or wall, bend radius, profile, quantity and acceptance criteria.', image: '/images/service/forming-bending.webp' },
+  { category: 'Fabricated Assemblies', title: 'Welding & Assembly', desc: 'Review titanium welded components and assemblies against joint design, material grade, cleanliness, shielding, inspection and service requirements.', send: 'Send: assembly drawing, material specification, joint details, welding or code requirements, NDT requirements and quantity.', image: '/images/service/welding-assembly.webp' },
+  { category: 'Surface Requirements', title: 'Surface Preparation & Finishing', desc: 'Define the required surface condition for subsequent coating, assembly, corrosion-service review, appearance or cleanliness. Available processes are confirmed for the specific part and order.', send: 'Send: material, current surface, target finish, roughness if applicable, cleanliness requirement and downstream process.', image: '/images/service/surface-finishing.webp' },
+  { category: 'Project-Specific Review', title: 'Additive Manufacturing Review', desc: 'Review titanium additive-manufacturing projects where geometry, material, post-processing and inspection requirements support the intended application. Process ownership and availability are confirmed for the specific project.', send: 'Send: 3D model, material, critical dimensions, quantity, post-processing, inspection and application requirements.', image: '/images/service/additive-manufacturing.jpg' },
+  { category: 'Order-Defined Evidence', title: 'Inspection & Documentation', desc: 'Define material, dimensional and project documentation before production so the quotation and inspection route match the buyer’s approval process.', send: 'Possible records: material documents, dimensional report, CoC, inspection plan and third-party inspection coordination.', image: '/images/service/inspection-docs.webp' },
+  { category: 'OEM Programs', title: 'OEM & Repeat-Supply Support', desc: 'Support prototype review, supplier qualification, repeat drawing control, batch documentation, packaging requirements and order-to-order manufacturing coordination.', send: 'Send: drawing revision, annual or project demand, qualification stage, target schedule and supplier-document requirements.', image: '/images/service/oem-supply.webp' },
+  { category: 'International Orders', title: 'Export Packing & Shipment Coordination', desc: 'Coordinate order-defined packing, commercial documents and shipment requirements for international industrial orders. Final responsibility follows the agreed Incoterm and contract scope.', send: 'Send: destination, Incoterm, packaging requirement, shipment schedule and document list.', image: '/images/service/export-packing.jpeg' },
+];
+
+const selectionTable = [
+  ['Titanium raw material in a defined size', 'Titanium Products or Cutting & Sizing', 'Grade, standard, product form, size, quantity, surface'],
+  ['A custom component made to drawing', 'CNC Machining or Custom Titanium Parts', 'Drawing, tolerances, material, quantity, finish, inspection'],
+  ['A bent or formed part', 'Forming & Bending', 'Drawing, material condition, thickness or wall, radius, profile'],
+  ['A welded assembly', 'Welding & Assembly', 'Assembly drawing, joint, code or WPS requirement, NDT, service'],
+  ['A defined surface condition', 'Surface Preparation & Finishing', 'Current surface, target finish, roughness or cleanliness, next process'],
+  ['Approval or traceability records', 'Inspection & Documentation', 'Required record, standard, acceptance criteria, third-party need'],
+  ['Prototype followed by repeat production', 'OEM Support', 'Revision control, validation stage, annual demand, batch documents'],
+  ['Export packing and shipment', 'Logistics Support', 'Destination, Incoterm, packing, schedule, document list'],
+  ['Unsure which route applies', 'Engineering Review', 'Application, drawing or photo, material, key risks and target outcome'],
+];
+
+const rfqInputs = [
+  'Titanium grade and applicable material standard',
+  '2D drawing, 3D model, BOM or controlled specification',
+  'Dimensions, tolerances and critical features',
+  'Required surface condition or finish',
+  'Prototype, batch and expected repeat quantity',
+  'Application and relevant service conditions',
+  'Inspection, MTC, CoC, NDT or third-party requirements',
+  'Delivery destination, target date and applicable Incoterm',
+];
+
+const workflow = [
+  { step: '1', title: 'Requirement Review', desc: 'Review drawing, grade, application, quantity, tolerance, surface, inspection and delivery requirements.' },
+  { step: '2', title: 'Material & Process Route', desc: 'Define the proposed material, manufacturing operations and applicable process ownership.' },
+  { step: '3', title: 'Technical Alignment', desc: 'Confirm drawing revision, scope, documents, exclusions, commercial terms and delivery basis.' },
+  { step: '4', title: 'Production & Inspection', desc: 'Complete the agreed production and inspection scope against defined acceptance criteria.' },
+  { step: '5', title: 'Packing & Delivery', desc: 'Prepare agreed packing, marking and documents; delivery responsibility follows the Incoterm.' },
+];
+
+const inspection = [
+  { title: 'Material Records', desc: 'Define the material information and traceability records required for the order.' },
+  { title: 'Dimensional Inspection', desc: 'Identify critical features, acceptance criteria and the required result format.' },
+  { title: 'Quality Documents', desc: 'Confirm CoC, inspection plan, FAI or other project-specific records before production.' },
+  { title: 'Third-Party Coordination', desc: 'State the approved party, witness point, report and commercial scope when required.' },
+];
+
+const buyerGroups = [
+  'Industrial OEMs and equipment manufacturers',
+  'Chemical and corrosion-resistant equipment companies',
+  'Electrochemical and surface-finishing equipment manufacturers',
+  'Marine and offshore equipment suppliers',
+  'System integrators and engineering companies',
+  'Project procurement, quality and supply-chain teams',
+  'R&D teams progressing from prototype to controlled production',
+];
+
+const triggers = [
+  'A new drawing or equipment platform',
+  'Prototype and supplier qualification',
+  'Supplier diversification or replacement',
+  'Outsourced machining or fabrication',
+  'A new material-traceability requirement',
+  'A repeat-supply program requiring revision and batch control',
+];
+
+const promises = [
+  { title: 'Drawing-Based Review', desc: 'Start with geometry, material, tolerance, quantity and application—not a generic catalogue.' },
+  { title: 'Clear Manufacturing Scope', desc: 'Identify agreed operations, documents, exclusions and applicable process ownership.' },
+  { title: 'Order-Defined Evidence', desc: 'Align inspection and documentation with the buyer’s approval requirements.' },
+  { title: 'OEM Supply Coordination', desc: 'Connect prototype, revision, repeat production, packing and shipment requirements.' },
+];
+
+const faqs = [
+  { q: 'What information do you need to quote a custom titanium part?', a: 'Please provide the titanium grade and standard, a controlled drawing or model, dimensions and tolerances, quantity, surface requirement, application, inspection documents and delivery destination. If some information is unavailable, identify the critical function and our team will list the remaining inputs needed for review.' },
+  { q: 'Can Titanium Parts supply both titanium material and finished parts?', a: 'Titanium Parts supports titanium materials and drawing-based manufacturing. The applicable material form, processing route, inspection scope and process ownership are confirmed for the specific quotation.' },
+  { q: 'Which titanium grades can you fabricate?', a: 'Grade availability depends on your product form, standard, dimensions, process route and documentation requirement. State the required grade and standard in the inquiry; do not rely on a general grade list as confirmation for a specific order.' },
+  { q: 'Can you work from a sample if no drawing is available?', a: 'A sample, photos and application information may support an initial review, but critical dimensions, tolerances, material requirements and acceptance criteria must be defined before controlled production.' },
+  { q: 'What tolerances can you hold?', a: 'Tolerance capability depends on geometry, material condition, size, process, quantity, surface requirement and inspection method. Titanium Parts does not apply one blanket tolerance to every titanium component. Send the drawing so the critical features can be reviewed.' },
+  { q: 'What inspection documents are available?', a: 'Depending on the order, documents may include material records, dimensional results, a certificate of conformity or other agreed inspection records. FAI, NDT and third-party inspection are project-specific and must be confirmed before production.' },
+  { q: 'Do you provide prototype and repeat-production support?', a: 'Prototype and repeat-supply requirements can be reviewed as part of an OEM program. Include the qualification stage, prototype quantity, expected batch or annual demand, drawing-revision process and required approval documents.' },
+  { q: 'Can you arrange international delivery?', a: 'Packing, export documentation and shipment coordination can be defined for the order. Responsibility, cost and risk transfer follow the agreed Incoterm and contract terms.' },
+  { q: 'Is every process completed in-house?', a: 'Process ownership depends on the service and project. Titanium Parts should identify whether an operation is directly controlled, completed by a qualified external processor or arranged on a project-specific basis during quotation review.' },
+  { q: 'How quickly will I receive a quotation?', a: 'Timing depends on drawing completeness, technical complexity and the required supplier or inspection review. After receiving the inquiry, the team will confirm missing information and the next technical step.' },
+];
+---
+
+<BaseLayout title="Custom Titanium Fabrication Services | Titanium Parts" description="Custom titanium fabrication, OEM machining, forming, welding, surface finishing, inspection documentation and export logistics for industrial OEMs, EPC contractors and system integrators.">
+
+  <!-- ============ HERO ============ -->
+  <section class="ts-hero">
+    <div class="ts-hero-bg" aria-hidden="true">
+      <img src="/images/service/hero-fabrication.webp" alt="Titanium component fabrication and manufacturing environment" loading="eager" />
+      <div class="ts-hero-overlay"></div>
+    </div>
+    <div class="ts-container">
+      <div class="ts-hero-content">
+        <span class="ts-hero-eyebrow">Titanium Materials · Fabrication · Inspection Documentation · Export Support</span>
+        <h1 class="ts-hero-title">Custom Titanium Fabrication Services for Industrial OEMs</h1>
+        <p class="ts-hero-desc-1">From cut-to-size material and drawing-based components to formed and welded assemblies, Titanium Parts supports OEMs, equipment manufacturers and project buyers with coordinated titanium sourcing, fabrication, inspection documentation and export delivery.</p>
+        <p class="ts-hero-desc-2">Send your grade, drawing, quantity, tolerance and documentation requirements. Our team will review the manufacturing route, information gaps and next technical step before quotation.</p>
+        <div class="ts-hero-actions">
+          <a href="#engineering-rfq" class="ts-btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Submit a Drawing for Review
+          </a>
+          <a href="#service-selector" class="ts-btn-outline">Choose a Titanium Service</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DRAWING-BASED MANUFACTURING ============ -->
+  <section class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-intro-wrap">
+        <span class="ts-section-eyebrow">Drawing-Based Manufacturing</span>
+        <h2 class="ts-h2">Titanium Manufacturing Support Built Around Your Drawing</h2>
+        <div class="ts-intro-body">
+          <p>Industrial titanium projects rarely depend on one process alone. Material grade, product form, dimensional tolerance, forming or welding requirements, surface condition, inspection scope and delivery documentation must work together.</p>
+          <p>Titanium Parts helps buyers define and coordinate the agreed manufacturing scope. We review the drawing and order requirements first, identify the appropriate material and process route, and confirm which capabilities and documents apply to the project.</p>
+          <blockquote class="ts-callout">
+            The final manufacturing, inspection and delivery scope is confirmed in the quotation and purchase-order review. Process ownership—Titanium Parts-controlled or qualified external processing—should be disclosed for the relevant order.
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICE SELECTOR ============ -->
+  <section id="service-selector" class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-header-block">
+        <span class="ts-section-eyebrow">Service Selector</span>
+        <h2 class="ts-h2">Choose the Titanium Service That Matches Your Project</h2>
+        <p class="ts-lead">Start with the output you need. Each service page explains the required inputs, applicable manufacturing route and information needed for a technical quotation.</p>
+      </div>
+      <div class="ts-svc-grid">
+        {services.map((s) => (
+          <div class="ts-svc-card">
+            <div class="ts-svc-image"><img src={s.image} alt={s.title} loading="lazy" /></div>
+            <div class="ts-svc-body">
+              <span class="ts-svc-cat">{s.category}</span>
+              <h3 class="ts-svc-title">{s.title}</h3>
+              <p class="ts-svc-desc">{s.desc}</p>
+              <p class="ts-svc-send">{s.send}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SELECTION TABLE ============ -->
+  <section class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-header-block">
+        <span class="ts-section-eyebrow">Selection Guide</span>
+        <h2 class="ts-h2">Which Titanium Service Do You Need?</h2>
+        <p class="ts-lead">Match the required output with the correct service before preparing the inquiry.</p>
+        <p class="ts-lead">Not sure where to start? Submit the drawing and application. We will identify the missing inputs before recommending a manufacturing route.</p>
+      </div>
+      <div class="ts-table-wrap">
+        <table class="ts-table">
+          <thead>
+            <tr>
+              <th>Your requirement</th>
+              <th>Start here</th>
+              <th>Key information to provide</th>
+            </tr>
+          </thead>
+          <tbody>
+            {selectionTable.map((row) => (
+              <tr>
+                <td>{row[0]}</td>
+                <td><strong>{row[1]}</strong></td>
+                <td>{row[2]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RFQ INPUTS ============ -->
+  <section class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-rfq-grid">
+        <div>
+          <span class="ts-section-eyebrow">RFQ Inputs</span>
+          <h2 class="ts-h2">What to Send for a Useful Technical Review</h2>
+          <p class="ts-lead">A complete inquiry does not need to be long. It needs to contain the information that changes material selection, manufacturability, inspection and commercial scope.</p>
+          <p class="ts-lead">Do not include unnecessary personal data or uncontrolled customer information. If the project requires confidentiality or a specific file-transfer method, state that requirement before sending sensitive drawings.</p>
+          <div class="ts-callout-soft">
+            <p>Send your drawing and grade at the same time as the inquiry so the engineering team can identify missing inputs before recommending a manufacturing route.</p>
+          </div>
+        </div>
+        <ul class="ts-checklist">
+          {rfqInputs.map((item) => (
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORKFLOW (DARK) ============ -->
+  <section class="ts-section ts-bg-dark">
+    <div class="ts-container">
+      <div class="ts-header-block">
+        <span class="ts-section-eyebrow ts-section-eyebrow-light">Service Workflow</span>
+        <h2 class="ts-h2 ts-h2-light">From Drawing Review to Order-Defined Delivery</h2>
+        <p class="ts-lead ts-lead-light">Each stage should reduce uncertainty before the next commercial or manufacturing decision.</p>
+      </div>
+      <div class="ts-flow-grid">
+        {workflow.map((w) => (
+          <div class="ts-flow-card">
+            <span class="ts-flow-step">{w.step}</span>
+            <h3 class="ts-flow-title">{w.title}</h3>
+            <p class="ts-flow-desc">{w.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INSPECTION & DOCUMENTATION ============ -->
+  <section class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-header-block">
+        <span class="ts-section-eyebrow">Quality Planning</span>
+        <h2 class="ts-h2">Define Inspection and Documentation Before Production</h2>
+        <p class="ts-lead">"Full documentation" does not mean the same thing for every buyer. An MTC identifies material information; a dimensional report records measured features; a CoC confirms conformity to an agreed order scope; FAI, NDT or third-party inspection may be required for specific projects.</p>
+        <p class="ts-lead">Tell us which records, standards and acceptance criteria are required. Availability and scope will be confirmed during quotation and purchase-order review.</p>
+      </div>
+      <div class="ts-insp-grid">
+        {inspection.map((i) => (
+          <div class="ts-insp-card">
+            <h3 class="ts-insp-title">{i.title}</h3>
+            <p class="ts-insp-desc">{i.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHO THIS SERVICE IS FOR ============ -->
+  <section class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-header-block">
+        <span class="ts-section-eyebrow">Buyer Fit</span>
+        <h2 class="ts-h2">Who This Service Is For</h2>
+        <p class="ts-lead">This service hub is designed for industrial buyers who have a defined component, equipment or project need—not for general consumer retail.</p>
+      </div>
+      <div class="ts-buyer-grid">
+        <div class="ts-buyer-col">
+          <h3 class="ts-buyer-title">Buyer Groups</h3>
+          <ul class="ts-buyer-list">
+            {buyerGroups.map((b) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="ts-buyer-col">
+          <h3 class="ts-buyer-title">Typical Buying Triggers</h3>
+          <ul class="ts-buyer-list">
+            {triggers.map((t) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TECHNICAL REVIEW PROMISE ============ -->
+  <section class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-header-block">
+        <h2 class="ts-h2">A Technical Review Before a Sales Promise</h2>
+      </div>
+      <div class="ts-promise-grid">
+        {promises.map((p) => (
+          <div class="ts-promise-card">
+            <div class="ts-promise-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 9 7 11 4 8"/><polyline points="14 10 7 17 4 14"/></svg>
+            </div>
+            <h3 class="ts-promise-title">{p.title}</h3>
+            <p class="ts-promise-desc">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="ts-section ts-bg-white">
+    <div class="ts-container">
+      <div class="ts-header-block ts-header-md">
+        <span class="ts-section-eyebrow">Engineering Questions</span>
+        <h2 class="ts-h2">Titanium Fabrication Services — Frequently Asked Questions</h2>
+      </div>
+      <div class="ts-faq-grid">
+        {faqs.map((f) => (
+          <details class="ts-faq-item">
+            <summary>
+              <span>{f.q}</span>
+              <svg class="ts-faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="ts-faq-body">
+              <p>{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUBMIT DRAWING FORM (DARK) ============ -->
+  <section id="engineering-rfq" class="ts-section ts-bg-dark">
+    <div class="ts-container">
+      <div class="ts-rfq-form-grid">
+        <div class="ts-rfq-left">
+          <span class="ts-section-eyebrow ts-section-eyebrow-light">Engineering Inquiry</span>
+          <h2 class="ts-h2 ts-h2-light">Submit Your Titanium Drawing for Technical Review</h2>
+          <p class="ts-lead ts-lead-light">Send the drawing, material requirement and project context. We will review the information needed to define the manufacturing, inspection and delivery scope before quotation.</p>
+          <div class="ts-rfq-image"><img src="/images/service/engineering-review.webp" alt="Titanium component manufacturing review" loading="lazy" /></div>
+          <ul class="ts-form-checks">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Drawing-Based Technical Review
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Material & Process Route Review
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Order-Defined Inspection Documents
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              OEM & Export Coordination
+            </li>
+          </ul>
+          <p class="ts-form-prefer">Prefer email? Send the project summary to <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a>. For sensitive files, first confirm the approved transfer method and confidentiality requirements.</p>
+        </div>
+        <div class="ts-form-card">
+          <RFQForm title="Request a Titanium Project Review" subtitle="Send the titanium grade, drawing revision, quantity, tolerances and inspection requirements. We will confirm feasibility and any missing information." variant="default" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ===== BASE TOKENS (Tailwind-aligned) ===== */
+  .ts-container { max-width: 1600px; margin: 0 auto; padding: 0 64px; }
+  @media (max-width: 1024px) { .ts-container { padding: 0 32px; } }
+  @media (max-width: 640px)  { .ts-container { padding: 0 20px; } }
+
+  /* ===== HERO ===== */
+  .ts-hero { position: relative; background: #020617; color: #fff; padding: 96px 0 112px; overflow: hidden; }
+  .ts-hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .ts-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.5; }
+  .ts-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,6,23,0.75) 0%, rgba(2,6,23,0.55) 100%); }
+  .ts-hero-content { position: relative; z-index: 1; max-width: 896px; }
+  .ts-hero-eyebrow { display: inline-flex; align-items: center; padding: 8px 16px; margin-bottom: 1.5rem; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(96, 165, 250, 0.3); color: #CCD7FA; font-size: 14px; font-weight: 600; border-radius: 9999px; letter-spacing: 1.96px; text-transform: uppercase; }
+  .ts-hero-title { font-size: 60px; font-weight: 700; line-height: 60px; color: #fff; margin-bottom: 1.5rem; letter-spacing: -1.5px; }
+  @media (max-width: 1024px) { .ts-hero-title { font-size: 48px; line-height: 48px; } }
+  @media (max-width: 640px)  { .ts-hero-title { font-size: 36px; line-height: 40px; letter-spacing: -0.9px; } }
+  .ts-hero-desc-1 { font-size: 20px; line-height: 28px; color: #E2E8F0; max-width: 768px; margin-bottom: 1rem; }
+  .ts-hero-desc-2 { font-size: 18px; line-height: 28px; color: #CBD5E1; max-width: 768px; margin-bottom: 2rem; }
+  @media (max-width: 640px) { .ts-hero-desc-1 { font-size: 17px; } .ts-hero-desc-2 { font-size: 16px; } }
+  .ts-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .ts-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-size: 14px; font-weight: 700; color: #fff; background: #2563EB; border-radius: 8px; text-decoration: none; transition: background 0.15s; }
+  .ts-btn-primary:hover { background: #1D4ED8; }
+  .ts-btn-outline { display: inline-flex; align-items: center; padding: 14px 28px; font-size: 14px; font-weight: 700; color: #fff; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.45); border-radius: 8px; text-decoration: none; transition: background 0.15s; }
+  .ts-btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+  /* ===== SECTIONS BASE ===== */
+  .ts-section { padding: 112px 0; }
+  @media (max-width: 768px) { .ts-section { padding: 72px 0; } }
+  .ts-bg-white { background: #fff; }
+  .ts-bg-dark { background: #020617; color: #fff; }
+
+  /* ===== TYPOGRAPHY ===== */
+  .ts-section-eyebrow { display: block; font-size: 16px; font-weight: 400; color: #475569; margin-bottom: 0.5rem; }
+  .ts-section-eyebrow-light { color: #93C5FD; }
+  .ts-h2 { font-size: 36px; font-weight: 700; color: #020617; line-height: 40px; letter-spacing: -0.9px; margin-bottom: 1rem; }
+  .ts-h2-light { color: #fff; }
+  @media (max-width: 768px) { .ts-h2 { font-size: 28px; line-height: 32px; letter-spacing: -0.6px; } }
+  .ts-lead { font-size: 18px; font-weight: 400; line-height: 32px; color: #475569; margin-bottom: 1rem; }
+  .ts-lead:last-child { margin-bottom: 0; }
+  .ts-lead-light { color: rgba(226, 232, 240, 0.9); }
+
+  /* ===== HEADER BLOCK ===== */
+  .ts-header-block { max-width: 896px; margin: 0 auto 3rem; }
+  .ts-header-md { max-width: 768px; }
+
+  /* ===== INTRO + CALLOUT ===== */
+  .ts-intro-wrap { max-width: 896px; margin: 0 auto; }
+  .ts-intro-body { margin-top: 1.75rem; }
+  .ts-intro-body p { font-size: 18px; line-height: 32px; color: #475569; margin-bottom: 1rem; }
+  .ts-callout { margin: 2rem 0 0; padding: 20px 24px; background: #fff; border-left: 4px solid #2563EB; border-radius: 0; box-shadow: 0 1px 2px rgba(0,0,0,0.05); font-size: 16px; line-height: 1.7; color: #334155; }
+  .ts-callout-soft { margin-top: 1.5rem; padding: 1.25rem 1.5rem; background: #EFF6FF; border-radius: 8px; border-left: 4px solid #2563EB; }
+  .ts-callout-soft p { margin: 0; font-size: 0.9375rem; line-height: 1.6; color: #334155; }
+
+  /* ===== SERVICE CARDS (with image) ===== */
+  .ts-svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  @media (max-width: 1024px) { .ts-svc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .ts-svc-grid { grid-template-columns: 1fr; } }
+  .ts-svc-card { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden; transition: all 0.2s; }
+  .ts-svc-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: #2563EB; }
+  .ts-svc-image { aspect-ratio: 16/9; overflow: hidden; background: #F1F5F9; }
+  .ts-svc-image img { width: 100%; height: 100%; object-fit: cover; }
+  .ts-svc-body { padding: 24px 28px 28px; }
+  .ts-svc-cat { display: block; font-size: 12px; font-weight: 700; color: #2563EB; letter-spacing: 1.56px; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .ts-svc-title { font-size: 20px; font-weight: 700; color: #020617; line-height: 28px; margin-bottom: 0.625rem; }
+  .ts-svc-desc { font-size: 14px; color: #475569; line-height: 24px; margin-bottom: 0.875rem; }
+  .ts-svc-send { font-size: 13px; color: #64748B; line-height: 22px; padding-top: 0.75rem; border-top: 1px solid #F1F5F9; margin: 0; }
+
+  /* ===== SELECTION TABLE ===== */
+  .ts-table-wrap { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden; }
+  .ts-table { width: 100%; border-collapse: collapse; }
+  .ts-table thead { background: #020617; }
+  .ts-table th { color: #fff; font-size: 14px; font-weight: 700; text-align: left; padding: 16px 24px; }
+  .ts-table tbody tr { border-top: 1px solid #E2E8F0; }
+  .ts-table tbody tr:first-child { border-top: none; }
+  .ts-table td { padding: 16px 24px; font-size: 14px; color: #0F172A; line-height: 1.6; vertical-align: top; }
+  .ts-table td strong { color: #2563EB; font-weight: 700; }
+  .ts-table tbody tr:hover { background: #F8FAFC; }
+
+  /* ===== RFQ INPUTS (two cols) ===== */
+  .ts-rfq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  @media (max-width: 1024px) { .ts-rfq-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .ts-rfq-grid .ts-h2 { text-align: left; }
+  .ts-checklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .ts-checklist li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #334155; line-height: 24px; }
+  .ts-checklist li svg { flex-shrink: 0; margin-top: 4px; }
+
+  /* ===== WORKFLOW DARK ===== */
+  .ts-flow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  @media (max-width: 1024px) { .ts-flow-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .ts-flow-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .ts-flow-grid { grid-template-columns: 1fr; } }
+  .ts-flow-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; transition: all 0.2s; }
+  .ts-flow-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(96,165,250,0.3); }
+  .ts-flow-step { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; font-size: 14px; font-weight: 700; color: #fff; background: #2563EB; border-radius: 9999px; margin-bottom: 1rem; }
+  .ts-flow-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.4; }
+  .ts-flow-desc { font-size: 14px; color: #CBD5E1; line-height: 22px; }
+
+  /* ===== INSPECTION GRID ===== */
+  .ts-insp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 1024px) { .ts-insp-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .ts-insp-grid { grid-template-columns: 1fr; } }
+  .ts-insp-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; transition: all 0.2s; }
+  .ts-insp-card:hover { border-color: #2563EB; box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .ts-insp-title { font-size: 16px; font-weight: 700; color: #020617; margin-bottom: 0.5rem; line-height: 1.4; }
+  .ts-insp-desc { font-size: 14px; color: #475569; line-height: 24px; }
+
+  /* ===== BUYER GROUPS ===== */
+  .ts-buyer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 768px) { .ts-buyer-grid { grid-template-columns: 1fr; } }
+  .ts-buyer-col { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; padding: 36px; }
+  .ts-buyer-title { font-size: 20px; font-weight: 700; color: #020617; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 2px solid #2563EB; }
+  .ts-buyer-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  .ts-buyer-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #334155; line-height: 24px; }
+  .ts-buyer-list li svg { flex-shrink: 0; margin-top: 4px; }
+
+  /* ===== PROMISE GRID ===== */
+  .ts-promise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 1024px) { .ts-promise-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .ts-promise-grid { grid-template-columns: 1fr; } }
+  .ts-promise-card { background: rgba(239, 246, 255, 0.6); border: 1px solid #E5EFFB; border-radius: 16px; padding: 24px; transition: all 0.2s; }
+  .ts-promise-card:hover { border-color: #2563EB; box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .ts-promise-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(37,99,235,0.1); color: #2563EB; border-radius: 10px; margin-bottom: 0.875rem; }
+  .ts-promise-title { font-size: 16px; font-weight: 700; color: #020617; margin-bottom: 0.5rem; line-height: 1.4; }
+  .ts-promise-desc { font-size: 14px; color: #475569; line-height: 24px; }
+
+  /* ===== FAQ ===== */
+  .ts-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 768px) { .ts-faq-grid { grid-template-columns: 1fr; } }
+  .ts-faq-item { background: #fff; border: 1px solid #F1F5F9; border-radius: 16px; overflow: hidden; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .ts-faq-item[open] { border-color: #BFDBFE; box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .ts-faq-item summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; cursor: pointer; list-style: none; font-size: 16px; font-weight: 500; color: #374151; line-height: 1.5; }
+  .ts-faq-item summary::-webkit-details-marker { display: none; }
+  .ts-faq-item summary:hover { color: #2563EB; }
+  .ts-faq-icon { flex-shrink: 0; color: #2563EB; transition: transform 0.2s; }
+  .ts-faq-item[open] .ts-faq-icon { transform: rotate(180deg); }
+  .ts-faq-body { padding: 0 24px 20px; padding-top: 12px; border-top: 1px solid #F1F5F9; margin-top: 0; }
+  .ts-faq-body p { margin: 0; padding-top: 12px; font-size: 14px; color: #475569; line-height: 24px; }
+
+  /* ===== SUBMIT DRAWING FORM (DARK) ===== */
+  .ts-rfq-form-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+  @media (max-width: 1024px) { .ts-rfq-form-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .ts-rfq-image { aspect-ratio: 16/9; overflow: hidden; border-radius: 16px; margin: 1.5rem 0; background: rgba(255,255,255,0.05); }
+  .ts-rfq-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ts-form-checks { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 640px) { .ts-form-checks { grid-template-columns: 1fr; } }
+  .ts-form-checks li { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.92); font-size: 14px; line-height: 1.5; }
+  .ts-form-prefer { color: rgba(226,232,240,0.85); font-size: 14px; line-height: 1.6; margin-top: 1.5rem; }
+  .ts-form-prefer a { color: #fff; font-weight: 600; text-decoration: underline; }
+  .ts-form-card .rfq-form { background: #fff; }
+</style>

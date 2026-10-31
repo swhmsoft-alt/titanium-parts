@@ -1,0 +1,606 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { company } from '@data/company';
+
+const pageTitle = 'Titanium Machined Parts | Custom CNC Titanium Parts to Your Drawing | Titanium Parts';
+const pageDescription = 'Align the controlled drawing or model, titanium Grade or UNS, starting-material form, datums and GD&T, threads, secondary processes, inspection evidence and quantity before comparing quotations.';
+
+const heroCards = [
+  { title: 'Product definition', sub: 'Authority, revision and precedence' },
+  { title: 'Material basis', sub: 'Grade, UNS, form and condition' },
+  { title: 'Critical features', sub: 'Datums, GD&T, threads and surfaces' },
+  { title: 'Acceptance evidence', sub: 'Method, sampling and report' },
+];
+
+const capabilityGroups = [
+  { title: 'Multi-axis milling', icon: 'cog', items: ['5-axis simultaneous machining centre (Mikron) — 700 × 600 × 500 mm','5-axis vertical/horizontal convertible centre — 1000 × 1150 × 1000 mm','4-axis horizontal centre — 1300 × 800 × 1000 mm','3-axis vertical centre — 850 × 550 × 550 mm'] },
+  { title: 'Turning', icon: 'rotate', items: ['CNC lathes up to Ø880 mm turning diameter, 1250 mm swing over bed','Vertical turning lathe — workpieces up to 4000 kg','CNC turn-mill centre — X 550 mm / Y 260 mm','Centerless peeling lathe for bar — Ø40–135 mm'] },
+  { title: 'Specialist processes', icon: 'tool', items: ['Deep-hole drilling Ø20–100 mm | boring Ø45–360 mm | trepanning Ø60–230 mm','CNC cylindrical grinding to Ø200 mm','Low-speed wire EDM (WEDM-LS) — workpieces to 1030 × 800 × 350 mm','4-axis abrasive waterjet — 2000 × 4000 mm bed','Belt polishing'] },
+  { title: 'In-house inspection', icon: 'search', items: ['Coordinate measuring machine — 1000 × 1200 × 800 mm envelope','XRF alloy analyser (Si-PIN detector) for grade verification on incoming and finished material','Ultrasonic flaw detection — 0.1–15 MHz, 0–10 000 mm range','Rockwell hardness testing — 22–88 HR, 588 N','Digital measuring microscope'] },
+];
+
+const partTypes = [
+  { img: '/images/machining/cnc-milled-titanium-parts.webp', alt: 'CNC Milled Titanium Parts', title: 'CNC Milled Titanium Parts', specify: 'Specify: Drawing/model · Datums · Pockets · Bores · GD&T', body: 'Prismatic components reviewed by revision, setup strategy, tool access, critical features, inspection method and release evidence.' },
+  { img: '/images/machining/cnc-turned-titanium-parts.webp', alt: 'CNC Turned Titanium Parts', title: 'CNC Turned Titanium Parts', specify: 'Specify: Diameter · Runout · Bores · Grooves · Threads', body: 'Rotational components reviewed against balance, concentricity, runout, secondary features and per-feature inspection.' },
+  { img: '/images/machining/brackets-structural.webp', alt: 'Brackets & Structural Components', title: 'Brackets & Structural Components', specify: 'Specify: Load path · Interfaces · Bolt patterns · Validation', body: 'Load-bearing geometry controlled by the approved product definition, accepted by suitable mechanical or functional evidence.' },
+  { img: '/images/machining/complex-geometry.webp', alt: 'Complex-Geometry Titanium Parts', title: 'Complex-Geometry Titanium Parts', specify: 'Specify: Model authority · Workholding · Tool access · Inspection plan', body: 'Complex 5-axis features reviewed by setup plan, fixturing, tool access, datum transfer and matched inspection method.' },
+];
+
+const partTypesMore = [
+  { img: '/images/machining/discs-plates-housings.webp', alt: 'Discs, Plates & Housings', title: 'Discs, Plates & Housings', specify: 'Specify: Plate derived routes · Flatness · Datum reference', body: 'Plate- or disc-derived housings reviewed for flatness, parallelism, sealing surfaces and assembly datum structure.' },
+  { img: '/images/machining/shafts-sleeves-pins.webp', alt: 'Shafts, Sleeves & Pins', title: 'Shafts, Sleeves & Pins', specify: 'Specify: Diameter · Runout · Surface · Fits', body: 'Shaft and pin features with critical diameters, runout and surface texture; fits reviewed against mating components.' },
+  { img: '/images/machining/threaded-components.webp', alt: 'Threaded Titanium Components', title: 'Threaded Titanium Components', specify: 'Specify: Thread form · Class · Depth · gauging', body: 'Internal and external threads controlled by the called-out specification, class, handedness, depth, critical features and gauging requirement.' },
+  { img: '/images/machining/valve-flow-control.webp', alt: 'Valve & Flow-Control Components', title: 'Valve & Flow-Control Components', specify: 'Specify: Bore · Surface · Seat · Cleaning · Test', body: 'Flow components reviewed for bore or seat cleanliness, surface roughness, service, leakage and functional acceptance.' },
+];
+const allPartTypes = [...partTypes, ...partTypesMore];
+
+const orderBasis6 = [
+  { title: 'Drawing & model', body: 'File authority, revision, units, precedence and approved deviations.' },
+  { title: 'Material & raw form', body: 'Grade/UNS, specification, condition, stock form and traceability.' },
+  { title: 'Datums & critical features', body: 'GD&T, fits, interfaces, threads, holes and functional priorities.' },
+  { title: 'Surface & secondary processes', body: 'Surface texture, deburring, heat treatment, coating, joining and cleaning.' },
+  { title: 'Inspection & acceptance', body: 'Method, sampling, instruments, report scope and release evidence.' },
+  { title: 'Commercial & change control', body: 'PO precedence, exceptions, deviations, packaging, delivery and revision control.' },
+];
+
+const standardsRows = [
+  { ref: 'ASME Y14.5 or ISO 1101', can: 'An invoked dimensioning and geometrical-tolerancing language and interpretation basis.', cant: 'Part-specific dimensions, characteristics, acceptance methods or contract precedence.' },
+  { ref: 'ASTM B348/B348M', can: 'Titanium and titanium-alloy bar and billet within the ordered revision and scope.', cant: 'Finished-part geometry, threads, surface, machining or final inspection.' },
+  { ref: 'ASTM B265', can: 'Titanium and titanium-alloy strip, sheet and plate within its scope.', cant: 'Machined housing, bracket or plate-component conformity.' },
+  { ref: 'ASTM B381', can: 'Titanium and titanium-alloy forgings within its scope.', cant: 'The machined configuration, customer qualification or finished-part approval.' },
+];
+
+const workflowSteps = [
+  { n: '01', t: 'Contract Review', d: 'Freeze authority, revision, quantity, critical features, exceptions and evidence.' },
+  { n: '02', t: 'Material & Route', d: 'Select the ordered Grade, starting form, condition, setups and controlled outside processes.' },
+  { n: '03', t: 'Machining & Control', d: 'Manage workholding, datum transfer, critical features, tool access, heat and distortion.' },
+  { n: '04', t: 'Inspection & Release', d: 'Apply the agreed inspection plan, documents, traceability, packing and release evidence.' },
+];
+
+const applications = [
+  { img: '/images/machining/chemical-processing.webp', title: 'Chemical & Process Equipment', body: 'Control service media, interfaces, sealing surfaces, cleanliness and order-specific material and inspection requirements.', href: '/industries/' },
+  { img: '/images/machining/marine-offshore.webp', title: 'Marine & Offshore Equipment', body: 'Define seawater or service exposure, loads, mating materials, crevice interfaces, fasteners, inspection and maintenance boundary.', href: '/industries/' },
+  { img: '/images/machining/energy-electrochemical.webp', title: 'Energy & Electrochemical Systems', body: 'Freeze functional surfaces, flow paths, electrical or sealing interfaces, cleanliness, traceability and customer qualification steps.', href: '/industries/' },
+  { img: '/images/machining/industrial-oem.webp', title: 'Industrial & OEM Assemblies', body: 'Use the assembly datum structure, fits, threads, repeatability, change control and release evidence to define the machined component.', href: '/industries/' },
+];
+
+const relatedSupplies = [
+  { t: 'Titanium Rod & Bar', d: 'Review bar/billet-based routes and material requirements.', href: '/titanium-products/titanium-rod-bar/' },
+  { t: 'Titanium Plate', d: 'Review plate-derived components and starting stock.', href: '/titanium-products/titanium-plate/' },
+  { t: 'Titanium Forgings', d: 'Review forged preforms before finish machining.', href: '/titanium-products/' },
+  { t: 'CNC Machining Service', d: 'Review the machining service and order boundary.', href: '/manufacturing-capabilities/' },
+];
+
+const faqList = [
+  { q: 'What information is needed to quote CNC titanium parts?', a: 'Send the controlled drawing and model, revision, material Grade or UNS, starting-material form and specification, quantity, critical dimensions and GD&T, threads, surface and edge requirements, secondary processes, inspection evidence, packaging and delivery basis.' },
+  { q: 'Does a 3D model replace a 2D drawing?', a: 'Only when the order states that the model is the authority and defines how dimensions, tolerances, notes, surface requirements and revisions are controlled. If both are supplied, the order should define precedence and resolve conflicts before production.' },
+  { q: 'Can one general tolerance be applied to the entire part?', a: 'A drawing may invoke general tolerances, but critical interfaces, datum-related controls, threads, surface texture and special characteristics still require explicit requirements. Blanket tight tolerances can add cost without improving function.' },
+  { q: 'Is a material certificate enough to accept a finished machined part?', a: 'No. A material certificate supports raw-material identity and properties within its scope. Finished-part conformity also depends on the approved product definition, process controls, dimensional and feature inspection, secondary-process evidence and traceability.' },
+  { q: 'Does CMM inspection prove every feature is acceptable?', a: 'No. The inspection method must suit the feature, tolerance, accessibility and required uncertainty. Threads, surface texture, internal geometry and special processes may require other methods and separate evidence.' },
+  { q: 'Can aerospace or medical titanium parts be ordered by application name alone?', a: 'No. Application labels do not establish customer approval, regulatory compliance or part qualification. The buyer must provide the applicable drawing, material, process, inspection, documentation and approval requirements.' },
+];
+
+const productOptions = [
+  'CNC Milled Titanium Part',
+  'CNC Turned Titanium Part',
+  'Bracket / Structural Component',
+  'Shaft / Sleeve / Pin',
+  'Threaded Component',
+  'Valve / Flow-Control Component',
+  'Housing / Disc / Plate Component',
+  'Drawing-Based Custom Part',
+];
+---
+<BaseLayout title={pageTitle} description={pageDescription} canonical="https://titanium-parts.com/titanium-machining-parts/">
+  <!-- Hero -->
+  <section id="cnc-parts-hero" class="mp-hero">
+    <img src="/images/machining/hero-precision-cnc.webp" alt="Drawing-based CNC machined titanium parts" class="mp-hero-bg" width="1920" height="1080" fetchpriority="high" decoding="async" />
+    <div class="mp-hero-overlay"></div>
+    <div class="mp-hero-inner">
+      <p class="mp-eyebrow">Milling · Turning · Threads · Complex Geometry</p>
+      <h1 id="cnc-parts-title">Custom CNC Titanium Parts to Your Drawing</h1>
+      <p class="mp-hero-lede">Align the controlled drawing or model, titanium Grade or UNS, starting-material form, datums and GD&amp;T, threads, surface, secondary processes, inspection evidence and quantity before comparing quotations.</p>
+      <div class="mp-hero-cta">
+        <a href="#part-types" class="mp-btn-primary">Explore Part Types</a>
+        <a href="#cnc-parts-rfq" class="mp-btn-secondary">Send Your Drawing</a>
+      </div>
+      <div class="mp-hero-cards">
+        {heroCards.map((c) => (
+          <div class="mp-hero-card">
+            <strong>{c.title}</strong>
+            <span>{c.sub}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning bar -->
+  <section class="mp-warn"><div class="mp-container">
+    <p>Before requesting a quote: identify the controlling revision, resolve model/drawing conflicts, mark critical interfaces, and state the exact material, process, inspection, documentation and change-control scope. &ldquo;Precision titanium part&rdquo; is not an acceptance criterion.</p>
+  </div></section>
+
+  <!-- Verified Machining Capability -->
+  <section class="mp-capability">
+    <div class="mp-container">
+      <div class="mp-capability-head">
+        <h2>Verified Machining Capability</h2>
+        <p>Titanium machining is done on our own CNC floor, not brokered out. The list below is equipment we operate and inspect on.</p>
+      </div>
+      <div class="mp-capability-grid">
+        {capabilityGroups.map((g) => (
+          <article class="mp-capability-card">
+            <div class="mp-capability-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                {g.icon === 'cog' && (<><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9 1.65 1.65 0 0 0 4.27 7.18l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></>)}
+                {g.icon === 'rotate' && (<><polyline points="23 4 23 10 17 10" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></>)}
+                {g.icon === 'tool' && (<><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></>)}
+                {g.icon === 'search' && (<><circle cx="12" cy="12" r="10" /><polyline points="9 12 11 14 15 10" /></>)}
+              </svg>
+            </div>
+            <h3>{g.title}</h3>
+            <ul>
+              {g.items.map((it) => <li>{it}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+      <div class="mp-capability-note">
+        <h4>A note on the numbers above</h4>
+        <p>The accuracy figures published by machine builders are positioning accuracies of the machine, not the tolerance achievable on your part. Achievable part tolerance depends on geometry, fixturing, material condition and inspection method, and we quote it against your drawing &mdash; not against a machine spec sheet.</p>
+        <a href="#cnc-parts-rfq" class="mp-btn-primary">Discuss Your Machining Needs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part Types -->
+  <section id="part-types" class="mp-part-types">
+    <div class="mp-container">
+      <div class="mp-section-head">
+        <p class="mp-eyebrow2">CNC Titanium Part Types</p>
+        <h2>Start with Geometry, Interfaces and Acceptance</h2>
+        <p>These groups organize the review. The approved product definition and order-specific requirements&mdash;not the card name&mdash;control the delivered part.</p>
+      </div>
+      <div class="mp-part-types-grid">
+        {allPartTypes.map((p) => (
+          <article class="mp-type-card">
+            <img src={p.img} alt={p.alt} width="800" height="500" loading="lazy" decoding="async" />
+            <div class="mp-type-body">
+              <h3>{p.title}</h3>
+              <p class="mp-type-spec">{p.specify}</p>
+              <p>{p.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Order Basis (image + 6 cards) -->
+  <section class="mp-order-basis">
+    <div class="mp-container mp-order-grid">
+      <div class="mp-order-img">
+        <img src="/images/machining/cnc-solutions.webp" alt="CNC titanium part review and inspection evidence" loading="lazy" decoding="async" width="800" height="900" />
+      </div>
+      <div class="mp-order-content">
+        <p class="mp-eyebrow-blue">Supply Scope &amp; Qualification</p>
+        <h2>One Order Basis for Engineering, Production and Inspection</h2>
+        <p>A reliable order connects six control groups. Each requirement should have an authority, revision, acceptance method and responsible party.</p>
+        <div class="mp-order-cards">
+          {orderBasis6.map((o) => (
+            <div class="mp-order-card">
+              <strong>{o.title}</strong>
+              <p>{o.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Standards Map -->
+  <section class="mp-standards">
+    <div class="mp-container">
+      <div class="mp-section-head">
+        <p class="mp-eyebrow2">Standards Map</p>
+        <h2>Separate Raw Material from Finished-Part Control</h2>
+      </div>
+      <div class="mp-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Reference</th><th>What it can control</th><th>What it does not replace</th></tr>
+          </thead>
+          <tbody>
+            {standardsRows.map((r) => (
+              <tr>
+                <td class="mp-td-strong">{r.ref}</td>
+                <td>{r.can}</td>
+                <td>{r.cant}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mp-table-note">Always state the required revision and any customer or project additions. The current edition is not automatically the contract edition unless the order says so.</p>
+    </div>
+  </section>
+
+  <!-- Process / Workflow (dark) -->
+  <section class="mp-workflow">
+    <div class="mp-container">
+      <div class="mp-workflow-head">
+        <div>
+          <p class="mp-eyebrow-blue">Process Review</p>
+          <h2>From Controlled Input to Traceable Release</h2>
+          <p>The actual route is confirmed after drawing, material, quantity and acceptance review. Equipment names alone do not establish capability.</p>
+        </div>
+        <img src="/images/machining/custom-titanium-parts.webp" alt="Custom CNC titanium components and process route" loading="lazy" decoding="async" />
+      </div>
+      <div class="mp-workflow-grid">
+        {workflowSteps.map((s) => (
+          <div class="mp-step-card">
+            <span class="mp-step-num">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Applications -->
+  <section class="mp-apps">
+    <div class="mp-container">
+      <div class="mp-section-head">
+        <p class="mp-eyebrow2">Applications</p>
+        <h2>Review the Part Inside Its Actual Assembly</h2>
+        <p>An industry label is only context. Customer drawings, project specifications and approval requirements still control the part.</p>
+      </div>
+      <div class="mp-apps-grid">
+        {applications.map((a) => (
+          <article class="mp-app-card">
+            <a href={a.href}>
+              <img src={a.img} alt={a.title} loading="lazy" decoding="async" />
+              <div class="mp-app-body">
+                <h3>{a.title}</h3>
+                <p>{a.body}</p>
+                <span class="mp-app-cta">Review the application context →</span>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Supply Options -->
+  <section class="mp-related">
+    <div class="mp-container">
+      <div class="mp-section-head">
+        <p class="mp-eyebrow2">Related Supply Options</p>
+        <h2>Connect the Finished Part to the Starting Material</h2>
+      </div>
+      <div class="mp-related-grid">
+        {relatedSupplies.map((r) => (
+          <a href={r.href} class="mp-related-card">
+            <strong>{r.t}</strong>
+            <p>{r.d}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Purchase Guard -->
+  <section class="mp-guard">
+    <div class="mp-container mp-guard-grid">
+      <div>
+        <p class="mp-eyebrow2">Purchase Guard</p>
+        <h2>Control the Order Before Cutting Material</h2>
+        <p>Freeze the product-definition hierarchy, revision, material and raw form, datum structure, critical characteristics, secondary processes, inspection evidence, traceability, change control and commercial basis.</p>
+        <ul class="mp-guard-list">
+          <li>✓ Resolve model, drawing, specification and purchase-order conflicts.</li>
+          <li>✓ Match every critical characteristic to a suitable inspection method.</li>
+          <li>✓ Define external processes, certificates and approval responsibility.</li>
+          <li>✓ Compare quotations only after exceptions and evidence are aligned.</li>
+        </ul>
+        <a href="/manufacturing-capabilities/" class="mp-btn-primary">Open the Complete Purchase Guide</a>
+      </div>
+      <div class="mp-guard-box">
+        <h3>Do not release the PO with only:</h3>
+        <ul>
+          <li>&ldquo;Grade 5 precision part&rdquo;</li>
+          <li>A model with no authority or tolerance basis</li>
+          <li>A material certificate as the only acceptance evidence</li>
+          <li>&ldquo;CMM inspection&rdquo; with no characteristic, method or report scope</li>
+          <li>An application label treated as customer or regulatory approval</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mp-faq">
+    <div class="mp-container">
+      <div class="mp-section-head">
+        <p class="mp-eyebrow-blue">FAQ</p>
+        <h2>CNC Titanium Parts Purchasing Questions</h2>
+      </div>
+      <div class="mp-faq-grid">
+        {faqList.map((f) => (
+          <details class="mp-faq-item">
+            <summary>
+              <span>{f.q}</span>
+              <span class="mp-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="mp-faq-answer">
+              <p>{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- RFQ / Contact (dark) -->
+  <section id="cnc-parts-rfq" class="mp-rfq">
+    <div class="mp-container mp-rfq-grid">
+      <div>
+        <p class="mp-eyebrow-blue">Drawing &amp; RFQ Review</p>
+        <h2>Send the Product Definition You Have</h2>
+        <p>Unknown items can remain open for review. Mark critical requirements clearly so feasibility, exceptions and evidence can be addressed before quotation.</p>
+        <ul class="mp-rfq-list">
+          <li>✓ Drawing/model authority and revision review</li>
+          <li>✓ Material, raw form and process-boundary review</li>
+          <li>✓ GD&amp;T, threads, surface and inspection checklist</li>
+          <li>✓ Traceability, documents, packing and delivery basis</li>
+        </ul>
+        <div class="mp-rfq-contact">
+          <p>Prefer email?</p>
+          <a href={`mailto:${company.contact.salesEmail}`}>{company.contact.salesEmail}</a>
+          <p class="mp-rfq-hq">HQ: {company.locations.hq.detail}</p>
+        </div>
+      </div>
+      <div class="mp-rfq-form">
+        <h3>Titanium Machined Parts Inquiry</h3>
+        <form action="/contact/" method="POST" enctype="multipart/form-data" class="mp-form">
+          <div class="mp-form-row">
+            <div class="mp-form-group">
+              <label for="mp-name">Full Name <span>*</span></label>
+              <input id="mp-name" type="text" name="fullName" autocomplete="name" required />
+            </div>
+            <div class="mp-form-group">
+              <label for="mp-email">Work Email <span>*</span></label>
+              <input id="mp-email" type="email" name="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="mp-form-row">
+            <div class="mp-form-group">
+              <label for="mp-company">Company (Optional)</label>
+              <input id="mp-company" type="text" name="company" autocomplete="organization" />
+            </div>
+            <div class="mp-form-group">
+              <label for="mp-interest">Area of Interest (Optional)</label>
+              <select id="mp-interest" name="interest">
+                <option value="">Select an option...</option>
+                {productOptions.map((o) => <option value={o}>{o}</option>)}
+              </select>
+            </div>
+          </div>
+          <div class="mp-form-group">
+            <label for="mp-file">Upload Drawing / Datasheet (Optional)</label>
+            <div class="mp-file-upload">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" width="36" height="36"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0l-4 4m4-4l4 4M4 20h16" /></svg>
+              <span>Drawing / CAD File (Optional)</span>
+              <small>Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</small>
+              <input id="mp-file" type="file" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" multiple />
+            </div>
+            <p class="mp-form-hint">PDF, image and common CAD formats are accepted.</p>
+          </div>
+          <div class="mp-form-group">
+            <label for="mp-message">Project Details / Requirements <span>*</span></label>
+            <textarea id="mp-message" name="message" rows="6" required></textarea>
+          </div>
+          <button type="submit" class="mp-btn-primary mp-form-submit">Send CNC Titanium Parts Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  /* ===== Base container ===== */
+  .mp-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  @media (max-width: 768px) { .mp-container { padding: 0 16px; } }
+
+  /* ===== Hero ===== */
+  .mp-hero { position: relative; min-height: 680px; overflow: hidden; background: #020617; color: #fff; display: flex; align-items: center; padding: 100px 0; }
+  .mp-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .mp-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, #020617 0%, rgba(2,6,23,0.9) 60%, rgba(23,37,84,0.45) 100%); z-index: 1; }
+  .mp-hero-inner { position: relative; z-index: 2; max-width: 1024px; padding: 0 24px; margin: 0 auto; width: 100%; }
+  @media (max-width: 768px) { .mp-hero-inner { padding: 0 16px; } .mp-hero { min-height: 600px; padding: 80px 0; } }
+  .mp-eyebrow { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: #93c5fd; margin: 0 0 20px; }
+  .mp-hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.75rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 24px; color: #fff; }
+  .mp-hero-lede { font-size: clamp(1.0625rem, 1.5vw, 1.25rem); line-height: 1.6; color: #e2e8f0; max-width: 900px; margin: 0 0 36px; }
+  .mp-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+  .mp-btn-primary { display: inline-flex; align-items: center; min-height: 48px; padding: 12px 28px; background: #2563eb; color: #fff !important; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background 0.2s; border: none; cursor: pointer; }
+  .mp-btn-primary:hover { background: #1d4ed8; }
+  .mp-btn-secondary { display: inline-flex; align-items: center; min-height: 48px; padding: 12px 28px; background: rgba(255,255,255,0.05); color: #fff !important; border: 1px solid rgba(255,255,255,0.45); border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .mp-btn-secondary:hover { background: rgba(255,255,255,0.1); }
+  .mp-hero-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 1024px; }
+  @media (max-width: 1024px) { .mp-hero-cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .mp-hero-cards { grid-template-columns: 1fr; } }
+  .mp-hero-card { border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; }
+  .mp-hero-card strong { display: block; color: #fff; font-size: 15px; font-weight: 700; }
+  .mp-hero-card span { display: block; margin-top: 4px; color: #cbd5e1; font-size: 14px; }
+
+  /* ===== Warning bar ===== */
+  .mp-warn { background: #eff6ff; padding: 32px 0; }
+  .mp-warn p { margin: 0; color: #1e3a8a; font-size: 15px; line-height: 1.65; }
+
+  /* ===== Capability ===== */
+  .mp-capability { background: #f9fafb; padding: 100px 0; }
+  @media (max-width: 1024px) { .mp-capability { padding: 80px 0; } }
+  .mp-capability-head { max-width: 800px; margin-bottom: 64px; }
+  .mp-capability-head h2 { font-size: clamp(1.875rem, 3vw, 2.25rem); font-weight: 700; color: #0f172a; margin: 0 0 24px; letter-spacing: -0.02em; }
+  .mp-capability-head p { font-size: 17px; line-height: 1.65; color: #4b5563; margin: 0; }
+  .mp-capability-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 64px; }
+  @media (max-width: 1024px) { .mp-capability-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+  @media (max-width: 640px) { .mp-capability-grid { grid-template-columns: 1fr; } }
+  .mp-capability-card { background: #fff; border: 1px solid #f1f5f9; border-radius: 24px; padding: 32px; box-shadow: 0 1px 3px rgba(15,23,42,0.04); transition: box-shadow 0.3s; }
+  .mp-capability-card:hover { box-shadow: 0 8px 24px rgba(15,23,42,0.08); }
+  .mp-capability-icon { width: 56px; height: 56px; background: #eff6ff; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #2563eb; margin-bottom: 24px; }
+  .mp-capability-icon svg { width: 28px; height: 28px; }
+  .mp-capability-card h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 16px; }
+  .mp-capability-card ul { list-style: none; padding: 0; margin: 0; }
+  .mp-capability-card li { font-size: 14px; line-height: 1.65; color: #4b5563; padding: 5px 0 5px 18px; position: relative; }
+  .mp-capability-card li::before { content: ""; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: #2563eb; }
+  .mp-capability-note { background: #fff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 40px; text-align: center; }
+  .mp-capability-note h4 { font-size: 22px; font-weight: 700; color: #0f172a; margin: 0 0 12px; }
+  .mp-capability-note p { font-size: 15px; line-height: 1.65; color: #475569; max-width: 900px; margin: 0 auto 24px; }
+
+  /* ===== Section heads ===== */
+  .mp-section-head { max-width: 800px; margin-bottom: 56px; }
+  .mp-section-head h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; color: #0f172a; margin: 16px 0 20px; line-height: 1.2; letter-spacing: -0.02em; }
+  .mp-section-head p { font-size: 17px; line-height: 1.65; color: #4b5563; margin: 0; }
+  .mp-eyebrow2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: #2563eb; margin: 0; }
+  .mp-eyebrow-blue { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: #2563eb; margin: 0 0 16px; }
+
+  /* ===== Part Types ===== */
+  .mp-part-types { padding: 100px 0 80px; scroll-margin-top: 96px; }
+  .mp-part-types-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 1024px) { .mp-part-types-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .mp-part-types-grid { grid-template-columns: 1fr; } }
+  .mp-type-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px rgba(15,23,42,0.04); transition: all 0.3s; }
+  .mp-type-card:hover { box-shadow: 0 12px 32px rgba(15,23,42,0.08); transform: translateY(-2px); }
+  .mp-type-card img { aspect-ratio: 16/10; width: 100%; object-fit: cover; display: block; }
+  .mp-type-body { padding: 24px; }
+  .mp-type-body h3 { font-size: 20px; font-weight: 700; color: #0f172a; margin: 0 0 12px; line-height: 1.3; }
+  .mp-type-spec { font-size: 13px; font-weight: 600; color: #2563eb; margin: 0 0 16px; }
+  .mp-type-body p { font-size: 15px; line-height: 1.65; color: #475569; margin: 0; }
+
+  /* ===== Order Basis (image + 6 list) ===== */
+  .mp-order-basis { background: #f8fafc; padding: 100px 0; }
+  .mp-order-grid { display: grid; gap: 56px; grid-template-columns: 1fr 1fr; align-items: stretch; }
+  @media (max-width: 1024px) { .mp-order-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .mp-order-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; box-shadow: 0 8px 24px rgba(15,23,42,0.08); min-height: 480px; }
+  @media (max-width: 1024px) { .mp-order-img img { min-height: 360px; } }
+  .mp-order-content h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; color: #0f172a; margin: 16px 0 20px; line-height: 1.2; letter-spacing: -0.02em; }
+  .mp-order-content > p { font-size: 17px; line-height: 1.65; color: #4b5563; margin: 0 0 32px; }
+  .mp-order-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .mp-order-cards { grid-template-columns: 1fr; } }
+  .mp-order-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; }
+  .mp-order-card strong { display: block; color: #0f172a; font-size: 15px; font-weight: 700; }
+  .mp-order-card p { font-size: 14px; line-height: 1.6; color: #475569; margin: 8px 0 0; }
+
+  /* ===== Standards Table ===== */
+  .mp-standards { padding: 100px 0; }
+  .mp-table-wrap { overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; }
+  .mp-standards table { width: 100%; border-collapse: collapse; }
+  .mp-standards thead { background: #020617; color: #fff; }
+  .mp-standards th { padding: 16px; text-align: left; font-weight: 700; font-size: 15px; }
+  .mp-standards td { padding: 16px; font-size: 14px; line-height: 1.55; color: #475569; border-top: 1px solid #e2e8f0; vertical-align: top; }
+  .mp-td-strong { font-weight: 700; color: #0f172a !important; }
+  .mp-table-note { font-size: 13px; color: #64748b; margin: 20px 4px 0; line-height: 1.6; }
+
+  /* ===== Workflow dark ===== */
+  .mp-workflow { background: #020617; color: #fff; padding: 100px 0; }
+  .mp-workflow-head { display: grid; gap: 48px; grid-template-columns: 1fr 1fr; align-items: center; }
+  @media (max-width: 1024px) { .mp-workflow-head { grid-template-columns: 1fr; } }
+  .mp-workflow h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; color: #fff; margin: 16px 0 20px; line-height: 1.2; }
+  .mp-workflow-head > div p { font-size: 17px; line-height: 1.65; color: #cbd5e1; margin: 0; }
+  .mp-workflow-head img { width: 100%; border-radius: 24px; }
+  .mp-workflow-grid { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); margin-top: 56px; }
+  @media (max-width: 1024px) { .mp-workflow-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .mp-workflow-grid { grid-template-columns: 1fr; } }
+  .mp-step-card { border: 1px solid #334155; border-radius: 16px; padding: 24px; }
+  .mp-step-num { font-size: 14px; font-weight: 700; color: #93c5fd; }
+  .mp-step-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin: 12px 0 12px; }
+  .mp-step-card p { font-size: 14px; line-height: 1.6; color: #cbd5e1; margin: 0; }
+
+  /* ===== Applications ===== */
+  .mp-apps { padding: 100px 0; }
+  .mp-apps-grid { display: grid; gap: 24px; grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 1024px) { .mp-apps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .mp-apps-grid { grid-template-columns: 1fr; } }
+  .mp-app-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+  .mp-app-card:hover { box-shadow: 0 12px 32px rgba(15,23,42,0.08); transform: translateY(-2px); }
+  .mp-app-card a { display: block; color: inherit; text-decoration: none; }
+  .mp-app-card img { aspect-ratio: 16/9; width: 100%; object-fit: cover; display: block; }
+  .mp-app-body { padding: 24px; }
+  .mp-app-body h3 { font-size: 20px; font-weight: 700; color: #0f172a; margin: 0 0 12px; line-height: 1.3; }
+  .mp-app-body p { font-size: 15px; line-height: 1.65; color: #475569; margin: 0 0 20px; }
+  .mp-app-cta { display: inline-block; font-size: 14px; font-weight: 700; color: #1d4ed8; }
+
+  /* ===== Related Supplies ===== */
+  .mp-related { background: #f8fafc; padding: 100px 0; }
+  .mp-related-grid { display: grid; gap: 20px; grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 1024px) { .mp-related-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .mp-related-grid { grid-template-columns: 1fr; } }
+  .mp-related-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; display: block; color: inherit; text-decoration: none; transition: all 0.3s; }
+  .mp-related-card:hover { box-shadow: 0 8px 24px rgba(15,23,42,0.08); transform: translateY(-2px); }
+  .mp-related-card strong { display: block; font-size: 18px; font-weight: 700; color: #0f172a; }
+  .mp-related-card p { font-size: 14px; line-height: 1.6; color: #475569; margin: 8px 0 0; }
+
+  /* ===== Purchase Guard ===== */
+  .mp-guard { padding: 100px 0; }
+  .mp-guard-grid { display: grid; gap: 56px; grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+  @media (max-width: 1024px) { .mp-guard-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .mp-guard h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; color: #0f172a; margin: 16px 0 20px; line-height: 1.2; }
+  .mp-guard > .mp-container > div:first-child > p { font-size: 17px; line-height: 1.65; color: #4b5563; margin: 0 0 24px; }
+  .mp-guard-list { list-style: none; padding: 0; margin: 0 0 32px; }
+  .mp-guard-list li { font-size: 16px; line-height: 1.7; color: #334155; padding: 8px 0; }
+  .mp-guard-box { background: #eff6ff; border-radius: 24px; padding: 32px; }
+  .mp-guard-box h3 { font-size: 22px; font-weight: 700; color: #0f172a; margin: 0 0 20px; }
+  .mp-guard-box ul { list-style: none; padding: 0; margin: 0; }
+  .mp-guard-box li { font-size: 16px; line-height: 1.65; color: #334155; padding: 10px 0; border-top: 1px solid #dbeafe; }
+  .mp-guard-box li:first-child { border-top: none; }
+
+  /* ===== FAQ ===== */
+  .mp-faq { background: #f8fafc; padding: 100px 0; }
+  .mp-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 1024px) { .mp-faq-grid { grid-template-columns: 1fr; } }
+  .mp-faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+  .mp-faq-item:hover { box-shadow: 0 4px 16px rgba(15,23,42,0.08); }
+  .mp-faq-item[open] { box-shadow: 0 4px 16px rgba(15,23,42,0.08); border-color: #cbd5e1; }
+  .mp-faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; cursor: pointer; list-style: none; }
+  .mp-faq-item summary::-webkit-details-marker { display: none; }
+  .mp-faq-item summary > span:first-child { font-size: 17px; font-weight: 600; color: #0f172a; line-height: 1.4; }
+  .mp-faq-icon { font-size: 24px; color: #2563eb; transition: transform 0.3s; flex-shrink: 0; }
+  .mp-faq-item[open] .mp-faq-icon { transform: rotate(45deg); }
+  .mp-faq-answer { padding: 0 24px 24px; border-top: 1px solid #f1f5f9; }
+  .mp-faq-answer p { font-size: 15px; line-height: 1.7; color: #475569; margin: 0; padding-top: 16px; }
+
+  /* ===== RFQ / Contact dark ===== */
+  .mp-rfq { background: #020617; color: #fff; padding: 100px 0; scroll-margin-top: 96px; }
+  .mp-rfq-grid { display: grid; gap: 56px; grid-template-columns: 1fr 1fr; align-items: center; }
+  @media (max-width: 1024px) { .mp-rfq-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .mp-rfq h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; color: #fff; margin: 16px 0 24px; line-height: 1.2; }
+  .mp-rfq > .mp-container > div:first-child > p { font-size: 17px; line-height: 1.65; color: #cbd5e1; margin: 0 0 32px; }
+  .mp-rfq-list { list-style: none; padding: 0; margin: 0 0 40px; }
+  .mp-rfq-list li { font-size: 16px; line-height: 1.7; color: #e2e8f0; padding: 8px 0; }
+  .mp-rfq-contact { border-top: 1px solid #1e293b; padding-top: 32px; }
+  .mp-rfq-contact p { font-size: 14px; color: #94a3b8; margin: 0; }
+  .mp-rfq-contact a { display: block; font-size: 19px; font-weight: 700; color: #fff !important; margin: 8px 0 8px; text-decoration: none; }
+  .mp-rfq-contact a:hover { color: #93c5fd !important; }
+  .mp-rfq-hq { color: #64748b !important; }
+  .mp-rfq-form { background: #fff; color: #0f172a; border-radius: 24px; padding: 40px; box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
+  @media (max-width: 640px) { .mp-rfq-form { padding: 24px; } }
+  .mp-rfq-form h3 { font-size: 22px; font-weight: 700; color: #0f172a; margin: 0 0 28px; }
+  .mp-form { display: flex; flex-direction: column; gap: 20px; }
+  .mp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .mp-form-row { grid-template-columns: 1fr; } }
+  .mp-form-group { display: flex; flex-direction: column; }
+  .mp-form-group label { font-size: 14px; font-weight: 700; color: #334155; margin-bottom: 8px; }
+  .mp-form-group label span { color: #ef4444; }
+  .mp-form-group input, .mp-form-group select, .mp-form-group textarea { width: 100%; padding: 12px 14px; font-size: 15px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #0f172a; font-family: inherit; transition: border-color 0.2s; }
+  .mp-form-group input:focus, .mp-form-group select:focus, .mp-form-group textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+  .mp-form-group textarea { resize: vertical; min-height: 120px; }
+  .mp-file-upload { position: relative; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 32px 16px; text-align: center; cursor: pointer; background: #f8fafc; transition: all 0.2s; color: #475569; }
+  .mp-file-upload:hover { border-color: #2563eb; background: #eff6ff; }
+  .mp-file-upload svg { color: #2563eb; margin: 0 auto 8px; display: block; }
+  .mp-file-upload span { display: block; font-size: 14px; font-weight: 600; color: #0f172a; }
+  .mp-file-upload small { display: block; font-size: 12px; color: #64748b; margin-top: 8px; }
+  .mp-file-upload input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .mp-form-hint { font-size: 12px; color: #64748b; margin: 8px 0 0; }
+  .mp-form-submit { width: 100%; justify-content: center; }
+</style>

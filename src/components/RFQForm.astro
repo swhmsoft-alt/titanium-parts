@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+interface Props { title?: string; subtitle?: string; variant?: 'default' | 'compact' | 'titanium' | 'anode' | 'pem' | 'team' | 'quality' | 'product'; }
+const { title = 'Send a Project Inquiry', subtitle = 'We typically respond within 1 business day.', variant = 'default' } = Astro.props;
+const productOptions: Record<string, string[]> = {
+  default: ['Titanium Products', 'Titanium Anodes', 'MMO / ICCP Anodes', 'Cathodic Protection Products', 'PEM Electrolyzer Products', 'Custom Titanium Parts', 'Other / Not Sure'],
+  titanium: ['Titanium Plate & Sheet', 'Titanium Coil & Strip', 'Titanium Rod & Bar', 'Titanium Tube & Pipe', 'Titanium Wire', 'Titanium Foil', 'Titanium Mesh', 'Titanium Fasteners', 'Titanium Fittings', 'Titanium Flanges', 'Titanium Forgings', 'Titanium Machined Parts', 'Titanium Balls', 'Titanium Baskets', 'Titanium Diaphragms', 'Titanium-Clad Copper', 'Not Sure / Need Material Review'],
+  anode: ['Ru-Ir MMO Titanium Anode', 'Ir-Ta / Ir-Based MMO Anode', 'Platinized Titanium Anode', 'Specialty Coated Titanium Anode', 'Mesh / Plate Anode', 'Tube / Rod Anode', 'Ribbon / Wire / Disc Anode', 'Drawing-Based Custom Anode', 'Replacement / Recoating Review', 'Not Sure / Need Technical Review'],
+  pem: ['S-Series Compact PEM Electrolyzer', 'H-Series Mid-Range PEM Electrolyzer', 'C-Series Industrial PEM Electrolyzer', 'M-Series High-Capacity PEM Electrolyzer', 'Containerized PEM Electrolyzer', 'Custom Skid / OEM System', 'Replacement / Retrofit Review', 'Not Sure / Need Technical Review'],
+};
+const options = productOptions[variant] || productOptions.default;
+---
+<form class="rfq-form" data-variant={variant}>
+  <div class="rfq-form-header">
+    <h3 class="rfq-form-title">{title}</h3>
+    {subtitle && <p class="rfq-form-subtitle">{subtitle}</p>}
+  </div>
+  <div class="rfq-form-grid">
+    <div class="form-group">
+      <label class="form-label">Full Name <span class="required">*</span></label>
+      <input type="text" name="fullName" class="form-input" required />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Work Email <span class="required">*</span></label>
+      <input type="email" name="email" class="form-input" required />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Company (Optional)</label>
+      <input type="text" name="company" class="form-input" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Area of Interest (Optional)</label>
+      <select name="interest" class="form-select">
+        <option value="">Select category</option>
+        {options.map((opt) => <option value={opt}>{opt}</option>)}
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Upload Drawing / Datasheet (Optional)</label>
+    <div class="form-file-upload">
+      <Icon name="upload" size={36} className="form-file-upload-icon" />
+      <span class="form-file-upload-text">Click to upload or drag and drop</span>
+      <span class="form-file-upload-hint">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</span>
+      <input type="file" name="attachment" class="rfq-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Project Details / Requirements <span class="required">*</span></label>
+    <textarea name="message" class="form-textarea" rows="5" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary btn-lg btn-block">Submit RFQ</button>
+  <p class="rfq-form-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
+</form>
+<style>
+  .rfq-form { background: #fff; padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+  .rfq-form-header { margin-bottom: 2rem; }
+  .rfq-form-title { font-size: 1.5rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.5rem; }
+  .rfq-form-subtitle { color: var(--color-text-secondary); font-size: 0.9375rem; }
+  .rfq-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media (max-width: 640px) { .rfq-form-grid { grid-template-columns: 1fr; } }
+  .rfq-file-input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .form-file-upload { position: relative; }
+  .rfq-form-privacy { font-size: 0.8125rem; color: var(--color-text-muted); text-align: center; margin-top: 1rem; }
+</style>

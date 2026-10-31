@@ -1,0 +1,85 @@
+/* =================================================================
+   TYPOGRAPHY RULES
+   ================================================================= */
+
+.heading-xl {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-heading);
+  margin-bottom: var(--space-4);
+}
+
+.heading-lg {
+  font-size: clamp(1.875rem, 3vw, 2.5rem);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-heading);
+  margin-bottom: var(--space-4);
+}
+
+.heading-md {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-snug);
+  color: var(--color-heading);
+  margin-bottom: var(--space-3);
+}
+
+.heading-sm {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  color: var(--color-heading);
+  margin-bottom: var(--space-3);
+}
+
+.text-lead {
+  font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-normal);
+}
+
+.text-body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+}
+
+.text-small {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-eyebrow {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive headings */
+@media (max-width: 768px) {
+  h1 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+  h4 { font-size: var(--text-xl); }
+}

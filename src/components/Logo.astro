@@ -1,0 +1,19 @@
+---
+interface Props {
+  variant?: 'default' | 'white';
+  className?: string;
+}
+const { variant = 'default', className = '' } = Astro.props;
+---
+
+<a href="/" class={`logo logo-${variant} ${className}`} aria-label="Titanium Parts Home">
+  <img src="/images/logos/titanium-parts-logo.png" alt="Titanium Parts" class="logo-img" loading="eager" />
+</a>
+
+<style>
+  .logo { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s; }
+  .logo:hover { opacity: 0.85; }
+  .logo-img { height: 40px; width: auto; max-height: 40px; }
+  .logo-white .logo-img { filter: brightness(0) invert(1); }
+  @media (max-width: 768px) { .logo-img { height: 32px; } }
+</style>

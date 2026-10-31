@@ -1,0 +1,60 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# screenshots temp
+docs/research/heletitanium/screenshots/temp/
+
+# ------------------------------------------------------------------
+# Scraping / research artifacts (must never enter version control)
+# These contain the source site's HTML, media and full-page captures.
+# ------------------------------------------------------------------
+scripts/product-data-json/
+scripts/*.html
+scripts/c1.txt
+scripts/c2.txt
+scripts/c3.txt
+scripts/mp1.txt
+scripts/mp2.txt
+scripts/mp3.txt
+scripts/faq-*.txt
+scripts/forms-sample.txt
+scripts/files-check.txt
+scripts/inspect-out.txt
+scripts/list-out.txt
+scripts/page-part1.txt
+docs/research/
+*.network-request
+*.network-response
+
+# One-off visual comparison captures at repo root
+/hero-elem.png
+/local-titanium-service.png
+/local-ts-updated.png
+/local-ts-vp1.png
+/ref-titanium-service-vp.png
+/ref-titanium-service.png
+/verify-applications-page.png
+
+# Raw photo drop folder (staging). Processed output lives in public/images.
+/assets-incoming/

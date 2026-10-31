@@ -1,0 +1,630 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const M = 'Titanium Tube &amp; Pipe';
+
+const hero = {
+  eyebrow: 'ASTM B338 Tube · ASTM B861/B862 Pipe',
+  title: 'Titanium Tube &amp; Pipe Manufacturer in China — Seamless &amp; Welded',
+  desc: 'Source seamless or welded titanium tube and pipe with product form, grade, specification, dimensions, condition, testing and documentation reviewed against your purchase requirements.',
+  img: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Tube-Pipe-Manufacturer-1.webp',
+  tags: ['B338 Tube · B861 Seamless Pipe · B862 Welded Pipe', 'OD/Wall · NPS/Schedule · Drawing-Based', 'Order-Specific MTC & Testing']
+};
+
+const orderBasis = [
+  { title: 'Tube or pipe', body: 'B338 tube, B861 seamless pipe, B862 welded pipe or drawing-based tubing.' },
+  { title: 'Material and dimensions', body: 'Grade, UNS, revision, condition, OD and wall or NPS and schedule, length and quantity.' },
+  { title: 'Fabrication and service', body: 'Media, temperature, pressure, joining, bending, ends, cleanliness and design code.' },
+  { title: 'Evidence and release', body: 'MTC, traceability, dimensional records, specified tests, marking, packing and documents.' }
+];
+
+// Tube & Pipe Range - 8 product cards (matching original)
+const forms = [
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Heat-Exchanger-Tube.webp',
+    alt: 'ASTM B338 Titanium Tube',
+    title: 'ASTM B338 Titanium Tube',
+    spec: 'Specify: OD × wall thickness × length',
+    body: 'Seamless or welded tube for condenser and heat-exchanger service when B338 is specified.'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Seamless-Pipe.webp',
+    alt: 'ASTM B861 Seamless Pipe',
+    title: 'ASTM B861 Seamless Pipe',
+    spec: 'Specify: NPS × schedule or exact OD × wall',
+    body: 'Seamless pipe for corrosion-resisting and elevated-temperature service under the ordered specification.'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Welded-Pipe.webp',
+    alt: 'ASTM B862 Welded Pipe',
+    title: 'ASTM B862 Welded Pipe',
+    spec: 'Specify: NPS × schedule or exact OD × wall',
+    body: 'Welded pipe with material, weld, condition, dimensions and testing controlled by the purchase order.'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Heat-Exchanger-Tube.webp',
+    alt: 'Heat Exchanger Tube',
+    title: 'Heat Exchanger Tube',
+    spec: 'Specify: Grade · OD · wall · length · tests',
+    body: 'Straight or project-specific tube for condensers and heat exchangers with service and cleanliness requirements defined.'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-Thin-Wall-Tube.webp',
+    alt: 'Thin-Wall Tube',
+    title: 'Thin-Wall Tube',
+    spec: 'Specify: Grade · OD · wall · tolerance',
+    body: 'Thin-wall tubing reviewed by alloy, formability, fabrication route and dimensional control.'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Capillary-Tube.webp',
+    alt: 'Capillary Tube',
+    title: 'Capillary Tube',
+    spec: 'Specify: OD · ID or wall · length · tolerance',
+    body: 'Small-diameter tubing reviewed for instrumentation or precision fluid-handling requirements.'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Square-Rectangular-Tube.webp',
+    alt: 'Shaped &amp; Custom Tube',
+    title: 'Shaped &amp; Custom Tube',
+    spec: 'Specify: Drawing · section · wall · grade',
+    body: 'Square, rectangular and other drawing-based profiles supplied to an agreed drawing or applicable specification.'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Custom-Fabricated-U-Bend.webp',
+    alt: 'Fabricated Tube',
+    title: 'Fabricated Tube',
+    spec: 'Specify: Drawing · geometry · tolerance · quantity',
+    body: 'Cutting, bending, U-bend, coiling and end preparation reviewed as an explicit processing scope.'
+  }
+];
+
+// Specification Mapping table
+const specMapping = [
+  { route: 'Condenser / heat-exchanger tube', dimensions: 'OD × wall × length', spec: 'ASTM B338 / ASME SB-338', scope: 'Seamless or welded tube; confirm grade, revision, condition and tests.' },
+  { route: 'Seamless pipe', dimensions: 'NPS × schedule or exact dimensions', spec: 'ASTM B861 / ASME SB-861', scope: 'Seamless pipe; define service, design code, ends and test package.' },
+  { route: 'Welded pipe', dimensions: 'NPS × schedule or exact dimensions', spec: 'ASTM B862 / ASME SB-862', scope: 'Welded pipe; define weld route, condition, NDT and acceptance.' },
+  { route: 'Shaped / fabricated tube', dimensions: 'Drawing and controlled dimensions', spec: 'Customer drawing or verified standard', scope: 'Do not apply B861 automatically to square or rectangular tube.' }
+];
+
+// Engineering Inputs (4 cards)
+const engineeringInputs = [
+  { title: 'Service conditions', body: 'Media, concentration, contaminants, temperature, pressure, velocity and cycling.' },
+  { title: 'Geometry', body: 'OD, wall, ID, NPS, schedule, tolerance, straightness, length and ends.' },
+  { title: 'Fabrication', body: 'Seamless or welded route, bending, joining, heat treatment, cleaning and inspection.' },
+  { title: 'Design responsibility', body: 'Design code, allowable stress, joint factor, allowances and approval authority.' }
+];
+
+// 5 Process steps (specific to tubing)
+const processSteps = [
+  { img: 'https://heletitanium.com/wp-content/uploads/2026/09/Requirement-Review-Titanium-Supply.webp', alt: 'Requirement Review for titanium tube and pipe', title: 'Requirement Review', body: 'Form, standard, grade, dimensions, service and documents.' },
+  { img: 'https://heletitanium.com/wp-content/uploads/2026/09/Seamless-Welded-Route.webp', alt: 'Seamless or Welded Route', title: 'Seamless or Welded Route', body: 'Seamless, welded, source condition and processing boundary.' },
+  { img: 'https://heletitanium.com/wp-content/uploads/2026/09/Sizing-Fabrication-Tube.webp', alt: 'Sizing & Fabrication', title: 'Sizing & Fabrication', body: 'Cutting, ends, bending or drawing-based work as agreed.' },
+  { img: 'https://heletitanium.com/wp-content/uploads/2026/09/Inspection-Tests-Tube.webp', alt: 'Inspection & Tests', title: 'Inspection & Tests', body: 'Order-specific dimensions, visual checks, tests and reports.' },
+  { img: 'https://heletitanium.com/wp-content/uploads/2026/09/Marking-Release-Tube.webp', alt: 'Marking & Release', title: 'Marking & Release', body: 'Traceability, protection, packing, documents and delivery basis.' }
+];
+
+const mfgVideo = {
+  poster: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.webp',
+  src: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.mp4'
+};
+
+// 4 application contexts (specific to tubing)
+const applications = [
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Heat-Exchangers-Condensers.png',
+    alt: 'Heat Exchangers &amp; Condensers titanium tube and pipe application',
+    title: 'Heat Exchangers &amp; Condensers',
+    spec: 'Define thermal duty, media, temperature, pressure, grade, dimensions, cleanliness, ends and applicable B338 inspection requirements.',
+    href: '/industries/chemical-processing/'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Petrochemical-Processing.webp',
+    alt: 'Chemical Processing &amp; Piping titanium tube and pipe application',
+    title: 'Chemical Processing &amp; Piping',
+    spec: 'Define chemistry, concentration, contaminants, temperature, pressure, design code, NPS or dimensions, fabrication and inspection.',
+    href: '/industries/chemical-processing/'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Marine-Offshore02.webp',
+    alt: 'Marine &amp; Seawater Systems titanium tube and pipe application',
+    title: 'Marine &amp; Seawater Systems',
+    spec: 'Review temperature, velocity, crevices, galvanic contacts, pressure boundary, joining and maintenance access.',
+    href: '/industries/marine-offshore/'
+  },
+  {
+    img: 'https://heletitanium.com/wp-content/uploads/2026/09/Have-a-Non-Standard-Requirement.webp',
+    alt: 'Industrial Fabrication &amp; OEM titanium tube and pipe application',
+    title: 'Industrial Fabrication &amp; OEM',
+    spec: 'Use the approved drawing to control form, grade, dimensions, bending, welding, cleanliness, inspection and responsibility.',
+    href: '/manufacturing-capabilities/'
+  }
+];
+
+// 4 Evidence items (specific to tubing)
+const evidence = [
+  { title: 'Material identity', body: 'Grade, heat or lot, form, condition and certificate link.' },
+  { title: 'Dimensional records', body: 'OD, wall, length, straightness, ends and agreed tolerances.' },
+  { title: 'Testing evidence', body: 'Method, acceptance criteria, sampling, witness point and report.' },
+  { title: 'Release package', body: 'Document index, marking, packing, shipping records and approval route.' }
+];
+
+// 4 Controls (specific to tubing)
+const controls = [
+  { title: 'Product &amp; Material Identity', body: 'Tube or pipe, seamless or welded, grade, standard revision and condition.' },
+  { title: 'Dimensions &amp; Fabrication', body: 'OD/wall or NPS/schedule, length, tolerance, ends, joining and processing.' },
+  { title: 'Testing &amp; Acceptance', body: 'Certificates, inspection, specified tests, witness points and release criteria.' },
+  { title: 'Commercial &amp; Delivery', body: 'Quantity basis, exclusions, packing, Incoterm and schedule assumptions.' }
+];
+
+// 6 FAQ items
+const faq = [
+  { q: 'What information is needed for a titanium tube or pipe quotation?', a: 'Provide the product form, grade, specification and revision, condition, dimensions, quantity, service, testing and document requirements. A drawing is optional for the first enquiry and recommended for shaped or fabricated products.' },
+  { q: 'What is the difference between titanium tube and titanium pipe?', a: 'The two terms describe different dimensional and specification scopes. Tube is typically sized by outside diameter and wall, pipe by NPS and schedule. Confirm which one is required by the governing specification and service code.' },
+  { q: 'What is the difference between ASTM B338, B861 and B862?', a: 'B338 covers seamless and welded tubes intended for condenser and heat-exchanger service; ASTM B861 covers seamless titanium pipe; ASTM B862 covers welded titanium pipe. State the required revision and supplementary requirements in the order.' },
+  { q: 'Can Titanium Parts supply both seamless and welded products?', a: 'Yes. Seamless tube and pipe are produced by hot extrusion and welded tube and pipe by TIG welding, both in our own factory. Sizes, grades, condition, testing scope and lead time are confirmed per order' },
+  { q: 'How is the pressure rating of titanium tube or pipe determined?', a: 'It cannot be determined from the material name alone. The responsible designer must apply the governing design code using dimensions, material properties at design temperature, joint factors, allowances, service conditions and system details.' },
+  { q: 'Are hydrostatic, pneumatic, eddy-current, ultrasonic or third-party tests included automatically?', a: 'No. Applicable tests, sampling, acceptance criteria, witness points and reports depend on the product specification and purchase order. They must be agreed before quotation and order release.' }
+];
+
+const rfqOptions = [
+  'ASTM B338 Titanium Tube',
+  'ASTM B861 Seamless Pipe',
+  'ASTM B862 Welded Pipe',
+  'Heat Exchanger Tube',
+  'Thin-Wall / Capillary Tube',
+  'Shaped / Fabricated Tube',
+  'Grade / Specification Review'
+];
+---
+<BaseLayout title={M + ' Manufacturer in China — Seamless & Welded'} description={hero.desc}>
+  <!-- HERO -->
+  <section class="tp-hero">
+    <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />
+    <div class="tp-hero-overlay"></div>
+    <div class="tp-hero-inner">
+      <p class="tp-hero-eyebrow">{hero.eyebrow}</p>
+      <h1>{hero.title}</h1>
+      <p class="tp-hero-lede">{hero.desc}</p>
+      <div class="tp-hero-tags">
+        {hero.tags.map((t) => <span class="tp-hero-tag" set:html={t}></span>)}
+      </div>
+      <div class="tp-hero-cta">
+        <a href="#forms-section" class="tp-btn-primary">Choose Tube or Pipe</a>
+        <a href="#tp-rfq" class="tp-btn-secondary">Request a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. ORDER BASIS -->
+  <section class="tp-section tp-blue-bg">
+    <div class="tp-inner tp-orderbasis-v2">
+      <div class="tp-orderbasis-head">
+        <p class="tp-eyebrow">Buying Essentials</p>
+        <h2 class="tp-h2">Start with Product Form, Standard and Design Basis</h2>
+      </div>
+      <div class="tp-grid-2">
+        {orderBasis.map((c) => (
+          <div class="tp-ob-card">
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TUBE & PIPE RANGE -->
+  <section id="forms-section" class="tp-section">
+    <div class="tp-inner">
+      <p class="tp-eyebrow">Tube &amp; Pipe Range</p>
+      <h2 class="tp-h2">Separate the Product Routes Before Quotation</h2>
+      <p class="tp-lede">B338 tube, B861 seamless pipe and B862 welded pipe are not interchangeable labels. Custom and fabricated products also require a defined drawing and responsibility boundary.</p>
+      <div class="tp-grid-4">
+        {forms.map((c) => (
+          <article class="tp-card tp-form-card">
+            <div class="tp-form-img"><img src={c.img} alt={c.alt} loading="lazy" /></div>
+            <div class="tp-form-body">
+              <h3>{c.title}</h3>
+              <p class="tp-form-spec"><strong>Specify:</strong> {c.spec}</p>
+              <p class="tp-form-text">{c.body}</p>
+              <p class="tp-form-text" style="color:#64748b; font-size:0.8125rem; margin-top:0.5rem;"><em>Grade, dimensions, condition and availability: confirmed by quotation.</em></p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b. SPECIFICATION MAPPING TABLE -->
+  <section class="tp-section tp-alt">
+    <div class="tp-inner">
+      <p class="tp-eyebrow">Specification Mapping</p>
+      <h2 class="tp-h2">Match the Standard to the Ordered Product</h2>
+      <div class="tp-spec-table-wrap">
+        <table class="tp-spec-table">
+          <thead>
+            <tr>
+              <th>Product route</th>
+              <th>Typical order dimensions</th>
+              <th>Specification when required</th>
+              <th>Scope boundary</th>
+            </tr>
+          </thead>
+          <tbody>
+            {specMapping.map((row) => (
+              <tr>
+                <td><strong>{row.route}</strong></td>
+                <td>{row.dimensions}</td>
+                <td>{row.spec}</td>
+                <td>{row.scope}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="tp-lede" style="margin-top:1.5rem;">Not every grade is included or available in every product form, size, condition or specification. Confirm the exact combination in the quotation.</p>
+    </div>
+  </section>
+
+  <!-- 3. ENGINEERING INPUTS -->
+  <section class="tp-section">
+    <div class="tp-inner">
+      <p class="tp-eyebrow">Engineering Inputs</p>
+      <h2 class="tp-h2">Pressure and Corrosion Claims Need a Defined Basis</h2>
+      <p class="tp-lede">A material grade or successful product test does not create a system pressure rating. The responsible designer must apply the governing code using actual dimensions, material properties at design temperature, joint factors, allowances, service conditions and system configuration.</p>
+      <div class="tp-grid-4">
+        {engineeringInputs.map((c) => (
+          <article class="tp-card">
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PROCESS REVIEW (Coordinate the Order) -->
+  <section class="tp-section tp-dark">
+    <div class="tp-inner">
+      <div class="tp-process-head">
+        <p class="tp-eyebrow tp-eyebrow-light">Process Review</p>
+        <h2 class="tp-h2 tp-h-light">Coordinate the Order from Definition to Release</h2>
+        <p class="tp-lede tp-lede-light">Seamless and welded tube and pipe are produced in our own factory. Sizing, fabrication, the inspection route and the document package are confirmed for each order.</p>
+      </div>
+      <div class="tp-grid-5">
+        {processSteps.map((c, i) => (
+          <article class="tp-process-card-v2">
+            <div class="tp-process-img"><img src={c.img} alt={c.alt} loading="lazy" /></div>
+            <div class="tp-process-body">
+              <span class="tp-process-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. MANUFACTURING ENVIRONMENT -->
+  <section class="tp-section">
+    <div class="tp-inner tp-mfg-grid">
+      <div>
+        <p class="tp-eyebrow">Inside Titanium Parts</p>
+        <h2 class="tp-h2">{M} Manufacturing Environment</h2>
+        <p class="tp-lede">Seamless extrusion, TIG welding, sizing and inspection are carried out in our own factory. The inspection scope and documentation for a specific order are agreed in the quotation.</p>
+      </div>
+      <div class="tp-mfg-video">
+        <video controls preload="metadata" playsinline poster={mfgVideo.poster}>
+          <source src={mfgVideo.src} type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. APPLICATION CONTEXT -->
+  <section class="tp-section tp-alt">
+    <div class="tp-inner">
+      <p class="tp-eyebrow">Application Context</p>
+      <h2 class="tp-h2">Match the Product Route to the Service and System</h2>
+      <p class="tp-lede">Industry labels are starting points. Final selection depends on service data, product specification, design code, fabrication and acceptance responsibilities.</p>
+      <div class="tp-grid-4">
+        {applications.map((c) => (
+          <article class="tp-card tp-form-card tp-app-card">
+            <div class="tp-form-img"><img src={c.img} alt={c.alt} loading="lazy" /></div>
+            <div class="tp-form-body">
+              <h3>{c.title}</h3>
+              <p class="tp-form-spec">{c.spec}</p>
+              <a href={c.href} class="tp-app-link">Review the application context →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. EVIDENCE / SUPPLY SCOPE -->
+  <section class="tp-section">
+    <div class="tp-inner tp-evidence-grid">
+      <div>
+        <p class="tp-eyebrow">Supply Scope &amp; Qualification</p>
+        <h2 class="tp-h2">Specify Tests and Records Before Quotation</h2>
+        <p class="tp-lede">Hydrostatic, pneumatic, eddy-current, ultrasonic, penetrant or other testing must be tied to the applicable specification, product route, acceptance criteria, sampling and order scope. Do not assume every method is required or included.</p>
+      </div>
+      <div class="tp-evidence-cards">
+        {evidence.map((c) => (
+          <div class="tp-evidence-card">
+            <Icon name="badge-check" size={22} className="tp-icon-blue" />
+            <h3 set:html={c.title}></h3>
+            <p>{c.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CONTROLS -->
+  <section class="tp-section tp-dark">
+    <div class="tp-inner">
+      <p class="tp-eyebrow tp-eyebrow-light">Before You Order</p>
+      <h2 class="tp-h2 tp-h-light">Confirm Four Controls Before You Buy</h2>
+      <p class="tp-lede tp-lede-light">Use this short check before comparing quotations. The complete guide covers standard selection, pressure-design boundaries, supplier evidence and commercial risk.</p>
+      <p style="margin: 0 0 2rem;"><a href="/knowledge-center/titanium-tube-pipe-purchase-guide/" class="tp-btn-primary" style="font-size:0.9375rem;">Read the Complete Purchase Guide</a></p>
+      <div class="tp-grid-4">
+        {controls.map((c) => (
+          <article class="tp-control-card">
+            <Icon name="badge-check" size={28} className="tp-icon-blue" />
+            <h3 set:html={c.title}></h3>
+            <p>{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FAQ -->
+  <section class="tp-section tp-alt">
+    <div class="tp-inner">
+      <p class="tp-eyebrow">Frequently Asked Questions</p>
+      <h2 class="tp-h2">{M} FAQ</h2>
+      <p class="tp-lede">Common questions before sending the inquiry.</p>
+      <div class="tp-faq-grid">
+        {faq.map((f) => (
+          <details class="tp-faq">
+            <summary>
+              <span>{f.q}</span>
+              <span class="tp-faq-icon">+</span>
+            </summary>
+            <div class="tp-faq-a"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. RFQ -->
+  <section id="tp-rfq" class="tp-section tp-dark tp-rfq-sec">
+    <div class="tp-inner tp-rfq-grid">
+      <aside class="tp-rfq-side">
+        <p style="color:#93c5fd; font-size:0.75rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin:0 0 0.75rem;">Titanium Tube &amp; Pipe Inquiry</p>
+        <h2 class="tp-h2 tp-h-light">Send the Order Basis for Supply Review</h2>
+        <p class="tp-lede tp-lede-light">Share the available product form, grade, specification, dimensions, quantity, service, testing and document requirements. A drawing is optional for the first enquiry and recommended for shaped or fabricated products.</p>
+        <ul class="tp-rfq-checks">
+          <li><Icon name="check" size={18} className="tp-icon-light" /> B338, B861 or B862 route review</li>
+          <li><Icon name="check" size={18} className="tp-icon-light" /> Grade, dimensions and condition review</li>
+          <li><Icon name="check" size={18} className="tp-icon-light" /> Testing and documentation checklist</li>
+          <li><Icon name="check" size={18} className="tp-icon-light" /> Quotation-specific availability and delivery basis</li>
+        </ul>
+        <p class="tp-rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
+        <p class="tp-rfq-hq">HQ: Titanium Valley, Baoji City, Shaanxi Province, China</p>
+      </aside>
+      <form class="tp-rfq-form" data-variant="titanium-tubing">
+        <h3 class="tp-rfq-form-title">Titanium Tube &amp; Pipe Inquiry</h3>
+        <div class="tp-rfq-row">
+          <div class="tp-rfq-field">
+            <label>Full Name <span>*</span></label>
+            <input type="text" name="fullName" required />
+          </div>
+          <div class="tp-rfq-field">
+            <label>Business Email <span>*</span></label>
+            <input type="email" name="email" required />
+          </div>
+        </div>
+        <div class="tp-rfq-field">
+          <label>Product of Interest <span>*</span></label>
+          <select name="interest" required>
+            <option value="">Select an option...</option>
+            {rfqOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
+        </div>
+        <div class="tp-rfq-field">
+          <label>Grade / Specification Review</label>
+          <input type="text" name="grade" placeholder="e.g. Grade 2, ASTM B338, 25.4mm OD × 0.7mm wall × 6000mm" />
+        </div>
+        <div class="tp-rfq-field">
+          <label>Drawing / Specification (Optional)</label>
+          <div class="tp-rfq-upload">
+            <Icon name="upload" size={32} className="tp-rfq-upload-icon" />
+            <span class="tp-rfq-upload-text">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</span>
+            <input type="file" name="attachment" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" />
+          </div>
+          <p class="tp-rfq-upload-hint">PDF, image and common CAD formats are accepted.</p>
+        </div>
+        <div class="tp-rfq-field">
+          <label>Message / Specifications <span>*</span></label>
+          <textarea name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="tp-btn-primary tp-btn-block">Send Tube &amp; Pipe Inquiry</button>
+        <p class="tp-rfq-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* ===== HERO ===== */
+.tp-hero { position: relative; min-height: 680px; padding: 5rem 0 4rem; color: #fff; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; }
+.tp-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.tp-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, #020617 0%, rgba(2,6,23,0.9) 50%, rgba(23,37,84,0.45) 100%); z-index: 2; }
+.tp-hero-inner { position: relative; z-index: 3; max-width: 1024px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+.tp-hero-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #93c5fd; margin: 0 0 1.25rem; }
+.tp-hero h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 1.25rem; }
+.tp-hero-lede { font-size: clamp(1rem, 1.6vw, 1.25rem); color: #cbd5e1; line-height: 1.65; max-width: 900px; margin: 0 0 1.5rem; }
+.tp-hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.tp-hero-tag { display: inline-block; padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #fff; font-size: 0.875rem; font-weight: 600; border-radius: 999px; }
+.tp-hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1rem; }
+.tp-btn-primary { display: inline-flex; align-items: center; justify-content: center; background: #2563eb; color: #fff; padding: 0.875rem 1.75rem; border-radius: 8px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; font-size: 0.9375rem; transition: background-color 0.2s; min-height: 48px; }
+.tp-btn-primary:hover { background: #1d4ed8; }
+.tp-btn-secondary { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; padding: 0.875rem 1.75rem; border: 1px solid rgba(255,255,255,0.6); border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.2s; min-height: 48px; }
+.tp-btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+.tp-btn-block { display: flex; width: 100%; justify-content: center; padding: 1rem 1.75rem; font-size: 1.0625rem; }
+
+/* ===== SECTIONS ===== */
+.tp-section { padding: 5rem 0; background: #fff; }
+.tp-section.tp-alt { background: #f8fafc; }
+.tp-section.tp-blue-bg { background: #eff6ff; }
+.tp-section.tp-dark { background: #020617; color: #fff; }
+.tp-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+.tp-h2 { font-size: clamp(1.75rem, 3.2vw, 2.625rem); font-weight: 800; color: #0f172a; margin: 0.5rem 0 1rem; line-height: 1.15; letter-spacing: -0.02em; }
+.tp-h-light { color: #fff; }
+.tp-lede { font-size: 1.0625rem; color: #475569; line-height: 1.65; margin: 0 0 2.5rem; max-width: 800px; }
+.tp-lede-light { color: #cbd5e1; }
+.tp-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #2563eb; margin: 0 0 0.5rem; }
+.tp-eyebrow-light { color: #93c5fd; }
+
+/* ===== GRIDS ===== */
+.tp-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.tp-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.tp-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.25rem; }
+@media (max-width: 1280px) { .tp-grid-5 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1024px) { .tp-grid-4 { grid-template-columns: repeat(2, 1fr); } .tp-grid-5 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .tp-grid-4, .tp-grid-2, .tp-grid-5 { grid-template-columns: 1fr; } }
+
+/* ===== SPEC TABLE ===== */
+.tp-spec-table-wrap { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px -2px rgba(15,23,42,0.04); }
+.tp-spec-table { width: 100%; border-collapse: collapse; }
+.tp-spec-table thead th { background: #f1f5f9; padding: 1rem 1.25rem; text-align: left; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #475569; border-bottom: 1px solid #e2e8f0; }
+.tp-spec-table tbody td { padding: 1.25rem; font-size: 0.9375rem; color: #334155; line-height: 1.55; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+.tp-spec-table tbody tr:last-child td { border-bottom: none; }
+.tp-spec-table tbody tr:hover { background: #f8fafc; }
+.tp-spec-table strong { color: #0f172a; font-weight: 700; }
+@media (max-width: 768px) {
+  .tp-spec-table-wrap { overflow-x: auto; }
+  .tp-spec-table { min-width: 720px; }
+}
+
+/* ===== ORDER BASIS ===== */
+.tp-orderbasis-v2 { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: start; }
+@media (max-width: 1024px) { .tp-orderbasis-v2 { grid-template-columns: 1fr; } }
+.tp-orderbasis-head { padding-top: 0.25rem; }
+.tp-orderbasis-head .tp-h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+.tp-ob-card { background: #fff; padding: 1.25rem; border-radius: 16px; }
+.tp-ob-card h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-ob-card p { font-size: 0.9375rem; color: #475569; line-height: 1.55; margin: 0; }
+
+/* ===== CARDS ===== */
+.tp-card { padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; transition: all 0.2s; }
+.tp-card:hover { box-shadow: 0 10px 25px -5px rgba(15,23,42,0.08); }
+.tp-card h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-card p { font-size: 0.9375rem; color: #475569; line-height: 1.55; margin: 0; }
+.tp-icon-blue { color: #2563eb; flex-shrink: 0; }
+.tp-icon-light { color: #93c5fd; flex-shrink: 0; }
+
+.tp-form-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.tp-form-img { aspect-ratio: 4/3; background: #f1f5f9; overflow: hidden; }
+.tp-form-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.tp-form-card:hover .tp-form-img img { transform: scale(1.05); }
+.tp-form-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.tp-form-body h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-form-spec { font-size: 0.8125rem; color: #475569; line-height: 1.5; margin: 0 0 0.5rem; }
+.tp-form-spec strong { color: #0f172a; }
+.tp-form-text { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin: 0; }
+.tp-app-link { display: inline-flex; align-items: center; font-size: 0.875rem; font-weight: 700; color: #2563eb; margin-top: 0.85rem; text-decoration: none; }
+.tp-app-link:hover { color: #1d4ed8; }
+
+/* ===== PROCESS CARDS ===== */
+.tp-process-head { max-width: 768px; margin-bottom: 2.5rem; }
+.tp-process-card-v2 { background: #fff; border-radius: 16px; overflow: hidden; transition: all 0.2s; }
+.tp-process-card-v2:hover { transform: translateY(-4px); box-shadow: 0 18px 35px -12px rgba(0,0,0,0.4); }
+.tp-process-img { aspect-ratio: 16/10; background: #f1f5f9; overflow: hidden; }
+.tp-process-img img { width: 100%; height: 100%; object-fit: cover; }
+.tp-process-body { padding: 1.25rem 1.5rem 1.5rem; }
+.tp-process-num { display: inline-block; font-size: 0.875rem; font-weight: 700; color: #2563eb; margin-bottom: 0.5rem; }
+.tp-process-body h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0.5rem 0 0.5rem; }
+.tp-process-body p { font-size: 0.875rem; color: #475569; line-height: 1.55; margin: 0; }
+
+/* ===== MANUFACTURING ===== */
+.tp-mfg-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: center; }
+@media (max-width: 1024px) { .tp-mfg-grid { grid-template-columns: 1fr; } }
+.tp-mfg-video { background: #020617; border-radius: 20px; overflow: hidden; box-shadow: 0 18px 50px -24px rgba(15,23,42,0.28); }
+.tp-mfg-video video { aspect-ratio: 16/9; width: 100%; height: auto; display: block; }
+
+/* ===== EVIDENCE ===== */
+.tp-evidence-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+@media (max-width: 1024px) { .tp-evidence-grid { grid-template-columns: 1fr; } }
+.tp-evidence-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 640px) { .tp-evidence-cards { grid-template-columns: 1fr; } }
+.tp-evidence-card { background: #f8fafc; padding: 1.5rem; border-radius: 16px; }
+.tp-evidence-card :global(svg) { margin-bottom: 0.75rem; }
+.tp-evidence-card h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-evidence-card p { font-size: 0.875rem; color: #475569; line-height: 1.55; margin: 0; }
+
+/* ===== CONTROLS ===== */
+.tp-control-card { padding: 1.75rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; transition: all 0.2s; }
+.tp-control-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(96,165,250,0.3); transform: translateY(-3px); }
+.tp-control-card :global(svg) { margin-bottom: 0.85rem; }
+.tp-control-card h3 { color: #fff; font-size: 1.0625rem; margin: 0 0 0.5rem; }
+.tp-control-card p { color: #cbd5e1; font-size: 0.9375rem; line-height: 1.55; margin: 0; }
+
+/* ===== FAQ ===== */
+.tp-faq-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; max-width: 920px; }
+.tp-faq { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.2s; }
+.tp-faq[open] { box-shadow: 0 10px 25px -5px rgba(15,23,42,0.06); border-color: #2563eb; }
+.tp-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; font-size: 1.0625rem; font-weight: 600; color: #0f172a; list-style: none; }
+.tp-faq summary::-webkit-details-marker { display: none; }
+.tp-faq-icon { color: #2563eb; font-size: 1.5rem; flex-shrink: 0; transition: transform 0.3s; font-weight: 300; }
+.tp-faq[open] .tp-faq-icon { transform: rotate(45deg); }
+.tp-faq-a { padding: 0 1.5rem 1.25rem; border-top: 1px solid #f1f5f9; }
+.tp-faq-a p { margin: 0; padding-top: 1rem; font-size: 0.9375rem; color: #475569; line-height: 1.7; }
+
+/* ===== RFQ ===== */
+.tp-rfq-sec { padding: 5rem 0; }
+.tp-rfq-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 3rem; align-items: start; }
+@media (max-width: 1024px) { .tp-rfq-grid { grid-template-columns: 1fr; gap: 2rem; } }
+.tp-rfq-side h2 { margin: 0 0 1rem; }
+.tp-rfq-checks { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.85rem; }
+.tp-rfq-checks li { display: flex; align-items: center; gap: 0.6rem; color: rgba(255,255,255,0.9); font-size: 0.9375rem; }
+.tp-rfq-prefer { color: rgba(255,255,255,0.85); font-size: 0.9375rem; margin: 1rem 0 0.5rem; }
+.tp-rfq-prefer a { color: #93c5fd; font-weight: 600; text-decoration: underline; }
+.tp-rfq-hq { color: rgba(255,255,255,0.7); font-size: 0.875rem; margin: 0.5rem 0 0; }
+
+.tp-rfq-form { background: #fff; border-radius: 16px; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+.tp-rfq-form-title { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0 0 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0; }
+.tp-rfq-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0; }
+@media (max-width: 640px) { .tp-rfq-row { grid-template-columns: 1fr; } }
+.tp-rfq-field { margin-bottom: 1.25rem; }
+.tp-rfq-field label { display: block; font-size: 0.875rem; font-weight: 600; color: #0f172a; margin-bottom: 0.5rem; }
+.tp-rfq-field label span { color: #dc2626; margin-left: 2px; }
+.tp-rfq-field input[type=text], .tp-rfq-field input[type=email], .tp-rfq-field select, .tp-rfq-field textarea {
+  width: 100%; padding: 0.75rem 1rem; font-size: 0.9375rem; color: #0f172a; background: #fff;
+  border: 1px solid #cbd5e1; border-radius: 8px; transition: all 0.15s; font-family: inherit;
+}
+.tp-rfq-field input:focus, .tp-rfq-field select:focus, .tp-rfq-field textarea:focus {
+  outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+.tp-rfq-field textarea { resize: vertical; min-height: 120px; }
+.tp-rfq-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236B7280'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.25rem; padding-right: 2.5rem;
+}
+.tp-rfq-upload { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.15s; }
+.tp-rfq-upload:hover { border-color: #2563eb; background: #eff6ff; }
+.tp-rfq-upload input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.tp-rfq-upload-icon { color: #2563eb; margin-bottom: 0.5rem; }
+.tp-rfq-upload-text { font-size: 0.8125rem; color: #64748b; }
+.tp-rfq-upload-hint { font-size: 0.75rem; color: #94a3b8; margin: 0.5rem 0 0; }
+.tp-rfq-privacy { font-size: 0.75rem; color: #64748b; text-align: center; margin: 1rem 0 0; }
+</style>

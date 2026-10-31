@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout title="PEM Electrolyzer Manufacturer | Green Hydrogen Systems | Titanium Parts" description="PEM hydrogen stacks, lab generators, mid-range systems and industrial-scale containerized electrolyzers for green H2 production.">
+  <PageHero eyebrow="PEM Electrolyzer" title="PEM Electrolyzer Manufacturer | Green Hydrogen Systems" description="PEM hydrogen stacks, lab generators, mid-range systems and industrial-scale containerized electrolyzers." image="/images/products/pem-electrolyzer.webp" />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="Product Family" title="From Lab Generators to Industrial Containerized Systems" />
+      <div class="pem-grid">
+        <div class="pem-card"><Icon name="zap" size={32} className="pem-icon" /><h3>S-Series Compact</h3><p>Compact PEM electrolyzer for laboratory and small-scale hydrogen supply.</p></div>
+        <div class="pem-card"><Icon name="zap" size={32} className="pem-icon" /><h3>H-Series Mid-Range</h3><p>Mid-range PEM systems for commercial and pilot hydrogen projects.</p></div>
+        <div class="pem-card"><Icon name="zap" size={32} className="pem-icon" /><h3>C-Series Industrial</h3><p>Industrial PEM electrolyzer systems for production-scale green hydrogen.</p></div>
+        <div class="pem-card"><Icon name="zap" size={32} className="pem-icon" /><h3>M-Series High-Capacity</h3><p>High-capacity PEM stack and system configurations.</p></div>
+        <div class="pem-card"><Icon name="zap" size={32} className="pem-icon" /><h3>Containerized Systems</h3><p>Skid-mounted and containerized PEM electrolyzer packages.</p></div>
+        <div class="pem-card"><Icon name="settings" size={32} className="pem-icon" /><h3>Custom Skid / OEM</h3><p>Custom skid and OEM integration.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionTitle eyebrow="Inside Titanium Parts" title="Inside Our Manufacturing & Quality System" />
+      <div class="checklist-grid">
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Stack Assembly Area</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> System Integration Workshop</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Electrical Control Assembly</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Packing & Dispatch Area</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Stack Sealing Inspection</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Pressure & Leak Testing</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Material / Document Traceability</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Third-Party Inspection Support</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="rfq-section-grid">
+        <div>
+          <span class="section-title-eyebrow">PEM Electrolyzer Project Review</span>
+          <h2 class="section-title-heading">Request a PEM Electrolyzer Technical Quote</h2>
+          <p class="section-title-desc">Send the project information already available. Unknown items can remain open for review.</p>
+          <ul class="rfq-benefits">
+            <li><Icon name="check-circle" size={18} /> Hydrogen duty and system-sizing review</li>
+            <li><Icon name="check-circle" size={18} /> Stack, BoP and site-interface checklist</li>
+            <li><Icon name="check-circle" size={18} /> FAT, safety and document boundary</li>
+            <li><Icon name="check-circle" size={18} /> Commercial assumptions and exclusions</li>
+          </ul>
+        </div>
+        <RFQForm title="Send PEM Electrolyzer Inquiry" subtitle="We review configuration, delivery boundary, and acceptance plan." variant="pem" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .pem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .pem-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .pem-grid { grid-template-columns: 1fr; } }
+  .pem-card { padding: 2rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .pem-icon { color: var(--color-primary); margin-bottom: 1rem; }
+  .pem-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.5rem; }
+  .pem-card p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; }
+  .checklist-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  @media (max-width: 768px) { .checklist-grid { grid-template-columns: 1fr; } }
+  .checklist-item { display: flex; align-items: center; gap: 0.625rem; padding: 1rem 1.25rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); font-weight: 500; }
+  .checklist-item :global(svg) { color: var(--color-primary); }
+  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
+  .rfq-benefits { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .rfq-benefits li { display: flex; align-items: center; gap: 0.625rem; font-size: 1rem; color: var(--color-text-secondary); }
+  .rfq-benefits li :global(svg) { color: var(--color-primary); }
+</style>

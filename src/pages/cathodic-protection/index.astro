@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout title="Cathodic Protection Anodes Manufacturer | ICCP & Sacrificial" description="ICCP, sacrificial and reference electrodes for soil, marine, concrete and tank-bottom corrosion protection systems.">
+  <PageHero eyebrow="Cathodic Protection" title="Cathodic Protection Anodes | ICCP, Sacrificial & Reference" description="ICCP, sacrificial and reference electrodes for soil, marine, concrete and tank-bottom corrosion protection systems. Engineering review and application-specific design." image="/images/industries/cathodic-protection.webp" />
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="CP Anode Families" title="ICCP · Sacrificial · Reference Electrodes" />
+      <div class="cp-categories">
+        <div class="cp-category">
+          <h3>ICCP Anodes</h3>
+          <ul>
+            <li>ICCP Anode Installation Configurations</li>
+            <li>ICCP Anodes for Deep Groundbed Systems</li>
+            <li>ICCP Anodes for Tank Bottom Protection</li>
+            <li>ICCP Anodes for Reinforced Concrete Protection</li>
+            <li>ICCP Anodes for Marine Structures</li>
+            <li>ICCP Anodes for Pipelines & Buried Structures</li>
+            <li>High Silicon Cast Iron Anodes</li>
+            <li>Powered Anode Rod</li>
+          </ul>
+        </div>
+        <div class="cp-category">
+          <h3>Sacrificial Anodes</h3>
+          <ul>
+            <li>Aluminum Sacrificial Anodes</li>
+            <li>Zinc Sacrificial Anodes</li>
+            <li>Magnesium Sacrificial Anodes</li>
+            <li>Bracelet Anodes</li>
+            <li>Ribbon Anodes</li>
+            <li>Hull Anodes</li>
+            <li>Ballast Tank Anodes</li>
+          </ul>
+        </div>
+        <div class="cp-category">
+          <h3>Reference Electrodes</h3>
+          <ul>
+            <li>Ag/AgCl Reference Electrode</li>
+            <li>Zinc Reference Electrode</li>
+            <li>MnO2 Reference Electrode</li>
+            <li>Cu/CuSO4 Permanent Reference Electrode</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionTitle eyebrow="Before Requesting a Quote" title="Define the CP System Boundary" description="A comparable quotation starts with the protected asset, exposure, environment, protection criteria, current demand, design life and the boundary between component supply and cathodic-protection system responsibility." />
+      <div class="checklist-grid">
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Identify the protected structure, coating condition and exposed area</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> State whether the approved design is galvanic or impressed current</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Provide electrolyte, resistivity, current demand and design life</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Define anode family, quantity, layout, mounting, cables and backfill</div>
+        <div class="checklist-item"><Icon name="check-circle" size={20} /> Assign CP design, rectifier, interference, installation and commissioning</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="rfq-section-grid">
+        <div>
+          <span class="section-title-eyebrow">CP Anode RFQ</span>
+          <h2 class="section-title-heading">Request a Cathodic Protection Anode Review</h2>
+          <p class="section-title-desc">Send your cathodic-protection project requirements so Titanium Parts can review the appropriate ICCP or sacrificial anode family, material, geometry, electrical duty, connection and documentation before quotation.</p>
+        </div>
+        <RFQForm title="Send CP Anode Inquiry" subtitle="We typically respond within 24 hours." variant="anode" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .cp-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .cp-categories { grid-template-columns: 1fr; } }
+  .cp-category { padding: 2rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .cp-category h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--color-primary); }
+  .cp-category ul { list-style: none; }
+  .cp-category li { padding: 0.5rem 0; font-size: 0.9375rem; color: var(--color-text-secondary); border-bottom: 1px solid var(--color-border-light); }
+  .cp-category li:last-child { border-bottom: none; }
+  .checklist-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+  .checklist-item { display: flex; align-items: center; gap: 0.625rem; padding: 1rem 1.25rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); font-weight: 500; }
+  .checklist-item :global(svg) { color: var(--color-primary); }
+  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,61 @@
+---
+import '../styles/main.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const { title, description = 'Titanium Parts is a factory-direct manufacturer and engineering supplier of titanium products, titanium anodes, and PEM electrolyzer systems for global OEMs, EPC contractors, and system integrators.', ogImage = '/images/og-default.jpg', canonical, noindex = false } = Astro.props;
+
+const brandName = 'Titanium Parts';
+// 品牌已作为标题片段出现（前导 "About Titanium Parts | ..." 或结尾 "... | Titanium Parts"）时不重复追加
+const hasBrand = title.split('|').some((seg) => seg.trim().startsWith(brandName) || seg.trim().endsWith(brandName));
+const fullTitle = hasBrand ? title : `${title} | ${brandName}`;
+const canonicalUrl = canonical || Astro.url.href;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{fullTitle}</title>
+  <link rel="canonical" href={canonicalUrl} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:site_name" content="Titanium Parts" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <Header />
+  <main id="main-content">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout title="Commercial Pool Salt Chlorinator & OEM Salt Chlorine Systems" description="Commercial and OEM salt chlorinator systems, replacement cells, and titanium electrolytic cells for pool and water treatment.">
+  <PageHero eyebrow="Water Treatment" title="Commercial Pool Salt Chlorinator & OEM Salt Chlorine Systems" description="Commercial and OEM salt chlorinator platforms, replacement cells, and titanium electrolytic cells for pool, spa, and water treatment applications." />
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="Product Family" title="Commercial Systems, OEM Platforms & Replacement Cells" />
+      <div class="products-grid">
+        <a href="/contact/" class="product-card"><div class="product-card-icon"><Icon name="droplet" size={32} /></div><h3>Commercial Pool System</h3><p>Complete chlorination system for commercial pools, water parks, hotels, and aquatic facilities.</p><span class="product-card-link">View Details <Icon name="arrow-right" size={14} /></span></a>
+        <a href="/contact/" class="product-card"><div class="product-card-icon"><Icon name="settings" size={32} /></div><h3>OEM Salt Chlorinator Platform</h3><p>White-label salt chlorinator platform for OEMs, brands, and system integrators.</p><span class="product-card-link">View Details <Icon name="arrow-right" size={14} /></span></a>
+        <a href="/contact/" class="product-card"><div class="product-card-icon"><Icon name="package" size={32} /></div><h3>Replacement Salt Cell</h3><p>Titanium replacement electrolytic cell for existing salt chlorinator installations.</p><span class="product-card-link">View Details <Icon name="arrow-right" size={14} /></span></a>
+        <a href="/contact/" class="product-card"><div class="product-card-icon"><Icon name="zap" size={32} /></div><h3>Titanium Electrolysis Cell</h3><p>Replacement-grade titanium electrolysis cell with platinum / MMO coating options.</p><span class="product-card-link">View Details <Icon name="arrow-right" size={14} /></span></a>
+      </div>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="container">
+      <SectionTitle eyebrow="Do Not Release A Purchase Order With Only" title="Common Specification Gaps" description="Common specification gaps that lead to mismatched system scope:" />
+      <div class="checklist-grid">
+        <div class="checklist-item"><Icon name="close" size={20} /> A grams-per-hour figure with no salinity or operating conditions</div>
+        <div class="checklist-item"><Icon name="close" size={20} /> An electrolytic cell presented as a complete chlorination system</div>
+        <div class="checklist-item"><Icon name="close" size={20} /> Polarity reversal, cleaning and scale control left undefined</div>
+        <div class="checklist-item"><Icon name="close" size={20} /> Compliance or pool-water performance assumed outside the agreed supply boundary</div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="rfq-section-grid">
+        <div>
+          <span class="section-title-eyebrow">Requirement Review</span>
+          <h2 class="section-title-heading">Send the Project Data You Already Have</h2>
+          <p class="section-title-desc">A drawing, process note, water analysis, existing-system record or specification is enough to begin.</p>
+        </div>
+        <RFQForm title="Send Requirements for Review" subtitle="We review operating-window, compliance, and documentation." variant="default" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  @media (max-width: 768px) { .products-grid { grid-template-columns: 1fr; } }
+  .product-card { display: block; padding: 2rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .product-card-icon { width: 56px; height: 56px; border-radius: var(--radius); background: var(--color-primary-50); color: var(--color-primary); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .product-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.5rem; }
+  .product-card p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1rem; }
+  .product-card-link { display: inline-flex; align-items: center; gap: 0.375rem; color: var(--color-primary); font-weight: 600; }
+  .checklist-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+  .checklist-item { display: flex; align-items: center; gap: 0.625rem; padding: 1rem 1.25rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); font-weight: 500; }
+  .checklist-item :global(svg) { color: var(--color-accent); }
+  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
+</style>

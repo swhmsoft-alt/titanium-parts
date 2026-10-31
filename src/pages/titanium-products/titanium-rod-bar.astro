@@ -1,0 +1,437 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const M = "Titanium Bar & Rod";
+const slug = "titanium-rod-bar";
+
+const hero = {
+  eyebrow: "ASTM B348 Titanium Bar & Rod",
+  title: "Titanium Bar & Rod Manufacturer for Precision Machining",
+  desc: "Source round bar, rod, precision-ground stock and custom profiles with material, dimensions, tolerance, finish, processing and inspection reviewed against your order requirements.",
+  img: "https://heletitanium.com/wp-content/uploads/2026/09/Precision-Titanium-Rods-Bars-Manufacturer.webp",
+  tags: ["Round · Ground · Hollow · Custom","Grades 2 · 5 · 7 · 23","Order-Specific MTC & Inspection"]
+};
+
+const orderBasis = [{"title":"Material","body":"Grade, UNS, specification and revision, condition and supplementary requirements."},{"title":"Profile & Size","body":"Round diameter or section dimensions, length, quantity and machining allowance."},{"title":"Precision Requirements","body":"Tolerance, straightness, roundness, surface, roughness and end condition."},{"title":"Evidence","body":"MTC, traceability, inspection, testing, marking, packing and release records."}];
+
+// Forms (text-only cards)
+const forms = [{"title":"Titanium Round Bar & Rod","body":"State grade, diameter, condition, length, tolerance, straightness, finish and quantity."},{"title":"Titanium Precision-Ground Bar","body":"Add finished diameter, tolerance system, gauge length, straightness, roundness and surface requirement."},{"title":"Titanium Hollow Bar","body":"Define OD, ID, wall or machining allowance, length, concentricity needs and source-route acceptance."},{"title":"Titanium Square & Rectangular Bar","body":"State width, height, corner condition, length, squareness, straightness and machining allowance."}];
+
+const processSteps = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Round-Bar-Rod.webp","alt":"Titanium Round Bar & Rod","title":"Titanium Round Bar & Rod","spec":"State grade, diameter, condition, length, tolerance, straightness, finish and quantity.","body":"State grade, diameter, condition, length, tolerance, straightness, finish and quantity."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Precision-Ground-Titanium-Bar.webp","alt":"Titanium Precision-Ground Bar","title":"Titanium Precision-Ground Bar","spec":"Add finished diameter, tolerance system, gauge length, straightness, roundness and surface requirement.","body":"Add finished diameter, tolerance system, gauge length, straightness, roundness and surface requirement."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Hollow-Bar.webp","alt":"Titanium Hollow Bar","title":"Titanium Hollow Bar","spec":"Define OD, ID, wall or machining allowance, length, concentricity needs and source-route acceptance.","body":"Define OD, ID, wall or machining allowance, length, concentricity needs and source-route acceptance."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Square-Rectangular-Bar.webp","alt":"Titanium Square & Rectangular Bar","title":"Titanium Square & Rectangular Bar","spec":"State width, height, corner condition, length, squareness, straightness and machining allowance.","body":"State width, height, corner condition, length, squareness, straightness and machining allowance."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Hex-Bar-1.webp","alt":"Titanium Hex Bar","title":"Titanium Hex Bar","spec":"Define across-flats dimension, length, tolerance, straightness, surface and intended machining route.","body":"Define across-flats dimension, length, tolerance, straightness, surface and intended machining route."}];
+
+const mfgVideo = {
+  poster: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Plates-Sheets-Manufacturer.webp',
+  src: 'https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Products-Manufacturer-Hele-Titanium.mp4'
+};
+
+const applications = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Forged-Custom-Titanium-Bar.webp","alt":"Titanium Forged & Custom Blank","title":"Titanium Forged & Custom Blank","spec":"Provide the approved drawing, material, condition, section, allowance, testing and acceptance plan.","body":"Provide the approved drawing, material, condition, section, allowance, testing and acceptance plan."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/CNC-Machining-Precision-Components.webp","alt":"CNC Machining & Precision Parts titanium bar application","title":"CNC Machining & Precision Parts","spec":"Control diameter or section, straightness, allowance, surface and material condition against the actual machining route.","body":"Control diameter or section, straightness, allowance, surface and material condition against the actual machining route."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Chemical-Processing01.webp","alt":"Chemical & Marine Equipment titanium bar application","title":"Chemical & Marine Equipment","spec":"Define media, concentration, contaminants, temperature, loading, joining and crevice conditions before grade selection.","body":"Define media, concentration, contaminants, temperature, loading, joining and crevice conditions before grade selection."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Aerospace-High-Performance-Engineering04.webp","alt":"Aerospace & High-Performance titanium bar application","title":"Aerospace & High-Performance","spec":"Confirm approved specification, revision, condition, source and qualification responsibilities; general Grade 5 supply is not aerospace approval.","body":"Confirm approved specification, revision, condition, source and qualification responsibilities; general Grade 5 supply is not aerospace approval."}];
+
+const evidence = [{"title":"Aerospace & High-Performance","body":"Confirm approved specification, revision, condition, source and qualification responsibilities; general Grade 5 supply is not aerospace approval."},{"title":"Medical & Customer-Qualified","body":"Separate raw-material specification and traceability from finished-device validation, approval and regulatory responsibility."},{"title":"Material identity","body":"Grade, heat or lot, form, condition and certificate link."},{"title":"Dimensional evidence","body":"Diameter, length, tolerance, straightness, roundness and surface."}];
+
+const controls = [{"title":"Testing & NDT","body":"Only the methods and criteria required by the agreed specification or order."},{"title":"Document release","body":"Index, report format, approval route and delivery timing."},{"title":"Material Identity","body":"Grade, profile, specification revision, condition and heat or lot basis."},{"title":"Geometry & Processing","body":"Size, tolerance, straightness, surface, allowance and processing boundary."}];
+
+const faq = [{"q":"What information is needed for a titanium bar or rod quotation?","a":"Provide the grade, governing specification and revision, condition, profile, diameter or section, length, quantity, surface, processing, inspection, testing and document requirements. A drawing is helpful for non-round or drawing-based blanks."},{"q":"What is the difference between titanium rod and titanium bar?","a":"The terms describe different production routes and dimensional practice. In general, rod covers smaller round cross-sections and bar covers larger rounds, squares, hex and rectangular sections. State the profile, dimensions and applicable specification."},{"q":"Which grades can be reviewed for titanium bar and rod?","a":"Common enquiries include Grades 2, 5, 7 and 23. Other grades may be reviewed. Availability, source form, condition, size and applicable specification are confirmed for the specific quotation."},{"q":"Can precision-ground titanium bar be supplied?","a":"Ground bar can be reviewed where diameter tolerance, straightness, roundness and surface requirements are defined. Achievable results depend on grade, starting diameter, finished size, length, quantity and process route."},{"q":"Can hollow, square, rectangular or hex titanium bar be supplied?","a":"Non-round and hollow profiles can be reviewed from the required section, grade, condition, length, tolerance, machining allowance and quantity. Supply may use a standard source form or a drawing-based route, as stated in the quotation."},{"q":"Are MTC, NDT and third-party inspection included automatically?","a":"No. Required certificates, traceability, dimensional records, testing, NDT and third-party involvement should be specified before quotation. Only the agreed package is included in the order scope."}];
+
+const rfqOptions = ["Round Titanium Bar / Rod","Precision-Ground Titanium Bar","Titanium Hollow Bar","Square / Rectangular / Hex Bar","Forged or Custom Machining Blank","Grade / Specification Review","Drawing / Specification (Optional)"];
+const grades = [{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Titanium-Grade-2-Round-Bar.webp","alt":"Grade 2 Titanium bar and rod","title":"Grade 2 Titanium","spec":"ASTM B348 / B348M when specified · UNS R50400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-5-Ti-6Al-4V-Rod.webp","alt":"Grade 5 / Ti-6Al-4V bar and rod","title":"Grade 5 / Ti-6Al-4V","spec":"ASTM B348 or AMS 4928 as ordered · UNS R56400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Grade-7-Ti-Pd-Alloy-Rod.webp","alt":"Grade 7 Titanium bar and rod","title":"Grade 7 Titanium","spec":"ASTM B348 / B348M when specified · UNS R52400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"https://heletitanium.com/wp-content/uploads/2026/09/Medical-Grade-23-ELI-Rod.webp","alt":"Grade 23 / Ti-6Al-4V ELI bar and rod","title":"Grade 23 / Ti-6Al-4V ELI","spec":"ASTM B348 / B348M when specified · UNS R56407","body":"Profile, dimensions, condition and availability: confirmed by quotation."}];
+---
+<BaseLayout title={M + ' | ' + (hero.title || '').slice(0, 80)} description={(hero.desc || M).slice(0, 160)}>
+  <!-- HERO -->
+  <section class="tp-hero">
+    {hero.img && <img src={hero.img} alt={hero.title} class="tp-hero-img" fetchpriority="high" decoding="async" loading="eager" />}
+    <div class="tp-hero-overlay"></div>
+    <div class="tp-hero-inner">
+      {hero.eyebrow && <p class="tp-hero-eyebrow">{hero.eyebrow}</p>}
+      <h1>{hero.title || M}</h1>
+      {hero.desc && <p class="tp-hero-lede">{hero.desc}</p>}
+      <div class="tp-hero-tags">
+        {hero.tags.map((t) => <span class="tp-hero-tag">{t}</span>)}
+      </div>
+      <div class="tp-hero-cta">
+        <a href="#forms-section" class="tp-btn-primary">Review Grades & Profiles</a>
+        <a href="#tp-rfq" class="tp-btn-secondary">Request a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. ORDER BASIS -->
+  {orderBasis.length >= 4 && (
+    <section class="tp-section tp-blue-bg">
+      <div class="tp-inner tp-orderbasis-v2">
+        <div class="tp-orderbasis-head">
+          <p class="tp-eyebrow">Buying Essentials</p>
+          <h2 class="tp-h2">Freeze the Order Basis Before Comparing Price</h2>
+        </div>
+        <div class="tp-grid-2">
+          {orderBasis.map((c) => (
+            <div class="tp-ob-card">
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 2. FORMS / GRADES -->
+  {(grades.length >= 4 || forms.length >= 4) && (
+    <section id="forms-section" class="tp-section">
+      <div class="tp-inner">
+        <p class="tp-eyebrow">{slug.includes('titanium-rod-bar') ? 'Grades & Supply Review' : slug.includes('titanium-coil') || slug.includes('titanium-foil') ? 'Product Form' : 'Grade Reference'}</p>
+        <h2 class="tp-h2">{M} Grades &amp; Forms</h2>
+        <p class="tp-lede">{M} grades and product forms reviewed against ASTM / ASME / project specifications.</p>
+        <div class="tp-grid-4">
+          {grades.length >= 4 ? (
+            grades.map((g) => (
+              <article class="tp-card tp-form-card">
+                {g.img && <div class="tp-form-img"><img src={g.img} alt={g.alt || g.title} loading="lazy" /></div>}
+                <div class="tp-form-body">
+                  <h3>{g.title}</h3>
+                  {g.spec && <p class="tp-form-spec"><strong>Standard:</strong> {g.spec}</p>}
+                  {g.body && <p class="tp-form-text">{g.body}</p>}
+                </div>
+              </article>
+            ))
+          ) : (
+            forms.map((f) => (
+              <article class="tp-form-pure">
+                <h3>{f.title}</h3>
+                <p>{f.body}</p>
+              </article>
+            ))
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 3. PROCESS -->
+  <section class="tp-section tp-dark">
+    <div class="tp-inner">
+      <div class="tp-process-head">
+        <p class="tp-eyebrow tp-eyebrow-light">Process Review</p>
+        <h2 class="tp-h2 tp-h-light">Coordinate the Order from Specification to Release</h2>
+        <p class="tp-lede tp-lede-light">Each step closes one part of the order basis. {M} preparation, processing and inspection scope are confirmed by quotation against the approved order basis.</p>
+      </div>
+      <div class="tp-grid-5">
+        {processSteps.slice(0, 5).map((c, i) => (
+          <article class="tp-process-card-v2">
+            {c.img && <div class="tp-process-img"><img src={c.img} alt={c.alt || c.title} loading="lazy" /></div>}
+            <div class="tp-process-body">
+              <span class="tp-process-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. MANUFACTURING ENVIRONMENT -->
+  <section class="tp-section">
+    <div class="tp-inner tp-mfg-grid">
+      <div>
+        <p class="tp-eyebrow">Inside Titanium Parts</p>
+        <h2 class="tp-h2">{M} Manufacturing Environment</h2>
+        <p class="tp-lede">{M} preparation, processing and inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation.</p>
+      </div>
+      <div class="tp-mfg-video">
+        <video controls preload="metadata" playsinline poster={mfgVideo.poster}>
+          <source src={mfgVideo.src} type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. APPLICATIONS -->
+  {applications.length >= 4 && (
+    <section class="tp-section tp-alt">
+      <div class="tp-inner">
+        <p class="tp-eyebrow">Application Context</p>
+        <h2 class="tp-h2">Match Material Decisions to the Actual Service</h2>
+        <p class="tp-lede">Grade, condition and documentation choices follow from the operating environment, not from the section name. Each context below sets the typical qualification conversation before the first quotation.</p>
+        <div class="tp-grid-4">
+          {applications.slice(0, 4).map((c) => (
+            <article class="tp-card tp-form-card tp-app-card">
+              {c.img && <div class="tp-form-img"><img src={c.img} alt={c.alt || c.title} loading="lazy" /></div>}
+              <div class="tp-form-body">
+                <h3>{c.title}</h3>
+                {c.spec && <p class="tp-form-spec">{c.spec}</p>}
+                {c.href && <a href={c.href} class="tp-app-link">Review the industry context →</a>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 6. EVIDENCE -->
+  {evidence.length >= 4 && (
+    <section class="tp-section">
+      <div class="tp-inner tp-evidence-grid">
+        <div>
+          <p class="tp-eyebrow">Supply Scope &amp; Qualification</p>
+          <h2 class="tp-h2">Specify the Evidence Needed for Acceptance</h2>
+          <p class="tp-lede">A certificate name alone does not define the complete acceptance package. State the traceability level, inspection characteristics, test reports, marking, third-party involvement and release documents required by the order.</p>
+        </div>
+        <div class="tp-evidence-cards">
+          {evidence.slice(0, 4).map((c) => (
+            <div class="tp-evidence-card">
+              <Icon name="badge-check" size={22} className="tp-icon-blue" />
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 7. CONTROLS -->
+  {controls.length >= 4 && (
+    <section class="tp-section tp-dark">
+      <div class="tp-inner">
+        <p class="tp-eyebrow tp-eyebrow-light">Before You Order</p>
+        <h2 class="tp-h2 tp-h-light">Confirm Four Controls Before You Buy</h2>
+        <p class="tp-lede tp-lede-light">Four checks that catch most order-basis errors before they become commercial or quality problems.</p>
+        <div class="tp-grid-4">
+          {controls.slice(0, 4).map((c) => (
+            <article class="tp-control-card">
+              <Icon name="badge-check" size={28} className="tp-icon-blue" />
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 8. FAQ -->
+  {faq.length > 0 && (
+    <section class="tp-section tp-alt">
+      <div class="tp-inner">
+        <p class="tp-eyebrow">Questions</p>
+        <h2 class="tp-h2">{M} FAQ</h2>
+        <p class="tp-lede">Common questions before sending the inquiry.</p>
+        <div class="tp-faq-grid">
+          {faq.slice(0, 6).map((f) => (
+            <details class="tp-faq">
+              <summary>
+                <span>{f.q}</span>
+                <span class="tp-faq-icon">+</span>
+              </summary>
+              <div class="tp-faq-a"><p>{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 9. RFQ -->
+  <section id="tp-rfq" class="tp-section tp-dark tp-rfq-sec">
+    <div class="tp-inner tp-rfq-grid">
+      <aside class="tp-rfq-side">
+        <h2 class="tp-h2 tp-h-light">Send the Order Basis for Supply Review</h2>
+        <p class="tp-lede tp-lede-light">Share the available grade, specification, dimensions, quantity, processing and evidence requirements. A drawing is helpful for cut blanks and controlled tolerances, but it is optional for the first enquiry.</p>
+        <ul class="tp-rfq-checks">
+          <li><Icon name="check" size={18} className="tp-icon-light" /> Grade and specification review</li>
+          <li><Icon name="check" size={18} className="tp-icon-light" /> {M} scope review</li>
+          <li><Icon name="check" size={18} className="tp-icon-light" /> Processing and inspection requirements</li>
+          <li><Icon name="check" size={18} className="tp-icon-light" /> Quotation-specific availability and delivery basis</li>
+        </ul>
+        <p class="tp-rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
+        <p class="tp-rfq-hq">HQ: Titanium Valley, Baoji City, Shaanxi Province, China</p>
+      </aside>
+      <form class="tp-rfq-form" data-variant="titanium-product">
+        <h3 class="tp-rfq-form-title">{M} Inquiry</h3>
+        <div class="tp-rfq-row">
+          <div class="tp-rfq-field">
+            <label>Full Name <span>*</span></label>
+            <input type="text" name="fullName" required />
+          </div>
+          <div class="tp-rfq-field">
+            <label>Business Email <span>*</span></label>
+            <input type="email" name="email" required />
+          </div>
+        </div>
+        <div class="tp-rfq-field">
+          <label>Product of Interest <span>*</span></label>
+          <select name="interest" required>
+            <option value="">Select an option...</option>
+            {rfqOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
+        </div>
+        <div class="tp-rfq-field">
+          <label>Grade / Specification Review</label>
+          <input type="text" name="grade" placeholder="e.g. Grade 2, ASTM B348, 10mm × 1000mm" />
+        </div>
+        <div class="tp-rfq-field">
+          <label>Drawing / Specification (Optional)</label>
+          <div class="tp-rfq-upload">
+            <Icon name="upload" size={32} className="tp-rfq-upload-icon" />
+            <span class="tp-rfq-upload-text">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</span>
+            <input type="file" name="attachment" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" />
+          </div>
+          <p class="tp-rfq-upload-hint">PDF, image and common CAD formats are accepted.</p>
+        </div>
+        <div class="tp-rfq-field">
+          <label>Message / Specifications <span>*</span></label>
+          <textarea name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="tp-btn-primary tp-btn-block">Send {M} Inquiry</button>
+        <p class="tp-rfq-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* ===== HERO ===== */
+.tp-hero { position: relative; min-height: 680px; padding: 5rem 0 4rem; color: #fff; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; }
+.tp-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.tp-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, #020617 0%, rgba(2,6,23,0.9) 50%, rgba(23,37,84,0.45) 100%); z-index: 2; }
+.tp-hero-inner { position: relative; z-index: 3; max-width: 1024px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+.tp-hero-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #93c5fd; margin: 0 0 1.25rem; }
+.tp-hero h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 1.25rem; }
+.tp-hero-lede { font-size: clamp(1rem, 1.6vw, 1.25rem); color: #cbd5e1; line-height: 1.65; max-width: 900px; margin: 0 0 1.5rem; }
+.tp-hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.tp-hero-tag { display: inline-block; padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #fff; font-size: 0.875rem; font-weight: 600; border-radius: 999px; }
+.tp-hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1rem; }
+.tp-btn-primary { display: inline-flex; align-items: center; justify-content: center; background: #2563eb; color: #fff; padding: 0.875rem 1.75rem; border-radius: 8px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; font-size: 0.9375rem; transition: background-color 0.2s; min-height: 48px; }
+.tp-btn-primary:hover { background: #1d4ed8; }
+.tp-btn-secondary { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: #fff; padding: 0.875rem 1.75rem; border: 1px solid rgba(255,255,255,0.6); border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.2s; min-height: 48px; }
+.tp-btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+.tp-btn-block { display: flex; width: 100%; justify-content: center; padding: 1rem 1.75rem; font-size: 1.0625rem; }
+
+.tp-section { padding: 5rem 0; background: #fff; }
+.tp-section.tp-alt { background: #f8fafc; }
+.tp-section.tp-blue-bg { background: #eff6ff; }
+.tp-section.tp-dark { background: #020617; color: #fff; }
+.tp-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+.tp-h2 { font-size: clamp(1.75rem, 3.2vw, 2.625rem); font-weight: 800; color: #0f172a; margin: 0.5rem 0 1rem; line-height: 1.15; letter-spacing: -0.02em; }
+.tp-h-light { color: #fff; }
+.tp-lede { font-size: 1.0625rem; color: #475569; line-height: 1.65; margin: 0 0 2.5rem; max-width: 800px; }
+.tp-lede-light { color: #cbd5e1; }
+.tp-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #2563eb; margin: 0 0 0.5rem; }
+.tp-eyebrow-light { color: #93c5fd; }
+
+.tp-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.tp-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.tp-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.25rem; }
+@media (max-width: 1280px) { .tp-grid-5 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1024px) { .tp-grid-4 { grid-template-columns: repeat(2, 1fr); } .tp-grid-5 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .tp-grid-4, .tp-grid-2, .tp-grid-5 { grid-template-columns: 1fr; } }
+
+.tp-orderbasis-v2 { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: start; }
+@media (max-width: 1024px) { .tp-orderbasis-v2 { grid-template-columns: 1fr; } }
+.tp-orderbasis-head { padding-top: 0.25rem; }
+.tp-orderbasis-head .tp-h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+.tp-ob-card { background: #fff; padding: 1.25rem; border-radius: 16px; }
+.tp-ob-card h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-ob-card p { font-size: 0.9375rem; color: #475569; line-height: 1.55; margin: 0; }
+
+.tp-card { padding: 0; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; transition: all 0.2s; display: flex; flex-direction: column; }
+.tp-card:hover { box-shadow: 0 10px 25px -5px rgba(15,23,42,0.08); }
+.tp-icon-blue { color: #2563eb; flex-shrink: 0; }
+.tp-icon-light { color: #93c5fd; flex-shrink: 0; }
+.tp-form-card { padding: 0; }
+.tp-form-img { aspect-ratio: 4/3; background: #f1f5f9; overflow: hidden; }
+.tp-form-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.tp-form-card:hover .tp-form-img img { transform: scale(1.05); }
+.tp-form-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.tp-form-body h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-form-spec { font-size: 0.8125rem; color: #475569; line-height: 1.5; margin: 0 0 0.5rem; }
+.tp-form-spec strong { color: #0f172a; }
+.tp-form-text { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin: 0; }
+.tp-app-link { display: inline-flex; align-items: center; font-size: 0.875rem; font-weight: 700; color: #2563eb; margin-top: 0.85rem; text-decoration: none; }
+.tp-app-link:hover { color: #1d4ed8; }
+.tp-form-pure { background: #fff; padding: 1.5rem; border-radius: 16px; border: 1px solid #e2e8f0; transition: all 0.2s; }
+.tp-form-pure:hover { box-shadow: 0 10px 25px -5px rgba(15,23,42,0.08); }
+.tp-form-pure h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-form-pure p { font-size: 0.9375rem; color: #475569; line-height: 1.6; margin: 0 0 0.85rem; }
+
+.tp-process-head { max-width: 768px; margin-bottom: 2.5rem; }
+.tp-process-card-v2 { background: #fff; border-radius: 16px; overflow: hidden; transition: all 0.2s; }
+.tp-process-card-v2:hover { transform: translateY(-4px); box-shadow: 0 18px 35px -12px rgba(0,0,0,0.4); }
+.tp-process-img { aspect-ratio: 16/10; background: #f1f5f9; overflow: hidden; }
+.tp-process-img img { width: 100%; height: 100%; object-fit: cover; }
+.tp-process-body { padding: 1.25rem 1.5rem 1.5rem; }
+.tp-process-num { display: inline-block; font-size: 0.875rem; font-weight: 700; color: #2563eb; margin-bottom: 0.5rem; }
+.tp-process-body h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0.5rem 0 0.5rem; }
+.tp-process-body p { font-size: 0.875rem; color: #475569; line-height: 1.55; margin: 0; }
+
+.tp-mfg-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 3rem; align-items: center; }
+@media (max-width: 1024px) { .tp-mfg-grid { grid-template-columns: 1fr; } }
+.tp-mfg-video { background: #020617; border-radius: 20px; overflow: hidden; box-shadow: 0 18px 50px -24px rgba(15,23,42,0.28); }
+.tp-mfg-video video { aspect-ratio: 16/9; width: 100%; height: auto; display: block; }
+
+.tp-evidence-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+@media (max-width: 1024px) { .tp-evidence-grid { grid-template-columns: 1fr; } }
+.tp-evidence-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 640px) { .tp-evidence-cards { grid-template-columns: 1fr; } }
+.tp-evidence-card { background: #f8fafc; padding: 1.5rem; border-radius: 16px; }
+.tp-evidence-card :global(svg) { margin-bottom: 0.75rem; }
+.tp-evidence-card h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-evidence-card p { font-size: 0.875rem; color: #475569; line-height: 1.55; margin: 0; }
+
+.tp-control-card { padding: 1.75rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; transition: all 0.2s; }
+.tp-control-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(96,165,250,0.3); transform: translateY(-3px); }
+.tp-control-card :global(svg) { margin-bottom: 0.85rem; }
+.tp-control-card h3 { color: #fff; font-size: 1.0625rem; margin: 0 0 0.5rem; }
+.tp-control-card p { color: #cbd5e1; font-size: 0.9375rem; line-height: 1.55; margin: 0; }
+
+.tp-faq-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; max-width: 920px; }
+.tp-faq { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.2s; }
+.tp-faq[open] { box-shadow: 0 10px 25px -5px rgba(15,23,42,0.06); border-color: #2563eb; }
+.tp-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; font-size: 1.0625rem; font-weight: 600; color: #0f172a; list-style: none; }
+.tp-faq summary::-webkit-details-marker { display: none; }
+.tp-faq-icon { color: #2563eb; font-size: 1.5rem; flex-shrink: 0; transition: transform 0.3s; font-weight: 300; }
+.tp-faq[open] .tp-faq-icon { transform: rotate(45deg); }
+.tp-faq-a { padding: 0 1.5rem 1.25rem; border-top: 1px solid #f1f5f9; }
+.tp-faq-a p { margin: 0; padding-top: 1rem; font-size: 0.9375rem; color: #475569; line-height: 1.7; }
+
+.tp-rfq-sec { padding: 5rem 0; }
+.tp-rfq-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 3rem; align-items: start; }
+@media (max-width: 1024px) { .tp-rfq-grid { grid-template-columns: 1fr; gap: 2rem; } }
+.tp-rfq-side h2 { margin: 0 0 1rem; }
+.tp-rfq-checks { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.85rem; }
+.tp-rfq-checks li { display: flex; align-items: center; gap: 0.6rem; color: rgba(255,255,255,0.9); font-size: 0.9375rem; }
+.tp-rfq-prefer { color: rgba(255,255,255,0.85); font-size: 0.9375rem; margin: 1rem 0 0.5rem; }
+.tp-rfq-prefer a { color: #93c5fd; font-weight: 600; text-decoration: underline; }
+.tp-rfq-hq { color: rgba(255,255,255,0.7); font-size: 0.875rem; margin: 0.5rem 0 0; }
+
+.tp-rfq-form { background: #fff; border-radius: 16px; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+.tp-rfq-form-title { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0 0 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0; }
+.tp-rfq-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0; }
+@media (max-width: 640px) { .tp-rfq-row { grid-template-columns: 1fr; } }
+.tp-rfq-field { margin-bottom: 1.25rem; }
+.tp-rfq-field label { display: block; font-size: 0.875rem; font-weight: 600; color: #0f172a; margin-bottom: 0.5rem; }
+.tp-rfq-field label span { color: #dc2626; margin-left: 2px; }
+.tp-rfq-field input[type=text], .tp-rfq-field input[type=email], .tp-rfq-field select, .tp-rfq-field textarea {
+  width: 100%; padding: 0.75rem 1rem; font-size: 0.9375rem; color: #0f172a; background: #fff;
+  border: 1px solid #cbd5e1; border-radius: 8px; transition: all 0.15s; font-family: inherit;
+}
+.tp-rfq-field input:focus, .tp-rfq-field select:focus, .tp-rfq-field textarea:focus {
+  outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+.tp-rfq-field textarea { resize: vertical; min-height: 120px; }
+.tp-rfq-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236B7280'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.25rem; padding-right: 2.5rem;
+}
+.tp-rfq-upload { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.15s; }
+.tp-rfq-upload:hover { border-color: #2563eb; background: #eff6ff; }
+.tp-rfq-upload input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.tp-rfq-upload-icon { color: #2563eb; margin-bottom: 0.5rem; }
+.tp-rfq-upload-text { font-size: 0.8125rem; color: #64748b; }
+.tp-rfq-upload-hint { font-size: 0.75rem; color: #94a3b8; margin: 0.5rem 0 0; }
+.tp-rfq-privacy { font-size: 0.75rem; color: #64748b; text-align: center; margin: 1rem 0 0; }
+</style>

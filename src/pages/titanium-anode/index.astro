@@ -1,0 +1,626 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { reactionRows, coatings, scopeSteps } from '../../data/titanium-anode-page-1';
+import { forms } from '../../data/titanium-anode-page-2';
+import { risks, processSteps } from '../../data/titanium-anode-page-3';
+import { evidenceCards, applications } from '../../data/titanium-anode-page-4';
+import { beforeQuoteDo, beforeQuoteDont, recoatingCards } from '../../data/titanium-anode-page-5';
+import { faqItems } from '../../data/titanium-anode-page-6';
+import { faqItemsExtra, quickPoints, rfqChecks } from '../../data/titanium-anode-page-7';
+const allFaq = [...faqItems, ...faqItemsExtra];
+---
+<BaseLayout title="Titanium Anode Manufacturer | MMO, Pt/Ti & Custom | Titanium Parts" description="Source custom MMO, Ru-Ir, Ir-Ta and platinized titanium anodes by reaction, electrolyte, current density, geometry and design-life requirements. Send your process data for engineering review.">
+  <!-- placeholder, sections inserted below -->
+<!-- HERO ====================================================== -->
+  <section id="anode-hero" class="anode-hero">
+    <div class="anode-hero-bg" aria-hidden="true">
+      <img src="/images/titanium-anode/titanium-anode-manufacturer.webp" alt="Custom MMO, platinized and specialty coated titanium anodes" loading="eager" decoding="async" />
+      <div class="anode-hero-overlay"></div>
+    </div>
+    <div class="anode-hero-inner">
+      <div class="anode-hero-text">
+        <p class="anode-eyebrow-light">MMO · Ru-Ir · Ir-Ta · Platinized Titanium · Custom Assemblies</p>
+        <h1 class="anode-hero-title">Custom Titanium Anodes for Industrial Electrochemical Systems</h1>
+        <p class="anode-hero-lede">Engineered MMO, Ru-Ir, Ir-Ta, and Platinized titanium electrodes matched to your exact electrolyte, current density, and design-life targets to minimize replacement risks and operational downtime.</p>
+        <div class="anode-hero-cta">
+          <a href="#reaction-selection" class="btn btn-primary">Start with the Target Reaction</a>
+          <a href="#anode-rfq" class="btn btn-secondary-outline">Send Drawing or Process Data</a>
+        </div>
+      </div>
+      <ul class="anode-quick-list">
+        {quickPoints.map((p) => (
+          <li>
+            <span class="anode-quick-tag">{p.tag}</span>
+            <span class="anode-quick-text">{p.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- WARNING BAR ================================================ -->
+  <section class="anode-warning" aria-label="Important note">
+    <div class="anode-warning-inner">
+      <strong>Before requesting a quote:</strong> an industry name alone does not define an anode. "MMO for water treatment," "high coating," "long life" or a current-density value without an active-area basis cannot be used to compare products reliably.
+    </div>
+  </section>
+
+  <!-- SOLUTION SELECTION GUIDE (reaction-selection) ============== -->
+  <section id="reaction-selection" class="anode-section">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Solution Selection Guide</p>
+        <h2>Choose the Starting Point by Target Reaction</h2>
+        <p class="anode-section-lede">The table is an engineering-review starting point, not an automatic coating recommendation. Final selection depends on the full process window, electrical duty, geometry, life basis and qualification plan.</p>
+      </header>
+      <div class="anode-table-wrap" role="region" aria-label="Anode selection by target reaction" tabindex="0">
+        <table class="anode-decision-table">
+          <thead><tr><th>Target reaction or process</th><th>Candidate family for review</th><th>Inputs that change the decision</th><th>Common geometry and connection questions</th><th>Qualification to agree</th></tr></thead>
+          <tbody>
+            {reactionRows.map((r) => (
+              <tr>
+                <td><strong>{r.target}</strong></td>
+                <td>{r.family}</td>
+                <td>{r.inputs}</td>
+                <td>{r.geometry}</td>
+                <td>{r.qualification}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="anode-section-foot">The customer or system designer remains responsible for confirming the complete cell and process design. Titanium Parts' review covers the agreed anode supply and qualification boundary.</p>
+    </div>
+  </section>
+
+  <!-- COATING FAMILIES ============================================ -->
+  <section id="coating-families" class="anode-section anode-section-alt">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Coating Families</p>
+        <h2>Compare the Active Surface Against the Process Window</h2>
+        <p class="anode-section-lede">Coating names are not interchangeable specifications. Exact composition, loading or thickness basis, active area, service conditions and inspection requirements are confirmed for each order.</p>
+      </header>
+      <div class="anode-coatings-grid">
+        {coatings.map((c) => (
+          <a href={c.href} class="anode-coating-card">
+            <div class="anode-coating-img"><img src={c.img} alt={c.alt} loading="lazy" decoding="async" /></div>
+            <div class="anode-coating-body">
+              <h3>{c.title}</h3>
+              <p class="anode-coating-review">Review: {c.review}</p>
+              <p class="anode-coating-text">{c.body}</p>
+              <span class="anode-card-link">Review {c.title.replace(' Anodes','').replace('Anodes','').trim()} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MANUFACTURING & SUPPLY SCOPE =============================== -->
+  <section id="manufacturing-scope" class="anode-section">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Manufacturing &amp; Supply Scope</p>
+        <h2>Define What Titanium Parts Will Build, Control and Document</h2>
+        <p class="anode-section-lede">An anode order is more than a coating name. The quotation and drawing review should align the substrate, coated area, masking, current feed, assembly, inspection and release documents. The exact manufacturing and partner scope is confirmed for the specific order.</p>
+      </header>
+      <div class="anode-scope-grid">
+        {scopeSteps.map((s) => (
+          <article class="anode-scope-card">
+            <div class="anode-scope-num">{s.n}</div>
+            <h3>{s.title}</h3>
+            <p class="anode-scope-sub">{s.sub}</p>
+            <p class="anode-scope-text">{s.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ANODE FORMS ================================================ -->
+  <section id="anode-forms" class="anode-section anode-section-alt">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Anode Forms</p>
+        <h2>Design Geometry, Coated Area and Current Feed Together</h2>
+        <p class="anode-section-lede">Substrate shape affects active area, current distribution, hydraulic access, mechanical support, connection design, masking and maintenance. Geometry should follow the process and installation—not the shape name alone.</p>
+      </header>
+      <div class="anode-forms-grid">
+        {forms.map((f) => (
+          <article class="anode-form-card">
+            <a href="#anode-rfq" class="anode-form-link">
+              <div class="anode-form-img"><img src={f.img} alt={f.alt} loading="lazy" decoding="async" /></div>
+              <div class="anode-form-body">
+                <h3>{f.title}</h3>
+                <p class="anode-form-spec"><strong>Specify:</strong> {f.spec}</p>
+                <p class="anode-form-text">{f.body}</p>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+      <div class="anode-basket-callout">
+        <p><strong>Titanium anode basket is a different product role.</strong> A basket normally carries soluble anode material, while an MMO or Pt/Ti coated titanium anode is usually an insoluble active electrode. <a href="/titanium-products/titanium-baskets/">Review titanium baskets separately.</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISK REVIEW ================================================ -->
+  <section id="risk-review" class="anode-section">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Risk Review</p>
+        <h2>Reduce Preventable Anode Risks Before Order Release</h2>
+        <p class="anode-section-lede">Titanium Parts cannot eliminate every process or system risk. A disciplined review can, however, expose incomplete specifications, non-comparable quotations and avoidable mismatches before manufacturing begins.</p>
+      </header>
+      <div class="anode-table-wrap" role="region" aria-label="Titanium anode risk review table" tabindex="0">
+        <table class="anode-risk-table">
+          <thead>
+            <tr><th>Risk seen in projects</th><th>Typical specification gap</th><th>Titanium Parts review before order release</th><th>Customer or system responsibility</th></tr>
+          </thead>
+          <tbody>
+            {risks.map((r) => (
+              <tr>
+                <td><strong>{r.risk}</strong></td>
+                <td>{r.gap}</td>
+                <td>{r.review}</td>
+                <td>{r.customer}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS REVIEW (dark section with images) ================== -->
+  <section id="process-review" class="anode-section anode-section-dark">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow anode-eyebrow-light">Process Review</p>
+        <h2 class="anode-h-light">From Substrate Identity to Coated-Anode Release</h2>
+        <p class="anode-section-lede anode-lede-light">The order route is confirmed against the approved drawing, coating map, connection, qualification and document requirements. Each control point should lead to a defined record or acceptance decision.</p>
+      </header>
+      <div class="anode-process-grid">
+        {processSteps.map((s) => (
+          <article class="anode-process-card">
+            <div class="anode-process-num">{s.n}</div>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+            <p class="anode-process-evidence"><em>{s.evidence}</em></p>
+            <div class="anode-process-img"><img src={s.img} alt={s.alt} loading="lazy" decoding="async" /></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INSPECTION EVIDENCE ========================================= -->
+  <section id="evidence-scope" class="anode-section">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Inspection Evidence</p>
+        <h2>Know What Each Record Can—and Cannot—Demonstrate</h2>
+        <p class="anode-section-lede">A test name alone is not an acceptance criterion. The method, units, calibration or reference basis, sample locations, frequency and limits should be agreed before the order is released.</p>
+      </header>
+      <div class="anode-evidence-warning">
+        <p><strong>Important:</strong> XRF composition, coating loading, coating thickness, adhesion-related checks, electrochemical behavior and service life are different characteristics. One result should not be presented as proof of all the others.</p>
+      </div>
+      <div class="anode-evidence-grid">
+        {evidenceCards.map((e) => (
+          <article class="anode-evidence-card">
+            <h3>{e.title}</h3>
+            <p>{e.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATIONS =============================================== -->
+  <section id="applications" class="anode-section anode-section-alt">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Applications</p>
+        <h2>Start with Process Data, Not the Industry Name</h2>
+        <p class="anode-section-lede">The same industry can contain different anodic reactions, electrolytes, current duties and equipment responsibilities. Application review begins with the actual process boundary.</p>
+      </header>
+      <div class="anode-apps-grid">
+        {applications.map((a) => (
+          <a href={a.href} class="anode-app-card">
+            <div class="anode-app-img"><img src={a.img} alt={a.alt} loading="lazy" decoding="async" /></div>
+            <div class="anode-app-body">
+              <h3>{a.title}</h3>
+              <p>{a.body}</p>
+              <span class="anode-card-link">Review this application →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MANUFACTURING VIDEO ========================================= -->
+  <section id="manufacturing-video" class="anode-section">
+    <div class="anode-section-inner anode-section-two-col">
+      <div>
+        <p class="anode-eyebrow">Inside Titanium Parts</p>
+        <h2>Titanium Anode Manufacturing Environment</h2>
+        <p class="anode-section-lede">See the substrate preparation, coating, assembly, inspection and handling environment used for titanium anode supply. Order-specific manufacturing, partner, inspection and acceptance scope is confirmed separately in the quotation and order documents.</p>
+      </div>
+      <div class="anode-video-frame">
+        <video controls preload="metadata" playsinline poster="/images/titanium-anode/titanium-anodes-video-poster.webp">
+          <source src="https://heletitanium.com/wp-content/uploads/2026/09/HeleTitanium_Website_Video_02_Clean_1080p.mp4" type="video/mp4" />
+          Your browser does not support the video element.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE REQUESTING A QUOTE =================================== -->
+  <section id="before-quote" class="anode-section anode-section-blue">
+    <div class="anode-section-inner anode-before-quote-grid">
+      <div>
+        <p class="anode-eyebrow">Before Requesting a Quote</p>
+        <h2>Define the Engineering Basis Before Comparing Suppliers</h2>
+        <p class="anode-section-lede">A comparable quotation aligns the reaction, chemistry, electrical-duty basis, coating definition, active and masked area, substrate, connection, design-life assumptions, inspection, release evidence and commercial scope.</p>
+        <ul class="anode-do-list">
+          {beforeQuoteDo.map((d) => (
+            <li><span class="anode-do-check">✓</span><span>{d}</span></li>
+          ))}
+        </ul>
+      </div>
+      <div class="anode-dont-card">
+        <h3>Do not release a purchase order with only:</h3>
+        <ul class="anode-dont-list">
+          {beforeQuoteDont.map((d) => (
+            <li>{d}</li>
+          ))}
+        </ul>
+        <div class="anode-before-cta">
+          <a href="#anode-rfq" class="btn btn-primary">Send the Data You Have</a>
+          <a href="/support/knowledge-center/titanium-anode-purchase-guide/" class="btn btn-secondary-outline">Open the Complete Purchase Guide</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPLACEMENT & RECOATING REVIEW ============================== -->
+  <section id="recoating-review" class="anode-section">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Replacement &amp; Recoating Review</p>
+        <h2>Reuse Is a Condition-Based Decision</h2>
+        <p class="anode-section-lede">A used titanium substrate is not automatically suitable for recoating. Evaluation depends on the remaining substrate, deformation, cracks, welds, connection, contamination, coating-removal route, dimensions and prior service history.</p>
+      </header>
+      <div class="anode-recoat-grid">
+        {recoatingCards.map((c) => (
+          <article class="anode-recoat-card">
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ ========================================================= -->
+  <section id="anode-faq" class="anode-section anode-section-alt">
+    <div class="anode-section-inner anode-faq-wrap">
+      <header class="anode-section-head anode-section-head-narrow">
+        <p class="anode-eyebrow">FAQ</p>
+        <h2>Titanium Anode Selection and Purchasing Questions</h2>
+      </header>
+      <div class="anode-faq-grid">
+        {allFaq.map((f) => (
+          <details class="anode-faq-item">
+            <summary>
+              <span>{f.q}</span>
+              <span class="anode-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="anode-faq-answer"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- RFQ (dark section with form) ================================ -->
+  <section id="anode-rfq" class="anode-section anode-section-dark">
+    <div class="anode-section-inner anode-rfq-wrap">
+      <div class="anode-rfq-grid-v2">
+        <div class="anode-rfq-left">
+          <p class="anode-eyebrow anode-eyebrow-light">Process &amp; RFQ Review</p>
+          <h2 class="anode-h-light">Send the Operating Data You Have</h2>
+          <p class="anode-rfq-lede">Unknown items can remain open for review. Mark mandatory performance requirements and permitted supplier proposals before quotation.</p>
+          <ul class="anode-rfq-checks-v2">
+            {rfqChecks.map((c) => (
+              <li><span class="anode-rfq-check">✓</span><span>{c}</span></li>
+            ))}
+          </ul>
+          <div class="anode-rfq-divider">
+            <p class="anode-rfq-prefer-label">Prefer email?</p>
+            <a href="mailto:sales@titanium-parts.com" class="anode-rfq-email">sales@titanium-parts.com</a>
+            <p class="anode-rfq-hq">HQ: Titanium Valley, Baoji City, Shaanxi Province, China</p>
+          </div>
+        </div>
+        <div class="anode-rfq-card">
+          <form class="anode-form" action="#" method="POST" enctype="multipart/form-data">
+            <div class="anode-form-row">
+              <div class="anode-form-field">
+                <label for="anode-name">Full Name <span class="anode-required">*</span></label>
+                <input id="anode-name" name="full_name" type="text" required autocomplete="name" />
+              </div>
+              <div class="anode-form-field">
+                <label for="anode-email">Business Email <span class="anode-required">*</span></label>
+                <input id="anode-email" name="business_email" type="email" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="anode-form-field">
+              <label for="anode-product">Product of Interest <span class="anode-required">*</span></label>
+              <select id="anode-product" name="product_interest" required>
+                <option value="">Select an option...</option>
+                <option>Ru-Ir MMO Titanium Anode</option>
+                <option>Ir-Ta / Ir-Based MMO Anode</option>
+                <option>Platinized Titanium Anode</option>
+                <option>Specialty Coated Titanium Anode</option>
+                <option>Mesh / Plate Anode</option>
+                <option>Tube / Rod Anode</option>
+                <option>Ribbon / Wire / Disc Anode</option>
+                <option>Drawing-Based Custom Anode</option>
+                <option>Replacement / Recoating Review</option>
+              </select>
+            </div>
+            <div class="anode-form-field">
+              <label for="anode-file">Drawing / Process Specification <span class="anode-optional">(Optional)</span></label>
+              <input id="anode-file" name="file_upload" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.stp,.iges,.igs,.stl,.dwg,.dxf,.zip" class="anode-form-file" />
+              <p class="anode-form-hint">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</p>
+              <p class="anode-form-subhint">PDF, image and common CAD formats are accepted.</p>
+            </div>
+            <div class="anode-form-field">
+              <label for="anode-message">Message / Specifications <span class="anode-required">*</span></label>
+              <textarea id="anode-message" name="message" rows="6" required placeholder="Share the target reaction, electrolyte and impurities, pH, temperature, flow, current/voltage and duty, current-density basis, design life, coating requirement, active area, substrate form, connection, quantity, tests and documents."></textarea>
+            </div>
+            <button type="submit" class="anode-form-submit">Send Titanium Anode Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+<style>/* Tokens + Hero */
+.anode-section { background: #fff; padding: 5rem 0; }
+.anode-section-inner { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+.anode-section-alt { background: #f8fafc; }
+.anode-section-dark { background: #0a1428; color: #fff; }
+.anode-section-blue { background: #eff6ff; }
+.anode-section-two-col { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: center; }
+@media (max-width: 900px) { .anode-section-two-col { grid-template-columns: 1fr; } }
+.anode-eyebrow { display: inline-block; padding: 0.375rem 0.875rem; margin-bottom: 1rem; background: rgba(37,99,235,0.08); color: #2563eb; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+.anode-eyebrow-light { background: rgba(255,255,255,0.1); color: #93c5fd; display: inline-block; padding: 0.375rem 0.875rem; margin-bottom: 1.25rem; border: 1px solid rgba(255,255,255,0.2); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+.anode-section-head { max-width: 800px; margin-bottom: 3rem; }
+.anode-section-head h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 800; color: #0f172a; margin: 0 0 1rem; line-height: 1.15; letter-spacing: -0.02em; }
+.anode-section-lede { font-size: 1.0625rem; color: #475569; line-height: 1.65; margin: 0; max-width: 800px; }
+.anode-section-foot { margin-top: 1.5rem; padding: 1rem 1.25rem; background: #fff; border-left: 4px solid #2563eb; font-size: 0.9375rem; color: #334155; line-height: 1.6; border-radius: 6px; }
+.anode-h-light { color: #fff; }
+.anode-lede-light { color: #cbd5e1; }
+.anode-hero { position: relative; min-height: 720px; padding: 7rem 0 5rem; background: #020617; color: #fff; overflow: hidden; }
+.anode-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.anode-hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+.anode-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,6,23,0.65) 0%, rgba(15,23,42,0.5) 100%); }
+.anode-hero-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+.anode-hero-title { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; color: #fff; margin: 0 0 1.5rem; line-height: 1.1; letter-spacing: -0.02em; max-width: 900px; }
+.anode-hero-lede { font-size: clamp(1rem, 1.4vw, 1.25rem); color: rgba(255,255,255,0.9); line-height: 1.6; max-width: 900px; margin: 0 0 2rem; }
+.anode-hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+.anode-hero-cta .btn-primary { background: #2563eb; color: #fff; padding: 0.875rem 1.5rem; border-radius: 6px; font-weight: 600; text-decoration: none; }
+.anode-hero-cta .btn-primary:hover { background: #1d4ed8; }
+.anode-hero-cta .btn-secondary-outline { background: transparent; color: #fff; padding: 0.875rem 1.5rem; border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; font-weight: 600; text-decoration: none; }
+.anode-hero-cta .btn-secondary-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+.anode-quick-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1100px; }
+@media (max-width: 900px) { .anode-quick-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .anode-quick-list { grid-template-columns: 1fr; } }
+.anode-quick-list li { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.25rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; }
+.anode-quick-tag { color: #93c5fd; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.anode-quick-text { color: rgba(255,255,255,0.85); font-size: 0.9375rem; line-height: 1.5; }
+.anode-warning { background: #eff6ff; padding: 1.25rem 0; border-top: 1px solid #bfdbfe; border-bottom: 1px solid #bfdbfe; }
+.anode-warning-inner { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; font-size: 0.9375rem; color: #1e3a8a; line-height: 1.6; }
+
+/* Tables */
+.anode-table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(15,23,42,0.06); }
+.anode-decision-table, .anode-risk-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.9375rem; }
+.anode-decision-table th, .anode-risk-table th { background: #1e293b; color: #fff; padding: 1rem 1.25rem; text-align: left; font-weight: 700; font-size: 0.875rem; white-space: nowrap; }
+.anode-decision-table td, .anode-risk-table td { padding: 1.25rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; line-height: 1.55; color: #334155; }
+.anode-decision-table tr:last-child td, .anode-risk-table tr:last-child td { border-bottom: none; }
+.anode-decision-table tr:nth-child(even), .anode-risk-table tr:nth-child(even) { background: #f8fafc; }
+
+/* Coating families */
+.anode-coatings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@media (max-width: 768px) { .anode-coatings-grid { grid-template-columns: 1fr; } }
+.anode-coating-card { display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.25s; text-decoration: none; }
+.anode-coating-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(15,23,42,0.08); border-color: #2563eb; }
+.anode-coating-img { aspect-ratio: 16/10; overflow: hidden; background: #f1f5f9; }
+.anode-coating-img img { width: 100%; height: 100%; object-fit: cover; }
+.anode-coating-card:hover .anode-coating-img img { transform: scale(1.05); }
+.anode-coating-body { padding: 1.75rem; }
+.anode-coating-body h3 { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.anode-coating-review { font-size: 0.8125rem; font-weight: 600; color: #2563eb; margin: 0 0 0.75rem; }
+.anode-coating-text { font-size: 0.9375rem; color: #64748b; line-height: 1.6; margin: 0 0 1.25rem; }
+.anode-card-link { color: #2563eb; font-weight: 600; font-size: 0.9375rem; }
+.anode-coating-card:hover .anode-card-link { text-decoration: underline; }
+
+/* Manufacturing scope */
+.anode-scope-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 768px) { .anode-scope-grid { grid-template-columns: 1fr; } }
+.anode-scope-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem; }
+.anode-scope-num { display: inline-block; padding: 0.25rem 0.75rem; background: #2563eb; color: #fff; font-size: 0.875rem; font-weight: 800; border-radius: 6px; margin-bottom: 1rem; letter-spacing: 0.05em; }
+.anode-scope-card h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.375rem; }
+.anode-scope-sub { font-size: 0.875rem; font-weight: 600; color: #2563eb; margin: 0 0 0.875rem; }
+.anode-scope-text { font-size: 0.9375rem; color: #475569; line-height: 1.65; margin: 0; }
+
+/* Anode forms */
+.anode-forms-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+@media (max-width: 1100px) { .anode-forms-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px) { .anode-forms-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .anode-forms-grid { grid-template-columns: 1fr; } }
+.anode-form-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.25s; }
+.anode-form-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(15,23,42,0.06); border-color: #2563eb; }
+.anode-form-link { display: block; text-decoration: none; color: inherit; }
+.anode-form-img { aspect-ratio: 16/10; background: #f1f5f9; overflow: hidden; }
+.anode-form-img img { width: 100%; height: 100%; object-fit: cover; }
+.anode-form-card:hover .anode-form-img img { transform: scale(1.05); }
+.anode-form-body { padding: 1.25rem; }
+.anode-form-body h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.625rem; }
+.anode-form-spec { font-size: 0.8125rem; font-weight: 600; color: #2563eb; margin: 0 0 0.625rem; }
+.anode-form-text { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin: 0; }
+.anode-basket-callout { margin-top: 1.5rem; padding: 1.25rem 1.5rem; background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; color: #78350f; font-size: 0.9375rem; line-height: 1.65; }
+.anode-basket-callout a { color: #2563eb; font-weight: 700; text-decoration: underline; }
+.anode-basket-callout a:hover { color: #1d4ed8; }
+
+/* Process review */
+.anode-process-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@media (max-width: 768px) { .anode-process-grid { grid-template-columns: 1fr; } }
+.anode-process-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 1.75rem; }
+.anode-process-num { display: inline-block; padding: 0.25rem 0.75rem; background: #2563eb; color: #fff; font-size: 0.875rem; font-weight: 800; border-radius: 6px; margin-bottom: 0.875rem; }
+.anode-process-card h3 { font-size: 1.125rem; font-weight: 700; color: #fff; margin: 0 0 0.75rem; }
+.anode-process-card p { font-size: 0.9375rem; color: #cbd5e1; line-height: 1.6; margin: 0 0 0.875rem; }
+.anode-process-evidence em { color: #93c5fd; font-size: 0.875rem; }
+.anode-process-img { margin-top: 1rem; aspect-ratio: 16/10; border-radius: 8px; overflow: hidden; }
+.anode-process-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Evidence + Apps */
+.anode-evidence-warning { margin-bottom: 2rem; padding: 1.25rem 1.5rem; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 6px; color: #78350f; font-size: 0.9375rem; line-height: 1.6; }
+.anode-evidence-warning strong { color: #422006; }
+.anode-evidence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 768px) { .anode-evidence-grid { grid-template-columns: 1fr; } }
+.anode-evidence-card { padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; border-radius: 8px; }
+.anode-evidence-card h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.625rem; }
+.anode-evidence-card p { font-size: 0.9375rem; color: #475569; line-height: 1.6; margin: 0; }
+.anode-apps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@media (max-width: 768px) { .anode-apps-grid { grid-template-columns: 1fr; } }
+.anode-app-card { display: block; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; text-decoration: none; transition: all 0.25s; }
+.anode-app-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(15,23,42,0.08); border-color: #2563eb; }
+.anode-app-img { aspect-ratio: 16/10; overflow: hidden; background: #f1f5f9; }
+.anode-app-img img { width: 100%; height: 100%; object-fit: cover; }
+.anode-app-card:hover .anode-app-img img { transform: scale(1.05); }
+.anode-app-body { padding: 1.5rem; }
+.anode-app-body h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.625rem; }
+.anode-app-body p { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin: 0 0 1rem; }
+.anode-app-card:hover .anode-card-link { text-decoration: underline; }
+.anode-video-frame { border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(15,23,42,0.08); background: #020617; padding: 0.5rem; }
+.anode-video-frame video { aspect-ratio: 16/9; width: 100%; border-radius: 12px; background: #020617; object-fit: cover; display: block; }
+
+/* Before quote (2-column layout matching original) */
+.anode-before-quote-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 3rem; align-items: start; }
+@media (max-width: 900px) { .anode-before-quote-grid { grid-template-columns: 1fr; } }
+.anode-before-quote-grid h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; color: #0f172a; margin: 0 0 1.25rem; line-height: 1.15; letter-spacing: -0.02em; }
+.anode-before-quote-grid > div > p.anode-eyebrow { margin-bottom: 1rem; }
+.anode-do-list { list-style: none; padding: 0; margin: 1.75rem 0 0; display: flex; flex-direction: column; gap: 1rem; }
+.anode-do-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 1rem; color: #334155; line-height: 1.7; }
+.anode-do-check { color: #1d4ed8; font-weight: 700; flex-shrink: 0; font-size: 1.125rem; line-height: 1.7; }
+.anode-dont-card { background: #fff; border: 1px solid #bfdbfe; border-radius: 24px; padding: 2rem; box-shadow: 0 1px 2px rgba(15,23,42,0.05); }
+.anode-dont-card h3 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0 0 1.5rem; line-height: 1.3; }
+.anode-dont-list { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.anode-dont-list li { font-size: 1rem; color: #334155; line-height: 1.7; padding-left: 0; }
+.anode-before-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.anode-before-cta .btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.75rem; background: #2563eb; color: #fff; border-radius: 8px; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: background-color 0.2s; }
+.anode-before-cta .btn-primary:hover { background: #1d4ed8; }
+.anode-before-cta .btn-secondary-outline { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.75rem; background: #fff; color: #1d4ed8; border: 1px solid #2563eb; border-radius: 8px; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+.anode-before-cta .btn-secondary-outline:hover { background: #eff6ff; }
+
+/* Recoating */
+.anode-recoat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+@media (max-width: 768px) { .anode-recoat-grid { grid-template-columns: 1fr; } }
+.anode-recoat-card { padding: 1.5rem; background: #fff; border: 1px solid #e2e8f0; border-top: 3px solid #2563eb; border-radius: 8px; }
+.anode-recoat-card h3 { font-size: 1.0625rem; font-weight: 700; color: #0f172a; margin: 0 0 0.625rem; }
+.anode-recoat-card p { font-size: 0.9375rem; color: #475569; line-height: 1.6; margin: 0; }
+
+/* FAQ */
+.anode-faq-wrap { max-width: 1100px; }
+.anode-faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; align-items: start; }
+@media (max-width: 900px) { .anode-faq-grid { grid-template-columns: 1fr; } }
+.anode-faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.25s; }
+.anode-faq-item[open] { box-shadow: 0 8px 20px rgba(15,23,42,0.06); border-color: #2563eb; }
+.anode-faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; font-size: 1rem; font-weight: 600; color: #0f172a; list-style: none; line-height: 1.4; }
+.anode-faq-item summary::-webkit-details-marker { display: none; }
+.anode-faq-icon { color: #2563eb; font-size: 1.5rem; font-weight: 400; flex-shrink: 0; transition: transform 0.3s; line-height: 1; }
+.anode-faq-item[open] .anode-faq-icon { transform: rotate(45deg); }
+.anode-faq-answer { padding: 0 1.5rem 1.25rem; border-top: 1px solid #f1f5f9; }
+.anode-faq-answer p { margin: 0; padding-top: 1rem; font-size: 0.9375rem; color: #475569; line-height: 1.7; }
+
+/* RFQ dark - 1:1 with original */
+.anode-rfq-wrap { max-width: 1200px; }
+.anode-rfq-grid-v2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+@media (max-width: 1024px) { .anode-rfq-grid-v2 { grid-template-columns: 1fr; } }
+.anode-rfq-left > .anode-eyebrow { margin-bottom: 1.25rem; }
+.anode-rfq-left > h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; color: #fff; margin: 0 0 1.5rem; line-height: 1.15; letter-spacing: -0.02em; }
+.anode-rfq-lede { font-size: 1.125rem; color: #cbd5e1; line-height: 1.7; margin: 0 0 2rem; }
+.anode-rfq-checks-v2 { list-style: none; padding: 0; margin: 0 0 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.anode-rfq-checks-v2 li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 1rem; color: #e2e8f0; line-height: 1.6; }
+.anode-rfq-check { color: #4ade80; font-weight: 700; flex-shrink: 0; font-size: 1.125rem; line-height: 1.6; }
+.anode-rfq-divider { border-top: 1px solid #1e293b; padding-top: 2rem; }
+.anode-rfq-prefer-label { font-size: 0.875rem; color: #94a3b8; margin: 0 0 0.5rem; }
+.anode-rfq-email { display: block; font-size: 1.125rem; font-weight: 600; color: #fff; text-decoration: none; margin-bottom: 0.5rem; }
+.anode-rfq-email:hover { text-decoration: underline; }
+.anode-rfq-hq { font-size: 0.875rem; color: #64748b; margin: 0; }
+.anode-rfq-card { background: #fff; border-radius: 24px; padding: 2rem 2.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+@media (max-width: 768px) { .anode-rfq-card { padding: 1.5rem; } }
+.anode-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.anode-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 640px) { .anode-form-row { grid-template-columns: 1fr; } }
+.anode-form-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.anode-form-field label { font-size: 0.875rem; font-weight: 700; color: #334155; }
+.anode-form-field label .anode-required { color: #dc2626; }
+.anode-form-field label .anode-optional { font-weight: 500; color: #64748b; }
+.anode-form-field input[type=text],
+.anode-form-field input[type=email],
+.anode-form-field input[type=file],
+.anode-form-field select,
+.anode-form-field textarea {
+  width: 100%; padding: 0.75rem 1rem; font-size: 0.9375rem; color: #0f172a; background: #fff;
+  border: 1px solid #cbd5e1; border-radius: 12px; transition: all 0.15s; font-family: inherit;
+  box-sizing: border-box;
+}
+.anode-form-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236B7280'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.25rem; padding-right: 2.5rem;
+}
+.anode-form-field input:focus,
+.anode-form-field select:focus,
+.anode-form-field textarea:focus {
+  outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+.anode-form-field textarea { resize: vertical; min-height: 140px; }
+.anode-form-file {
+  padding: 0.625rem 1rem !important;
+  background: #f8fafc !important;
+  cursor: pointer;
+  font-size: 0.875rem !important;
+  color: #64748b !important;
+}
+.anode-form-file::file-selector-button {
+  margin-right: 1rem;
+  padding: 0.625rem 1.25rem;
+  border: 0;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.anode-form-hint { font-size: 0.75rem; color: #94a3b8; margin: 0.375rem 0 0; display: flex; align-items: center; gap: 0.25rem; font-weight: 500; }
+.anode-form-subhint { font-size: 0.75rem; color: #94a3b8; margin: 0.5rem 0 0; }
+.anode-form-submit {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 48px; padding: 0 1.5rem;
+  background: #2563eb; color: #fff;
+  border: 0; border-radius: 12px;
+  font-size: 0.875rem; font-weight: 700;
+  cursor: pointer; transition: background-color 0.2s;
+}
+.anode-form-submit:hover { background: #1d4ed8; }
+</style>

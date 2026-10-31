@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+const products = [
+  { slug: 'titanium-anode', title: 'Titanium Anodes', desc: 'MMO & Platinized Coatings', img: '/images/products/titanium-anodes.webp', href: '/titanium-anode/', featured: true, points: ['Optimized for Electroplating', 'Extended Operating Lifespan'] },
+  { slug: 'pem-electrolyzer', title: 'PEM Electrolyzers', desc: 'Stack & Systems', img: '/images/products/pem-electrolyzer.webp', href: '/pem-electrolyzer/', featured: true, points: ['Turnkey Integrated Solutions', 'Low Maintenance Operation'] },
+  { slug: 'titanium-rod-bar', title: 'Titanium Rod & Bar', desc: 'Gr1-Gr5 Grades', img: '/images/products/titanium-rod-bar.webp', href: '/titanium-products/titanium-rod-bar/', points: ['High Tensile Strength', 'Tight Dimensional Tolerances'] },
+  { slug: 'titanium-plate', title: 'Titanium Plate & Sheet', desc: 'Gr1-Gr5 Grades', img: '/images/products/titanium-plates-sheets.webp', href: '/titanium-products/titanium-plate/', points: ['Custom Cut-to-Size', 'Superior Surface Finish'] },
+  { slug: 'titanium-tubing', title: 'Titanium Tubing & Pipe', desc: 'Seamless & Welded', img: '/images/products/titanium-tubes.webp', href: '/titanium-products/titanium-tubing/', points: ['Heat Exchanger Ready', 'Strict Pressure Testing'] },
+  { slug: 'titanium-fittings', title: 'Titanium Fittings', desc: 'Elbows & Tees & Reducers', img: '/images/products/titanium-fittings.webp', href: '/titanium-products/titanium-fittings/', points: ['Ultrasonic Tested', 'Optimal Grain Structure'] },
+  { slug: 'titanium-fasteners', title: 'Titanium Fasteners', desc: 'Bolts & Nuts & Washers', img: '/images/products/titanium-fasteners.webp', href: '/titanium-products/titanium-fasteners/', points: ['DIN & ISO', 'High Fatigue Resistance'] },
+  { slug: 'titanium-machined-parts', title: 'Custom CNC Parts', desc: 'Precision Machining', img: '/images/products/titanium-parts.webp', href: '/titanium-products/titanium-machined-parts/', points: ['Per Drawing Specifications', 'Rapid Prototyping Support'] },
+];
+const partnerLogos = [
+  { src: '/images/logos/sespi.png', alt: 'SESPI' },
+  { src: '/images/logos/waterair.png', alt: 'Waterair' },
+  { src: '/images/logos/mainfraim.png', alt: 'Mainfraim' },
+  { src: '/images/logos/electra.png', alt: 'Electra' },
+  { src: '/images/logos/pss.png', alt: 'PSS' },
+  { src: '/images/logos/ventil-aqua.png', alt: 'VENTIL AQUA' },
+  { src: '/images/logos/h2o.png', alt: 'H2O' },
+  { src: '/images/logos/gonvarri.png', alt: 'GONVARRI' },
+];
+const stats = [
+  { num: '10+', label: 'YEARS INDUSTRY EXPERIENCE' },
+  { num: '3', label: 'MANUFACTURING HUBS' },
+  { num: '100%', label: 'TRACEABLE QUALITY SUPPORT' },
+  { num: '50+', label: 'APPLICATION SCENARIOS' },
+];
+const capabilities = [
+  { title: 'Titanium Materials & Components', desc: 'Factory-direct titanium plates, sheets, rods, tubes, fittings, fasteners, and custom CNC parts.' },
+  { title: 'Titanium Anodes & Electrodes', desc: 'Custom MMO, Ru-Ir, Ir-Ta, IrO₂, platinized titanium, BDD, PbO₂, ICCP, MGPS anodes.' },
+  { title: 'PEM Electrolyzer & Hydrogen', desc: 'PEM electrolyzer stacks and integrated systems for green hydrogen, lab supply, renewable storage.' },
+  { title: 'Quality & Engineering Support', desc: 'MTC, coating reports, incoming material verification, inspection records, system documentation.' },
+];
+const industries = [
+  { title: 'Renewable Energy & Hydrogen', review: 'Hydrogen output, pressure, purity, power source, water quality, cooling, environment, control, supply boundary, required documents and project schedule.', img: '/images/industries/energy-hydrogen.webp' },
+  { title: 'Water Treatment & Environmental Systems', review: 'Treatment flow, available chlorine demand, feed water quality, dosing, environment, control, safety interface and supply boundary.', img: '/images/industries/water-treatment.webp' },
+  { title: 'Marine & Offshore Engineering', review: 'Mounting, cable/connection, design life, coating/structure, water condition, hull potential, inspection boundary and required documents.', img: '/images/industries/marine-offshore.webp' },
+  { title: 'Oil & Gas / Cathodic Protection', review: 'Protected structure, electrolyte, current demand, design life, anode family, mounting, cable/connection and project documents.', img: '/images/industries/cathodic-protection.webp' },
+  { title: 'Electroplating & Metal Processing', review: 'Reaction, electrolyte, current density, active area, substrate, connection zones and agreed coating evidence.', img: '/images/industries/metal-electrowinning.webp' },
+  { title: 'Aerospace & Lightweight Engineering', review: 'Application, alloy grade, dimensions, tolerances, processing, inspection, surface treatment and project documentation.', img: '/images/industries/aerospace.webp' },
+];
+const qualityItems = [
+  { title: 'MTC (Material Test Certificates)', img: '/images/quality/mtc.webp' },
+  { title: 'Positive Material Identification (PMI)', img: '/images/quality/pmi.webp' },
+  { title: 'Continuous Verification During Production', img: '/images/quality/continuous-verification.webp' },
+  { title: 'Dimensional Inspection', img: '/images/quality/dimensional-inspection.webp' },
+  { title: 'Coating Verification', img: '/images/quality/coating-verification.webp' },
+  { title: 'Final Inspection', img: '/images/quality/final-inspection.webp' },
+  { title: 'FAT (Factory Acceptance Testing)', img: '/images/quality/assembly-testing.jpeg' },
+  { title: 'Export Packing', img: '/images/quality/export-packing.webp' },
+];
+const scenarios = [
+  { title: 'Water Treatment OEM', desc: 'Anode Definition — A high-chloride MMO anode inquiry can be reviewed against electrolyte, current duty, active area, substrate, connection zones and agreed coating evidence before batch supply.' },
+  { title: 'Hydrogen Project Team', desc: 'System Boundary Review — A PEM requirement can be routed by hydrogen output, pressure, purity, utilities, controls and downstream interfaces before a stack or integrated-system scope is selected.' },
+  { title: 'Marine Retrofit Supplier', desc: 'Interface Matching — A marine replacement package can be reviewed from existing drawings, measured dimensions, cable and connection details, installation limits and required project documents.' },
+  { title: 'Precision Manufacturing Buyer', desc: 'Drawing-Controlled Supply — A drawing-based titanium part can be reviewed by grade, revision, dimensions, tolerances, process route, inspection points and repeat-supply requirements.' },
+];
+const faqTitles = ['What information is needed before Titanium Parts recommends a product?', 'How is the supply boundary defined?', 'Which inspection and quality documents may be available?', 'Can Titanium Parts manufacture from controlled drawings?', 'Can Titanium Parts match an installed or replacement component?', 'Can third-party inspection or FAT be included?', 'What remains the responsibility of the buyer or system integrator?', 'What should be included in the first RFQ?'];
+---
+<BaseLayout title="Titanium Products Manufacturer & Engineering Supplier | Titanium Parts" description="Factory-direct titanium materials, components, anodes, and PEM electrolyzer systems.">
+  <section class="hero">
+    <div class="hero-bg"><img src="/images/hero-bg.webp" alt="Titanium Parts engineer" class="hero-bg-img" /><div class="hero-bg-overlay"></div></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Titanium Products Manufacturer &amp; Engineering Supplier</h1>
+        <p class="hero-subtitle">Factory-direct titanium materials, precision-fabricated components, engineered titanium anodes, and PEM electrolyzer systems for global OEMs, EPC contractors, system integrators, and industrial projects</p>
+        <div class="hero-badges">
+          <span class="hero-badge"><Icon name="check-circle" size={16} /> Factory-Direct Manufacturing</span>
+          <span class="hero-badge"><Icon name="check-circle" size={16} /> Custom Engineering Support</span>
+          <span class="hero-badge"><Icon name="check-circle" size={16} /> Traceable Quality Documents</span>
+        </div>
+        <div class="hero-actions">
+          <a href="/titanium-products/" class="btn btn-primary btn-lg">Explore Product Range</a>
+          <a href="#rfq" class="btn btn-secondary btn-lg">Send Your RFQ</a>
+        </div>
+        <p class="hero-trust">Trusted by engineers, OEMs, and industrial buyers worldwide.</p>
+      </div>
+    </div>
+  </section>
+  <section class="partners"><div class="container"><p class="partners-label">SUPPORTING OEM, EPC AND SYSTEM-INTEGRATION REQUIREMENTS</p><div class="partners-grid">{partnerLogos.map((logo) => <div class="partner-logo"><img src={logo.src} alt={logo.alt} loading="lazy" /></div>)}</div></div></section>
+
+  <section class="section section-slate-50"><div class="container"><div class="section-header"><h2 class="section-title">What We Manufacture</h2><p class="section-desc">From titanium materials to engineered anodes and PEM systems, each category can be reviewed by grade, dimension, coating type, or application — with full specifications and traceable documentation available on every product page.</p></div><div class="products-grid">{products.map((product) => <a href={product.href} class={`product-card ${product.featured ? 'featured' : ''}`}><div class="product-image"><img src={product.img} alt={product.title} loading="lazy" /></div><div class="product-content"><h3 class="product-title">{product.title}</h3><p class="product-desc">{product.desc}</p><ul class="product-points">{product.points.map((p) => <li><Icon name="check" size={14} /> {p}</li>)}</ul><span class="product-link">View Details <Icon name="arrow-right" size={14} /></span></div></a>)}</div></div></section>
+
+  <section class="section section-white"><div class="container"><div class="stats-grid">{stats.map((stat) => <div class="stat-card"><div class="stat-num">{stat.num}</div><div class="stat-label">{stat.label}</div></div>)}</div><div class="about-grid"><div class="about-header"><h2 class="section-title">About Titanium Parts</h2><h3 class="about-subtitle">Titanium Products Manufacturer &amp; Engineering Supplier</h3><p class="about-text">Titanium Parts is a factory-direct titanium products manufacturer and engineering supplier for global OEMs, EPC contractors, and system integrators. Our capability builds in three layers: titanium materials as the traceable foundation; MMO titanium anodes as the value-added layer; and complete PEM electrolyzer systems for green hydrogen as the advanced layer — all built in-house, so buyers work with a single accountable supplier instead of coordinating separate vendors.</p><div class="about-actions"><a href="/company/" class="btn btn-secondary">About Titanium Parts</a><a href="/contact/" class="btn btn-primary">Contact Engineering Team</a></div></div><div class="capabilities-grid">{capabilities.map((cap) => <div class="capability-card"><h4 class="capability-title">{cap.title}</h4><p class="capability-desc">{cap.desc}</p></div>)}</div></div></div></section>
+
+  <section class="section section-dark"><div class="container"><div class="section-header-light"><h2 class="section-title-light">Engineering Applications We Support</h2><p class="section-desc-light">Titanium Parts reviews each application by operating environment, process conditions, interfaces and required evidence before confirming a titanium material, electrochemical or PEM supply scope.</p></div><div class="industries-grid">{industries.map((ind) => <div class="industry-card-dark"><div class="industry-image"><img src={ind.img} alt={ind.title} loading="lazy" /></div><div class="industry-content-dark"><h3 class="industry-title-dark">{ind.title}</h3><p class="industry-review-label">REVIEW BASIS</p><p class="industry-review">{ind.review}</p></div></div>)}</div></div></section>
+
+  <section class="section section-white"><div class="container"><div class="section-header"><h2 class="section-title">Documented Quality for Global Industrial Projects</h2></div><div class="quality-grid">{qualityItems.map((item) => <a href="/quality/" class="quality-card"><div class="quality-image"><img src={item.img} alt={item.title} loading="lazy" /></div><h4 class="quality-title">{item.title}</h4></a>)}</div></div></section>
+
+  <section class="section section-dark"><div class="container"><div class="section-header-light"><h2 class="section-title-light">Selected Engineering Support Scenarios</h2><p class="section-desc-light">Examples of how available project data can be reviewed and converted into a controlled supply scope. Final suitability and evidence remain subject to the confirmed order.</p></div><div class="scenarios-grid">{scenarios.map((s) => <div class="scenario-card"><h3 class="scenario-title">{s.title}</h3><p class="scenario-desc">{s.desc}</p></div>)}</div></div></section>
+
+  <section class="section section-slate-50"><div class="container"><div class="section-header"><h2 class="section-title">Questions Before Product Selection and Quotation</h2><p class="section-desc">Define the application, supply boundary, evidence and responsibilities needed for a useful technical review and comparable quotation.</p></div><div class="faq-list">{faqTitles.map((q) => <details class="faq-item"><summary class="faq-question">{q}</summary><div class="faq-answer"><p>Send the project or application, available drawings or measurements, operating conditions, quantity, destination, required documents and expected schedule. A complete specification is not required for the first review; unknown items can be identified during technical communication.</p></div></details>)}</div></div></section>
+
+  <section class="section section-dark" id="rfq"><div class="container"><div class="rfq-grid"><div class="rfq-info"><h2 class="rfq-title">Send the Project Data You Have</h2><p class="rfq-desc">A complete specification is not required for the first review. Share the product or application, available drawings, operating conditions, quantity and documentation requirements. Unknown items can be identified during technical review.</p><ul class="rfq-benefits"><li><span class="rfq-benefit-icon"><Icon name="check-circle" size={16} /></span> Application and Drawing Review</li><li><span class="rfq-benefit-icon"><Icon name="clock" size={16} /></span> Product-Specific Documentation Scope</li><li><span class="rfq-benefit-icon"><Icon name="refresh-cw" size={16} /></span> Response Within 1 Business Day</li></ul><p class="rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p></div><form class="rfq-form" onsubmit="event.preventDefault();"><h3 class="rfq-form-title">Request a Quote</h3><div class="rfq-field"><label>Full Name *</label><input type="text" name="fullName" required /></div><div class="rfq-field"><label>Business Email *</label><input type="email" name="email" required /></div><div class="rfq-field"><label>Project Information *</label><textarea name="message" rows="4" required></textarea></div><button type="submit" class="btn btn-primary btn-block">Send Inquiry</button><p class="rfq-form-note">We typically respond within 1 business day.</p></form></div></div></section>
+</BaseLayout>

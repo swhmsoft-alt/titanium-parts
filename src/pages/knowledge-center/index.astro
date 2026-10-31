@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout title="Knowledge Center | Titanium Parts" description="Engineering and selection guides for titanium materials, anodes, and PEM electrolyzer systems.">
+  <PageHero eyebrow="KNOWLEDGE CENTER" title="Titanium, Electrochemical & Hydrogen Knowledge Center" description="Engineering and selection guides for buyers, engineers, and project teams." />
+  <section class="section">
+    <div class="container">
+      <div class="knowledge-grid">
+        <a href="/titanium-products/" class="knowledge-card"><div class="knowledge-icon"><Icon name="package" size={36} /></div><h3>Titanium Materials Knowledge</h3><p>Compare industrial titanium grades, mechanical performance, corrosion behavior.</p><span class="knowledge-link">Explore <Icon name="arrow-right" size={16} /></span></a>
+        <a href="/titanium-anode/" class="knowledge-card"><div class="knowledge-icon"><Icon name="zap" size={36} /></div><h3>Titanium Anodes Knowledge</h3><p>MMO vs other coatings, applications in cathodic protection, electrolysis, water treatment.</p><span class="knowledge-link">Explore <Icon name="arrow-right" size={16} /></span></a>
+        <a href="/pem-electrolyzer/" class="knowledge-card"><div class="knowledge-icon"><Icon name="cpu" size={36} /></div><h3>PEM Electrolyzer Knowledge</h3><p>PEM water electrolysis, stack and system configuration, hydrogen production projects.</p><span class="knowledge-link">Explore <Icon name="arrow-right" size={16} /></span></a>
+      </div>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="container">
+      <SectionTitle eyebrow="Engineering & Selection Guides" title="Resources to help evaluate technical options." />
+      <div class="guides-grid">
+        <div class="guide-card"><span class="guide-badge">Guide</span><h3>Titanium Grade Selection Matrix</h3><p>Industrial titanium grades based on corrosive environments and operating temperatures.</p><a href="/titanium-products/" class="guide-link">Read Guide <Icon name="arrow-right" size={16} /></a></div>
+        <div class="guide-card"><span class="guide-badge">Guide</span><h3>MMO Coating Evaluation</h3><p>Optimal mixed metal oxide coating formulations.</p><a href="/titanium-anode/" class="guide-link">Read Guide <Icon name="arrow-right" size={16} /></a></div>
+        <div class="guide-card"><span class="guide-badge">Calculator</span><h3>PEM Stack Sizing Parameters</h3><p>Key engineering calculations for sizing PEM electrolyzer stacks.</p><a href="/pem-electrolyzer/" class="guide-link">Read Guide <Icon name="arrow-right" size={16} /></a></div>
+      </div>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="container">
+      <div class="rfq-section-grid">
+        <div>
+          <span class="section-title-eyebrow">Get Specialized Technical Support</span>
+          <h2 class="section-title-heading">Need help choosing the right titanium material, anode design, or PEM electrolyzer configuration?</h2>
+        </div>
+        <RFQForm title="Ask an Engineer" subtitle="Submit your technical requirements below." />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .knowledge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .knowledge-grid { grid-template-columns: 1fr; } }
+  .knowledge-card { display: block; padding: 2.5rem 2rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .knowledge-icon { width: 64px; height: 64px; border-radius: var(--radius); background: var(--color-primary-50); color: var(--color-primary); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+  .knowledge-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.75rem; }
+  .knowledge-card p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.25rem; }
+  .knowledge-link { display: inline-flex; align-items: center; gap: 0.375rem; color: var(--color-primary); font-weight: 600; }
+  .guides-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .guides-grid { grid-template-columns: 1fr; } }
+  .guide-card { padding: 2rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .guide-badge { display: inline-block; padding: 0.25rem 0.75rem; background: var(--color-primary-50); color: var(--color-primary); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; border-radius: var(--radius); margin-bottom: 1rem; }
+  .guide-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.75rem; }
+  .guide-card p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.25rem; }
+  .guide-link { display: inline-flex; align-items: center; gap: 0.375rem; color: var(--color-primary); font-weight: 600; }
+  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
+</style>

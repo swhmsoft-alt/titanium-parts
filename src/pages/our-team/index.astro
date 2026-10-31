@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import RFQForm from '../../components/RFQForm.astro';
+
+interface Member {
+  name: string;
+  title: string;
+  department: string;
+  experience: string;
+  bio: string;
+  initials: string;
+  image: string;
+}
+
+const team: Member[] = [
+  { name: 'Bobby Fu', title: 'Co-Founder & Managing Director', department: 'Leadership', experience: '12+ years titanium industry', bio: `Bobby leads Titanium Parts' global strategy, partner relationships and major project direction. He works directly with EPC contractors, OEMs and system integrators on long-term supply programs.`, initials: 'BF', image: '/images/team/bobby-fu.webp' },
+  { name: 'Stephen Fu', title: 'Co-Founder & Technical Director', department: 'Leadership', experience: '15+ years titanium engineering', bio: `Stephen oversees the technical foundation of Titanium Parts' titanium material and machining operations. He reviews critical specifications, supplier approval programs and engineering escalations.`, initials: 'SF', image: '/images/team/stephen-fu.webp' },
+  { name: 'Alex Liu', title: 'Anode Engineering Manager', department: 'Anode Team', experience: '10+ years electrochemical engineering', bio: `Alex leads engineering for MMO and platinized titanium anodes - substrate design, coating selection, current density review and accelerated life validation for cathodic protection and electrolysis projects.`, initials: 'AL', image: '/images/team/alex-liu.webp' },
+  { name: 'Roger Liu', title: 'PEM Systems Lead', department: 'PEM Electrolyzer Team', experience: '10+ years hydrogen systems', bio: `Roger leads PEM stack and system engineering, including stack architecture, BoP configuration, control philosophy and FAT planning for laboratory, mid-scale and industrial hydrogen projects.`, initials: 'RL', image: '/images/team/roger-liu.webp' },
+  { name: 'Tom Liu', title: 'Quality & Documentation Lead', department: 'Quality Team', experience: '9+ years industrial QA', bio: `Tom coordinates Titanium Parts' quality documentation flow - MTC review, inspection reports, coating records and shipment evidence - aligned to each project's approval and document package.`, initials: 'TL', image: '/images/team/tom-liu.webp' },
+  { name: 'Bobby Fu', title: 'Marketing & Customer Programs', department: 'Commercial Team', experience: '8+ years industrial marketing', bio: `Bobby runs Titanium Parts' customer programs, digital presence and exhibition strategy. He supports international buyers with technical communication, sample coordination and project visibility.`, initials: 'BF', image: '/images/team/bobby-fu-marketing.webp' },
+];
+
+const departments = [
+  { key: 'Leadership', count: 2, desc: 'Co-founders and company direction' },
+  { key: 'Anode Team', count: 1, desc: 'MMO / Pt anodes and electrochemical engineering' },
+  { key: 'PEM Electrolyzer Team', count: 1, desc: 'Hydrogen stack and system engineering' },
+  { key: 'Quality Team', count: 1, desc: 'Inspection, documentation and release' },
+  { key: 'Commercial Team', count: 1, desc: 'Customer programs and partnerships' },
+];
+---
+
+<BaseLayout title="Our Team | Titanium Parts" description="Meet the engineering, quality and project team behind Titanium Parts - titanium materials, anode engineering, PEM hydrogen systems, and OEM/EPC support.">
+  <PageHero eyebrow="Our Team" title="The People Behind Every Titanium Parts Order" description="An engineering-first team covering titanium materials, custom anodes, PEM hydrogen systems and global project coordination." />
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Leadership & Engineering</span>
+        <h2 class="section-title">Co-Founders & Department Leads</h2>
+        <p class="section-desc">The people accountable for technical decisions, project coordination and customer outcomes across every Titanium Parts order.</p>
+      </div>
+      <div class="team-grid">
+
+        {team.map((m) => (
+          <div class="team-card">
+            <div class="team-photo"><img src={m.image} alt={m.name} loading="lazy" /></div>
+            <div class="team-info">
+              <span class="team-dept">{m.department}</span>
+              <h3>{m.name}</h3>
+              <p class="team-title">{m.title}</p>
+              <p class="team-exp">{m.experience}</p>
+              <p class="team-bio">{m.bio}</p>
+            </div>
+          </div>
+        ))}
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-slate-50">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Departments</span>
+        <h2 class="section-title">Five Specialized Teams, One Engineering System</h2>
+        <p class="section-desc">Each product family at Titanium Parts is supported by a named team with clear ownership of materials, manufacturing, quality and customer communication.</p>
+      </div>
+      <div class="dept-grid">
+        {departments.map((d) => (
+          <div class="dept-card">
+            <div class="dept-count">{d.count}</div>
+            <h3>{d.key}</h3>
+            <p>{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="team-photo-banner">
+        <img src="/images/team/wechat-team.webp" alt="Titanium Parts team" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-slate-50">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">How We Work With Buyers</span>
+        <h2 class="section-title">A Named Contact For Every Project</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card"><div class="value-num">01</div><h3>Engineer-to-Engineer Communication</h3><p>Discussions happen between your engineers and ours - not through call centers - so technical detail is preserved.</p></div>
+        <div class="value-card"><div class="value-num">02</div><h3>Application-Led Engineering</h3><p>Each project starts with operating conditions, drawings and approval scope, not a generic product catalog quote.</p></div>
+        <div class="value-card"><div class="value-num">03</div><h3>Documented Project Trail</h3><p>Reviews, sample reports, FAT plans and shipment records are kept with your project - auditable on request.</p></div>
+        <div class="value-card"><div class="value-num">04</div><h3>Long-Term Partnership</h3><p>Our repeat buyer base is built on long-term supply programs, not one-off transactions.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <div class="rfq-grid">
+        <div>
+          <span class="section-title-eyebrow" style="color: var(--color-primary-200);">Work With Our Team</span>
+          <h2 class="rfq-title">Tell us your project scope, drawings and approval requirements - we will route you to the right engineer.</h2>
+          <ul class="rfq-benefits">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Direct engineer-to-engineer contact</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Application and drawing review</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Technical and approval support</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Long-term supply coordination</li>
+          </ul>
+          <p class="rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
+        </div>
+        <RFQForm title="Talk With Our Team" subtitle="A project engineer will respond within 1 business day." variant="team" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .section-white { background: #fff; }
+  .section-slate-50 { background: var(--color-slate-50); }
+  .section-dark { background: var(--color-slate-900); color: #fff; }
+  .section { padding: 6rem 0; }
+  .section-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
+  .section-title-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.875rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.025em; }
+  .section-dark .section-title { color: #fff; }
+  .section-desc { font-size: 1rem; line-height: 1.6; color: var(--color-slate-600); }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .team-grid { grid-template-columns: 1fr; } }
+  .team-card { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; transition: all 0.25s; }
+  .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); border-color: var(--color-primary); }
+  .team-photo { aspect-ratio: 4/3; background: var(--color-slate-100); overflow: hidden; }
+  .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-info { padding: 1.5rem; }
+  .team-dept { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary); background: rgba(37,99,235,0.08); padding: 0.25rem 0.625rem; border-radius: 999px; margin-bottom: 0.625rem; }
+  .team-info h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.25rem; }
+  .team-title { font-size: 0.9375rem; color: var(--color-slate-700); font-weight: 500; margin-bottom: 0.5rem; }
+  .team-exp { font-size: 0.8125rem; color: var(--color-primary); font-weight: 600; margin-bottom: 0.75rem; }
+  .team-bio { font-size: 0.875rem; color: var(--color-slate-600); line-height: 1.6; }
+  .dept-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  @media (max-width: 1024px) { .dept-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .dept-grid { grid-template-columns: repeat(2, 1fr); } }
+  .dept-card { background: #fff; padding: 1.5rem; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; text-align: center; }
+  .dept-count { font-size: 2rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.5rem; }
+  .dept-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
+  .dept-card p { font-size: 0.8125rem; color: var(--color-slate-600); line-height: 1.5; }
+  .team-photo-banner { border-radius: 0.75rem; overflow: hidden; }
+  .team-photo-banner img { width: 100%; height: auto; display: block; }
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .values-grid { grid-template-columns: 1fr; } }
+  .value-card { background: #fff; padding: 1.75rem; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .value-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--color-primary); color: #fff; font-weight: 700; border-radius: 50%; margin-bottom: 1rem; }
+  .value-card h3 { font-size: 1.0625rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
+  .value-card p { font-size: 0.9375rem; color: var(--color-slate-600); line-height: 1.6; }
+  .rfq-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-grid { grid-template-columns: 1fr; } }
+  .rfq-title { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.025em; }
+  .rfq-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+  .rfq-benefits li { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9); font-size: 0.9375rem; }
+  .rfq-prefer { color: rgba(255,255,255,0.85); font-size: 0.9375rem; margin-bottom: 0.75rem; }
+  .rfq-prefer a { color: #fff; font-weight: 600; text-decoration: underline; }
+</style>

@@ -1,0 +1,415 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RFQForm from '../../components/RFQForm.astro';
+
+const objectives = [
+  { title: 'Protect Assets', desc: 'Control corrosion on pipelines, tanks, buried infrastructure, reinforced concrete, marine structures or other defined assets, or manage biological fouling within seawater circuits.' },
+  { title: 'Generate Chemicals', desc: 'Produce chlorine, sodium hypochlorite or another defined electrochemical output from brine, seawater or a specified process electrolyte.' },
+  { title: 'Recover or Deposit Metals', desc: 'Recover metals from a defined electrolyte or deposit a controlled metallic layer or electronic material under specified cell conditions.' },
+  { title: 'Treat Water or Support Separation', desc: 'Treat industrial, municipal or process water through defined electrochemical reactions or support downstream separation, polishing or oxidation duties.' },
+];
+
+const processes = [
+  { title: 'Cathodic Protection', desc: 'Route pipeline, tank, marine, offshore, buried-structure or concrete protection requirements to an impressed-current or sacrificial-protection review.', send: 'Start with: Protected asset, environment, coating condition, current demand, resistivity, installation, design life and project standard.', image: '/images/applications/cathodic-protection.webp' },
+  { title: 'Electrochlorination', desc: 'Review brine, seawater, cooling-water or on-site hypochlorite duties using actual chloride level, output target and cell conditions.', send: 'Start with: Chloride level, output target, flow, residence time, cell geometry and operating mode.', image: '/images/applications/electrochlorination.webp' },
+  { title: 'Chlor-Alkali Process', desc: 'Review membrane, diaphragm or mercury cell routes for chlorine, hydrogen and caustic soda production under specified electrolyte, current density and product purity targets.', send: 'Start with: Cell type, brine quality, current density, target products and downstream purification.', image: '/images/applications/chlor-alkali.webp' },
+  { title: 'Sodium Chlorate Production', desc: 'Review sodium chlorate cells with defined electrolyte composition, current density, pH, temperature and product specification.', send: 'Start with: Electrolyte composition, current density, operating temperature, cell voltage and product purity.', image: '/images/applications/sodium-chlorate.webp' },
+  { title: 'Metal Electrowinning', desc: 'Recover copper, zinc, nickel, cobalt or other defined metals from pregnant leach solution or refining electrolyte under specified cell conditions.', send: 'Start with: Metal, electrolyte composition, current density, temperature, impurity profile and target deposit quality.', image: '/images/applications/electrowinning.webp' },
+  { title: 'Electrolytic Copper Foil', desc: 'Produce electrodeposited copper foil for lithium battery or PCB substrate with defined thickness profile, surface treatment and mechanical property.', send: 'Start with: Target thickness, width, surface profile, mechanical property and downstream process.', image: '/images/applications/copper-foil.webp' },
+  { title: 'PCB Electroplating', desc: 'Copper, tin, nickel, gold or other metal plating on printed circuit board substrates using defined chemistry, current density and rack or continuous operation.', send: 'Start with: Substrate, plating metal, chemistry, current density, throughput requirement and surface criteria.', image: '/images/applications/pcb-plating.webp' },
+  { title: 'Electrochemical Water Treatment', desc: 'Review electrochemical oxidation, reduction or disinfection duties for industrial or municipal water under defined contaminant, conductivity and flow conditions.', send: 'Start with: Target contaminant, influent quality, flow rate, conductivity, current density and discharge standard.', image: '/images/applications/water-treatment.webp' },
+  { title: 'Marine Anti-Fouling', desc: 'Control marine biological fouling in seawater cooling circuits, ballast lines or intake structures through defined electrochlorination or impressed-current systems.', send: 'Start with: Pipe diameter, flow rate, seawater quality, biofouling history, current demand and installation environment.', image: '/images/applications/marine-antifouling.webp' },
+];
+
+const routingMatrix = [
+  ['Corrosion protection on a defined asset', 'Cathodic Protection', 'Asset type, environment, current demand, coating condition, design life'],
+  ['On-site chlorine / hypochlorite generation', 'Electrochlorination', 'Brine or seawater source, output target, cell geometry, flow'],
+  ['Chlor-alkali / chlorate production', 'Chlor-Alkali / Chlorate', 'Cell type, brine composition, current density, product specification'],
+  ['Metal recovery from electrolyte', 'Metal Electrowinning', 'Metal, electrolyte composition, current density, deposit criteria'],
+  ['Copper foil for battery / PCB', 'Electrolytic Copper Foil', 'Target thickness, surface profile, mechanical property'],
+  ['Metal plating on PCB substrate', 'PCB Electroplating', 'Plating metal, substrate, chemistry, current density, throughput'],
+  ['Industrial / municipal water treatment', 'Electrochemical Water Treatment', 'Target contaminant, influent, flow, conductivity, discharge standard'],
+  ['Marine biological fouling control', 'Marine Anti-Fouling', 'Pipe diameter, flow rate, seawater quality, biofouling history'],
+];
+
+const inputs = [
+  { title: 'Target Process', desc: 'State what must be protected, generated, recovered, deposited, oxidized, disinfected or separated.' },
+  { title: 'Electrolyte & Chemistry', desc: 'Provide composition, concentration, contaminants, pH, conductivity and relevant analysis.' },
+  { title: 'Electrical Duty', desc: 'Define current, current density, voltage, waveform, polarity and operating cycle.' },
+  { title: 'Operating Environment', desc: 'State temperature, pressure, ventilation, hazards, installation environment and expected service hours.' },
+  { title: 'Geometry & Connection', desc: 'Provide electrode dimensions, connection type, cell layout, mounting and mechanical interface details.' },
+  { title: 'Acceptance Evidence', desc: 'Specify required documentation, MTC, CoC, witness points, third-party inspection and acceptance standards.' },
+];
+
+const electrodes = [
+  { title: 'Chlorine-Evolution MMO Paths', desc: 'Often considered for defined chloride-containing electrochemical duties such as electrochlorination or chlor-alkali. Electrolyte, current density, temperature and geometry must be reviewed.' },
+  { title: 'Oxygen-Evolution MMO Paths', desc: 'Ir-based or Ir-Ta-related systems may be relevant to defined oxygen-evolution or oxidation duties. They are not a universal substitute for other coatings.' },
+  { title: 'Platinized Titanium Paths', desc: 'May be relevant to selected electroplating, electrolysis, testing and specialty processes when platinum thickness, surface area and chemistry are specified.' },
+  { title: 'BDD & PbO₂ Paths', desc: 'Considered for defined advanced oxidation, water treatment or specialty chemistry duties where standard MMO is not applicable. Operating conditions must be reviewed.' },
+];
+
+const faqs = [
+  { q: 'Can I select an electrode only by product name?', a: 'No. The same application can use different electrode chemistries and geometries. A review needs the target reaction, electrolyte, pH, temperature, current density, dimensions, operating mode and acceptance evidence before a product or technical path is recommended.' },
+  { q: 'Are chlorine-evolution and oxygen-evolution electrodes interchangeable?', a: 'No. They have different electrochemical functions, operating windows, substrate or coating structures, validation needs and commercial implications. Selection must be process-specific.' },
+  { q: 'How should I provide existing electrode information?', a: 'Provide the drawing, markings, substrate and coating if known, electrical connection, process chemistry, operating data, service history and observed failure mode. A visual match alone is insufficient for a meaningful review.' },
+  { q: 'Does the quotation include a complete system?', a: 'Not automatically. Some inquiries may cover an electrode or component; others may involve a cell or selected system scope. The quotation must state inclusions, exclusions, design responsibility and documentation scope for each item.' },
+];
+---
+
+<BaseLayout title="Electrochemical Process Solutions & Electrode Selection | Titanium Parts" description="Electrochemical process solutions, electrode selection guide and project-based engineering for chlor-alkali, electrochlorination, electrowinning, water treatment and marine anti-fouling duties.">
+
+  <!-- ============ HERO ============ -->
+  <section class="app-hero">
+    <div class="app-hero-bg" aria-hidden="true">
+      <img src="/images/applications/hero.webp" alt="Industrial electrochemical process and titanium electrodes" loading="eager" />
+      <div class="app-hero-overlay"></div>
+    </div>
+    <div class="app-container">
+      <div class="app-hero-content">
+        <span class="app-hero-eyebrow">Buyer Selection Guide</span>
+        <h1 class="app-hero-title">Start with the Process, Then Define the Electrode</h1>
+        <p class="app-hero-desc">The right electrode solution depends on the target reaction, electrolyte composition, current or current density, temperature, operating cycle, geometry and equipment boundary. Define these conditions first; the electrode is a downstream decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS OBJECTIVES ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-header-block">
+        <span class="app-section-eyebrow">Process Objectives</span>
+        <h2 class="app-h2">What Must the Electrochemical System Achieve?</h2>
+        <p class="app-lead">Start with the required process outcome, then use the operating conditions, equipment boundary and acceptance criteria to identify the relevant technical path before comparing electrode products or system suppliers.</p>
+      </div>
+      <div class="app-obj-grid">
+        {objectives.map((o) => (
+          <div class="app-obj-card">
+            <h3 class="app-obj-title">{o.title}</h3>
+            <p class="app-obj-desc">{o.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS NAVIGATION (9 cards with images) ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-header-block">
+        <span class="app-section-eyebrow">Core Solution Paths</span>
+        <h2 class="app-h2">Navigate by Process, Not by Product List</h2>
+        <p class="app-lead">Each path links the process goal to the first technical inputs required for a meaningful review. Final electrode or component selection remains project-specific.</p>
+      </div>
+      <div class="app-proc-grid">
+        {processes.map((p) => (
+          <div class="app-proc-card">
+            <div class="app-proc-image"><img src={p.image} alt={p.title} loading="lazy" /></div>
+            <div class="app-proc-body">
+              <h3 class="app-proc-title">{p.title}</h3>
+              <p class="app-proc-desc">{p.desc}</p>
+              <p class="app-proc-send">{p.send}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOLUTION ROUTING MATRIX (TABLE) ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-header-block">
+        <span class="app-section-eyebrow">Solution Routing Matrix</span>
+        <h2 class="app-h2">Match the Required Outcome to the First Inputs</h2>
+        <p class="app-lead">Use this matrix to map your required outcome to the relevant technical path and the first set of inputs needed for an engineering review.</p>
+      </div>
+      <div class="app-table-wrap">
+        <table class="app-table">
+          <thead>
+            <tr>
+              <th>Required Outcome</th>
+              <th>Start Here</th>
+              <th>First Inputs</th>
+            </tr>
+          </thead>
+          <tbody>
+            {routingMatrix.map((row) => (
+              <tr>
+                <td>{row[0]}</td>
+                <td><strong>{row[1]}</strong></td>
+                <td>{row[2]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INPUTS THAT CHANGE PATH (6 cards) ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-header-block">
+        <span class="app-section-eyebrow">Technical Intake</span>
+        <h2 class="app-h2">Inputs That Change the Solution Path</h2>
+        <p class="app-lead">A useful first review does not require every answer, but unknown items should be identified rather than guessed.</p>
+      </div>
+      <div class="app-input-grid">
+        {inputs.map((i) => (
+          <div class="app-input-card">
+            <h3 class="app-input-title">{i.title}</h3>
+            <p class="app-input-desc">{i.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ELECTRODE TECHNOLOGIES (4 cards) ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-header-block">
+        <span class="app-section-eyebrow">Electrode Family Boundary</span>
+        <h2 class="app-h2">Electrode Technologies Are Not Interchangeable</h2>
+        <p class="app-lead">Similar shapes do not mean equivalent electrochemistry. The target reaction, electrolyte and evidence requirements determine which technology can be evaluated.</p>
+      </div>
+      <div class="app-elec-grid">
+        {electrodes.map((e) => (
+          <div class="app-elec-card">
+            <h3 class="app-elec-title">{e.title}</h3>
+            <p class="app-elec-desc">{e.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCOPE & EVIDENCE (image + text) ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-scope-grid">
+        <div class="app-scope-image">
+          <img src="/images/applications/evidence.webp" alt="Electrochemical solution review and evidence" loading="lazy" />
+        </div>
+        <div>
+          <span class="app-section-eyebrow">Scope & Evidence</span>
+          <h2 class="app-h2">A Solution Name Is Not a Finished Specification</h2>
+          <p class="app-lead">The same process can require different chemistry, geometry, connections, tests and supply boundaries. Titanium Parts should not be presented as supplying a complete system, fixed service life or universal certification. The quotation must state inclusions, exclusions, design responsibility and documentation scope for each item.</p>
+          <p class="app-lead">Final specification is set during the drawing and quality-plan review, not by product label.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INDUSTRY APPLICATIONS (2 cols) ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-header-block">
+        <span class="app-section-eyebrow">Industry Applications</span>
+        <h2 class="app-h2">Explore Solutions for Your Operating Environment?</h2>
+        <p class="app-lead">If your project begins with an industry, asset or operating environment rather than a defined electrochemical process, explore the relevant industry applications to identify potential titanium material or electrode families.</p>
+      </div>
+      <div class="app-explore-grid">
+        <div class="app-explore-col">
+          <h3 class="app-explore-title">Start Here When...</h3>
+          <ul class="app-explore-list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              You know the electrochemical duty, target reaction or equipment problem and need the relevant technical path.
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              You have drawings, datasheets or operating data that define the input conditions.
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              You need a defined project scope for quotation, documentation or delivery planning.
+            </li>
+          </ul>
+        </div>
+        <div class="app-explore-col">
+          <h3 class="app-explore-title">Use Industries When...</h3>
+          <ul class="app-explore-list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              You know the sector, asset or operating environment but still need to identify the applicable technology family.
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              You are sourcing titanium material, anodes or system components for a defined industry application.
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              You want to explore reference projects, scope matching and supply precedents.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="app-section app-bg-white">
+    <div class="app-container">
+      <div class="app-header-block app-header-md">
+        <span class="app-section-eyebrow">Solution FAQ</span>
+        <h2 class="app-h2">Questions Before Electrode Selection</h2>
+      </div>
+      <div class="app-faq-grid">
+        {faqs.map((f) => (
+          <details class="app-faq-item">
+            <summary>
+              <span>{f.q}</span>
+              <svg class="app-faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="app-faq-body">
+              <p>{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RFQ FORM ============ -->
+  <section class="app-section app-bg-dark">
+    <div class="app-container">
+      <div class="app-rfq-form-grid">
+        <div class="app-rfq-left">
+          <span class="app-section-eyebrow app-section-eyebrow-light">Engineering Inquiry</span>
+          <h2 class="app-h2 app-h2-light">Discuss Your Electrochemical Process Requirements</h2>
+          <p class="app-lead app-lead-light">Tell us what the process must achieve, then share the electrolyte, operating environment, electrical duty, electrode or cell geometry, drawings and documentation requirements. Titanium Parts will identify the relevant technical path and the missing inputs before any quotation scope is set.</p>
+          <p class="app-form-prefer">Prefer email? Send the project summary to <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a>. Confirm an approved transfer method before uploading confidential or controlled files.</p>
+        </div>
+        <div class="app-form-card">
+          <RFQForm title="Discuss an Electrochemical Process" subtitle="Send the process objective, electrolyte, operating conditions, electrode or cell geometry and documentation requirements." variant="default" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ===== BASE TOKENS ===== */
+  .app-container { max-width: 1600px; margin: 0 auto; padding: 0 64px; }
+  @media (max-width: 1024px) { .app-container { padding: 0 32px; } }
+  @media (max-width: 640px) { .app-container { padding: 0 20px; } }
+
+  /* ===== HERO ===== */
+  .app-hero { position: relative; background: #020617; color: #fff; padding: 96px 0 112px; overflow: hidden; }
+  .app-hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .app-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.5; }
+  .app-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,6,23,0.78) 0%, rgba(2,6,23,0.55) 100%); }
+  .app-hero-content { position: relative; z-index: 1; max-width: 896px; }
+  .app-hero-eyebrow { display: inline-flex; align-items: center; padding: 8px 16px; margin-bottom: 1.5rem; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(96, 165, 250, 0.3); color: #CCD7FA; font-size: 14px; font-weight: 600; border-radius: 9999px; letter-spacing: 1.96px; text-transform: uppercase; }
+  .app-hero-title { font-size: 60px; font-weight: 700; line-height: 60px; color: #fff; margin-bottom: 1.5rem; letter-spacing: -1.5px; }
+  @media (max-width: 1024px) { .app-hero-title { font-size: 48px; line-height: 48px; } }
+  @media (max-width: 640px) { .app-hero-title { font-size: 36px; line-height: 40px; letter-spacing: -0.9px; } }
+  .app-hero-desc { font-size: 20px; line-height: 28px; color: #E2E8F0; max-width: 768px; }
+  @media (max-width: 640px) { .app-hero-desc { font-size: 17px; } }
+
+  /* ===== SECTIONS BASE ===== */
+  .app-section { padding: 112px 0; }
+  @media (max-width: 768px) { .app-section { padding: 72px 0; } }
+  .app-bg-white { background: #fff; }
+  .app-bg-dark { background: #020617; color: #fff; }
+
+  /* ===== TYPOGRAPHY ===== */
+  .app-section-eyebrow { display: block; font-size: 16px; font-weight: 400; color: #475569; margin-bottom: 0.5rem; }
+  .app-section-eyebrow-light { color: #93C5FD; }
+  .app-h2 { font-size: 36px; font-weight: 700; color: #020617; line-height: 40px; letter-spacing: -0.9px; margin-bottom: 1rem; }
+  .app-h2-light { color: #fff; }
+  @media (max-width: 768px) { .app-h2 { font-size: 28px; line-height: 32px; letter-spacing: -0.6px; } }
+  .app-lead { font-size: 18px; font-weight: 400; line-height: 32px; color: #475569; margin-bottom: 1rem; }
+  .app-lead:last-child { margin-bottom: 0; }
+  .app-lead-light { color: rgba(226, 232, 240, 0.9); }
+
+  /* ===== HEADER BLOCK ===== */
+  .app-header-block { max-width: 896px; margin: 0 auto 3rem; }
+  .app-header-md { max-width: 768px; }
+
+  /* ===== OBJECTIVES (4 cards) ===== */
+  .app-obj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 640px) { .app-obj-grid { grid-template-columns: 1fr; } }
+  .app-obj-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 28px; transition: all 0.2s; }
+  .app-obj-card:hover { border-color: #2563EB; background: #fff; box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .app-obj-title { font-size: 20px; font-weight: 700; color: #020617; margin-bottom: 0.625rem; line-height: 1.4; }
+  .app-obj-desc { font-size: 14px; color: #475569; line-height: 24px; }
+
+  /* ===== PROCESS GRID (9 image cards) ===== */
+  .app-proc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1024px) { .app-proc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .app-proc-grid { grid-template-columns: 1fr; } }
+  .app-proc-card { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden; transition: all 0.2s; }
+  .app-proc-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: #2563EB; }
+  .app-proc-image { aspect-ratio: 16/9; overflow: hidden; background: #F1F5F9; }
+  .app-proc-image img { width: 100%; height: 100%; object-fit: cover; }
+  .app-proc-body { padding: 24px 28px 28px; }
+  .app-proc-title { font-size: 20px; font-weight: 700; color: #020617; line-height: 28px; margin-bottom: 0.625rem; }
+  .app-proc-desc { font-size: 14px; color: #475569; line-height: 24px; margin-bottom: 0.875rem; }
+  .app-proc-send { font-size: 13px; color: #64748B; line-height: 22px; padding-top: 0.75rem; border-top: 1px solid #F1F5F9; margin: 0; }
+
+  /* ===== TABLE ===== */
+  .app-table-wrap { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden; }
+  .app-table { width: 100%; border-collapse: collapse; }
+  .app-table thead { background: #020617; }
+  .app-table th { color: #fff; font-size: 14px; font-weight: 700; text-align: left; padding: 16px 24px; }
+  .app-table tbody tr { border-top: 1px solid #E2E8F0; }
+  .app-table tbody tr:first-child { border-top: none; }
+  .app-table td { padding: 16px 24px; font-size: 14px; color: #0F172A; line-height: 1.6; vertical-align: top; }
+  .app-table td strong { color: #2563EB; font-weight: 700; }
+  .app-table tbody tr:hover { background: #F8FAFC; }
+
+  /* ===== INPUT CARDS (6) ===== */
+  .app-input-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 1024px) { .app-input-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .app-input-grid { grid-template-columns: 1fr; } }
+  .app-input-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; transition: all 0.2s; }
+  .app-input-card:hover { border-color: #2563EB; box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .app-input-title { font-size: 16px; font-weight: 700; color: #020617; margin-bottom: 0.5rem; line-height: 1.4; }
+  .app-input-desc { font-size: 14px; color: #475569; line-height: 24px; }
+
+  /* ===== ELECTRODE CARDS (4) ===== */
+  .app-elec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 640px) { .app-elec-grid { grid-template-columns: 1fr; } }
+  .app-elec-card { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; padding: 28px; transition: all 0.2s; }
+  .app-elec-card:hover { border-color: #2563EB; box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .app-elec-title { font-size: 18px; font-weight: 700; color: #020617; margin-bottom: 0.625rem; line-height: 1.4; }
+  .app-elec-desc { font-size: 14px; color: #475569; line-height: 24px; }
+
+  /* ===== SCOPE (image + text 2-col) ===== */
+  .app-scope-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: center; }
+  @media (max-width: 1024px) { .app-scope-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .app-scope-image { aspect-ratio: 4/3; overflow: hidden; border-radius: 16px; background: #F1F5F9; }
+  .app-scope-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ===== EXPLORE COLUMNS (2-col) ===== */
+  .app-explore-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 768px) { .app-explore-grid { grid-template-columns: 1fr; } }
+  .app-explore-col { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; padding: 36px; }
+  .app-explore-title { font-size: 20px; font-weight: 700; color: #020617; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 2px solid #2563EB; }
+  .app-explore-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  .app-explore-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #334155; line-height: 24px; }
+  .app-explore-list li svg { flex-shrink: 0; margin-top: 4px; }
+
+  /* ===== FAQ ===== */
+  .app-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 768px) { .app-faq-grid { grid-template-columns: 1fr; } }
+  .app-faq-item { background: #fff; border: 1px solid #F1F5F9; border-radius: 16px; overflow: hidden; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .app-faq-item[open] { border-color: #BFDBFE; box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .app-faq-item summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; cursor: pointer; list-style: none; font-size: 16px; font-weight: 500; color: #374151; line-height: 1.5; }
+  .app-faq-item summary::-webkit-details-marker { display: none; }
+  .app-faq-item summary:hover { color: #2563EB; }
+  .app-faq-icon { flex-shrink: 0; color: #2563EB; transition: transform 0.2s; }
+  .app-faq-item[open] .app-faq-icon { transform: rotate(180deg); }
+  .app-faq-body { padding: 0 24px 20px; padding-top: 12px; border-top: 1px solid #F1F5F9; }
+  .app-faq-body p { margin: 0; padding-top: 12px; font-size: 14px; color: #475569; line-height: 24px; }
+
+  /* ===== RFQ FORM (DARK) ===== */
+  .app-rfq-form-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+  @media (max-width: 1024px) { .app-rfq-form-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .app-form-prefer { color: rgba(226,232,240,0.85); font-size: 14px; line-height: 1.6; margin-top: 1.5rem; }
+  .app-form-prefer a { color: #fff; font-weight: 600; text-decoration: underline; }
+  .app-form-card .rfq-form { background: #fff; }
+</style>

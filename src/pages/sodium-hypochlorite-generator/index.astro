@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout title="On-Site Sodium Hypochlorite Generator Manufacturer" description="On-site sodium hypochlorite generators for water treatment, disinfection, and industrial applications.">
+  <PageHero eyebrow="Water Treatment" title="On-Site Sodium Hypochlorite Generator Manufacturer" description="On-site sodium hypochlorite generators for water treatment, disinfection, and industrial applications." />
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="Configurations" title="Brine-Based, Seawater, Skid-Mounted & Containerized" />
+      <div class="systems-grid">
+        <div class="system-card"><Icon name="droplet" size={32} /><h3>Brine-Based System</h3><p>Complete brine-based on-site NaOCl generation system for municipal and industrial water treatment.</p></div>
+        <div class="system-card"><Icon name="anchor" size={32} /><h3>Seawater Electrochlorination</h3><p>Seawater electrochlorination system for marine and offshore applications.</p></div>
+        <div class="system-card"><Icon name="package" size={32} /><h3>Skid-Mounted / Containerized</h3><p>Skid-mounted and containerized configurations for plug-and-play deployment.</p></div>
+        <div class="system-card"><Icon name="settings" size={32} /><h3>OEM Integrated System</h3><p>Custom layouts and OEM integration for system integrators and EPCs.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="container">
+      <SectionTitle eyebrow="Inquiry" title="Discuss an On-Site NaOCl System" description="Tell us where the system will operate and what disinfection duty it must meet." />
+      <div class="rfq-section-grid">
+        <div>
+          <span class="section-title-eyebrow">Inquiry</span>
+          <h2 class="section-title-heading">Discuss an On-Site NaOCl System</h2>
+          <p class="section-title-desc">Water flow, required available-chlorine output, feed source, target solution strength, operating hours and site utilities help us review the process route.</p>
+        </div>
+        <RFQForm title="Send Inquiry" subtitle="Tell us where the system will operate and what disinfection duty it must meet." variant="default" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .systems-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  @media (max-width: 768px) { .systems-grid { grid-template-columns: 1fr; } }
+  .system-card { padding: 2rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .system-card :global(svg) { color: var(--color-primary); margin-bottom: 1rem; }
+  .system-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.5rem; }
+  .system-card p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; }
+  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
+</style>

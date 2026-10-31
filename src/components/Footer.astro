@@ -1,0 +1,108 @@
+---
+import { company } from '@data/company';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+---
+<footer class="site-footer">
+  <div class="footer-cta">
+    <div class="container">
+      <div class="footer-cta-inner">
+        <div>
+          <h3 class="footer-cta-title">Request an Engineering Quote</h3>
+          <p class="footer-cta-desc">Share your drawings, application, material grade, coating requirement, quantity, and delivery target. Our team will review your request within 1 business day.</p>
+        </div>
+        <a href="/contact/" class="btn btn-white btn-lg">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <Logo variant="white" />
+          <p class="footer-tagline">{company.description}</p>
+          <div class="footer-contact">
+            <a href={`mailto:${company.contact.salesEmail}`} class="footer-contact-item">
+              <span><Icon name="mail" size={16} /> Email Us</span>
+              <span class="footer-contact-value">{company.contact.salesEmail}</span>
+            </a>
+            <a href={`https://wa.me/${company.contact.whatsapp.replace(/[^0-9]/g,'')}`} class="footer-contact-item">
+              <span><Icon name="phone-call" size={16} /> WhatsApp / Call Us</span>
+              <span class="footer-contact-value">+{company.contact.phoneDisplay}</span>
+            </a>
+            <div class="footer-contact-item">
+              <span><Icon name="map-pin" size={16} /> Factory & Engineering Center</span>
+              <span class="footer-contact-value">{company.locations.hq.detail}</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Direct Factory</h4>
+          <ul class="footer-list">
+            <li><a href="/titanium-products/">Titanium Products</a></li>
+            <li><a href="/titanium-anode/">Titanium Anodes</a></li>
+            <li><a href="/pem-electrolyzer/">PEM Electrolyzer</a></li>
+            <li><a href="/manufacturing-capabilities/">Custom Fabrication</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Custom Engineering</h4>
+          <ul class="footer-list">
+            <li><a href="/manufacturing-capabilities/">OEM Manufacturing</a></li>
+            <li><a href="/contact/">Engineering Support</a></li>
+            <li><a href="/quality/">Quality Control</a></li>
+            <li><a href="/industries/">Industries</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Global B2B Supply</h4>
+          <ul class="footer-list">
+            <li><a href="/contact/">Request a Quote</a></li>
+            <li><a href="/knowledge-center/">Knowledge Center</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/our-team/">Our Team</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-left">
+          <p class="footer-copyright">{company.copyright}</p>
+          <div class="footer-legal"><a href="/terms/">Terms of Use</a></div>
+        </div>
+        <div class="footer-features">
+          <span class="footer-feature"><Icon name="shield" size={14} /> Direct Factory</span>
+          <span class="footer-feature"><Icon name="settings" size={14} /> Custom Engineering</span>
+          <span class="footer-feature"><Icon name="globe" size={14} /> Global B2B Supply</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<style>
+  .site-footer { background: var(--color-bg-dark); color: rgba(255,255,255,0.85); margin-top: auto; }
+  .footer-cta { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); color: #fff; padding: 3rem 0; }
+  .footer-cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .footer-cta-title { font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .footer-cta-desc { font-size: 1rem; color: rgba(255,255,255,0.9); max-width: 700px; line-height: 1.6; }
+  .footer-main { padding: 4rem 0 1.5rem; }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-tagline { font-size: 0.875rem; line-height: 1.6; margin: 1.25rem 0 1.5rem; color: rgba(255,255,255,0.7); }
+  .footer-contact { display: flex; flex-direction: column; gap: 1rem; }
+  .footer-contact-item { display: flex; flex-direction: column; gap: 0.25rem; color: rgba(255,255,255,0.7); font-size: 0.875rem; }
+  a.footer-contact-item:hover { color: #fff; }
+  .footer-contact-item > span:first-child { color: var(--color-primary-200); display: inline-flex; align-items: center; gap: 0.5rem; }
+  .footer-contact-value { color: rgba(255,255,255,0.95); font-weight: 500; }
+  .footer-col-title { color: #fff; font-size: 0.9375rem; font-weight: 700; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .footer-list { display: flex; flex-direction: column; gap: 0.625rem; }
+  .footer-list a { color: rgba(255,255,255,0.7); font-size: 0.9375rem; }
+  .footer-list a:hover { color: #fff; }
+  .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-bottom-left { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-copyright { font-size: 0.875rem; color: rgba(255,255,255,0.6); }
+  .footer-legal a { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-left: 1rem; }
+  .footer-features { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-feature { display: inline-flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.7); font-size: 0.8125rem; font-weight: 500; }
+  .footer-feature :global(svg) { color: var(--color-primary-200); }
+</style>

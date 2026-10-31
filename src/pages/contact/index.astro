@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import Icon from '../../components/Icon.astro';
+import { company } from '../../data/company';
+---
+<BaseLayout title="Contact Titanium Parts | Request a Custom Quote" description="Contact Titanium Parts to request a custom quote, technical review, or engineering consultation. Email, WhatsApp, phone, or send drawings directly.">
+  <PageHero eyebrow="Contact" title="Contact Titanium Parts" description="Talk directly with the project and engineering team. Send drawings, application, material grade, coating requirement, quantity, and delivery target." image="/images/scenarios/system-integration.webp" />
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-card"><Icon name="mail" size={32} className="contact-icon" /><h3>Prefer email?</h3><p>Send drawings, application, material grade, coating requirement, quantity, and delivery target. Our team will review your request within 1 business day.</p><a href={`mailto:${company.contact.salesEmail}`} class="contact-link">{company.contact.salesEmail}</a></div>
+          <div class="contact-card"><Icon name="phone-call" size={32} className="contact-icon" /><h3>WhatsApp / Phone</h3><p>Reach the project coordination team during China business hours. Same-day technical reply for active projects.</p><a href={`https://wa.me/${company.contact.whatsapp.replace(/[^0-9]/g,'')}`} class="contact-link">+{company.contact.phoneDisplay}</a></div>
+          <div class="contact-card"><Icon name="map-pin" size={32} className="contact-icon" /><h3>Factory</h3><p>Our engineering center and main manufacturing hub.</p><p class="contact-detail">{company.locations.hq.detail}</p></div>
+        </div>
+        <RFQForm title="Send Inquiry" subtitle="We typically respond within 1 business day." variant="default" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionTitle eyebrow="What Happens Next" title="After receiving your inquiry" description="Our team reviews the available technical inputs, identifies missing information, and defines the next step toward quotation and order review." />
+      <div class="next-steps">
+        <div class="next-step"><div class="next-step-num">01</div><h3>Review Your Requirement</h3><p>We check your product type, drawings, application, operating conditions, quantity, and documentation needs.</p></div>
+        <div class="next-step"><div class="next-step-num">02</div><h3>Review Technical Fit</h3><p>Our team reviews material grade, coating type, geometry, system configuration, or hydrogen output requirements.</p></div>
+        <div class="next-step"><div class="next-step-num">03</div><h3>Prepare Quote & Documents</h3><p>For qualified requests, Titanium Parts prepares pricing, lead time, technical feedback, datasheets, and the proposed documentation scope.</p></div>
+        <div class="next-step"><div class="next-step-num">04</div><h3>Support Production & Delivery</h3><p>For approved projects, we coordinate production, inspection, packing, export documents, and shipment follow-up.</p></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-card { padding: 1.75rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .contact-icon { color: var(--color-primary); margin-bottom: 1rem; }
+  .contact-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.75rem; }
+  .contact-card p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 0.5rem; }
+  .contact-link { color: var(--color-primary); font-weight: 600; font-size: 1rem; }
+  .contact-link:hover { text-decoration: underline; }
+  .contact-detail { color: var(--color-text); font-weight: 500; }
+  .next-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .next-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .next-steps { grid-template-columns: 1fr; } }
+  .next-step { padding: 1.5rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .next-step-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--color-primary); color: #fff; font-weight: 700; border-radius: var(--radius-full); margin-bottom: 1rem; }
+  .next-step h3 { font-size: 1.0625rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.5rem; }
+  .next-step p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; }
+</style>

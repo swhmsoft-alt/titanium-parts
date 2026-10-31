@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import RFQForm from '../../components/RFQForm.astro';
+
+const qualityItems = [
+  { title: 'Incoming Material Verification', image: '/images/quality/mtc.webp', desc: 'MTC review, heat / lot traceability, grade verification and dimensional records on receipt of every batch.' },
+  { title: 'Dimensional Inspection', image: '/images/quality/dimensional-inspection.webp', desc: 'CMM, calipers, gauges and surface plates used to verify part geometry to drawing tolerance.' },
+  { title: 'PMI (Positive Material Identification)', image: '/images/quality/pmi.webp', desc: 'Handheld XRF PMI used to confirm grade composition of titanium, anodes and alloy components.' },
+  { title: 'Coating Verification', image: '/images/quality/coating-verification.webp', desc: 'XRF composition records, coating loading and adhesion review for MMO / Pt titanium anodes.' },
+  { title: 'Assembly & System Testing', image: '/images/quality/assembly-testing.jpeg', desc: 'PEM stack assembly review, pressure / leak tests and BoP functional verification before release.' },
+  { title: 'Final Inspection', image: '/images/quality/final-inspection.webp', desc: 'Visual and dimensional final QC against the approved quality plan, including surface and marking checks.' },
+  { title: 'Continuous Verification', image: '/images/quality/continuous-verification.webp', desc: 'In-process and end-of-line checkpoints aligned to the agreed inspection and test plan.' },
+  { title: 'Export Packing & Documents', image: '/images/quality/export-packing.webp', desc: 'Packing list, certificate of conformity, datasheets, manuals and export documents compiled per project scope.' },
+];
+---
+
+<BaseLayout title="Quality Control | Titanium, Anode & PEM Testing | Titanium Parts" description="Titanium Parts' quality system covers incoming inspection, in-process checks, dimensional verification, coating review, and FAT documentation.">
+  <PageHero eyebrow="Quality" title="Quality You Can Verify" description="Titanium Parts' quality system covers incoming material verification, in-process dimensional checks, surface and coating inspection, mechanical testing, and order-specific documentation aligned to the agreed scope." />
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Inside Our Quality System</span>
+        <h2 class="section-title">Inspection, Testing & Documentation for Industrial Buyers</h2>
+        <p class="section-desc">Eight defined checkpoints from receipt of material to shipment, each producing a record the project can audit.</p>
+      </div>
+      <div class="q-grid">
+        {qualityItems.map((q) => (
+          <div class="q-card">
+            <div class="q-image\"><img src={q.image} alt={q.title} loading="lazy" /></div>
+            <div class="q-body\">
+              <h3>{q.title}</h3>
+              <p>{q.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-slate-50">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Final QC Package</span>
+        <h2 class="section-title">Final Quality Documentation for Project Approval</h2>
+        <p class="section-desc">Before shipment or internal approval, industrial buyers often need a defined QC document package. Titanium Parts' document package is configurable to project requirements.</p>
+      </div>
+      <div class="doc-grid">
+        <div class="doc-card"><h3>Traceability Records</h3><p>MTC or material certificates, batch records, grade verification, source documents.</p></div>
+        <div class="doc-card"><h3>Inspection Reports</h3><p>Dimensional inspection, surface inspection, machining tolerance review, weld inspection and final QC records.</p></div>
+        <div class="doc-card"><h3>Coating & Performance Records</h3><p>XRF composition records, coating loading or process records, adhesion review.</p></div>
+        <div class="doc-card"><h3>Shipment & Compliance Documents</h3><p>Packing list, certificate of conformity, datasheets, manuals, export documents.</p></div>
+      </div>
+      <p class="doc-note">Note: Document availability depends on product type, project requirement, inspection scope and the agreed documentation package.</p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <div class="rfq-grid">
+        <div>
+          <span class="section-title-eyebrow" style="color: var(--color-primary-200);">Define Your QC Scope</span>
+          <h2 class="rfq-title">Tell us the inspection, document and approval scope you need - we will align our quality plan to your project.</h2>
+          <ul class="rfq-benefits">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Inspection and document scope</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Witness and FAT requirements</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Third-party inspection coordination</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Project-specific approvals</li>
+          </ul>
+          <p class="rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
+        </div>
+        <RFQForm title="Quality Plan Inquiry" subtitle="Quality team will respond within 1 business day." variant="quality" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .section-white { background: #fff; }
+  .section-slate-50 { background: var(--color-slate-50); }
+  .section-dark { background: var(--color-slate-900); color: #fff; }
+  .section { padding: 6rem 0; }
+  .section-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
+  .section-title-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.875rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.025em; }
+  .section-dark .section-title { color: #fff; }
+  .section-desc { font-size: 1rem; line-height: 1.6; color: var(--color-slate-600); }
+  .q-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  @media (max-width: 1024px) { .q-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .q-grid { grid-template-columns: 1fr; } }
+  .q-card { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; transition: all 0.25s; }
+  .q-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.06); border-color: var(--color-primary); }
+  .q-image { aspect-ratio: 4/3; background: var(--color-slate-100); overflow: hidden; }
+  .q-image img { width: 100%; height: 100%; object-fit: cover; }
+  .q-body { padding: 1.25rem; }
+  .q-body h3 { font-size: 1rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
+  .q-body p { font-size: 0.875rem; color: var(--color-slate-600); line-height: 1.6; }
+  .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  @media (max-width: 768px) { .doc-grid { grid-template-columns: 1fr; } }
+  .doc-card { padding: 1.75rem; background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .doc-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.625rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-primary); }
+  .doc-card p { font-size: 0.9375rem; color: var(--color-slate-600); line-height: 1.6; }
+  .doc-note { margin-top: 2rem; font-size: 0.875rem; color: var(--color-slate-500); font-style: italic; text-align: center; }
+  .rfq-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-grid { grid-template-columns: 1fr; } }
+  .rfq-title { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.025em; }
+  .rfq-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+  .rfq-benefits li { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9); font-size: 0.9375rem; }
+  .rfq-prefer { color: rgba(255,255,255,0.85); font-size: 0.9375rem; margin-bottom: 0.75rem; }
+  .rfq-prefer a { color: #fff; font-weight: 600; text-decoration: underline; }
+</style>

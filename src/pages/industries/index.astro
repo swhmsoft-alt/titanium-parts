@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import RFQForm from '../../components/RFQForm.astro';
+import { industries } from '../../data/industries-data';
+
+const industryData = [
+  { slug: 'water-environmental', title: 'Water & Environmental Systems', image: '/images/industries/water-treatment.webp', description: 'Treatment, disinfection, desalination and reuse - titanium anodes, salt chlorinators and PEM systems engineered for long service life in chloride-rich media.' },
+  { slug: 'cathodic-protection', title: 'Cathodic Protection & Infrastructure', image: '/images/industries/cathodic-protection.webp', description: 'Pipelines, tanks, concrete and buried assets - MMO linear, ribbon, tubular and disc anodes for ICCP systems with documented long-term performance.' },
+  { slug: 'marine-offshore', title: 'Marine & Offshore', image: '/images/industries/marine-offshore.webp', description: 'Hulls, ballast tanks, offshore structures - seawater-resistant titanium materials and MGPS anodes engineered for continuous marine exposure.' },
+  { slug: 'electroplating', title: 'Electroplating & Surface Finishing', image: '/images/products/titanium-anodes.webp', description: 'Decorative and functional plating lines - Pt and MMO titanium anodes for hard chrome, precious metal and PCB plating with stable current density.' },
+  { slug: 'mining-electrowinning', title: 'Mining, Electrowinning & Metals', image: '/images/industries/metal-electrowinning.webp', description: 'Hydrometallurgy and metal recovery - titanium anodes and baskets for copper, zinc, nickel and cobalt electrowinning operations.' },
+  { slug: 'hydrogen-energy', title: 'Hydrogen & Energy', image: '/images/industries/energy-hydrogen.webp', description: 'Green H2 production, fuel cells, storage - PEM electrolyzer stacks and systems for laboratory, mid-scale and industrial hydrogen production.' },
+  { slug: 'chemical-industrial', title: 'Chemical & Industrial Equipment', image: '/images/products/titanium-fittings.webp', description: 'Reactors, heat exchangers, process piping - titanium plate, tube, fittings and flanges for corrosive chemical service.' },
+  { slug: 'aerospace', title: 'Aerospace & Advanced Engineering', image: '/images/industries/aerospace.webp', description: 'Aerospace structural and engine components - titanium parts, fasteners and forgings to AMS, ASTM and project specifications.' },
+];
+---
+
+<BaseLayout title="Titanium, Anode & PEM Solutions by Industry | Titanium Parts" description="Application-first engineering across water, cathodic protection, marine, electroplating, mining, hydrogen, chemical, and aerospace industries.">
+  <PageHero eyebrow="Industries" title="Titanium, Anode & PEM Solutions by Industry" description="Application-first engineering for water, cathodic protection, marine, electroplating, mining, hydrogen, chemical and aerospace industries." />
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Application Engineering</span>
+        <h2 class="section-title">Engineered for Your Industry Conditions</h2>
+        <p class="section-desc">Eight core industry sectors where Titanium Parts delivers material selection, application-specific engineering, drawing-based quotation and order-specific documentation.</p>
+      </div>
+      <div class="ind-grid">
+        {industryData.map((ind) => (
+          <div class="ind-card">
+            <div class="ind-image\"><img src={ind.image} alt={ind.title} loading="lazy" /></div>
+            <div class="ind-body\">
+              <h3>{ind.title}</h3>
+              <p>{ind.description}</p>
+              <ul class="ind-list">
+                <li>Application-specific engineering</li>
+                <li>Material / coating selection</li>
+                <li>Drawing-based quotation</li>
+                <li>Order-specific documentation</li>
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-slate-50">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-title-eyebrow">Project Inquiry</span>
+        <h2 class="section-title">Find the Right Titanium Solution for Your Industry</h2>
+        <p class="section-desc">Tell us your industry, operating environment, performance requirements, drawings, quality documentation needs and delivery destination.</p>
+      </div>
+      <div class="rfq-section-grid">
+        <div>
+          <ul class="rfq-benefits">
+            <li><span class="benefit-num">1</span><div><strong>Factory-Direct Support</strong><p>Direct line to engineering and project coordination.</p></div></li>
+            <li><span class="benefit-num">2</span><div><strong>Application-Specific Engineering</strong><p>Material, coating and configuration matched to operating conditions.</p></div></li>
+            <li><span class="benefit-num">3</span><div><strong>Traceable Quality Documentation</strong><p>MTC, inspection reports and records per order.</p></div></li>
+            <li><span class="benefit-num">4</span><div><strong>Global Project Coordination</strong><p>Export documents, packing and shipment follow-up.</p></div></li>
+          </ul>
+        </div>
+        <RFQForm title="Submit Application for Review" subtitle="Tell us your operating conditions, drawings and required evidence." variant="default" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .section-white { background: #fff; }
+  .section-slate-50 { background: var(--color-slate-50); }
+  .section { padding: 6rem 0; }
+  .section-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
+  .section-title-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.875rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.025em; }
+  .section-desc { font-size: 1rem; line-height: 1.6; color: var(--color-slate-600); }
+  .ind-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  @media (max-width: 768px) { .ind-grid { grid-template-columns: 1fr; } }
+  .ind-card { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; transition: all 0.25s; }
+  .ind-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.06); border-color: var(--color-primary); }
+  .ind-image { aspect-ratio: 16/9; background: var(--color-slate-100); overflow: hidden; }
+  .ind-image img { width: 100%; height: 100%; object-fit: cover; }
+  .ind-body { padding: 1.75rem; }
+  .ind-body h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.75rem; }
+  .ind-body p { font-size: 0.9375rem; color: var(--color-slate-600); line-height: 1.6; margin-bottom: 1rem; }
+  .ind-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .ind-list li { font-size: 0.875rem; color: var(--color-slate-700); display: flex; align-items: center; gap: 0.5rem; }
+  .ind-list li::before { content: '✓'; color: var(--color-primary); font-weight: 700; }
+  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
+  .rfq-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+  .rfq-benefits li { display: flex; gap: 1rem; align-items: flex-start; }
+  .benefit-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--color-primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; }
+  .rfq-benefits li div strong { display: block; font-size: 1rem; color: var(--color-slate-900); margin-bottom: 0.25rem; }
+  .rfq-benefits li div p { font-size: 0.875rem; color: var(--color-slate-600); line-height: 1.5; margin: 0; }
+</style>
