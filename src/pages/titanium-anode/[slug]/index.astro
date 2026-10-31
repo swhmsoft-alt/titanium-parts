@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import RFQForm from '../../../components/RFQForm.astro';
+import Icon from '../../../components/Icon.astro';
+import { anodeCoatings, type AnodeCoating } from '../../../data/anode-coatings';
+import { site } from '../../../data/site';
+
+export function getStaticPaths() {
+  return anodeCoatings.map((coating) => ({
+    params: { slug: coating.slug },
+    props: { coating },
+  }));
+}
+
+interface Props {
+  coating: AnodeCoating;
+}
+
+const { coating } = Astro.props;
+const others = anodeCoatings.filter((c) => c.slug !== coating.slug);
+---
+
+<BaseLayout
+  title={`${coating.title} | Titanium Parts`}
+  description={coating.description}
+>
+  <PageHero eyebrow="Anode Coatings" title={coating.title} description={coating.summary} />
+
+  <section class="an-sec an-white">
+    <div class="container">
+      <div class="an-hero-img">
+        <img src={coating.image} alt={coating.title} loading="eager" decoding="async" width="1536" height="1024" />
+      </div>
+
+      <div class="an-grid">
+        <div class="an-main">
+          <h2 class="an-h2">How The Coating Is Selected</h2>
+          <p class="an-lede">{coating.detail}</p>
+
+          <h2 class="an-h2">Reactions Commonly Reviewed</h2>
+          <ul class="an-checks">
+            {coating.reactions.map((item) => (
+              <li><Icon name="zap" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="an-h2">What We Confirm Before Quoting</h2>
+          <ul class="an-checks">
+            {coating.reviewBasis.map((item) => (
+              <li><Icon name="check" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="an-h2">Common Anode Geometries</h2>
+          <ul class="an-forms">
+            {coating.geometries.map((item) => (
+              <li><Icon name="package" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <div class="an-note">
+            <h3>Why Coating Name Alone Is Not Enough</h3>
+            <p>
+              Coating loading, thickness and composition are different characteristics, and each
+              has to be defined with its own units, measurement method, sampling plan and
+              acceptance criteria. Service life also depends on the electrolyte, current
+              density, temperature, mass transfer and operating control — not on coating
+              loading alone.
+            </p>
+          </div>
+        </div>
+
+        <aside class="an-side">
+          <div class="an-card">
+            <h3 class="an-card-title">Send Your Process Data</h3>
+            <p class="an-card-desc">
+              Share the electrolyte, current duty, geometry and required lifetime. A project
+              engineer responds within 1 business day.
+            </p>
+            <ul class="an-card-list">
+              <li><Icon name="mail" size={15} /> {site.contact.salesEmail}</li>
+              <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
+            </ul>
+            <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+          </div>
+
+          <div class="an-card an-card-muted">
+            <h3 class="an-card-title">Other Coating Families</h3>
+            <ul class="an-other">
+              {others.map((o) => (
+                <li><a href={`/titanium-anode/${o.slug}/`}>{o.title}</a></li>
+              ))}
+              <li><a href="/titanium-anode/">All anode capabilities</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="an-sec an-slate">
+    <div class="container">
+      <div class="an-rfq">
+        <div>
+          <span class="an-eyebrow">Send Details</span>
+          <h2 class="an-h2 an-h2-light">Describe The Electrochemical Duty</h2>
+          <p class="an-lede an-lede-light">
+            Reaction, electrolyte, current density, geometry, target life and the inspection
+            evidence you need. A complete specification is not required for the first review.
+          </p>
+        </div>
+        <RFQForm title="Request an Anode Quotation" subtitle="A project engineer will respond within 1 business day." variant="anode" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .an-sec { padding: 5rem 0; }
+  .an-white { background: #fff; }
+  .an-slate { background: var(--color-slate-50); }
+  .an-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+  .an-h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-slate-900); margin: 2.5rem 0 1rem; }
+  .an-h2:first-child { margin-top: 0; }
+  .an-h2-light { color: #fff; }
+  .an-lede { font-size: 1rem; line-height: 1.75; color: var(--color-slate-600); margin: 0; }
+  .an-lede-light { color: rgba(255, 255, 255, 0.82); }
+
+  .an-hero-img { margin-bottom: 3rem; border-radius: 1rem; overflow: hidden; }
+  .an-hero-img img { width: 100%; height: auto; display: block; }
+
+  .an-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3.5rem; align-items: start; }
+  @media (max-width: 1024px) { .an-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  .an-checks, .an-forms { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .an-checks li, .an-forms li { display: flex; align-items: flex-start; gap: 0.625rem; font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-700); }
+  .an-checks :global(svg) { color: var(--color-primary); flex-shrink: 0; margin-top: 0.2rem; }
+  .an-forms :global(svg) { color: #059669; flex-shrink: 0; margin-top: 0.2rem; }
+
+  .an-note { margin-top: 2.5rem; padding: 1.5rem; border-left: 3px solid var(--color-primary); background: var(--color-primary-50); border-radius: 0 0.5rem 0.5rem 0; }
+  .an-note h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.5rem; }
+  .an-note p { margin: 0; font-size: 0.875rem; line-height: 1.7; color: var(--color-slate-600); }
+
+  .an-side { display: flex; flex-direction: column; gap: 1.5rem; }
+  .an-card { padding: 1.75rem; background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .an-card-muted { background: var(--color-slate-50); }
+  .an-card-title { font-size: 1.0625rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.75rem; }
+  .an-card-desc { font-size: 0.875rem; line-height: 1.65; color: var(--color-slate-600); margin: 0 0 1rem; }
+  .an-card-list { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .an-card-list li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--color-slate-700); }
+  .an-card-list :global(svg) { color: var(--color-primary); }
+  .an-other { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .an-other a { font-size: 0.875rem; color: var(--color-slate-700); text-decoration: none; }
+  .an-other a:hover { color: var(--color-primary); }
+
+  .an-rfq { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .an-rfq { grid-template-columns: 1fr; gap: 2rem; } }
+</style>

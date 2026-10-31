@@ -3,116 +3,15 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { company } from '@data/company';
 
-// Real navigation structure from titanium-parts.com
-const navItems = [
-  { label: 'Home', href: '/' },
-  {
-    label: 'About', href: '/company/',
-    children: [
-      { label: 'About', href: '/company/' },
-      { label: 'Manufacturing & Capabilities', href: '/manufacturing-capabilities/' },
-      { label: 'Our Team', href: '/our-team/' },
-      { label: 'Quality Control', href: '/quality/' },
-    ],
-  },
-  {
-    label: 'Titanium Products', href: '/titanium-products/',
-    children: [
-      { label: 'Titanium Plate / Sheet', href: '/titanium-products/titanium-plate/' },
-      { label: 'Titanium Rod / Bar', href: '/titanium-products/titanium-rod-bar/' },
-      { label: 'Titanium Tube & Pipe', href: '/titanium-products/titanium-tubing/' },
-      { label: 'Titanium Wire', href: '/titanium-products/titanium-wire/' },
-      { label: 'Titanium Mesh', href: '/titanium-products/titanium-mesh/' },
-      { label: 'Titanium Fittings', href: '/titanium-products/titanium-fittings/' },
-      { label: 'Titanium Flange', href: '/titanium-products/titanium-flanges/' },
-      { label: 'Titanium Fasteners', href: '/titanium-products/titanium-bolts/' },
-      { label: 'Titanium Machined Parts', href: '/titanium-machining-parts/' },
-      { label: 'Custom CNC Parts', href: '/manufacturing-capabilities/' },
-    ],
-  },
-  {
-    label: 'Titanium Anodes', href: '/titanium-anode/',
-    children: [
-      {
-        label: 'MMO Anodes', href: '/titanium-anode/',
-        children: [
-          { label: 'MMO Linear Anode', href: '/titanium-anode/mmo-anode/mmo-linear-anode/' },
-          { label: 'MMO Wire Anode', href: '/titanium-anode/mmo-anode/mmo-wire-anode/' },
-          { label: 'MMO Ribbon Anode', href: '/titanium-anode/mmo-anode/mmo-ribbon-anode/' },
-          { label: 'MMO Mesh Ribbon Anode', href: '/titanium-anode/mmo-anode/mmo-mesh-ribbon-anode/' },
-          { label: 'MMO Canister Anode', href: '/titanium-anode/mmo-anode/mmo-canister-anode/' },
-          { label: 'MMO Tubular Anode', href: '/titanium-anode/mmo-anode/mmo-tubular-anode/' },
-          { label: 'MMO Disc Anode', href: '/titanium-anode/mmo-anode/mmo-disc-anode/' },
-          { label: 'MMO Rod Anode', href: '/titanium-anode/mmo-anode/mmo-rod-anode/' },
-        ],
-      },
-      { label: 'Iridium Oxide Coated Titanium Anodes', href: '/titanium-anode/iridium-oxide-coated-titanium-anodes/' },
-      { label: 'Ruthenium-Iridium Coated Titanium Anodes', href: '/titanium-anode/ruthenium-coated-titanium-anodes/' },
-      { label: 'Platinized Titanium Anodes', href: '/titanium-anode/platinized-anode/' },
-      { label: 'Titanium Anode Baskets', href: '/titanium-products/titanium-baskets/' },
-      {
-        label: 'Cathodic Protection Anodes', href: '/cathodic-protection/',
-        children: [
-          {
-            label: 'ICCP Anodes', href: '/cathodic-protection/',
-            children: [
-              { label: 'ICCP Anode Installation Configurations', href: '/iccp-anode-installation-configurations/' },
-              { label: 'ICCP Anodes for Deep Groundbed Systems', href: '/iccp-anodes-for-deep-groundbed-systems/' },
-              { label: 'ICCP Anodes for Tank Bottom Protection', href: '/iccp-anodes-for-tank-bottom-protection/' },
-              { label: 'ICCP Anodes for Reinforced Concrete Protection', href: '/iccp-anodes-for-reinforced-concrete-protection/' },
-              { label: 'ICCP Anodes for Marine Structures', href: '/iccp-anodes-for-marine-structures/' },
-              { label: 'ICCP Anodes for Pipelines & Buried Structures', href: '/iccp-anodes-for-pipelines-buried-structures/' },
-            ],
-          },
-          { label: 'High Silicon Cast Iron Anodes', href: '#' },
-          { label: 'Powered Anode Rod', href: '/titanium-anode/mmo-anode/powered-anode-rod/' },
-        ],
-      },
-      {
-        label: 'Sacrificial Anodes', href: '#',
-        children: [
-          { label: 'Aluminum Sacrificial Anodes', href: '/sacrificial-anode/' },
-          { label: 'Zinc Sacrificial Anodes', href: '/sacrificial-anode/' },
-          { label: 'Magnesium Sacrificial Anodes', href: '/sacrificial-anode/' },
-          { label: 'Bracelet Anodes', href: '/sacrificial-anode/' },
-          { label: 'Ribbon Anodes', href: '/sacrificial-anode/' },
-          { label: 'Hull Anodes', href: '/sacrificial-anode/' },
-          { label: 'Ballast Tank Anodes', href: '/sacrificial-anode/' },
-        ],
-      },
-      {
-        label: 'Reference Electrodes', href: '#',
-        children: [
-          { label: 'Ag/AgCl Reference Electrode', href: '/reference-electrode/' },
-          { label: 'Zinc Reference Electrode', href: '/reference-electrode/' },
-          { label: 'MnO2 Reference Electrode', href: '/reference-electrode/' },
-          { label: 'Cu/CuSO4 Reference Electrode', href: '/reference-electrode/' },
-          { label: 'Permanent Reference Electrode', href: '/reference-electrode/' },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'PEM Electrolyzer', href: '/pem-electrolyzer/',
-    children: [
-      { label: 'PEM Stack & Systems', href: '/pem-electrolyzer/' },
-      { label: 'Hydrogen Generator', href: '/hydrogen-generators/' },
-      { label: 'Water Treatment', href: '/salt-chlorinator-for-pool/' },
-      { label: 'Sodium Hypochlorite', href: '/sodium-hypochlorite-generator/' },
-    ],
-  },
-  {
-    label: 'Support', href: '/industries/',
-    children: [
-      { label: 'Industries', href: '/industries/' },
-      { label: 'Solutions', href: '/applications/' },
-      { label: 'Services', href: '/titanium-service/' },
-      { label: 'Knowledge Center', href: '/knowledge-center/' },
-      { label: 'FAQ', href: '/knowledge-center/' },
-    ],
-  },
-  { label: 'Contact', href: '/contact/' },
-];
+import { mainNav, filterAvailable } from '@data/navigation';
+import routes from '@data/routes.json';
+
+// Only surface menu entries whose target page exists in the build.
+const navItems = filterAvailable(
+  mainNav,
+  new Set(routes as string[])
+);
+
 const currentPath = Astro.url.pathname;
 ---
 

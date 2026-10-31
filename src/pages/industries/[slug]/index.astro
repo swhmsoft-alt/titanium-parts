@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import RFQForm from '../../../components/RFQForm.astro';
+import Icon from '../../../components/Icon.astro';
+import { industries, type Industry } from '../../../data/industries-data';
+import { site } from '../../../data/site';
+
+export function getStaticPaths() {
+  return industries.map((industry) => ({
+    params: { slug: industry.slug },
+    props: { industry },
+  }));
+}
+
+interface Props {
+  industry: Industry;
+}
+
+const { industry } = Astro.props;
+const others = industries.filter((i) => i.slug !== industry.slug);
+---
+
+<BaseLayout
+  title={`${industry.title} | Titanium Parts`}
+  description={industry.description}
+>
+  <PageHero eyebrow="Industry" title={industry.title} description={industry.summary} />
+
+  <section class="ind-sec ind-white">
+    <div class="container">
+      <div class="ind-hero-img">
+        <img src={industry.image} alt={industry.title} loading="eager" decoding="async" width="1536" height="1024" />
+      </div>
+
+      <div class="ind-grid">
+        <div class="ind-main">
+          <h2 class="ind-h2">How The Application Drives The Material</h2>
+          <p class="ind-lede">{industry.detail}</p>
+
+          <h2 class="ind-h2">What We Review Before Quoting</h2>
+          <ul class="ind-checks">
+            {industry.reviewBasis.map((item) => (
+              <li><Icon name="check" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="ind-h2">Typical Product Forms</h2>
+          <ul class="ind-forms">
+            {industry.productForms.map((item) => (
+              <li><Icon name="package" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="ind-h2">Documentation &amp; Inspection Scope</h2>
+          <ul class="ind-checks">
+            {industry.evidence.map((item) => (
+              <li><Icon name="check-circle" size={16} /> {item}</li>
+            ))}
+          </ul>
+        </div>
+
+        <aside class="ind-side">
+          <div class="ind-card">
+            <h3 class="ind-card-title">Discuss Your Project</h3>
+            <p class="ind-card-desc">
+              Send the service conditions, the material requirement and the drawing. A project
+              engineer responds within 1 business day.
+            </p>
+            <ul class="ind-card-list">
+              <li><Icon name="mail" size={15} /> {site.contact.salesEmail}</li>
+              <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
+            </ul>
+            <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+          </div>
+
+          <div class="ind-card ind-card-muted">
+            <h3 class="ind-card-title">Other Industries</h3>
+            <ul class="ind-other">
+              {others.map((o) => (
+                <li><a href={`/industries/${o.slug}/`}>{o.title}</a></li>
+              ))}
+              <li><a href="/industries/">All industries</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="ind-sec ind-slate">
+    <div class="container">
+      <div class="ind-rfq">
+        <div>
+          <span class="ind-eyebrow">Send Details</span>
+          <h2 class="ind-h2 ind-h2-light">Describe The Service Condition</h2>
+          <p class="ind-lede ind-lede-light">
+            Media, temperature, pressure, current density, quantity and required documents.
+            A complete specification is not needed for the first review — unknown items can be
+            identified during technical communication.
+          </p>
+        </div>
+        <RFQForm title="Request a Quotation" subtitle="A project engineer will respond within 1 business day." variant="anode" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ind-sec { padding: 5rem 0; }
+  .ind-white { background: #fff; }
+  .ind-slate { background: var(--color-slate-50); }
+  .ind-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+  .ind-h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-slate-900); margin: 2.5rem 0 1rem; }
+  .ind-h2:first-child { margin-top: 0; }
+  .ind-h2-light { color: #fff; }
+  .ind-lede { font-size: 1rem; line-height: 1.75; color: var(--color-slate-600); margin: 0; }
+  .ind-lede-light { color: rgba(255, 255, 255, 0.82); }
+
+  .ind-hero-img { margin-bottom: 3rem; border-radius: 1rem; overflow: hidden; }
+  .ind-hero-img img { width: 100%; height: auto; display: block; }
+
+  .ind-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3.5rem; align-items: start; }
+  @media (max-width: 1024px) { .ind-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  .ind-checks, .ind-forms { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .ind-checks li, .ind-forms li { display: flex; align-items: flex-start; gap: 0.625rem; font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-700); }
+  .ind-checks :global(svg) { color: var(--color-primary); flex-shrink: 0; margin-top: 0.2rem; }
+  .ind-forms :global(svg) { color: #059669; flex-shrink: 0; margin-top: 0.2rem; }
+
+  .ind-side { display: flex; flex-direction: column; gap: 1.5rem; }
+  .ind-card { padding: 1.75rem; background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .ind-card-muted { background: var(--color-slate-50); }
+  .ind-card-title { font-size: 1.0625rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.75rem; }
+  .ind-card-desc { font-size: 0.875rem; line-height: 1.65; color: var(--color-slate-600); margin: 0 0 1rem; }
+  .ind-card-list { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .ind-card-list li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--color-slate-700); }
+  .ind-card-list :global(svg) { color: var(--color-primary); }
+  .ind-other { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .ind-other a { font-size: 0.875rem; color: var(--color-slate-700); text-decoration: none; }
+  .ind-other a:hover { color: var(--color-primary); }
+
+  .ind-rfq { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .ind-rfq { grid-template-columns: 1fr; gap: 2rem; } }
+</style>

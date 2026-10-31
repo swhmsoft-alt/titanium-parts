@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import RFQForm from '../../../components/RFQForm.astro';
+import Icon from '../../../components/Icon.astro';
+import { serviceSteps, type ServiceStep } from '../../../data/service-steps';
+import { site } from '../../../data/site';
+
+export function getStaticPaths() {
+  return serviceSteps.map((step) => ({
+    params: { slug: step.slug },
+    props: { step },
+  }));
+}
+
+interface Props {
+  step: ServiceStep;
+}
+
+const { step } = Astro.props;
+
+const others = serviceSteps.filter((s) => s.slug !== step.slug);
+---
+
+<BaseLayout
+  title={step.title}
+  description={step.description}
+>
+  <PageHero eyebrow="Titanium Services" title={step.title} description={step.summary} />
+
+  <section class="svc-section svc-white">
+    <div class="container">
+      <div class="svc-grid">
+        <div class="svc-main">
+          <h2 class="svc-h2">What This Step Covers</h2>
+          <p class="svc-lede">{step.scope}</p>
+
+          <h2 class="svc-h2">What We Confirm Before Quoting</h2>
+          <ul class="svc-checks">
+            {step.reviewBasis.map((item) => (
+              <li><Icon name="check" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="svc-h2">Typical Outputs</h2>
+          <ul class="svc-outputs">
+            {step.outputs.map((item) => (
+              <li><Icon name="check-circle" size={18} /> {item}</li>
+            ))}
+          </ul>
+
+          <div class="svc-note">
+            <h3>Scope Boundary</h3>
+            <p>
+              This service is quoted against a confirmed order basis. Design suitability,
+              code compliance and final application approval stay with the buyer or
+              system integrator unless they are expressly included in the quotation.
+            </p>
+          </div>
+        </div>
+
+        <aside class="svc-side">
+          <div class="svc-card">
+            <h3 class="svc-card-title">Send Your Requirement</h3>
+            <p class="svc-card-desc">
+              Share the material, dimensions, drawing and inspection scope. A project
+              engineer responds within 1 business day.
+            </p>
+            <ul class="svc-card-list">
+              <li><Icon name="mail" size={15} /> {site.contact.salesEmail}</li>
+              <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
+            </ul>
+            <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+          </div>
+
+          <div class="svc-card svc-card-muted">
+            <h3 class="svc-card-title">Other Services</h3>
+            <ul class="svc-other">
+              {others.map((s) => (
+                <li><a href={`/titanium-service/${s.slug}/`}>{s.title}</a></li>
+              ))}
+              <li><a href="/titanium-service/">All fabrication services</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-slate">
+    <div class="container">
+      <div class="svc-rfq">
+        <div>
+          <span class="svc-eyebrow">Send Details</span>
+          <h2 class="svc-h2 svc-h2-light">Tell Us What You Need Produced</h2>
+          <p class="svc-lede svc-lede-light">
+            Include the material and grade, the drawing or dimensions, the quantity and
+            the documents required with delivery. Unknown items can be identified during
+            technical review.
+          </p>
+        </div>
+        <RFQForm title="Request a Quotation" subtitle="A project engineer will respond within 1 business day." variant="titanium" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .svc-section { padding: 5rem 0; }
+  .svc-white { background: #fff; }
+  .svc-slate { background: var(--color-slate-50); }
+  .svc-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+  .svc-h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-slate-900); margin: 2.5rem 0 1rem; }
+  .svc-h2:first-child { margin-top: 0; }
+  .svc-h2-light { color: #fff; }
+  .svc-lede { font-size: 1rem; line-height: 1.75; color: var(--color-slate-600); margin: 0; }
+  .svc-lede-light { color: rgba(255, 255, 255, 0.82); }
+
+  .svc-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3.5rem; align-items: start; }
+  @media (max-width: 1024px) { .svc-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  .svc-checks, .svc-outputs { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .svc-checks li { display: flex; align-items: flex-start; gap: 0.625rem; font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-700); }
+  .svc-checks :global(svg) { color: var(--color-primary); flex-shrink: 0; margin-top: 0.2rem; }
+  .svc-outputs li { display: flex; align-items: flex-start; gap: 0.625rem; font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-700); }
+  .svc-outputs :global(svg) { color: #059669; flex-shrink: 0; margin-top: 0.2rem; }
+
+  .svc-note { margin-top: 2.5rem; padding: 1.5rem; border-left: 3px solid var(--color-primary); background: var(--color-primary-50); border-radius: 0 0.5rem 0.5rem 0; }
+  .svc-note h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.5rem; }
+  .svc-note p { margin: 0; font-size: 0.875rem; line-height: 1.7; color: var(--color-slate-600); }
+
+  .svc-side { display: flex; flex-direction: column; gap: 1.5rem; }
+  .svc-card { padding: 1.75rem; background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .svc-card-muted { background: var(--color-slate-50); }
+  .svc-card-title { font-size: 1.0625rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.75rem; }
+  .svc-card-desc { font-size: 0.875rem; line-height: 1.65; color: var(--color-slate-600); margin: 0 0 1rem; }
+  .svc-card-list { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .svc-card-list li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--color-slate-700); }
+  .svc-card-list :global(svg) { color: var(--color-primary); }
+  .svc-other { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .svc-other a { font-size: 0.875rem; color: var(--color-slate-700); text-decoration: none; }
+  .svc-other a:hover { color: var(--color-primary); }
+
+  .svc-rfq { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .svc-rfq { grid-template-columns: 1fr; gap: 2rem; } }
+</style>

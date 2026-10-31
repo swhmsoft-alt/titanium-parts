@@ -3,17 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import RFQForm from '../../components/RFQForm.astro';
 import { industries } from '../../data/industries-data';
+import Icon from '../../components/Icon.astro';
 
-const industryData = [
-  { slug: 'water-environmental', title: 'Water & Environmental Systems', image: '/images/industries/water-treatment.webp', description: 'Treatment, disinfection, desalination and reuse - titanium anodes, salt chlorinators and PEM systems engineered for long service life in chloride-rich media.' },
-  { slug: 'cathodic-protection', title: 'Cathodic Protection & Infrastructure', image: '/images/industries/cathodic-protection.webp', description: 'Pipelines, tanks, concrete and buried assets - MMO linear, ribbon, tubular and disc anodes for ICCP systems with documented long-term performance.' },
-  { slug: 'marine-offshore', title: 'Marine & Offshore', image: '/images/industries/marine-offshore.webp', description: 'Hulls, ballast tanks, offshore structures - seawater-resistant titanium materials and MGPS anodes engineered for continuous marine exposure.' },
-  { slug: 'electroplating', title: 'Electroplating & Surface Finishing', image: '/images/products/titanium-anodes.webp', description: 'Decorative and functional plating lines - Pt and MMO titanium anodes for hard chrome, precious metal and PCB plating with stable current density.' },
-  { slug: 'mining-electrowinning', title: 'Mining, Electrowinning & Metals', image: '/images/industries/metal-electrowinning.webp', description: 'Hydrometallurgy and metal recovery - titanium anodes and baskets for copper, zinc, nickel and cobalt electrowinning operations.' },
-  { slug: 'hydrogen-energy', title: 'Hydrogen & Energy', image: '/images/industries/energy-hydrogen.webp', description: 'Green H2 production, fuel cells, storage - PEM electrolyzer stacks and systems for laboratory, mid-scale and industrial hydrogen production.' },
-  { slug: 'chemical-industrial', title: 'Chemical & Industrial Equipment', image: '/images/products/titanium-fittings.webp', description: 'Reactors, heat exchangers, process piping - titanium plate, tube, fittings and flanges for corrosive chemical service.' },
-  { slug: 'aerospace', title: 'Aerospace & Advanced Engineering', image: '/images/industries/aerospace.webp', description: 'Aerospace structural and engine components - titanium parts, fasteners and forgings to AMS, ASTM and project specifications.' },
-];
 ---
 
 <BaseLayout title="Titanium, Anode & PEM Solutions by Industry | Titanium Parts" description="Application-first engineering across water, cathodic protection, marine, electroplating, mining, hydrogen, chemical, and aerospace industries.">
@@ -27,20 +18,21 @@ const industryData = [
         <p class="section-desc">Eight core industry sectors where Titanium Parts delivers material selection, application-specific engineering, drawing-based quotation and order-specific documentation.</p>
       </div>
       <div class="ind-grid">
-        {industryData.map((ind) => (
-          <div class="ind-card">
-            <div class="ind-image\"><img src={ind.image} alt={ind.title} loading="lazy" /></div>
-            <div class="ind-body\">
+        {industries.map((ind) => (
+          <a href={`/industries/${ind.slug}/`} class="ind-card ind-card-link">
+            <div class="ind-image"><img src={ind.image} alt={ind.title} loading="lazy" /></div>
+            <div class="ind-body">
               <h3>{ind.title}</h3>
-              <p>{ind.description}</p>
+              <p>{ind.summary}</p>
               <ul class="ind-list">
                 <li>Application-specific engineering</li>
                 <li>Material / coating selection</li>
                 <li>Drawing-based quotation</li>
                 <li>Order-specific documentation</li>
               </ul>
+              <span class="ind-link">View Industry <Icon name="arrow-right" size={14} /></span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
@@ -94,4 +86,8 @@ const industryData = [
   .benefit-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--color-primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; }
   .rfq-benefits li div strong { display: block; font-size: 1rem; color: var(--color-slate-900); margin-bottom: 0.25rem; }
   .rfq-benefits li div p { font-size: 0.875rem; color: var(--color-slate-600); line-height: 1.5; margin: 0; }
+
+  .ind-card-link { display: block; text-decoration: none; color: inherit; transition: all 0.25s; }
+  .ind-card-link:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.15); border-color: var(--color-primary); }
+  .ind-link { display: inline-flex; align-items: center; gap: 0.375rem; margin-top: 0.75rem; color: var(--color-primary); font-weight: 600; font-size: 0.875rem; }
 </style>
