@@ -1,0 +1,84 @@
+{
+  "id": "titanium-anode-taxonomy",
+  "title": "Titanium Anode Taxonomy Rebuild",
+  "summary": "Rebuild the titanium anode taxonomy as four navigation groups, add the MMO product cluster and the system pages, and extend the landing page without rewriting it.",
+  "assertions": [
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-ribbon-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-mesh-ribbon-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-canister-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-tubular-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-disc-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-rod-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/coating-systems/" },
+    { "type": "routeExists", "route": "/titanium-anode/anti-fouling-system/" },
+    { "type": "routeExists", "route": "/cathodic-protection/reference-electrodes/" },
+    { "type": "routeExists", "route": "/cathodic-protection/" },
+
+    { "type": "routeMeta", "route": "/titanium-anode/mmo-anode/" },
+    { "type": "routeMeta", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeMeta", "route": "/titanium-anode/coating-systems/" },
+    { "type": "routeMeta", "route": "/titanium-anode/anti-fouling-system/" },
+    { "type": "routeMeta", "route": "/cathodic-protection/reference-electrodes/" },
+
+    { "type": "routeContains", "route": "/titanium-anode/", "selector": "id=\"product-families\"" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/", "text": "MMO and DSA Are Not Two Different Products" },
+    { "type": "routeContains", "route": "/titanium-anode/coating-systems/", "text": "MMO Contains Ru-Ir and Ir-Ta" },
+    { "type": "routeContains", "route": "/titanium-anode/anti-fouling-system/", "text": "Anti-Fouling vs ICCP" },
+    { "type": "routeContains", "route": "/cathodic-protection/reference-electrodes/", "text": "This is not an anode" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/", "text": "MMO Wire Anode vs Linear Anode Assembly" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-rod-anode/", "text": "condenser, chiller and water-side protection applications" },
+
+    { "type": "routeLinksTo", "route": "/titanium-anode/", "href": "/titanium-anode/mmo-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/", "href": "/titanium-anode/mmo-anode/mmo-rod-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/", "href": "/titanium-anode/coating-systems/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/", "href": "/titanium-anode/anti-fouling-system/" },
+    { "type": "routeLinksTo", "route": "/cathodic-protection/", "href": "/cathodic-protection/reference-electrodes/" },
+    { "type": "routeLinksTo", "route": "/cathodic-protection/", "href": "/titanium-anode/mmo-anode/mmo-canister-anode/" },
+    { "type": "routeLinksTo", "route": "/applications/", "href": "/titanium-anode/anti-fouling-system/" },
+    { "type": "routeLinksTo", "route": "/titanium-products/titanium-baskets/", "href": "/titanium-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "href": "/titanium-anode/mmo-anode/" },
+
+    {
+      "type": "navGroups",
+      "menu": "Titanium Anodes",
+      "groups": [
+        { "label": "MMO Titanium Anodes", "childCount": 8 },
+        { "label": "Coating Systems", "childCount": 4 },
+        { "label": "Cathodic Protection", "childCount": 2 },
+        { "label": "Systems & Components", "childCount": 3 }
+      ]
+    },
+
+    {
+      "type": "dataEntries",
+      "module": "src/data/mmo-anodes.ts",
+      "export": "mmoAnodes",
+      "count": 8,
+      "slugs": [
+        "mmo-linear-anode",
+        "mmo-wire-anode",
+        "mmo-ribbon-anode",
+        "mmo-mesh-ribbon-anode",
+        "mmo-canister-anode",
+        "mmo-tubular-anode",
+        "mmo-disc-anode",
+        "mmo-rod-anode"
+      ]
+    },
+    { "type": "dataEntries", "module": "src/data/anode-catalog.ts", "export": "anodeNavGroups", "count": 4, "idField": "key" },
+    { "type": "dataExportExists", "module": "src/data/anode-hubs.ts", "export": "mmoHub" },
+    { "type": "dataExportExists", "module": "src/data/anode-hubs.ts", "export": "coatingHub" },
+    { "type": "dataExportExists", "module": "src/data/anode-hubs.ts", "export": "antiFoulingHub" },
+    { "type": "dataExportExists", "module": "src/data/anode-hubs.ts", "export": "referenceElectrodeHub" },
+    { "type": "dataEntries", "module": "src/data/anode-coatings.ts", "export": "anodeCoatings", "count": 4 },
+
+    { "type": "fileDiffAdditive", "path": "src/pages/titanium-anode/index.astro" },
+    { "type": "fileExists", "path": "docs/titanium-anode-ia.md" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mesh-anodes.webp" },
+    { "type": "imageExists", "path": "public/images/applications/marine-antifouling.webp" },
+    { "type": "pageCount", "min": 67 }
+  ]
+}

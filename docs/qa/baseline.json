@@ -1,0 +1,15 @@
+{
+  "note": "Project wide accepted failures. Every task inherits this file, so a known problem is stated once instead of being repeated in each task definition. Remove an entry when the underlying problem is fixed — the verifier then switches that check back to strict.",
+  "audit": {
+    "knownFailures": [
+      {
+        "check": "image-references-resolve",
+        "paths": [
+          "/images/titanium-anode/website-video-02-clean-1080p.mp4",
+          "/images/titanium-products/titanium-products-manufacturer.mp4"
+        ],
+        "reason": "Production footage that has not been shot yet. Both clips are listed in docs/shooting-plan.md as pending and appear as missing slots in docs/image-sheet.md. The whole site is in a pre-video state."
+      }
+    ]
+  }
+}

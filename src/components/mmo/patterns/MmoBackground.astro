@@ -1,0 +1,23 @@
+---
+/**
+ * The decorative picture of a band.
+ *
+ * It sits behind the copy of its section, so it is rendered as a background
+ * layer of the band rather than as a figure.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'background' }>;
+}
+
+const { part } = Astro.props;
+---
+
+{
+  part.image && (
+    <div class="mmo-band-bg" aria-hidden="true">
+      <img src={part.image.src} alt="" loading="lazy" decoding="async" />
+    </div>
+  )
+}

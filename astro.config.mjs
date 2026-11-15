@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import imageDimensions from './scripts/media/image-dimensions.mjs';
+import { llmsTxt } from './scripts/seo/build-llms-txt.mjs';
+import { sitemapImages } from './scripts/seo/build-sitemap-images.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -61,6 +63,9 @@ export default defineConfig({
         return { ...item, lastmod: stamp };
       },
     }),
+    // Runs after the sitemap integration so the XML file exists to annotate.
+    sitemapImages(),
+    llmsTxt(),
   ],
   vite: {
     ssr: { noExternal: ['astro/*'] },

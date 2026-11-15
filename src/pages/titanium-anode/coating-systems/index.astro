@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import RFQForm from '../../../components/RFQForm.astro';
+import Icon from '../../../components/Icon.astro';
+import { coatingHub } from '../../../data/anode-hubs';
+import { site } from '../../../data/site';
+import '../../../styles/anode-catalog.css';
+---
+
+<BaseLayout
+  title="Coating Systems for Titanium Anodes | Titanium Parts"
+  description={coatingHub.description}
+>
+  <PageHero eyebrow="Coating Technology" title={coatingHub.title} description={coatingHub.lede} image={coatingHub.heroImage} />
+
+  <section class="ac-section">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">How The Families Relate</p>
+        <h2 class="ac-h2">{coatingHub.relationship.title}</h2>
+        <p class="ac-lede">{coatingHub.relationship.body}</p>
+      </div>
+      <div class="ac-grid-4">
+        {coatingHub.comparisonRows.map((row) => (
+          <a href={row.href} class="ac-card-link">
+            <h3 class="ac-h3">{row.family}</h3>
+            <p class="ac-p" style="margin: 0 0 0.75rem;">{row.targetReaction}</p>
+            <span class="ac-card-more">Review this coating →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-alt">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">Comparison</p>
+        <h2 class="ac-h2">Compare The Coating Systems Against The Process Window</h2>
+        <p class="ac-lede">
+          A coating name is not a specification. The reaction, the media, the current basis and
+          the factor that normally limits the service life are what separate one family from
+          another.
+        </p>
+      </div>
+      <div class="ac-table-wrap" role="region" aria-label="Coating system comparison" tabindex="0">
+        <table class="ac-table">
+          <thead>
+            <tr>
+              <th>Coating Family</th>
+              <th>Commonly Reviewed For</th>
+              <th>Media</th>
+              <th>Current Basis</th>
+              <th>What Limits The Life</th>
+            </tr>
+          </thead>
+          <tbody>
+            {coatingHub.comparisonRows.map((row) => (
+              <tr>
+                <td><a href={row.href}>{row.family}</a></td>
+                <td>{row.targetReaction}</td>
+                <td>{row.media}</td>
+                <td>{row.currentBasis}</td>
+                <td>{row.lifeLimit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">Selection Path</p>
+        <h2 class="ac-h2">Four Steps To A Reviewable Specification</h2>
+        <p class="ac-lede">
+          The order of these steps matters. Naming the coating first is what produces
+          quotations that cannot be compared with each other.
+        </p>
+      </div>
+      <div class="ac-grid-4">
+        {coatingHub.selectionPath.map((step) => (
+          <article class="ac-card">
+            <span class="ac-pill">{step.step}</span>
+            <h3 class="ac-h3" style="margin-top: 0.75rem;">{step.title}</h3>
+            <p class="ac-p" style="margin: 0;">{step.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="ac-note">
+        <h3>The geometry comes last</h3>
+        <p>
+          Once the active surface is fixed, the shape follows from the installation. The eight
+          MMO geometries — linear, wire, ribbon, mesh ribbon, canister, tubular, disc and rod —
+          are reviewed on their own pages.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-alt">
+    <div class="ac-inner">
+      <div class="ac-layout">
+        <div>
+          <div class="ac-head">
+            <p class="ac-eyebrow">Coating Family Pages</p>
+            <h2 class="ac-h2">Open The Coating System You Need</h2>
+            <p class="ac-lede">
+              Each coating page states the reactions it is commonly reviewed for, the inputs
+              that change the decision and the geometry it is supplied in.
+            </p>
+          </div>
+          <div class="ac-grid-2">
+            {coatingHub.comparisonRows.map((row) => (
+              <a href={row.href} class="ac-card-link">
+                <h3 class="ac-h3">{row.family}</h3>
+                <p class="ac-p" style="margin: 0 0 0.75rem;">{row.media}</p>
+                <span class="ac-card-more">Review {row.family} →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+        <aside class="ac-side">
+          <div class="ac-side-card">
+            <h3 class="ac-h3">Send Your Process Data</h3>
+            <p class="ac-p">
+              Share the reaction, the electrolyte and the electrical duty. A project engineer
+              responds within 1 business day.
+            </p>
+            <ul class="ac-side-list">
+              <li><Icon name="mail" size={15} /> {site.contact.salesEmail}</li>
+              <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
+            </ul>
+            <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+          </div>
+          <div class="ac-side-card ac-side-card-muted">
+            <h3 class="ac-h3">Related Pages</h3>
+            <ul class="ac-side-links">
+              <li><a href="/titanium-anode/mmo-anode/">MMO Titanium Anodes</a></li>
+              <li><a href="/titanium-anode/">Titanium Anode Overview</a></li>
+              <li><a href="/applications/">Electrochemical Applications</a></li>
+              <li><a href="/cathodic-protection/">Cathodic Protection</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">FAQ</p>
+        <h2 class="ac-h2">Coating System Questions</h2>
+      </div>
+      <div class="ac-faq">
+        {coatingHub.faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-dark">
+    <div class="ac-inner">
+      <div class="ac-rfq">
+        <div>
+          <span class="ac-eyebrow-light">Send Details</span>
+          <h2 class="ac-h2 ac-h2-light">Describe The Reaction And The Media</h2>
+          <p class="ac-lede ac-lede-light">
+            Target reaction, electrolyte composition, contaminants, pH, temperature, current
+            density with its active-area basis, geometry and the required life. A complete
+            specification is not required for the first review.
+          </p>
+        </div>
+        <RFQForm title="Request a Coating Review" subtitle="A project engineer will respond within 1 business day." variant="anode" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+</BaseLayout>

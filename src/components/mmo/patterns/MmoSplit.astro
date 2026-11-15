@@ -1,0 +1,37 @@
+---
+/**
+ * Two columns: a picture on one side, the copy on the other.
+ *
+ * The copy arrives through the slot, so a split may hold any part — a grid of
+ * cards, a table, a list of paragraphs.
+ */
+import type { MmoImage } from '../../../data/mmo-family-pages';
+
+interface Props {
+  image?: MmoImage | null;
+  caption?: string;
+  /** The copy sits above the picture on a small screen. */
+  copyFirst?: boolean;
+}
+
+const { image, caption = '', copyFirst = false } = Astro.props;
+---
+
+<div class:list={['mmo-split', copyFirst ? 'mmo-split-copy-first' : undefined]}>
+  {
+    image && (
+      <figure class="mmo-figure mmo-figure-contain mmo-split-figure">
+        <img
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          decoding="async"
+        />
+        {caption && <figcaption class="mmo-figure-cap">{caption}</figcaption>}
+      </figure>
+    )
+  }
+  <div class="mmo-split-body">
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,48 @@
+{
+  "id": "wire-skeleton-parity",
+  "title": "Wire Skeleton Parity Across The Anode Page Family",
+  "summary": "The six rebuilt pages follow the MMO wire anode page as their skeleton: the same three dark bands, the same custom engineering band, the same quote boundary band, the same factory band after the questions and the same closing quote band. The wire page is the reference, so the parity is asserted against it rather than against a description of it.",
+  "assertions": [
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/iridium-oxide-coated-titanium-anodes/" },
+    { "type": "routeExists", "route": "/titanium-anode/platinized-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/lead-dioxide-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/anti-fouling-system/" },
+    { "type": "routeExists", "route": "/cathodic-protection/" },
+    { "type": "routeExists", "route": "/cathodic-protection/reference-electrodes/" },
+
+    { "type": "routeContains", "route": "/titanium-anode/iridium-oxide-coated-titanium-anodes/", "text": "Ir-Ta Anodes Built Around Your Cell, Not Around a Catalogue" },
+    { "type": "routeContains", "route": "/titanium-anode/platinized-anode/", "text": "Platinized Anodes Built Around the Cell, Not Around a Product Name" },
+    { "type": "routeContains", "route": "/titanium-anode/lead-dioxide-anode/", "text": "PbO₂ Anodes Reviewed Case by Case, Against the Duty and the Rules" },
+    { "type": "routeContains", "route": "/titanium-anode/anti-fouling-system/", "text": "An Anti-Fouling System Sized for the Vessel, the Route and the Sea" },
+    { "type": "routeContains", "route": "/cathodic-protection/", "text": "A Cathodic Protection Design Built Around the Structure, Not Around a Product" },
+    { "type": "routeContains", "route": "/cathodic-protection/reference-electrodes/", "text": "A Reference Electrode Selected Against the Electrolyte and the Control Loop" },
+
+    { "type": "routeContains", "route": "/titanium-anode/iridium-oxide-coated-titanium-anodes/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/titanium-anode/platinized-anode/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/titanium-anode/lead-dioxide-anode/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/titanium-anode/anti-fouling-system/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/cathodic-protection/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/cathodic-protection/reference-electrodes/", "text": "Before Requesting a Quote" },
+
+    { "type": "routeContains", "route": "/titanium-anode/iridium-oxide-coated-titanium-anodes/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/titanium-anode/platinized-anode/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/titanium-anode/lead-dioxide-anode/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/titanium-anode/anti-fouling-system/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/cathodic-protection/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/cathodic-protection/reference-electrodes/", "text": "Inside our factory" },
+
+    { "type": "routeContains", "route": "/titanium-anode/iridium-oxide-coated-titanium-anodes/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/titanium-anode/platinized-anode/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/titanium-anode/lead-dioxide-anode/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/titanium-anode/anti-fouling-system/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/cathodic-protection/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/cathodic-protection/reference-electrodes/", "text": "Custom Engineering" },
+
+    { "type": "fileExists", "path": "src/components/anode/PageBand.astro" },
+    { "type": "fileExists", "path": "src/components/anode/PageBlocks.astro" },
+    { "type": "fileExists", "path": "src/components/anode/ProductPage.astro" },
+    { "type": "fileExists", "path": "src/data/coating-page-model.ts" },
+    { "type": "fileExists", "path": "scripts/qa/check-scoped-classes.mjs" }
+  ]
+}

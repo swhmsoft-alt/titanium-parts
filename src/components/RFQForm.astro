@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
-interface Props { title?: string; subtitle?: string; variant?: 'default' | 'compact' | 'titanium' | 'anode' | 'pem' | 'team' | 'quality' | 'product'; }
-const { title = 'Send a Project Inquiry', subtitle = 'We typically respond within 1 business day.', variant = 'default' } = Astro.props;
+interface Props { title?: string; subtitle?: string; variant?: 'default' | 'compact' | 'titanium' | 'anode' | 'pem' | 'team' | 'quality' | 'product'; /** Heading level of the form title. Defaults to h3; use 'p' where the surrounding section already owns the heading structure. */ titleTag?: 'h2' | 'h3' | 'p'; }
+const { title = 'Send a Project Inquiry', subtitle = 'We typically respond within 1 business day.', variant = 'default', titleTag = 'h3' } = Astro.props;
 const productOptions: Record<string, string[]> = {
   default: ['Titanium Products', 'Titanium Anodes', 'MMO / ICCP Anodes', 'Cathodic Protection Products', 'PEM Electrolyzer Products', 'Custom Titanium Parts', 'Other / Not Sure'],
   titanium: ['Titanium Plate & Sheet', 'Titanium Coil & Strip', 'Titanium Rod & Bar', 'Titanium Tube & Pipe', 'Titanium Wire', 'Titanium Foil', 'Titanium Mesh', 'Titanium Fasteners', 'Titanium Fittings', 'Titanium Flanges', 'Titanium Forgings', 'Titanium Machined Parts', 'Titanium Balls', 'Titanium Baskets', 'Titanium Diaphragms', 'Titanium-Clad Copper', 'Not Sure / Need Material Review'],
@@ -12,7 +12,9 @@ const options = productOptions[variant] || productOptions.default;
 ---
 <form class="rfq-form" data-variant={variant}>
   <div class="rfq-form-header">
-    <h3 class="rfq-form-title">{title}</h3>
+    {titleTag === 'h2' && <h2 class="rfq-form-title">{title}</h2>}
+    {titleTag === 'h3' && <h3 class="rfq-form-title">{title}</h3>}
+    {titleTag === 'p' && <p class="rfq-form-title">{title}</p>}
     {subtitle && <p class="rfq-form-subtitle">{subtitle}</p>}
   </div>
   <div class="rfq-form-grid">

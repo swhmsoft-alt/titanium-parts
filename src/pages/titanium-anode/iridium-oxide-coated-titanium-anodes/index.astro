@@ -1,0 +1,12 @@
+---
+/**
+ * The Ir-Ta coated titanium anode page.
+ *
+ * The URL is owned by this static route, so the shared coating template in
+ * `src/pages/titanium-anode/[slug]/index.astro` excludes this slug.
+ */
+import ProductPage from '../../../components/anode/ProductPage.astro';
+import { irTaPage } from '../../../data/ir-ta-anode-page';
+---
+
+<ProductPage page={irTaPage} />

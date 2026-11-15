@@ -2,92 +2,383 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import RFQForm from '../../components/RFQForm.astro';
-import { industries } from '../../data/industries-data';
 import Icon from '../../components/Icon.astro';
+import {
+  hubMeta,
+  technicalRoutes,
+  industryCards,
+  comparisonRows,
+  qualification,
+  rfqGroups,
+  hubFaqs,
+} from '../../data/industries-hub';
+import { site } from '../../data/site';
 
+const origin = site.url.replace(/\/$/, '');
+const canonicalUrl = new URL(Astro.url.pathname, origin).href;
+
+/**
+ * The FAQPage node is generated from the same array that renders the
+ * accordion further down the page, so the visible copy and the structured
+ * data can never disagree.
+ */
+const faqJsonLd = {
+  '@type': 'FAQPage',
+  '@id': `${canonicalUrl}#faq`,
+  mainEntity: hubFaqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+
+const jsonLd: Record<string, unknown>[] = [faqJsonLd];
 ---
 
-<BaseLayout title="Titanium, Anode & PEM Solutions by Industry | Titanium Parts" description="Application-first engineering across water, cathodic protection, marine, electroplating, mining, hydrogen, chemical, and aerospace industries.">
-  <PageHero eyebrow="Industries" title="Titanium, Anode & PEM Solutions by Industry" description="Application-first engineering for water, cathodic protection, marine, electroplating, mining, hydrogen, chemical and aerospace industries." />
+<BaseLayout title={hubMeta.title} description={hubMeta.description} jsonLd={jsonLd}>
+  <PageHero eyebrow={hubMeta.eyebrow} title={hubMeta.h1} description={hubMeta.lede} />
 
-  <section class="section section-white">
+  <section class="hub-section hub-section-white">
     <div class="container">
-      <div class="section-header">
-        <span class="section-title-eyebrow">Application Engineering</span>
-        <h2 class="section-title">Engineered for Your Industry Conditions</h2>
-        <p class="section-desc">Eight core industry sectors where Titanium Parts delivers material selection, application-specific engineering, drawing-based quotation and order-specific documentation.</p>
+      <div class="hub-intro">
+        <div class="hub-intro-lead">
+          <span class="hub-eyebrow">Positioning</span>
+          <h2 class="hub-h2">Industry Is the Starting Point—Not the Specification</h2>
+          <p class="hub-lede">
+            A sector tells us which variables usually dominate the decision. It does not tell us
+            the grade, the coating, the geometry or the inspection scope. Those are set by the
+            medium, the duty and the failure mode, and they are confirmed in the same technical
+            review for every order.
+          </p>
+        </div>
+        <ul class="hub-principles">
+          <li>
+            <span class="hub-principle-label">Start from the service condition</span>
+            <span class="hub-principle-text">
+              Medium, temperature, pressure, current density and the expected failure mode decide
+              the route.
+            </span>
+          </li>
+          <li>
+            <span class="hub-principle-label">Select by application, not by grade name</span>
+            <span class="hub-principle-text">
+              A grade or coating is only correct against a defined operating basis, never on its
+              own.
+            </span>
+          </li>
+          <li>
+            <span class="hub-principle-label">Confirm evidence before the order</span>
+            <span class="hub-principle-text">
+              Documentation, inspection and acceptance criteria are agreed while the quotation is
+              being prepared.
+            </span>
+          </li>
+          <li>
+            <span class="hub-principle-label">Keep the responsibility boundary visible</span>
+            <span class="hub-principle-text">
+              Design approval, code compliance and application suitability stay with the buyer
+              unless the contract states otherwise.
+            </span>
+          </li>
+        </ul>
       </div>
-      <div class="ind-grid">
-        {industries.map((ind) => (
-          <a href={`/industries/${ind.slug}/`} class="ind-card ind-card-link">
-            <div class="ind-image"><img src={ind.image} alt={ind.title} loading="lazy" /></div>
-            <div class="ind-body">
-              <h3>{ind.title}</h3>
-              <p>{ind.summary}</p>
-              <ul class="ind-list">
-                <li>Application-specific engineering</li>
-                <li>Material / coating selection</li>
-                <li>Drawing-based quotation</li>
-                <li>Order-specific documentation</li>
-              </ul>
-              <span class="ind-link">View Industry <Icon name="arrow-right" size={14} /></span>
-            </div>
-          </a>
+    </div>
+  </section>
+
+  <section class="hub-section hub-section-slate">
+    <div class="container">
+      <div class="hub-section-header">
+        <span class="hub-eyebrow">Technical Routes</span>
+        <h2 class="hub-h2">Three Technical Routes, Selected by Application</h2>
+        <p class="hub-lede">
+          The industry matrix below tells you which duty dominates. These three routes tell you
+          how that duty is technically answered.
+        </p>
+      </div>
+      <div class="hub-routes">
+        {technicalRoutes.map((route) => (
+          <article class="hub-route">
+            <h3 class="hub-route-title">{route.title}</h3>
+            <p class="hub-route-summary">{route.summary}</p>
+            <ul class="hub-route-points">
+              {route.points.map((point) => (
+                <li><Icon name="check" size={15} /> <span>{point}</span></li>
+              ))}
+            </ul>
+            <a href={route.href} class="hub-route-link">
+              View the range <Icon name="arrow-right" size={14} />
+            </a>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section-slate-50">
+  <section class="hub-section hub-section-white">
     <div class="container">
-      <div class="section-header">
-        <span class="section-title-eyebrow">Project Inquiry</span>
-        <h2 class="section-title">Find the Right Titanium Solution for Your Industry</h2>
-        <p class="section-desc">Tell us your industry, operating environment, performance requirements, drawings, quality documentation needs and delivery destination.</p>
+      <div class="hub-section-header">
+        <span class="hub-eyebrow">Industry Matrix</span>
+        <h2 class="hub-h2">Explore Solutions by Industrial Process and Operating Risk</h2>
+        <p class="hub-lede">
+          Each sector is reviewed against the failure it actually sees in service, and matched to
+          the route that addresses it.
+        </p>
       </div>
-      <div class="rfq-section-grid">
-        <div>
-          <ul class="rfq-benefits">
-            <li><span class="benefit-num">1</span><div><strong>Factory-Direct Support</strong><p>Direct line to engineering and project coordination.</p></div></li>
-            <li><span class="benefit-num">2</span><div><strong>Application-Specific Engineering</strong><p>Material, coating and configuration matched to operating conditions.</p></div></li>
-            <li><span class="benefit-num">3</span><div><strong>Traceable Quality Documentation</strong><p>MTC, inspection reports and records per order.</p></div></li>
-            <li><span class="benefit-num">4</span><div><strong>Global Project Coordination</strong><p>Export documents, packing and shipment follow-up.</p></div></li>
-          </ul>
-        </div>
-        <RFQForm title="Submit Application for Review" subtitle="Tell us your operating conditions, drawings and required evidence." variant="default" />
+      <div class="hub-matrix">
+        {industryCards.map((card) => (
+          <article class="hub-matrix-card">
+            <div class="hub-matrix-media">
+              <img src={card.image} alt={card.title} loading="lazy" decoding="async" width="1536" height="1024" />
+            </div>
+            <div class="hub-matrix-body">
+              <h3 class="hub-matrix-title">{card.title}</h3>
+              <p class="hub-matrix-summary">{card.summary}</p>
+              <div class="hub-matrix-fact">
+                <span class="hub-fact-label">Operating pain point</span>
+                <p class="hub-fact-text">{card.pain}</p>
+              </div>
+              <div class="hub-matrix-fact">
+                <span class="hub-fact-label">Typical matched solution</span>
+                <p class="hub-fact-text">{card.solution}</p>
+              </div>
+              <a href={card.href} class="hub-matrix-cta">
+                Review {card.title} <Icon name="arrow-right" size={14} />
+              </a>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
-</BaseLayout>
-<style>
-  .section-white { background: #fff; }
-  .section-slate-50 { background: var(--color-slate-50); }
-  .section { padding: 6rem 0; }
-  .section-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; }
-  .section-title-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 1rem; }
-  .section-title { font-size: clamp(1.875rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.025em; }
-  .section-desc { font-size: 1rem; line-height: 1.6; color: var(--color-slate-600); }
-  .ind-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  @media (max-width: 768px) { .ind-grid { grid-template-columns: 1fr; } }
-  .ind-card { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; transition: all 0.25s; }
-  .ind-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.06); border-color: var(--color-primary); }
-  .ind-image { aspect-ratio: 16/9; background: var(--color-slate-100); overflow: hidden; }
-  .ind-image img { width: 100%; height: 100%; object-fit: cover; }
-  .ind-body { padding: 1.75rem; }
-  .ind-body h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.75rem; }
-  .ind-body p { font-size: 0.9375rem; color: var(--color-slate-600); line-height: 1.6; margin-bottom: 1rem; }
-  .ind-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .ind-list li { font-size: 0.875rem; color: var(--color-slate-700); display: flex; align-items: center; gap: 0.5rem; }
-  .ind-list li::before { content: '✓'; color: var(--color-primary); font-weight: 700; }
-  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
-  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
-  .rfq-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
-  .rfq-benefits li { display: flex; gap: 1rem; align-items: flex-start; }
-  .benefit-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--color-primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; }
-  .rfq-benefits li div strong { display: block; font-size: 1rem; color: var(--color-slate-900); margin-bottom: 0.25rem; }
-  .rfq-benefits li div p { font-size: 0.875rem; color: var(--color-slate-600); line-height: 1.5; margin: 0; }
 
-  .ind-card-link { display: block; text-decoration: none; color: inherit; transition: all 0.25s; }
-  .ind-card-link:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.15); border-color: var(--color-primary); }
-  .ind-link { display: inline-flex; align-items: center; gap: 0.375rem; margin-top: 0.75rem; color: var(--color-primary); font-weight: 600; font-size: 0.875rem; }
+  <section class="hub-section hub-section-slate">
+    <div class="container">
+      <div class="hub-section-header">
+        <span class="hub-eyebrow">Selection Matrix</span>
+        <h2 class="hub-h2">Match the Industry to Required Engineering Inputs</h2>
+        <p class="hub-lede">
+          The same four inputs decide every order. This table maps each sector to the medium, the
+          governing failure risk and the parameters an RFQ has to carry.
+        </p>
+      </div>
+      <div class="hub-table-scroll" tabindex="0" role="region" aria-label="Industry selection matrix">
+        <table class="hub-table">
+          <caption class="hub-table-caption">
+            Industry, primary medium, key failure risk and the critical RFQ parameters for each
+            sector.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Target Industry</th>
+              <th scope="col">Primary Medium</th>
+              <th scope="col">Key Failure Risk</th>
+              <th scope="col">Critical RFQ Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row) => (
+              <tr>
+                <th scope="row">{row.industry}</th>
+                <td>{row.medium}</td>
+                <td>{row.failureRisk}</td>
+                <td>{row.rfqParameters}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="hub-table-hint">Scroll the table horizontally on a narrow screen.</p>
+    </div>
+  </section>
+
+  <section class="hub-section hub-section-white">
+    <div class="container">
+      <div class="hub-section-header">
+        <span class="hub-eyebrow">Qualification Boundary</span>
+        <h2 class="hub-h2">Industry Relevance Is Not Automatic Qualification</h2>
+        <p class="hub-lede">
+          Familiarity with a sector is not the same as an approved order. This section states where
+          that line sits, so the scope of any quotation is unambiguous.
+        </p>
+      </div>
+      <div class="hub-qual">
+        <article class="hub-qual-card">
+          <h3 class="hub-qual-title">{qualification.fromInquiry.title}</h3>
+          <p class="hub-qual-body">{qualification.fromInquiry.body}</p>
+          <ol class="hub-steps">
+            {qualification.fromInquiry.steps.map((step) => (
+              <li>{step}</li>
+            ))}
+          </ol>
+        </article>
+        <article class="hub-qual-card hub-qual-card-accent">
+          <h3 class="hub-qual-title">{qualification.specialized.title}</h3>
+          <p class="hub-qual-body">{qualification.specialized.body}</p>
+          <ul class="hub-special">
+            {qualification.specialized.items.map((item) => (
+              <li>
+                <span class="hub-special-name">{item.sector}</span>
+                <span class="hub-special-note">{item.note}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="hub-section hub-section-slate" id="rfq">
+    <div class="container">
+      <div class="hub-section-header">
+        <span class="hub-eyebrow">Project Inquiry</span>
+        <h2 class="hub-h2">Send the Parameters That Control the Decision</h2>
+        <p class="hub-lede">
+          These three groups decide whether a quotation can be prepared. Send what you have — a
+          complete specification is not required for the first review.
+        </p>
+      </div>
+      <div class="hub-rfq-grid">
+        <div class="hub-rfq-groups">
+          {rfqGroups.map((group) => (
+            <article class="hub-rfq-group">
+              <h3 class="hub-rfq-title">{group.title}</h3>
+              <p class="hub-rfq-summary">{group.summary}</p>
+              <ul class="hub-rfq-list">
+                {group.parameters.map((param) => (
+                  <li><Icon name="check-circle" size={15} /> <span>{param}</span></li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <div class="hub-rfq-form">
+          <RFQForm
+            title="Submit Your Application for Review"
+            subtitle="A project engineer responds within 1 business day."
+            variant="default"
+            titleTag="p"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hub-section hub-section-white">
+    <div class="container">
+      <div class="hub-section-header">
+        <span class="hub-eyebrow">Technical Questions</span>
+        <h2 class="hub-h2">Technical Questions Before Product Selection</h2>
+        <p class="hub-lede">
+          The questions that decide a technical route, answered before a product is named.
+        </p>
+      </div>
+      <div class="hub-faq">
+        {hubFaqs.map((item) => (
+          <details class="hub-faq-item">
+            <summary class="hub-faq-question">
+              <span>{item.question}</span>
+              <span class="hub-faq-mark" aria-hidden="true"><Icon name="plus" size={18} /></span>
+            </summary>
+            <div class="hub-faq-answer"><p>{item.answer}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+<style>
+  .hub-section { padding: 5rem 0; }
+  /* Anchor offset for the RFQ section, so the target is not hidden. */
+  #rfq { scroll-margin-top: 6rem; }
+  .hub-section-white { background: #fff; }
+  .hub-section-slate { background: var(--color-slate-50); }
+  .hub-section-header { max-width: 760px; margin: 0 auto 3rem; text-align: center; }
+  .hub-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+  .hub-h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .hub-lede { font-size: 1rem; line-height: 1.7; color: var(--color-slate-600); }
+
+  /* Positioning -------------------------------------------------------- */
+  .hub-intro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .hub-intro { grid-template-columns: 1fr; gap: 2rem; } }
+  .hub-principles { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+  .hub-principles li { background: var(--color-slate-50); border: 1px solid var(--color-slate-200); border-left: 3px solid var(--color-primary); border-radius: var(--radius-md); padding: 1rem 1.25rem; }
+  .hub-principle-label { display: block; font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.25rem; }
+  .hub-principle-text { display: block; font-size: 0.875rem; line-height: 1.6; color: var(--color-slate-600); }
+
+  /* Technical routes --------------------------------------------------- */
+  .hub-routes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .hub-routes { grid-template-columns: 1fr; } }
+  .hub-route { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--color-slate-200); border-radius: var(--radius-lg); padding: 1.75rem; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+  .hub-route:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--color-primary); }
+  .hub-route-title { font-size: 1.1875rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.75rem; }
+  .hub-route-summary { font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-600); margin-bottom: 1.25rem; }
+  .hub-route-points { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-direction: column; gap: 0.625rem; flex: 1; }
+  .hub-route-points li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.875rem; line-height: 1.55; color: var(--color-slate-700); }
+  .hub-route-points :global(svg) { color: var(--color-primary); flex-shrink: 0; margin-top: 0.2rem; }
+  .hub-route-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; font-weight: 600; color: var(--color-primary); }
+
+  /* Industry matrix ---------------------------------------------------- */
+  .hub-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 1200px) { .hub-matrix { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) { .hub-matrix { grid-template-columns: 1fr; } }
+  .hub-matrix-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--color-slate-200); border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+  .hub-matrix-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--color-primary); }
+  .hub-matrix-media { aspect-ratio: 16 / 9; background: var(--color-slate-100); overflow: hidden; }
+  .hub-matrix-media img { width: 100%; height: 100%; object-fit: cover; }
+  .hub-matrix-body { display: flex; flex-direction: column; flex: 1; padding: 1.5rem; }
+  .hub-matrix-title { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
+  .hub-matrix-summary { font-size: 0.875rem; line-height: 1.6; color: var(--color-slate-600); margin-bottom: 1.25rem; }
+  .hub-matrix-fact { margin-bottom: 1rem; }
+  .hub-fact-label { display: block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.375rem; }
+  .hub-fact-text { font-size: 0.875rem; line-height: 1.6; color: var(--color-slate-700); margin: 0; }
+  .hub-matrix-cta { display: inline-flex; align-items: center; gap: 0.375rem; margin-top: auto; padding-top: 0.75rem; font-size: 0.875rem; font-weight: 600; color: var(--color-primary); }
+
+  /* Comparison table --------------------------------------------------- */
+  .hub-table-scroll { overflow-x: auto; border: 1px solid var(--color-slate-200); border-radius: var(--radius-lg); background: #fff; }
+  .hub-table-scroll:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+  .hub-table { width: 100%; min-width: 880px; border-collapse: collapse; font-size: 0.875rem; }
+  .hub-table-caption { padding: 1.25rem 1.5rem 0; text-align: left; font-size: 0.8125rem; color: var(--color-slate-500); }
+  .hub-table thead th { background: var(--color-slate-900); color: #fff; text-align: left; font-weight: 600; padding: 1rem 1.25rem; font-size: 0.8125rem; letter-spacing: 0.03em; text-transform: uppercase; }
+  .hub-table tbody th { text-align: left; font-weight: 700; color: var(--color-slate-900); padding: 1rem 1.25rem; background: var(--color-slate-50); vertical-align: top; }
+  .hub-table tbody td { padding: 1rem 1.25rem; color: var(--color-slate-600); line-height: 1.6; vertical-align: top; border-top: 1px solid var(--color-slate-100); }
+  .hub-table tbody tr:nth-child(even) th { background: var(--color-slate-100); }
+  .hub-table-hint { margin-top: 0.75rem; font-size: 0.8125rem; color: var(--color-slate-500); }
+
+  /* Qualification ------------------------------------------------------ */
+  .hub-qual { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+  @media (max-width: 1024px) { .hub-qual { grid-template-columns: 1fr; } }
+  .hub-qual-card { background: #fff; border: 1px solid var(--color-slate-200); border-radius: var(--radius-lg); padding: 1.75rem; }
+  .hub-qual-card-accent { border-color: var(--color-primary-200); background: var(--color-primary-50); }
+  .hub-qual-title { font-size: 1.1875rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.75rem; }
+  .hub-qual-body { font-size: 0.9375rem; line-height: 1.7; color: var(--color-slate-600); margin-bottom: 1.25rem; }
+  .hub-steps { list-style: none; padding: 0; margin: 0; counter-reset: hub-step; display: flex; flex-direction: column; gap: 0.75rem; }
+  .hub-steps li { counter-increment: hub-step; position: relative; padding-left: 2.25rem; font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-700); }
+  .hub-steps li::before { content: counter(hub-step); position: absolute; left: 0; top: 0.1rem; width: 1.5rem; height: 1.5rem; display: flex; align-items: center; justify-content: center; background: var(--color-primary); color: #fff; border-radius: 50%; font-size: 0.75rem; font-weight: 700; }
+  .hub-special { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.875rem; }
+  .hub-special li { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.875rem 1rem; background: #fff; border: 1px solid var(--color-primary-200); border-radius: var(--radius-md); }
+  .hub-special-name { font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); }
+  .hub-special-note { font-size: 0.875rem; line-height: 1.6; color: var(--color-slate-600); }
+
+  /* RFQ ---------------------------------------------------------------- */
+  .hub-rfq-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 2.5rem; align-items: start; }
+  @media (max-width: 1024px) { .hub-rfq-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .hub-rfq-groups { display: flex; flex-direction: column; gap: 1.25rem; }
+  .hub-rfq-group { background: #fff; border: 1px solid var(--color-slate-200); border-radius: var(--radius-lg); padding: 1.5rem; }
+  .hub-rfq-title { font-size: 1.0625rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.375rem; }
+  .hub-rfq-summary { font-size: 0.875rem; line-height: 1.6; color: var(--color-slate-600); margin-bottom: 1rem; }
+  .hub-rfq-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .hub-rfq-list li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.875rem; line-height: 1.55; color: var(--color-slate-700); }
+  .hub-rfq-list :global(svg) { color: var(--color-primary); flex-shrink: 0; margin-top: 0.2rem; }
+
+  /* FAQ ---------------------------------------------------------------- */
+  .hub-faq { display: flex; flex-direction: column; gap: 0.75rem; max-width: 900px; margin: 0 auto; }
+  .hub-faq-item { background: #fff; border: 1px solid var(--color-slate-200); border-radius: var(--radius-lg); overflow: hidden; }
+  .hub-faq-item[open] { border-color: var(--color-primary-200); box-shadow: 0 6px 20px -12px rgba(15, 23, 42, 0.25); }
+  .hub-faq-question { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 1.5rem; cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--color-slate-900); list-style: none; }
+  .hub-faq-question::-webkit-details-marker { display: none; }
+  .hub-faq-mark { flex-shrink: 0; display: inline-flex; color: var(--color-primary); transition: transform 0.25s; }
+  .hub-faq-item[open] .hub-faq-mark { transform: rotate(45deg); }
+  .hub-faq-answer { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--color-slate-100); }
+  .hub-faq-answer p { margin: 0; padding-top: 1rem; font-size: 0.9375rem; line-height: 1.75; color: var(--color-slate-600); }
 </style>
+</BaseLayout>

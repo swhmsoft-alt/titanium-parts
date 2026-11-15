@@ -1,0 +1,37 @@
+{
+  "id": "ruthenium-anode-rewrite",
+  "title": "Ru-Ir Coated Titanium Anode Page Rewrite",
+  "summary": "Rebuild the ruthenium coating page on the MMO wire anode skeleton, with people-first copy, engineering depth, FAQ answers and its own structured data, keeping the URL and the navigation unchanged.",
+  "assertions": [
+    { "type": "routeExists", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/" },
+    { "type": "routeMeta", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/" },
+    { "type": "routeJsonLdType", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "types": ["WebPage", "Product", "FAQPage"] },
+    { "type": "routeHasTable", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "minRows": 20 },
+
+    { "type": "routeContains", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "text": "Ru-Ir MMO on Titanium: What You Are Actually Buying" },
+    { "type": "routeContains", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "text": "How Ru and Ir Split the Work" },
+    { "type": "routeContains", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "text": "What Decides the Life of a Ru-Ir Anode" },
+    { "type": "routeContains", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "text": "The Records That Let You Accept the Anode" },
+    { "type": "routeContains", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "text": "What We Need Before an Anode Can Be Quoted" },
+    { "type": "routeContains", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "text": "What is the difference between a Ru-Ir anode and an Ir-Ta anode?" },
+
+    { "type": "routeLinksTo", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "href": "/titanium-anode/mmo-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "href": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "href": "/titanium-anode/mmo-anode/mmo-tubular-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "href": "/quality/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/ruthenium-coated-titanium-anodes/", "href": "/industries/water-treatment/" },
+
+    { "type": "fileExists", "path": "src/components/anode/RuIrAnodePage.astro" },
+    { "type": "fileExists", "path": "src/data/ru-ir-anode-page.ts" },
+    { "type": "fileExists", "path": "src/data/ru-ir-anode-sections.ts" },
+    { "type": "fileExists", "path": "src/pages/titanium-anode/ruthenium-coated-titanium-anodes/index.astro" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/ru-ir-mmo-anodes.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/coating-process-loading-control.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/surface-preparation-control.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/titanium-substrate-traceability.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/geometry-electrical-connection-inspection.webp" },
+
+    { "type": "dataEntries", "module": "src/data/anode-coatings.ts", "export": "anodeCoatings", "count": 4 },
+    { "type": "pageCount", "min": 67 }
+  ]
+}

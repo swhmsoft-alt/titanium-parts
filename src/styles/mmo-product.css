@@ -1,0 +1,748 @@
+/*
+ * MMO linear anode product page.
+ *
+ * A 1:1 replica of the reference page layout: the same section order, the
+ * same card grid, the same table treatments and the same two dark bands.
+ *
+ * The `mmo-` prefix keeps these rules isolated from the page-scoped styles
+ * used elsewhere on the site. Colours and radii are taken from the project
+ * design tokens in `variables.css`, so the page follows the site palette
+ * while keeping the reference page's structure.
+ */
+
+.mmo-section { padding: 5rem 0; }
+@media (min-width: 1024px) { .mmo-section { padding: 7rem 0; } }
+
+.mmo-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 640px) { .mmo-inner { padding: 0 1.5rem; } }
+@media (min-width: 1024px) { .mmo-inner { padding: 0 2rem; } }
+
+.mmo-scroll { scroll-margin-top: 6rem; }
+
+/* Spacing helpers ---------------------------------------------------- */
+
+.mmo-mt-1 { margin-top: 0.5rem; }
+.mmo-mt-2 { margin-top: 1.25rem; }
+.mmo-mt-3 { margin-top: 2rem; }
+.mmo-mt-4 { margin-top: 3rem; }
+.mmo-panel-wide { border-radius: 1.5rem; }
+
+/* ------------------------------------------------------------------ */
+/* Type                                                                */
+/* ------------------------------------------------------------------ */
+
+.mmo-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.65rem;
+  color: var(--color-primary); font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.mmo-eyebrow::before {
+  content: ''; display: block; width: 2rem; height: 2px;
+  background: var(--color-primary);
+}
+.mmo-eyebrow-light { color: var(--color-primary-300); }
+.mmo-eyebrow-light::before { background: var(--color-primary-300); }
+
+.mmo-h2 {
+  margin: 1rem 0 0; font-size: clamp(1.9rem, 3.5vw, 2.65rem);
+  font-weight: 800; line-height: 1.13; letter-spacing: -0.025em;
+  color: var(--color-slate-900);
+}
+.mmo-h2-light { color: #fff; }
+
+.mmo-lede {
+  margin: 1.5rem 0 0; font-size: 1.125rem; line-height: 1.75;
+  color: var(--color-slate-600);
+}
+.mmo-lede-light { color: var(--color-slate-300); }
+
+.mmo-body { margin: 0; font-size: 1rem; line-height: 1.8; color: var(--color-slate-600); }
+.mmo-body + .mmo-body { margin-top: 1.25rem; }
+.mmo-body-strong { color: var(--color-slate-950); }
+
+.mmo-h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--color-slate-900); }
+.mmo-h3-light { color: #fff; }
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
+
+.mmo-hero {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #fff, var(--color-slate-50));
+}
+/* Vertical rhythm only — the horizontal padding comes from `.mmo-inner`. */
+.mmo-hero-inner { padding-top: 4rem; padding-bottom: 4rem; }
+@media (min-width: 640px) {
+  .mmo-hero-inner { padding-top: 5rem; padding-bottom: 5rem; }
+}
+@media (min-width: 1024px) {
+  .mmo-hero-inner { padding-top: 6rem; padding-bottom: 6rem; }
+}
+
+.mmo-hero-grid { display: grid; gap: 3rem; }
+@media (min-width: 1024px) {
+  .mmo-hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+    align-items: center;
+  }
+}
+
+.mmo-hero-copy { max-width: 48rem; }
+
+.mmo-h1 {
+  margin: 1.25rem 0 0; font-size: 2.25rem; font-weight: 800;
+  line-height: 1.06; letter-spacing: -0.025em; color: var(--color-slate-950);
+}
+@media (min-width: 640px) { .mmo-h1 { font-size: 3rem; } }
+@media (min-width: 1024px) { .mmo-h1 { font-size: 3.5rem; } }
+
+.mmo-hero-lede {
+  margin: 1.75rem 0 0; font-size: 1.125rem; line-height: 2rem;
+  color: var(--color-slate-600);
+}
+@media (min-width: 640px) { .mmo-hero-lede { font-size: 1.25rem; } }
+
+.mmo-cta-row {
+  display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2.25rem;
+}
+@media (min-width: 640px) { .mmo-cta-row { flex-direction: row; } }
+
+.mmo-note {
+  margin-top: 1.75rem; border-left: 4px solid var(--color-primary);
+  padding-left: 1.25rem;
+}
+.mmo-note p {
+  margin: 0; font-size: 0.875rem; line-height: 1.5rem;
+  color: var(--color-slate-600);
+}
+
+
+/* Buttons ------------------------------------------------------------ */
+
+.mmo-btn {
+  display: inline-flex; min-height: 3rem; align-items: center;
+  justify-content: center; border-radius: 0.75rem; padding: 0.875rem 1.75rem;
+  font-size: 0.875rem; font-weight: 700; text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+.mmo-btn-primary { background: var(--color-primary); color: #fff; }
+.mmo-btn-primary:hover { background: var(--color-primary-700); color: #fff; }
+.mmo-btn-secondary {
+  background: #fff; border: 1px solid var(--color-slate-300);
+  color: var(--color-slate-800);
+}
+.mmo-btn-secondary:hover {
+  border-color: var(--color-primary-500); color: var(--color-primary-700);
+}
+.mmo-btn-block { width: 100%; }
+
+.mmo-pill {
+  display: inline-flex; min-height: 2.75rem; align-items: center;
+  border-radius: 999px; border: 1px solid var(--color-primary-200);
+  background: #fff; padding: 0.5rem 1rem; font-size: 0.875rem;
+  font-weight: 700; color: var(--color-primary-800); text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.mmo-pill:hover { border-color: var(--color-primary-500); color: var(--color-primary-950); }
+.mmo-pill-plain { border-color: var(--color-slate-300); color: var(--color-slate-700); }
+.mmo-pill-plain:hover {
+  border-color: var(--color-primary-500); color: var(--color-primary-700);
+}
+
+/* Figures ------------------------------------------------------------ */
+
+.mmo-figure {
+  overflow: hidden; border-radius: 1.5rem;
+  border: 1px solid var(--color-slate-200); background: #fff;
+  box-shadow: 0 20px 55px -28px rgba(15, 23, 42, 0.3);
+}
+.mmo-figure img { display: block; width: 100%; height: auto; }
+.mmo-figure-ratio img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; }
+.mmo-figure-contain img { width: 100%; height: auto; object-fit: contain; }
+.mmo-figure-cap {
+  margin: 0; padding: 1.25rem; font-size: 0.875rem;
+  line-height: 1.5rem; color: var(--color-slate-600);
+}
+.mmo-figure-cap-light { color: #fff; }
+
+.mmo-thumbs {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem; margin-top: 1rem;
+}
+.mmo-thumb {
+  overflow: hidden; border-radius: 0.75rem;
+  border: 1px solid var(--color-slate-200); background: #fff;
+}
+.mmo-thumb img { display: block; aspect-ratio: 4 / 3; width: 100%; object-fit: cover; }
+
+/* Hero statistics ---------------------------------------------------- */
+
+.mmo-stats {
+  display: grid; margin-top: 3rem; overflow: hidden;
+  border-radius: 1rem; border: 1px solid var(--color-slate-200);
+  background: #fff; box-shadow: 0 20px 55px -28px rgba(15, 23, 42, 0.3);
+}
+@media (min-width: 640px) { .mmo-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .mmo-stats { grid-template-columns: repeat(4, 1fr); } }
+
+.mmo-stat {
+  padding: 1.25rem; border-bottom: 1px solid var(--color-slate-200);
+}
+@media (min-width: 640px) {
+  .mmo-stat { border-right: 1px solid var(--color-slate-200); }
+  .mmo-stat:nth-child(2n) { border-right: 0; }
+}
+@media (min-width: 1024px) {
+  .mmo-stat { border-bottom: 0; border-right: 1px solid var(--color-slate-200); }
+  .mmo-stat:last-child { border-right: 0; }
+}
+.mmo-stat strong {
+  display: block; font-size: 1.5rem; color: var(--color-slate-950);
+}
+.mmo-stat span {
+  display: block; margin-top: 0.25rem; font-size: 0.875rem;
+  color: var(--color-slate-500);
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Anchor navigation                                                   */
+/* ------------------------------------------------------------------ */
+
+.mmo-anchor-nav {
+  overflow-x: auto; border-bottom: 1px solid var(--color-slate-200);
+  background: #fff;
+}
+.mmo-anchor-nav-inner {
+  display: flex; min-width: max-content; gap: 1.75rem;
+  padding: 1rem 1.25rem; font-size: 0.875rem; font-weight: 700;
+}
+@media (min-width: 640px) { .mmo-anchor-nav-inner { padding: 1rem 1.5rem; } }
+@media (min-width: 1024px) { .mmo-anchor-nav-inner { padding: 1rem 2rem; } }
+.mmo-anchor-nav a {
+  white-space: nowrap; color: var(--color-slate-600); text-decoration: none;
+}
+.mmo-anchor-nav a:hover { color: var(--color-primary-700); }
+.mmo-anchor-nav a.is-active { color: var(--color-primary-700); }
+
+/* ------------------------------------------------------------------ */
+/* Section bands                                                       */
+/* ------------------------------------------------------------------ */
+
+.mmo-band-alt { background: var(--color-slate-50); }
+.mmo-band-dark { background: var(--color-slate-950); color: #fff; }
+.mmo-band-navy { background: var(--color-primary-950); color: #fff; }
+
+/* ------------------------------------------------------------------ */
+/* Grids                                                               */
+/* ------------------------------------------------------------------ */
+
+.mmo-grid-2 { display: grid; gap: 1.5rem; }
+@media (min-width: 1024px) { .mmo-grid-2 { grid-template-columns: repeat(2, 1fr); } }
+
+.mmo-grid-4 { display: grid; gap: 1.5rem; }
+@media (min-width: 768px) { .mmo-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .mmo-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+
+.mmo-split { display: grid; gap: 3rem; }
+@media (min-width: 1024px) {
+  .mmo-split { grid-template-columns: 1.02fr 0.98fr; align-items: center; }
+  .mmo-split-even { grid-template-columns: 1fr 1fr; align-items: start; }
+  .mmo-split-wide { grid-template-columns: 0.9fr 1.1fr; align-items: center; }
+  .mmo-split-narrow { grid-template-columns: 1.05fr 0.95fr; align-items: center; }
+}
+
+.mmo-lead-col { max-width: 56rem; }
+.mmo-wide-col { max-width: 64rem; }
+.mmo-narrow-col { max-width: 48rem; }
+
+/* ------------------------------------------------------------------ */
+/* Cards                                                               */
+/* ------------------------------------------------------------------ */
+
+.mmo-card {
+  border-radius: 1rem; border: 1px solid var(--color-slate-200);
+  background: #fff; padding: 1.5rem;
+  box-shadow: 0 20px 55px -28px rgba(15, 23, 42, 0.3);
+}
+.mmo-card-flat { box-shadow: none; }
+.mmo-card-index {
+  font-size: 0.875rem; font-weight: 800; color: var(--color-primary-700);
+}
+.mmo-card h3 {
+  margin: 0.75rem 0 0; font-size: 1.25rem; font-weight: 700;
+  color: var(--color-slate-900);
+}
+.mmo-card p {
+  margin: 0.75rem 0 0; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+
+.mmo-card-blue {
+  border-radius: 1rem; border: 1px solid var(--color-primary-200);
+  background: var(--color-primary-50); padding: 1.75rem;
+}
+.mmo-card-blue h3 {
+  margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-card-blue p {
+  margin: 0.75rem 0 0; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+
+.mmo-card-outline {
+  border-radius: 0.75rem; border: 1px solid var(--color-slate-200);
+  background: #fff; padding: 1.25rem;
+}
+.mmo-card-outline-wide { grid-column: 1 / -1; }
+.mmo-card-outline h3 {
+  margin: 0; font-size: 1rem; font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-card-outline p {
+  margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+
+.mmo-card-muted {
+  border-radius: 0.75rem; background: var(--color-slate-50); padding: 1.25rem;
+}
+.mmo-card-muted h3 {
+  margin: 0; font-size: 1rem; font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-card-muted p {
+  margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+
+.mmo-card-navy {
+  border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05); padding: 1.25rem;
+}
+.mmo-card-navy h3 { margin: 0; font-size: 1rem; font-weight: 700; color: #fff; }
+.mmo-card-navy p {
+  margin: 0.5rem 0 0; font-size: 0.875rem; line-height: 1.5rem; color: #fff;
+}
+
+.mmo-card-image {
+  overflow: hidden; border-radius: 1rem;
+  border: 1px solid var(--color-slate-200); background: #fff;
+}
+.mmo-card-image img {
+  display: block; aspect-ratio: 16 / 10; width: 100%; object-fit: cover;
+}
+.mmo-card-image-body { padding: 1.5rem; }
+.mmo-card-image-body h3 {
+  margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-card-image-body p {
+  margin: 0.75rem 0 0; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Notes and callouts                                                  */
+/* ------------------------------------------------------------------ */
+
+.mmo-callout {
+  margin-top: 2.5rem; border-radius: 1rem;
+  border: 1px solid #fde68a; background: #fffbeb; padding: 1.5rem;
+}
+.mmo-callout p {
+  margin: 0; font-size: 1rem; line-height: 1.8; color: var(--color-slate-600);
+}
+.mmo-callout strong { color: var(--color-slate-950); }
+
+.mmo-callout-dark {
+  margin-top: 2rem; border-radius: 1rem;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.1); padding: 1.5rem;
+}
+.mmo-callout-dark p {
+  margin: 0; font-size: 1rem; line-height: 1.75rem; color: var(--color-slate-200);
+}
+.mmo-callout-dark strong { color: #fff; }
+
+.mmo-callout-soft {
+  margin-top: 2rem; border-radius: 1rem;
+  border: 1px solid var(--color-slate-200);
+  background: var(--color-slate-50); padding: 1.5rem;
+}
+.mmo-callout-soft p {
+  margin: 0; font-size: 1rem; line-height: 1.8; color: var(--color-slate-600);
+}
+.mmo-callout-soft strong { color: var(--color-slate-950); }
+
+.mmo-pair { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+@media (min-width: 1024px) { .mmo-pair { grid-template-columns: repeat(2, 1fr); } }
+
+.mmo-pair-panel { border-radius: 1.5rem; padding: 1.5rem; }
+@media (min-width: 640px) { .mmo-pair-panel { padding: 2rem; } }
+.mmo-pair-panel-blue {
+  border: 1px solid var(--color-primary-100); background: var(--color-primary-50);
+}
+.mmo-pair-panel-amber { border: 1px solid #fde68a; background: #fffbeb; }
+.mmo-pair-panel h3 {
+  margin: 0; font-size: 1.25rem; font-weight: 800; color: var(--color-slate-950);
+}
+
+/* ------------------------------------------------------------------ */
+/* Bullet lists                                                        */
+/* ------------------------------------------------------------------ */
+
+.mmo-bullets {
+  margin: 1.25rem 0 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.mmo-bullets li {
+  display: flex; gap: 0.75rem; font-size: 1rem; line-height: 1.75rem;
+  color: var(--color-slate-700);
+}
+.mmo-bullets li::before {
+  content: ''; flex-shrink: 0; width: 0.5rem; height: 0.5rem;
+  margin-top: 0.5rem; border-radius: 999px; background: var(--color-primary);
+}
+.mmo-bullets-light li { color: var(--color-slate-200); }
+
+/* ------------------------------------------------------------------ */
+/* Item grids                                                          */
+/* ------------------------------------------------------------------ */
+
+.mmo-item-grid { display: grid; gap: 1.5rem 2rem; margin-top: 2rem; }
+@media (min-width: 640px) { .mmo-item-grid { grid-template-columns: repeat(2, 1fr); } }
+.mmo-item-grid h3 {
+  margin: 0; font-size: 1rem; font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-item-grid p {
+  margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+.mmo-item-grid-tight { gap: 1rem; }
+
+.mmo-stack {
+  display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem;
+}
+.mmo-stack-panel {
+  border-radius: 1rem; border: 1px solid var(--color-slate-200); padding: 1.5rem;
+}
+.mmo-stack-panel h3 {
+  margin: 0; font-size: 1rem; font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-stack-panel p {
+  margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+
+/* ------------------------------------------------------------------ */
+/* Tables                                                              */
+/* ------------------------------------------------------------------ */
+
+.mmo-table-wrap {
+  margin-top: 2.5rem; overflow-x: auto; border-radius: 1rem;
+  border: 1px solid var(--color-slate-200);
+  box-shadow: 0 20px 55px -28px rgba(15, 23, 42, 0.3);
+}
+.mmo-table {
+  width: 100%; border-collapse: collapse; min-width: 900px;
+  font-size: 0.95rem; line-height: 1.55;
+}
+.mmo-table th, .mmo-table td {
+  border: 1px solid var(--color-slate-300); padding: 0.9rem;
+  text-align: left; vertical-align: top;
+}
+.mmo-table thead th {
+  background: var(--color-slate-900); color: #fff; font-weight: 800;
+}
+.mmo-table tbody tr:nth-child(even) { background: var(--color-slate-50); }
+.mmo-table tbody th { font-weight: 700; }
+
+.mmo-table-dark-wrap {
+  overflow-x: auto; border-radius: 1rem; border: 1px solid var(--color-slate-700);
+}
+.mmo-table-dark {
+  width: 100%; min-width: 540px; border-collapse: collapse; text-align: left;
+}
+.mmo-table-dark th {
+  border-bottom: 1px solid var(--color-slate-700); background: var(--color-slate-900);
+  padding: 1rem; color: #fff; font-weight: 700;
+}
+.mmo-table-dark td {
+  border-bottom: 1px solid var(--color-slate-800); padding: 1rem;
+  color: var(--color-slate-200);
+}
+.mmo-table-dark td:first-child { font-weight: 700; }
+.mmo-table-dark tbody tr:last-child td { border-bottom: 0; }
+
+.mmo-table-link {
+  font-weight: 700; color: var(--color-primary-700); text-decoration: none;
+}
+.mmo-table-link:hover { text-decoration: underline; }
+
+
+/* ------------------------------------------------------------------ */
+/* FAQ                                                                 */
+/* ------------------------------------------------------------------ */
+
+.mmo-faq-grid { display: grid; gap: 1rem; margin-top: 2.5rem; }
+@media (min-width: 1024px) { .mmo-faq-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.mmo-faq {
+  border-radius: 1rem; border: 1px solid var(--color-slate-200); background: #fff;
+}
+.mmo-faq summary {
+  display: flex; cursor: pointer; list-style: none; align-items: center;
+  justify-content: space-between; gap: 1.25rem; padding: 1.5rem;
+  font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-faq summary::-webkit-details-marker { display: none; }
+.mmo-faq summary:hover { color: var(--color-primary-700); }
+.mmo-faq-plus {
+  font-size: 1.5rem; line-height: 1; color: var(--color-primary);
+  transition: transform 0.2s;
+}
+.mmo-faq[open] .mmo-faq-plus { transform: rotate(45deg); }
+.mmo-faq p {
+  margin: 0; border-top: 1px solid var(--color-slate-100);
+  padding: 1rem 1.5rem 1.5rem; font-size: 1rem; line-height: 1.8;
+  color: var(--color-slate-600);
+}
+
+/* ------------------------------------------------------------------ */
+/* RFQ                                                                 */
+/* ------------------------------------------------------------------ */
+
+.mmo-rfq-grid { display: grid; gap: 3.5rem; }
+@media (min-width: 1024px) {
+  .mmo-rfq-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+.mmo-rfq-list {
+  margin: 2rem 0 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.mmo-rfq-list li {
+  font-size: 1rem; line-height: 1.75rem; color: var(--color-slate-200);
+}
+.mmo-rfq-list li::before { content: '✓ '; }
+
+.mmo-rfq-contact {
+  margin-top: 2.5rem; border-top: 1px solid var(--color-slate-800); padding-top: 2rem;
+}
+.mmo-rfq-contact-label { margin: 0; font-size: 0.875rem; color: var(--color-slate-400); }
+.mmo-rfq-contact a {
+  display: block; margin-top: 0.5rem; font-size: 1.125rem;
+  font-weight: 600; color: #fff; text-decoration: none;
+}
+.mmo-rfq-contact a:hover { color: var(--color-primary-300); }
+.mmo-rfq-address {
+  margin: 0.75rem 0 0; font-size: 0.875rem; color: var(--color-slate-500);
+}
+
+.mmo-form-card {
+  border-radius: 1.5rem; background: #fff; padding: 1.5rem;
+  color: var(--color-slate-900); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+@media (min-width: 640px) { .mmo-form-card { padding: 2rem; } }
+@media (min-width: 1024px) { .mmo-form-card { padding: 2.5rem; } }
+
+.mmo-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.mmo-form-row { display: grid; gap: 1.25rem; }
+@media (min-width: 640px) { .mmo-form-row { grid-template-columns: repeat(2, 1fr); } }
+.mmo-form-field label {
+  display: block; margin-bottom: 0.5rem; font-size: 0.875rem;
+  font-weight: 700; color: var(--color-slate-700);
+}
+.mmo-form-field label .mmo-optional { font-weight: 500; color: var(--color-slate-500); }
+.mmo-input {
+  display: block; width: 100%; border: 1px solid var(--color-slate-300);
+  border-radius: 0.75rem; background: #fff; padding: 0.85rem 1rem;
+  color: var(--color-slate-900); font-size: 1rem; font-family: inherit;
+}
+.mmo-input:focus {
+  outline: none; border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+textarea.mmo-input { resize: vertical; }
+.mmo-file {
+  display: block; width: 100%; cursor: pointer; border-radius: 0.75rem;
+  border: 1px solid var(--color-slate-300); background: var(--color-slate-50);
+  padding: 0.75rem; font-size: 0.875rem; color: var(--color-slate-500);
+}
+.mmo-file::file-selector-button {
+  margin-right: 1rem; border: 0; border-radius: 0.5rem;
+  background: var(--color-primary-50); padding: 0.75rem 1.25rem;
+  font-size: 0.875rem; font-weight: 700; color: var(--color-primary-700);
+  cursor: pointer;
+}
+.mmo-file-hint {
+  display: flex; align-items: center; gap: 0.25rem; margin: 0.375rem 0 0.5rem;
+  font-size: 11px; font-weight: 500; color: var(--color-slate-400);
+}
+.mmo-file-note {
+  margin: 0.5rem 0 0; font-size: 0.75rem; line-height: 1.25rem;
+  color: var(--color-slate-500);
+}
+.mmo-form-privacy {
+  margin: 0; text-align: center; font-size: 0.75rem; line-height: 1.25rem;
+  color: var(--color-slate-500);
+}
+
+/* ------------------------------------------------------------------ */
+/* Family blocks                                                       */
+/* ------------------------------------------------------------------ */
+
+/* A labelled note box: "Technical Note:" + the note text. */
+.mmo-callout-blue {
+  margin-top: 2rem; border-radius: 1rem;
+  border: 1px solid var(--color-primary-100); background: var(--color-primary-50);
+  padding: 1.25rem 1.5rem;
+}
+.mmo-callout-blue p {
+  margin: 0; font-size: 1rem; line-height: 1.8; color: var(--color-slate-600);
+}
+.mmo-callout-blue .mmo-note-label {
+  margin-bottom: 0.5rem; font-size: 0.875rem; font-weight: 800;
+  color: var(--color-primary-700);
+}
+
+/* A heading inside a section that carries more than one sub-topic. */
+.mmo-subheading { margin-top: 3.5rem; }
+.mmo-subheading .mmo-h2 { margin-top: 0.75rem; }
+
+/* Tag pills used for project input lists. */
+.mmo-pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+.mmo-pill {
+  display: inline-flex; align-items: center; border-radius: 999px;
+  border: 1px solid var(--color-primary-100); background: var(--color-primary-50);
+  padding: 0.4rem 0.9rem; font-size: 0.875rem; font-weight: 600;
+  color: var(--color-primary-800);
+}
+
+/* Free-standing paragraphs inside a section. */
+.mmo-prose { margin-top: 1.75rem; }
+.mmo-prose p {
+  margin: 0 0 1rem; font-size: 1rem; line-height: 1.85; color: var(--color-slate-600);
+}
+.mmo-prose p:last-child { margin-bottom: 0; }
+
+/* A short bold label that introduces a paragraph. */
+.mmo-inline-label {
+  margin: 1.5rem 0 0.5rem; font-size: 0.875rem; font-weight: 800;
+  color: var(--color-slate-900);
+}
+
+/* A link that reads as body copy (email addresses, cross references). */
+.mmo-text-link {
+  font-weight: 700; color: var(--color-primary-700); text-decoration: none;
+}
+.mmo-text-link:hover { text-decoration: underline; }
+
+/* Metric cards: a short value above its caption. */
+.mmo-item-value {
+  margin: 0.5rem 0 0; font-size: 1.75rem; font-weight: 800;
+  color: var(--color-primary-700); line-height: 1.2;
+}
+.mmo-item-caption {
+  margin: 0.35rem 0 0; font-size: 0.875rem; line-height: 1.6;
+  color: var(--color-slate-500);
+}
+
+/* ------------------------------------------------------------------ */
+/* Dark band copy                                                      */
+/* ------------------------------------------------------------------ */
+
+/*
+ * The shared blocks are written for a light surface. On the navy or the near
+ * black band their copy has to turn light, otherwise it disappears into the
+ * background. Only colours change here — layout, spacing and radii stay.
+ */
+.mmo-band-dark .mmo-item-grid h3,
+.mmo-band-navy .mmo-item-grid h3 { color: #fff; }
+
+.mmo-band-dark .mmo-item-grid p,
+.mmo-band-navy .mmo-item-grid p { color: var(--color-slate-300); }
+
+.mmo-band-dark .mmo-item-value,
+.mmo-band-navy .mmo-item-value { color: var(--color-primary-300); }
+
+.mmo-band-dark .mmo-item-caption,
+.mmo-band-navy .mmo-item-caption { color: var(--color-slate-400); }
+
+.mmo-band-dark .mmo-inline-label,
+.mmo-band-navy .mmo-inline-label { color: #fff; }
+
+.mmo-band-dark .mmo-prose p,
+.mmo-band-navy .mmo-prose p { color: var(--color-slate-300); }
+
+.mmo-band-dark .mmo-text-link,
+.mmo-band-navy .mmo-text-link { color: var(--color-primary-300); }
+
+.mmo-band-dark .mmo-subheading .mmo-h2,
+.mmo-band-navy .mmo-subheading .mmo-h2 { color: #fff; }
+
+/* A narrow data table keeps the reference page's 540px minimum width. */
+.mmo-table-narrow { min-width: 540px; }
+
+/* ------------------------------------------------------------------ */
+/* Family patterns                                                     */
+/* ------------------------------------------------------------------ */
+
+/* A three column card grid. */
+.mmo-grid-3 { display: grid; gap: 1.5rem; }
+@media (min-width: 1024px) { .mmo-grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* The picture inside a card. */
+.mmo-card-media {
+  display: block; width: 100%; aspect-ratio: 16 / 10;
+  object-fit: cover; border-radius: 0.75rem; margin-bottom: 1rem;
+}
+.mmo-card-blue .mmo-card-media { margin-bottom: 1.25rem; }
+
+/* The copy beside the picture of a split. */
+.mmo-split-body { min-width: 0; }
+.mmo-split-copy-first .mmo-split-body { order: -1; }
+
+/* The heading above a table. */
+.mmo-table-caption { margin-bottom: 1.5rem; }
+.mmo-table-caption h3 {
+  margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--color-slate-900);
+}
+.mmo-table-caption p {
+  margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.8; color: var(--color-slate-600);
+}
+.mmo-band-dark .mmo-table-caption h3,
+.mmo-band-navy .mmo-table-caption h3 { color: #fff; }
+.mmo-band-dark .mmo-table-caption p,
+.mmo-band-navy .mmo-table-caption p { color: var(--color-slate-300); }
+
+/* The decorative picture of a band — it sits behind the copy. */
+.mmo-section { position: relative; overflow: hidden; }
+.mmo-section > .mmo-inner { position: relative; z-index: 1; }
+.mmo-band-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.mmo-band-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.12; }
+
+/* The check mark of a list that the reference marks with one. */
+.mmo-bullets-check li::before {
+  content: '✓'; width: auto; height: auto; margin-top: 0;
+  background: none; color: var(--color-primary); font-weight: 700;
+}
+
+/* The vertical rhythm of a section, named by the extractor. */
+.mmo-pad-medium { padding-top: 5rem; padding-bottom: 6rem; }
+.mmo-pad-wide { padding-top: 6rem; padding-bottom: 6rem; }
+.mmo-pad-fixed { padding-top: 5rem; padding-bottom: 5rem; }
+.mmo-pad-short { padding-top: 4rem; padding-bottom: 7rem; }
+.mmo-pad-tight { padding-top: 4rem; padding-bottom: 6rem; }
+.mmo-pad-compact { padding-top: 4rem; padding-bottom: 4rem; }
+.mmo-pad-tiny { padding-top: 2.5rem; padding-bottom: 3rem; }
+@media (min-width: 1024px) {
+  .mmo-pad-medium { padding-top: 5rem; padding-bottom: 6rem; }
+  .mmo-pad-wide { padding-top: 6rem; padding-bottom: 6rem; }
+  .mmo-pad-fixed { padding-top: 5rem; padding-bottom: 5rem; }
+  .mmo-pad-short { padding-top: 4rem; padding-bottom: 7rem; }
+  .mmo-pad-tight { padding-top: 4rem; padding-bottom: 6rem; }
+  .mmo-pad-compact { padding-top: 4rem; padding-bottom: 4rem; }
+  .mmo-pad-tiny { padding-top: 2.5rem; padding-bottom: 3rem; }
+}
+

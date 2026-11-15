@@ -1,0 +1,17 @@
+---
+/**
+ * A heading of its own inside a section, with the text that follows it.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'heading' }>;
+}
+
+const { part } = Astro.props;
+---
+
+<div class="mmo-subheading">
+  <h3 class="mmo-h3">{part.title}</h3>
+  {part.body && <p class="mmo-body mmo-mt-1">{part.body}</p>}
+</div>

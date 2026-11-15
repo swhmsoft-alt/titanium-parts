@@ -6,11 +6,28 @@ import Icon from '../../../components/Icon.astro';
 import { anodeCoatings, type AnodeCoating } from '../../../data/anode-coatings';
 import { site } from '../../../data/site';
 
+/**
+ * Coatings that render from the shared template.
+ *
+ * `ruthenium-coated-titanium-anodes`, `iridium-oxide-coated-titanium-anodes`
+ * and `platinized-anode` have pages of their own — see the static routes under
+ * `src/pages/titanium-anode/` — so they are excluded here to keep the route
+ * unambiguous. The coating entries themselves stay in `anodeCoatings`,
+ * because the navigation and the sibling pages still refer to them.
+ */
 export function getStaticPaths() {
-  return anodeCoatings.map((coating) => ({
-    params: { slug: coating.slug },
-    props: { coating },
-  }));
+  return anodeCoatings
+    .filter(
+      (coating) =>
+        coating.slug !== 'ruthenium-coated-titanium-anodes' &&
+        coating.slug !== 'iridium-oxide-coated-titanium-anodes' &&
+        coating.slug !== 'platinized-anode' &&
+        coating.slug !== 'lead-dioxide-anode',
+    )
+    .map((coating) => ({
+      params: { slug: coating.slug },
+      props: { coating },
+    }));
 }
 
 interface Props {
@@ -52,6 +69,13 @@ const others = anodeCoatings.filter((c) => c.slug !== coating.slug);
             ))}
           </ul>
 
+          <h2 class="an-h2">Coating Compositions Covered</h2>
+          <ul class="an-forms">
+            {coating.compositions.map((item) => (
+              <li><Icon name="package" size={16} /> {item}</li>
+            ))}
+          </ul>
+
           <h2 class="an-h2">Common Anode Geometries</h2>
           <ul class="an-forms">
             {coating.geometries.map((item) => (
@@ -59,8 +83,21 @@ const others = anodeCoatings.filter((c) => c.slug !== coating.slug);
             ))}
           </ul>
 
+          <h2 class="an-h2">This Coating On The MMO Geometries</h2>
+          <p class="an-lede" style="margin-bottom: 1rem;">
+            The coating fixes the active surface; the geometry follows the installation. These
+            MMO product pages describe how this coating family is supplied in the forms that
+            carry it.
+          </p>
+          <ul class="an-forms an-forms-links">
+            {coating.relatedGeometries.map((item) => (
+              <li><Icon name="package" size={16} /><a href={item.href}>{item.label}</a></li>
+            ))}
+          </ul>
+
           <div class="an-note">
             <h3>Why Coating Name Alone Is Not Enough</h3>
+
             <p>
               Coating loading, thickness and composition are different characteristics, and each
               has to be defined with its own units, measurement method, sampling plan and
@@ -83,6 +120,15 @@ const others = anodeCoatings.filter((c) => c.slug !== coating.slug);
               <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
             </ul>
             <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+          </div>
+
+          <div class="an-card an-card-muted">
+            <h3 class="an-card-title">Coating &amp; Geometry Families</h3>
+            <ul class="an-other">
+              <li><a href="/titanium-anode/coating-systems/">Compare all coating systems</a></li>
+              <li><a href="/titanium-anode/mmo-anode/">MMO Titanium Anodes</a></li>
+              <li><a href="/titanium-anode/">Titanium Anode Overview</a></li>
+            </ul>
           </div>
 
           <div class="an-card an-card-muted">
@@ -137,6 +183,8 @@ const others = anodeCoatings.filter((c) => c.slug !== coating.slug);
   .an-checks li, .an-forms li { display: flex; align-items: flex-start; gap: 0.625rem; font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-700); }
   .an-checks :global(svg) { color: var(--color-primary); flex-shrink: 0; margin-top: 0.2rem; }
   .an-forms :global(svg) { color: #059669; flex-shrink: 0; margin-top: 0.2rem; }
+  .an-forms-links li a { color: var(--color-primary); font-weight: 600; text-decoration: none; }
+  .an-forms-links li a:hover { text-decoration: underline; }
 
   .an-note { margin-top: 2.5rem; padding: 1.5rem; border-left: 3px solid var(--color-primary); background: var(--color-primary-50); border-radius: 0 0.5rem 0.5rem 0; }
   .an-note h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.5rem; }

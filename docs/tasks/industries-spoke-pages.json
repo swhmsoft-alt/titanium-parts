@@ -1,0 +1,885 @@
+{
+  "id": "industries-spoke-pages",
+  "title": "Industry Spoke Page Depth",
+  "summary": "Turn the industry detail pages into deep spoke pages: a visible breadcrumb, the failure mechanisms of the sector, the process-to-specification matrix, the standards and field evidence, the sector-specific RFQ inputs and a sector-specific FAQ backed by matching FAQPage JSON-LD.",
+  "assertions": [
+    {
+      "type": "routeExists",
+      "route": "/industries/marine-offshore/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/marine-offshore/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/marine-offshore/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/marine-offshore/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Marine & Offshore Titanium Materials and Anodes"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Seawater Failure Mechanisms and Material Selection Risks Offshore"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Galvanic Coupling Corrosion at Dissimilar Joints in Seawater"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Crevice Corrosion and Biofouling in Seawater Heat Transfer"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Stress Corrosion Cracking of Titanium in Warm Seawater"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Engineered Solutions for Marine and Offshore Systems"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Marine and Offshore Duty-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Submerged hull and splash-zone attachment"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Required Engineering Inputs for Your Marine and Offshore RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Technical FAQs for Marine and Offshore Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/marine-offshore/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/marine-offshore/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/marine-offshore/",
+      "href": "/cathodic-protection/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/marine-offshore/",
+      "href": "/titanium-products/titanium-bolts/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/marine-offshore/",
+      "href": "/titanium-products/titanium-tubing/"
+    },
+    {
+      "type": "routeExists",
+      "route": "/industries/aerospace/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/aerospace/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/aerospace/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/aerospace/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Aerospace & Advanced Engineering Titanium Alloy Supply"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Metallurgical and Process Failure Risks in Aerospace Titanium"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Hydrogen Embrittlement from Pickling, Plating and Service Environment"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Microstructural Inhomogeneity and Alpha Case Damage"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Fatigue Crack Initiation at Machined and Damaged Surface Features"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Aerospace-Grade Titanium Supply and Machined Components"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Aerospace Application-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Airframe structural plate and sheet"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Required Engineering Inputs for Your Aerospace RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Technical FAQs for Aerospace Supply and Quality Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/aerospace/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/aerospace/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/aerospace/",
+      "href": "/titanium-products/titanium-plate/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/aerospace/",
+      "href": "/titanium-products/titanium-forgings/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/aerospace/",
+      "href": "/titanium-service/cnc-machining/"
+    },
+    {
+      "type": "routeExists",
+      "route": "/industries/medical/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/medical/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/medical/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/medical/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Medical & Bioprocessing Titanium Components and Materials"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Material, Surface and Contamination Failure Risks in Medical and Bioprocess"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Surface Contamination and Particulate Release"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Fatigue and Stress Corrosion Cracking from Residual Forming Stress"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Biocompatibility and Sterilisation Compatibility Failures"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Medical-Grade Titanium Supply and Precision Components"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Medical and Bioprocess Application-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Orthopaedic implant stems and fixation components"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Required Engineering Inputs for Your Medical and Bioprocess RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Technical FAQs for Medical Device and Bioprocess Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/medical/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/medical/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/medical/",
+      "href": "/titanium-products/titanium-wire/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/medical/",
+      "href": "/titanium-products/titanium-balls/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/medical/",
+      "href": "/titanium-service/surface-treatment-finishing/"
+    },
+    {
+      "type": "routeExists",
+      "route": "/industries/cathodic-protection/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/cathodic-protection/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/cathodic-protection/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/cathodic-protection/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Cathodic Protection MMO Anodes and Monitoring Electrodes"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Coating, Current Distribution and Continuity Failure Risks in Cathodic Protection"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Coating Passivation and Loss of Driving Voltage"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Non-Uniform Current Distribution and Undermining of the Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Electrical Continuity Loss at the Cable Termination"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Engineered Anode Systems for Cathodic Protection"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Cathodic Protection Application-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Buried cross-country pipeline with external coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Required Engineering Inputs for Your Cathodic Protection RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Technical FAQs for Cathodic Protection Design and Installation Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/cathodic-protection/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/cathodic-protection/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/cathodic-protection/",
+      "href": "/titanium-anode/mmo-anode/mmo-linear-anode/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/cathodic-protection/",
+      "href": "/titanium-anode/mmo-anode/mmo-tubular-anode/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/cathodic-protection/",
+      "href": "/cathodic-protection/reference-electrodes/"
+    },
+    {
+      "type": "routeExists",
+      "route": "/industries/water-treatment/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/water-treatment/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/water-treatment/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/water-treatment/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Water & Wastewater Treatment Titanium & MMO Anode Solutions"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Operating Conditions & Material Failure Risks in Water Treatment"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "High-Chloride Pitting and Crevice Corrosion"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Coating Passivation Under Fluctuating and Intermittent Current"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Scaling, Fouling and Flow Erosion"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Engineered Solutions for Water Treatment Processes"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Water Treatment Process-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Seawater electrochlorination (chlorine generation)"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Required Engineering Inputs for Your Water Treatment RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Technical FAQs for Water Treatment Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/water-treatment/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/water-treatment/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/water-treatment/",
+      "href": "/titanium-anode/ruthenium-coated-titanium-anodes/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/water-treatment/",
+      "href": "/titanium-products/titanium-tubing/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/water-treatment/",
+      "href": "/sodium-hypochlorite-generator/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/water-treatment/",
+      "href": "/titanium-anode/mmo-anode/"
+    },
+    {
+      "type": "routeExists",
+      "route": "/industries/electroplating/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/electroplating/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/electroplating/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/electroplating/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Electroplating & Surface Finishing Titanium Anodes and Baskets"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Bath Contamination and Current Distribution Risks in Electroplating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Anode Dissolution and Metal Contamination of the Bath"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Passivation of the Anode and Collapse of the Cell Voltage"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Poor Current Distribution from Anode Geometry and Spacing"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Anodes, Baskets and Racks for Plating Lines"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Electroplating Process-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Decorative nickel and chrome on consumer parts"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Required Engineering Inputs for Your Electroplating RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Technical FAQs for Electroplating and Surface Finishing Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electroplating/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electroplating/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electroplating/",
+      "href": "/titanium-anode/platinized-anode/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electroplating/",
+      "href": "/titanium-anode/mmo-anode/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electroplating/",
+      "href": "/titanium-products/titanium-baskets/"
+    },
+    {
+      "type": "routeExists",
+      "route": "/industries/electrowinning/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/electrowinning/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/electrowinning/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/electrowinning/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Mining, Electrowinning & Metals Recovery Titanium Equipment"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Electrolyte and Current Distribution Failure Risks in Metal Recovery"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Anode Coating Degradation from Impurity Concentration in the Anolyte"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Spongy, Cracked and Poorly Adherent Deposits from Current Distribution"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Sludge Accumulation and Short Circuits Between Anode and Cathode"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Anodes and Cathodes for Hydrometallurgical Recovery"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Electrowinning Process-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Copper electrowinning in a sulphate leach circuit"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Required Engineering Inputs for Your Electrowinning RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Technical FAQs for Electrowinning and Hydrometallurgy Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/electrowinning/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electrowinning/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electrowinning/",
+      "href": "/titanium-anode/mmo-anode/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electrowinning/",
+      "href": "/titanium-products/titanium-baskets/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/electrowinning/",
+      "href": "/titanium-products/titanium-clad-copper/"
+    },
+    {
+      "type": "routeExists",
+      "route": "/industries/hydrogen-energy/"
+    },
+    {
+      "type": "routeMeta",
+      "route": "/industries/hydrogen-energy/"
+    },
+    {
+      "type": "routeJsonLdType",
+      "route": "/industries/hydrogen-energy/",
+      "types": [
+        "WebPage",
+        "FAQPage"
+      ]
+    },
+    {
+      "type": "routeHasTable",
+      "route": "/industries/hydrogen-energy/",
+      "minRows": 6
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Hydrogen & Energy Titanium Components for PEM Electrolysis"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Hydrogen Embrittlement and Pressure Integrity Risks in Hydrogen Systems"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Hydrogen Embrittlement of High-Pressure Stainless and Titanium Components"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Product Gas Contamination and Catalyst Degradation from Particulate Release"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Crevice Corrosion and Seal Leaks at High-Pressure Manifold Joints"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Titanium Components for Electrolysis and Hydrogen Plant"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Hydrogen and Energy Application-to-Specification Matrix"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "PEM electrolyser bipolar plate"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Required Engineering Inputs for Your Hydrogen and Energy RFQ"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Technical FAQs for Hydrogen and Electrolysis Engineers"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "text": "Recommended Material / Coating"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "selector": "<table"
+    },
+    {
+      "type": "routeContains",
+      "route": "/industries/hydrogen-energy/",
+      "selector": "aria-label=\"Breadcrumb\""
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/hydrogen-energy/",
+      "href": "/industries/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/hydrogen-energy/",
+      "href": "/pem-electrolyzer/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/hydrogen-energy/",
+      "href": "/titanium-products/titanium-diaphragm/"
+    },
+    {
+      "type": "routeLinksTo",
+      "route": "/industries/hydrogen-energy/",
+      "href": "/titanium-products/titanium-fittings/"
+    },
+    {
+      "type": "dataEntries",
+      "module": "src/data/industries-spoke.ts",
+      "export": "spokeContent",
+      "count": 9,
+      "slugs": [
+        "chemical-processing",
+        "marine-offshore",
+        "aerospace",
+        "medical",
+        "cathodic-protection",
+        "water-treatment",
+        "electroplating",
+        "electrowinning",
+        "hydrogen-energy"
+      ]
+    },
+    {
+      "type": "fileExists",
+      "path": "src/data/spoke/types.ts"
+    },
+    {
+      "type": "fileExists",
+      "path": "src/data/spoke/assert-route.ts"
+    }
+  ]
+}

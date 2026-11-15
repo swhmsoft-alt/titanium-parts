@@ -4,16 +4,29 @@ interface Props {
   className?: string;
 }
 const { variant = 'default', className = '' } = Astro.props;
+
+// 品牌标识已矢量化为 SVG，深色版用于页头/移动端菜单，白色版用于深色页脚。
+const logoSrc =
+  variant === 'white'
+    ? '/images/logos/titanium-parts-logo-white.svg'
+    : '/images/logos/titanium-parts-logo.svg';
 ---
 
 <a href="/" class={`logo logo-${variant} ${className}`} aria-label="Titanium Parts Home">
-  <img src="/images/logos/titanium-parts-logo.png" alt="Titanium Parts" class="logo-img" loading="eager" />
+  <img
+    src={logoSrc}
+    alt="Titanium Parts"
+    class="logo-img"
+    width="361"
+    height="64"
+    loading="eager"
+    decoding="async"
+  />
 </a>
 
 <style>
   .logo { display: inline-flex; align-items: center; text-decoration: none; transition: opacity 0.2s; }
   .logo:hover { opacity: 0.85; }
-  .logo-img { height: 40px; width: auto; max-height: 40px; }
-  .logo-white .logo-img { filter: brightness(0) invert(1); }
+  .logo-img { height: 40px; width: auto; max-height: 40px; min-width: 150px; }
   @media (max-width: 768px) { .logo-img { height: 32px; } }
 </style>

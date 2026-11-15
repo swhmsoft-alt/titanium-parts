@@ -1,0 +1,13 @@
+---
+/**
+ * The marine electrolytic anti-fouling system page.
+ *
+ * The page is rendered by the shared renderer of the family,
+ * `src/components/anode/ProductPage.astro`, from the content model in
+ * `src/data/anti-fouling-page.ts`.
+ */
+import ProductPage from '../../../components/anode/ProductPage.astro';
+import { antiFoulingPage } from '../../../data/anti-fouling-page';
+---
+
+<ProductPage page={antiFoulingPage} />

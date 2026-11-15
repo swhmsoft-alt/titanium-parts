@@ -1,0 +1,13 @@
+---
+/**
+ * Reference electrodes for cathodic protection.
+ *
+ * The page is rendered by the shared renderer of the anode page family,
+ * `src/components/anode/ProductPage.astro`, from the content model in
+ * `src/data/reference-electrode-page.ts`.
+ */
+import ProductPage from '../../../components/anode/ProductPage.astro';
+import { referenceElectrodePage } from '../../../data/reference-electrode-page';
+---
+
+<ProductPage page={referenceElectrodePage} />

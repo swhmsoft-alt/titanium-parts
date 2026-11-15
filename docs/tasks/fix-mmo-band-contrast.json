@@ -1,0 +1,21 @@
+{
+  "id": "fix-mmo-band-contrast",
+  "title": "Dark bands on the MMO family pages keep a readable text contrast",
+  "summary": "The dark bands of the MMO family pages carried their copy with the dark utilities of the reference markup (text-slate-500 to text-slate-900, text-gray-600, text-gray-700) and their headings carried no colour class at all, so the global heading colour won over the band colour. The result was near black text on a near black band. A scoped layer under .mmo-page now lifts the copy of a band to a light tone, gives the headings of a band the colour of the band and keeps the solid light surfaces of a band (the quote form card) on the dark palette.",
+  "assertions": [
+    { "type": "fileExists", "path": "src/styles/mmo-contrast.css" },
+    { "type": "fileContains", "path": "src/styles/mmo-contrast.css", "text": ".mmo-page" },
+    { "type": "fileContains", "path": "src/styles/mmo-contrast.css", "text": "bg-[#003366]" },
+    { "type": "fileContains", "path": "src/components/mmo/MmoProductPage.astro", "text": "import '../../styles/mmo-contrast.css';" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/", "selector": "bg-blue-950" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-canister-anode/", "selector": "bg-slate-900" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-disc-anode/", "selector": "bg-[#003366]" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-ribbon-anode/", "selector": "bg-slate-800" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-rod-anode/", "selector": "bg-[#003366]" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-tubular-anode/", "selector": "bg-slate-900" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "selector": "bg-blue-950" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-mesh-ribbon-anode/", "selector": "bg-slate-900" },
+    { "type": "pageCount", "min": 67 }
+  ]
+}

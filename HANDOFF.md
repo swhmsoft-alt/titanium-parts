@@ -1,0 +1,877 @@
+# HANDOFF
+
+<!-- newtask -->
+Task: newtask-workflow
+<!-- /newtask -->
+
+## Current Status
+
+Task `newtask-workflow` — **complete**. The `/newtask` flow is now a
+deterministic launcher instead of a free-form restart. The four steps are
+written down and enforced by a script:
+
+1. read the root `HANDOFF.md` once and take its single `Task: <id>` line;
+2. open the context ledger with `npm run budget -- --reset --task <id>`;
+3. that id is the one and only task file of `docs/tasks/*.json` to work on;
+4. work on that task's assertions alone.
+
+The task id comes from the handoff and from nowhere else. A missing,
+ambiguous or unknown id is a hard error (`EXIT=2`): there is no fallback,
+no automatic pick and no second entry point. Guessing the task is how scope
+leaks, so the script refuses instead.
+
+The task line is read from a marked block, not from the whole document.
+The block sits at the top of this file: the `<!-- newtask -->` marker, then
+exactly one line `Task: <id>`, then the `<!-- /newtask -->` marker.
+
+The handoff is a prose archive that grows with every round. Without the
+block, one sentence in an archived round could break the launcher. With it,
+the prose cannot interfere, and a `Task:` line outside the block is reported
+with its line number instead of silently confusing the launcher.
+
+What changed in this round:
+
+- `scripts/handoff/newtask.mjs` — new. Reads the handoff, resolves the one
+  task, opens the ledger, prints the opening contract and lists the other
+  task files as report-only. Exit codes: 0 = started, 1 = the ledger could
+  not be opened, 2 = the handoff does not name exactly one usable task. The
+  result is written to `tmp/handoff/newtask.status` as `EXIT=<code>`.
+  The task line is read from the `<!-- newtask -->` block only, so the
+  prose of the archive cannot interfere with it.
+- `package.json` — added the `newtask` script.
+- `.clinerules/.clinerules.md` — §0 gained the `npm run newtask` gate,
+  §7.3 now requires the `Task: <id>` line in the handoff, §7.4 was rewritten
+  as the four fixed steps and carries the red line: the failures of the
+  other tasks may be reported but must never be fixed on the side.
+- `docs/tasks/newtask-workflow.json` — the task definition of this round:
+  thirteen assertions over the script, the package script, the rules file,
+  the handoff line and the page count.
+
+Verification, all green:
+
+- `npm run build` — 67 pages, `Complete!`
+- `npm run newtask` — reads the handoff, opens the ledger for
+  `newtask-workflow`, prints the opening contract and lists the other
+  thirteen task files as report-only. `EXIT=0`.
+- Failure cases, all `EXIT=2`: no marked block, a block without a task line,
+  two task lines inside the block, an unknown task id, an id that is not a
+  slug, a task line outside the block (reported with its line number) and
+  reversed markers.
+- `npm run task:verify -- newtask-workflow` — 24/24 checks passed
+
+## Next Step
+
+1. This task is finished and verified. Nothing is outstanding for it.
+2. When the next task is opened, **change the `Task: <id>` line at the top
+   of this file** to the id of that task and create its
+   `docs/tasks/<id>.json` first. The launcher exits with `EXIT=2` when the
+   line names a task that has no definition — that is the intended
+   behaviour, not a bug.
+3. Nothing else is scheduled. The two follow-up candidates of the previous
+   round (the site wide `WebPage` JSON-LD node and the industry image
+   fields of the `SpokeContent` model) still need their own task files.
+
+## Known Pitfalls
+
+- The task id of a new session lives in exactly one place: the `Task: <id>`
+  line inside the `<!-- newtask -->` block at the top of this file. A second
+  `Task:` line inside the block, or any `Task:` line outside it, makes the
+  launcher exit with `EXIT=2` and report the line number.
+- The `Task:` line has to be the whole line and it has to be inside the
+  block. A `Task:` line written inside a sentence or a list item is not read
+  as the task, but it still counts as a conflict if it starts a line.
+- `npm run newtask` resets the budget ledger. Running it twice in a session
+  throws the first ledger away.
+- The other task files are listed by the launcher so that they can be
+  reported, not worked on. Fixing one of them inside another task is out
+  of scope and has to be asked for first.
+- The editor payload limit is about 6000 characters, so a long file has to
+  be written in chunks that each end at a complete block. PowerShell
+  here-strings (`@'...'@ | Set-Content` then `Add-Content`) work well for
+  this and avoid the limit entirely.
+
+## Context Summary
+
+1. Goal and acceptance. Task `newtask-workflow`, assertions in
+   `docs/tasks/newtask-workflow.json`. A new session must start from the
+   task the handoff names, and from no other task.
+2. Done. The launcher, the package script, the rules rewrite, the task
+   definition and the machine readable handoff line are in place. Build
+   67 pages, all four failure cases exit with `EXIT=2`, task verify 17/17.
+3. Files changed this round. `scripts/handoff/newtask.mjs` (new),
+   `package.json` (the `newtask` script), `.clinerules/.clinerules.md`
+   (§0, §7.3, §7.4), `docs/tasks/newtask-workflow.json` (new),
+   `HANDOFF.md` (this file).
+4. Next actions. None outstanding. Update the `Task:` line when the next
+   task is opened.
+5. Known traps. The `Task:` line has to be alone on its line and unique in
+   the document. The launcher resets the ledger, so it runs once per
+   session.
+
+---
+
+## Archive — previous rounds
+
+Task `fix-mmo-wire-anode-css` — the MMO family pages
+(`/titanium-anode/mmo-anode/*`) had lost every reference section band, every
+section eyebrow and every FAQ answer.
+
+Root cause, measured not assumed: `src/styles/mmo-product.css` was loaded
+correctly and no rule was missing. The defect was in the data pipeline. The
+family content lives in `tmp/ref/family-model.json` and is written to
+`src/data/mmo-family-pages.ts` by `tmp/gen-data.mjs`. The model had been
+filled in by hand and never captured three facts that only the reference page
+carries:
+
+- the background band of each section — every section was `plain`, and the
+  tone model could not even express `navy`, so `.mmo-band-navy` was dead CSS;
+- the eyebrow label above the section heading — every section rendered
+  without its label;
+- the FAQ answers — all 43 panels across the seven pages rendered empty.
+
+Two more defects came out of the same source: every table was marked
+`dark: true` although a dark table has no background on its body cells and
+therefore cannot read on a light band, and several tables repeated their
+header as the first body row.
+
+What changed:
+
+- `scripts/mmo/sync-family-model.mjs` — new. Reads the saved reference pages
+  in `tmp/ref/<slug>.html` and writes band, eyebrow and FAQ answer back into
+  the model. Local files only, no network, safe to run repeatedly.
+- `scripts/qa/check-family-bands.mjs` — new. Checks the built pages in
+  `dist/` for band, eyebrow, FAQ answer and table treatment.
+- `tmp/ref/family-model.json` — band, eyebrow and FAQ answer of all seven
+  pages, duplicated header rows removed, table flags corrected.
+- `tmp/gen-data.mjs` — the tone type of the template knows `navy`.
+- `src/data/mmo-family-pages.ts` — regenerated, 3201 lines.
+- `src/components/mmo/MmoProductPage.astro` — `toneClass()` maps `navy`,
+  `isDarkBand()` decides the light copy, the tone is passed to the blocks.
+- `src/components/mmo/MmoBlock.astro` — the band decides the table
+  treatment, the card variant, the bullet variant and the table width.
+- `src/styles/mmo-product.css` — appended only: dark band copy rules and
+  `.mmo-table-narrow`.
+- `docs/tasks/fix-mmo-wire-anode-css.json` — task with 30 assertions.
+- `docs/mmo-family-band-map.md` — band map of all seven pages.
+
+Verified structurally, not visually: `npm run build` builds 67 pages without
+an error, the task verification passes 34/34, and the built pages report every
+section band, a rendered eyebrow, no empty FAQ panel and no dark table on a
+light band.
+
+**Still open — the pages do not look like the reference pages.** The user
+checked the result visually on all seven pages and none of them reads as
+correct. Nothing in this task was verified against the rendered appearance:
+the browser tooling was lost during the session, so every check was made on
+the markup and the class names, never on pixels. The checks above prove
+structure, not design.
+
+The data layer is now correct, so the remaining gap is the renderer itself:
+`src/components/mmo/MmoProductPage.astro` and `src/styles/mmo-product.css`
+carry their own spacing, container width, typography and card styling, which
+are not the reference page's layout system. The reference pages use their own
+markup — `py-20 lg:py-28` sections, `max-w-7xl` containers, `text-3xl`
+headings, `bg-gray-50` bands with `border-y border-gray-200` — and the
+family renderer approximates it with a different design system. Band colour,
+labels and copy are right; the rest of the composition is not.
+
+### Round 2 (this session) — the layout base, half built
+
+The user's verdict (all seven pages still wrong) proved the data layer is not
+the blocker: the **renderer** flattens the reference into a generic block
+vocabulary, so images fall outside their card and text floats. The agreed fix
+is to rebuild the renderer from section archetypes taken from the reference
+DOM, not from a block list.
+
+Work done in this round:
+
+- **Reference truth read off disk, not from the network.** The saved pages in
+  `tmp/ref/<slug>.html` carry the real layout: `py-20 lg:py-28` sections,
+  `max-w-7xl` containers, `max-w-3xl` header blocks, `grid md:grid-cols-2
+  lg:grid-cols-4` card rows, `bg-gray-50 p-8 rounded-2xl border` cards,
+  `overflow-x-auto` table wrappers, `grid lg:grid-cols-12` picture/copy
+  splits.
+- `scripts/mmo/extract-family-layout.mjs` — **new, the base of the new
+  renderer.** It walks each saved reference page with `parse5` and emits
+  `tmp/ref/family-layout.json`: per section the band, the header unit
+  (eyebrow + heading + lead) and the body as ordered *parts* (`cards`,
+  `split`, `table`, `faq`, `note`, `pills`, `checklist`, `figure`, `cta`,
+  `paragraph`), so a card keeps its image and a split keeps its two columns.
+  Runs offline, repeatable, with a `--verify` mode that compares the
+  extracted result against the per-section fingerprints in
+  `tmp/ref/structure.txt`.
+- Extracted today: wire 12 sections, ribbon 10, mesh-ribbon 12, canister 11,
+  tubular 12, disc 12, rod 9 — 78 sections in total.
+- **The extractor now passes its acceptance gate: 0 mismatched sections.**
+  `node scripts/mmo/extract-family-layout.mjs --verify` reports
+  `mismatched sections: 0` against the per-section fingerprints in
+  `tmp/ref/structure.txt` (was 32 when this round started). The report is
+  written to `tmp/qa/family-layout-verify.txt`.
+- The verifier compares the **titles by name**, not only by count: every h3 of
+  the reference must appear as a card title, a table caption or a heading of its
+  own, and every reference image must appear by file name. Five defects were
+  found and fixed this way, each a real extraction bug rather than a counting
+  artefact:
+  1. `noteOf()` was greedy — it found any `<strong>` anywhere below the node,
+     so a section container that merely *contains* an "Installation Note:" box
+     was classified as one `note` and its cards were lost. It now only accepts
+     a `<strong>` that is a direct child.
+  2. The fingerprint counted `cards` and `images` only at the top level of
+     `parts`, so cards nested inside a `split` counted as zero. It now walks
+     `split.parts` recursively.
+  3. `localImage()` only matched the manifest key exactly. The reference page
+     names a picture by a relative path while the manifest holds the full
+     address of the same file, so the local copy was never found and the image
+     came back empty. Both forms are tried now.
+  4. The heading above a table was emitted twice — once as the table caption
+     and once as a heading of its own. The caption is now claimed before the
+     neighbouring blocks are collected.
+  5. A section may carry a decorative picture *outside* the content container
+     (the ribbon and mesh-ribbon "custom engineering" bands). Those images
+     were dropped; they are now captured as a `background` part.
+- The comparison also learned two facts about the reference files:
+  `structure.txt` lists **h3 titles only**, so an h4 the extraction also
+  captures is not an extra h3 (the titles carry their tag now), and the
+  reference pages were saved with a broken encoding, so titles are compared by
+  their words (`normTitle`) rather than by their bytes.
+- **Not started:** the Astro pattern components, the new data shape, the
+  regenerated `src/data/*`, the per-page composition and any visual check.
+  `src/components/mmo/MmoProductPage.astro` and `MmoBlock.astro` are still
+  the old generic renderer.
+
+## Next Step
+
+1. **Do not trust the class-level checks.** They passed on a page the user
+   rejects. A visual comparison is the only acceptable acceptance gate.
+2. The extractor is done and verified (0 mismatched sections). Re-run
+   `node scripts/mmo/extract-family-layout.mjs --verify` after any change to
+   it — `tmp/ref/structure.txt` is the oracle and it is on disk.
+3. The pattern components are **written** (14 kinds, one per file, plus the
+   `MmoPart.astro` dispatcher) but no page references them yet.
+4. **One link still lost.** The verifier reports exactly one mismatch:
+   `mmo-rod-anode#configurations: missing link: …/mmo-tubular-anode/`. Read
+   `tmp/ref/mmo-rod-anode.html` around `id="configurations"`, find the link
+   and find out why the extractor does not reach it. Then the gate is met at 0
+   mismatched sections — and the link check stays in the verifier, so this
+   class of loss can never pass silently again.
+5. Change the family data shape from `blocks[]` to section archetypes, keep
+   `tmp/ref/family-model.json` as the single source, regenerate
+   `src/data/mmo-family-pages.ts`, then compose the seven pages from the
+   patterns (image inside the card body, grid columns from the reference's
+   own card count). The section archetypes must carry the new `variant`,
+   `pad` and `copyFirst` fields the extractor now emits.
+6. `npm run build` → `npm run task:verify -- fix-mmo-wire-anode-css` →
+   `node scripts/qa/check-family-bands.mjs`, then one visual look per page
+   by the user. No screenshots from the assistant side.
+7. The linear anode page still hard codes its own bands and copy in
+   `src/pages/titanium-anode/mmo-anode/mmo-linear-anode.astro`. It renders
+   correctly, but it is the reason the same defect could repeat there. Move
+   it to the shared renderer when that page is next touched.
+
+### Round 4 (this session) — the pattern components and the CSS they need
+
+The fourteen part kinds the extractor emits now each have an Astro component
+under `src/components/mmo/patterns/`, and `MmoPart.astro` is the only place
+that knows which part is which. The components reuse the class names that
+`src/styles/mmo-product.css` already carries — the linear anode page is the
+known-good reference for how they compose — and the file gained only the
+classes the new parts need.
+
+New, in `src/components/mmo/patterns/`:
+
+| Component | Part kind | Composition |
+| --- | --- | --- |
+| `MmoCards.astro` | `cards` | `mmo-grid-2/3/4` of `mmo-card`, `mmo-card-blue` or `mmo-card-navy` |
+| `MmoCard.astro` | `card` | one box of the same three treatments |
+| `MmoSplit.astro` | `split` | `mmo-split` of a figure and the copy |
+| `MmoTable.astro` | `table` | `mmo-table-caption` + `mmo-table-wrap` / `mmo-table` |
+| `MmoFaq.astro` | `faq` | `mmo-faq-grid` of `mmo-faq` |
+| `MmoNote.astro` | `note` | `mmo-callout-blue` / `mmo-callout` / `mmo-callout-soft` |
+| `MmoPills.astro` | `pills` | `mmo-pill-row` of `mmo-pill` |
+| `MmoChecklist.astro` | `checklist` | `mmo-bullets` |
+| `MmoFigure.astro` | `figure` | `mmo-figure` with `mmo-figure-cap` |
+| `MmoBackground.astro` | `background` | `mmo-band-bg`, behind the copy |
+| `MmoCta.astro` | `cta` | `mmo-pill mmo-pill-plain` |
+| `MmoParagraph.astro` | `paragraph` | `mmo-body` |
+| `MmoHeading.astro` | `heading` | `mmo-subheading` of `mmo-h3` |
+| `MmoList.astro` | `list` | `mmo-bullets`, light inside a dark band |
+
+`MmoPart.astro` dispatches on `part.kind` and renders the `split` copy
+recursively, so a split may hold any part.
+
+The extractor gained three facts it did not carry, all of them visible in the
+reference and needed by the components:
+
+- `variant` on a card and on a note — the reference uses a blue box for one
+  card and an amber box for one note, and the colour decides the class.
+- `pad` is now the name of the vertical rhythm (`default`, `medium`, `wide`,
+  `fixed`, `short`, `tight`, `compact`, `tiny`) instead of the raw `py-20` /
+  `py-24` pair, because the reference uses eight different combinations.
+- `copyFirst` on a split — three sections put the copy above the picture on a
+  small screen (`order-2 lg:order-1`).
+
+`src/styles/mmo-product.css` gained, appended only: `.mmo-grid-3`,
+`.mmo-card-media`, `.mmo-split-body`, `.mmo-split-copy-first`,
+`.mmo-table-caption` (with its dark-band copy), `.mmo-band-bg`,
+`.mmo-bullets-check` and the seven `.mmo-pad-*` section rhythms.
+
+**Open defect found, not yet fixed — sibling-product links are lost.** Three
+comparison sections lay their links out in one row that mixes `<a>` elements
+with `<span>` separators (`a, span "|", a, span "|", a`). The extractor reads
+that row as pills, so the links never reach the data. The affected rows are
+`mmo-wire-anode` (`MMO Mesh Ribbon Anode`, `MMO Canister Anode`,
+`MMO Disc Anode`), `mmo-canister-anode` (six links) and `mmo-rod-anode`
+(five links). The fingerprint verifier does not catch it, because it compares
+titles, images, tables and FAQ panels only — the links are counted by nothing.
+`mmo-ribbon-anode`, `mmo-mesh-ribbon-anode` and the plain `<a>`-only rows are
+unaffected. Fix it in the extractor before the new data shape is generated.
+
+State of the tree: `npm run build` is green (`Complete!`), the band QA reports
+`all pages consistent`, and the extractor still verifies with **0 mismatched
+sections** out of 78 after the three new fields. The components are written
+but **not yet referenced by any page** — the data shape is still the old
+`blocks[]` one, so nothing renders them yet.
+
+### Round 5 (this session) — the lost sibling-product links, root-caused and fixed
+
+The defect named in the round-4 handoff is real, but it is **not one bug — it
+is four**, and it was wider than the three pages it was reported on. Measured
+per section (reference `<a>` count vs extracted `cta` count), the reference
+carries links in **#definition, #comparison, #before-quote-boundary,
+#configurations and #rfq** on all seven pages. Before the fix, three
+comparison rows and every `#before-quote-boundary` nav row lost every link.
+
+The four causes, all in `scripts/mmo/extract-family-layout.mjs`:
+
+1. **A `flex-wrap` row that mixes `<a>` and `<span>` was swallowed as pills.**
+   The row was returned whole as one `pills` part, so the links never became
+   parts. This is the reported case: `mmo-wire-anode`, `mmo-canister-anode`
+   and `mmo-rod-anode` lay their sibling links out as `a, span "|", a, …`.
+2. **A `<nav>` of links was never visited.** `collect()` returns early for
+   every tag that is not a `div`, and a `nav` is not a `div` — so the five
+   "MMO Linear Anodes / MMO Ribbon Anodes / …" links of every
+   `#before-quote-boundary` section were dropped. This affected **all seven
+   pages** and was never noticed, because the fingerprint counts titles,
+   images, tables and FAQ only.
+3. **A card that ends in a link lost it.** `cardOf()` read the heading, the
+   body and the list, but not the `<a>` — the "View MMO Linear Anode →" at
+   the foot of every `#definition` card.
+4. **A table cell that is a link lost its address.** `tableOf()` kept the
+   cell text but dropped the `href`, so "View Product →" and "MMO Rod Anode"
+   cells became plain text.
+
+The fix, all in the extractor:
+
+- A row of links is now a part of its own: `{ kind: 'links', items, style,
+  sep }`, where `style` is `button` or `text` (the reference draws one group
+  as pills and the other as plain text) and `sep` is the `|` or `·` that sits
+  between two links. The `flex-wrap` branch checks for links **before** it
+  checks for pills, and a `nav` is now collected.
+- `pillsOf()` no longer treats a separator span (`|`, `·`) as a pill.
+- `cardOf()` records `link: { label, href }` when the card ends in one.
+- `tableOf()` records a linked cell as `{ text, href }` instead of a string.
+- **The verifier now compares links.** `fingerprint()` collects the links of
+  every part, `referenceLinks()` reads the links of the same section straight
+  out of the saved reference page, and the verify loop reports a missing or
+  an extra link per section. A lost link can no longer pass unnoticed.
+
+State: the verifier now reports **1 mismatched section** — down from a silent
+loss on seven pages. The remaining one is
+`mmo-rod-anode#configurations: missing link: …/mmo-tubular-anode/`, which is
+**not yet diagnosed**. The likely cause is a link inside a table cell whose
+cell also carries text, or a link in a structure the extractor does not
+visit — read `tmp/ref/mmo-rod-anode.html` around `id="configurations"` and
+compare it with the `configurations` section of
+`tmp/ref/family-layout.json`. Fix it, then the gate is met at 0.
+
+`npm run build` is green (`exit=0`, `Complete!`).
+
+### Round 6 (this session) — the pages leaned left: the CSS extractor ate declarations
+
+The user reported the family pages sat against the left edge with a wide empty
+column on the right. Root cause, measured not assumed: the generator of
+`src/styles/mmo-reference.css` — `scripts/mmo/extract-reference-css.mjs` —
+treated **every** semicolon as the end of an at-rule. A reference rule that
+carries several declarations therefore kept only its **last** one:
+
+| reference rule | generated rule (before) | effect |
+| --- | --- | --- |
+| `.mx-auto{margin-left:auto;margin-right:auto}` | `.mx-auto{margin-right:auto}` | the `max-w-7xl` container was pushed to the left |
+| `.px-5{padding-left:1.25rem;padding-right:1.25rem}` | `.px-5{padding-right:1.25rem}` | no left padding |
+| `[data-morank-container="page"]{…margin-left:auto;margin-right:auto;padding-left:2rem…}` | only `padding-right:2rem!important` | no width, no max width, no auto margins |
+
+`margin-right:auto` alone left-aligns the box, which is exactly the reported
+"整体倾斜左侧、右侧留白多".
+
+Fix: `parseCss()` now keeps a semicolon that separates two declarations and
+only ends an at-rule statement at the top level. The utility layer was
+regenerated with `node scripts/mmo/extract-reference-css.mjs` (41309 bytes,
+544 lines) and now carries the full rules, e.g.
+`.mmo-page .mx-auto{margin-left:auto;margin-right:auto}` and
+`.mmo-page [data-mmo-container="page"]{…margin-left:auto!important;margin-right:auto!important;padding-left:2rem!important…}`.
+The rule counts are unchanged (kept 526, covered 488/490, missing 2 —
+`morank-file-hint sticky`), so no rule was lost by the fix.
+
+Verified: `npm run build` green (67 pages, `Complete!`), the built CSS carries
+the restored rules, and the new task
+`docs/tasks/fix-mmo-family-css-declarations.json` passes 19/19.
+
+Still open from earlier rounds: the band/eyebrow/FAQ work of
+`docs/tasks/fix-mmo-wire-anode-css.json` is unfinished (24/34), and the
+`mmo-rod-anode#configurations` lost link is still undiagnosed.
+
+## Known Pitfalls
+
+- **The model is the source, not the generated file.** `src/data/mmo-family-pages.ts`
+  is generated. Edit `tmp/ref/family-model.json` and regenerate, or the next
+  generator run undoes the change.
+- **A band class that the data cannot produce is a band that disappears.**
+  When a family page looks flat, compare the section backgrounds with
+  `docs/mmo-family-band-map.md` before touching any CSS.
+- **Dark blocks on a light band are invisible, not ugly.** `mmo-table-dark`
+  body cells carry no background and `mmo-bullets-light` text is slate-200.
+  A light-text variant only belongs inside a dark band.
+- **Every reference table is a light table.** Take the table treatment from
+  the reference page, never from a neighbouring page.
+- **The reference pages are already saved locally** in `tmp/ref/<slug>.html`.
+  Do not fetch them again — the saved copy is the authority, it works
+  offline, and re-fetching costs a lot of time.
+- **Every task needs `docs/tasks/<id>.json` and a `HANDOFF.md` entry.** The
+  defect reached a second page of the same family because the first fix was
+  never written down.
+- **The PowerShell terminal echo garbles long commands** and often swallows
+  the output. Redirect to a file under `tmp/qa/` and read the file instead.
+- **`tmp/qa/` holds a large number of old logs.** Filter with
+  `Select-String`, never read the files whole.
+
+## Context summary
+
+1. Goal: every MMO family page shows the reference page — section bands,
+   section eyebrows, readable FAQ panels and tables that match their band.
+   Assertions live in `docs/tasks/fix-mmo-wire-anode-css.json`.
+2. Done: model synced from the saved reference pages, data file regenerated,
+   renderer and CSS updated, build and task verification green. Round 2: the
+   layout extractor `scripts/mmo/extract-family-layout.mjs` written and
+   running against all seven saved pages, emitting
+   `tmp/ref/family-layout.json` (161 KB) and
+   `tmp/qa/family-layout-parts.txt` (78 sections). Round 3: the verifier was
+   rewritten to compare **titles by name and images by file name**, which
+   exposed five real extraction bugs (greedy `noteOf()`, non-recursive
+   fingerprint counter, manifest lookup that missed relative paths, a table
+   caption emitted twice, decorative band pictures dropped). All five are
+   fixed and the gate is met: **0 mismatched sections** out of 78.
+   Round 4: the 14 Astro pattern components plus the `MmoPart.astro`
+   dispatcher written under `src/components/mmo/patterns/`; the CSS extended
+   with the classes they need; the extractor gained `variant`, a named `pad`
+   and `copyFirst`. Round 5: the lost links root-caused to **four** distinct
+   defects and fixed — the `flex-wrap` row swallowed as pills, the `<nav>`
+   never visited, the card that ends in a link, and the linked table cell —
+   and the verifier now compares links per section, which brought the
+   mismatch count from a silent loss on seven pages down to **1**.
+   Not done: the last lost link, the new data shape, the regenerated data
+   file, the composed pages, and any visual check.
+3. Changed files: `scripts/mmo/extract-family-layout.mjs`,
+   `src/components/mmo/patterns/` (15 new files),
+   `src/styles/mmo-product.css` (appended), `HANDOFF.md`. Unchanged this
+   round: `tmp/ref/family-model.json`, `tmp/gen-data.mjs`,
+   `src/data/mmo-family-pages.ts`, `src/components/mmo/MmoProductPage.astro`,
+   `src/components/mmo/MmoBlock.astro`.
+4. Next actions: fix the last lost link → new data shape → regenerate →
+   build → verify → compose the seven pages → one visual look per page by
+   the user.
+5. Known traps: the generated data file is overwritten by the generator, a
+   dead band class disappears silently, dark blocks on light bands are
+   invisible, the reference pages are already saved locally, a loose
+   node-level classifier swallows whole sections, and **the fingerprint
+   verifier counted titles, images, tables and FAQ only — it could not see a
+   lost link.** It compares links now.
+
+
+### Round 7 — dark band contrast (closed, user confirmed visually)
+
+Task `fix-mmo-band-contrast` — the dark bands of the MMO family pages carried
+their copy with the **dark** utilities of the reference markup
+(`text-slate-500`…`text-slate-900`, `text-gray-600`, `text-gray-700`), and the
+band headings carried **no colour class at all**, so the global heading colour
+(`global.css` → `h1..h6{color:var(--color-heading)}` = near black) won over the
+band colour. Result: near black text on a near black band.
+
+Note that the reference pages carry the same low contrast markup; they get away
+with it through a theme layer that re-tints those utilities. **Do not copy the
+band copy of the reference pages verbatim — it is a trap.**
+
+Fix: `src/styles/mmo-contrast.css` (new), imported by
+`src/components/mmo/MmoProductPage.astro` only, so the rest of the site is
+untouched. All rules are scoped under `.mmo-page` and key on the six band
+backgrounds of the family (`bg-blue-950`, `bg-slate-950`, `bg-slate-900`,
+`bg-blue-900`, `bg-slate-800`, `bg-[#003366]`):
+
+1. the band states its own colour, so a band without `text-white` is legible;
+2. the headings of a band take the colour of the band (`color: inherit`);
+3. the dark text utilities of a band are lifted (`slate-700` → `#e2e8f0`,
+   `slate-600/500`, `gray-700/600` → `#cbd5e1`, `blue-700` → `#93c5fd`);
+4. a solid light surface inside a band (the quote form card) keeps the dark
+   palette, so the form labels do not become white on white.
+
+`npm run build` → 67 pages, exit 0. The user checked the result in the browser
+and confirmed it reads correctly. Task file:
+`docs/tasks/fix-mmo-band-contrast.json` (14 assertions).
+
+Traps of this round: a custom property cannot carry a selector, so the band
+list is written out six times; the reference extractor is the only source of
+the band utilities, and it must not be edited by hand.
+
+---
+
+### Round 8 — Ru-Ir coating page rewrite (closed, user confirmed visually)
+
+Task `ruthenium-anode-rewrite` — the ruthenium coating page
+(`/titanium-anode/ruthenium-coated-titanium-anodes/`) was rendered by the thin
+shared coating template: four short lists and one note, no FAQ, no
+specification, no evidence. It is now a full product page built on the MMO
+wire anode skeleton, with the Ru-Ir subject matter written for a buyer who has
+to justify the coating to a process engineer.
+
+**Routing.** The URL did not move and the navigation did not change. A static
+route `src/pages/titanium-anode/ruthenium-coated-titanium-anodes/index.astro`
+now owns the page, and `src/pages/titanium-anode/[slug]/index.astro` excludes
+that one slug from `getStaticPaths` so the route stays unambiguous. The entry
+in `src/data/anode-coatings.ts` stays (the hub, the navigation and the sibling
+pages still refer to it), so `anodeCoatings` still has four entries.
+
+**Skeleton.** `src/components/anode/RuIrAnodePage.astro` renders the page with
+the same utilities the MMO family pages use (`src/styles/mmo-reference.css`,
+scoped under `.mmo-page`) and the same band rhythm: hero with eyebrow, H1,
+people-first lead, two CTAs and an engineering-boundary note; hero figure with
+four thumbnails; a four-cell data strip; an anchor navigation; alternating
+light bands; a FAQ band; a dark quote band with `RFQForm` inside a white card.
+`src/styles/mmo-contrast.css` is imported by this component only.
+
+**Content.** `src/data/ru-ir-anode-page.ts` (page model, hero, navigation, RFQ)
+and `src/data/ru-ir-anode-sections.ts` (the sections and the FAQ). The copy is
+written to the people-first / E-E-A-T brief: the hero states the buyer's
+problem, every technical statement is tied to a condition (current density,
+chloride level, pH, temperature, duty cycle), reference windows are labelled as
+reference windows, and no company metric is invented. The FAQ carries ten
+questions with substantive answers, and the JSON-LD is built from that same
+data, so the published answers are the answers a reader sees — unlike the
+family renderer, which publishes empty `acceptedAnswer.text`.
+
+**Verified.** `npm run build` → 67 pages, exit 0. `verify-task
+ruthenium-anode-rewrite` → 30/30. `verify-task titanium-anode-taxonomy` →
+51/51, so the existing taxonomy assertions still hold. `verify-seo` → all
+checks passed, 67 unique titles and 67 unique descriptions. `audit` → no new
+failure (the one failure is the pre-existing baseline entry for two video
+slots). `list-dead-links` → no dead internal links. The user confirmed the
+rendered page in the browser.
+
+Task file: `docs/tasks/ruthenium-anode-rewrite.json` (26 assertions).
+
+Traps of this round: Astro evaluates `getStaticPaths` in an isolated scope, so
+the filter cannot live in a module-level constant — it has to be inline. The
+description length limit of the SEO gate is 175 characters, and a description
+written for a reader easily runs past it. The `.mmo-page` utilities are scoped,
+so a class that is not in `src/styles/mmo-reference.css` silently does nothing
+— the class list was extracted from the built wire page rather than written
+from memory.
+
+---
+
+### Round 9 — the anode page family, seven pages on one renderer
+
+Task `expansion-anode-pages` — six more pages were rebuilt on the same wire
+anode skeleton: the iridium oxide coating page, the platinized anode page, the
+lead dioxide anode page, the marine anti-fouling system, cathodic protection
+and the reference electrodes.
+
+**The engine.** Round 8 left a renderer that was almost entirely data-driven;
+only two strings in it were hard-coded. That renderer was generalised into
+`src/components/anode/ProductPage.astro`, with the block markup moved into
+`src/components/anode/PageBlocks.astro` and the page shape declared in
+`src/data/coating-page-model.ts` (`PageModel` plus the block vocabulary
+`paragraphs | cards | table | list | linkcards | spec | note | steps`). The
+hard-coded FAQ heading and the hard-coded form title became model fields, so
+a new page is copy, not markup. `src/components/anode/RuIrAnodePage.astro`
+stays as the entry point of the ruthenium page and forwards to the shared
+renderer — the task file asserts the file exists, and the page output did not
+change (30/30 still pass).
+
+**The pages.** One data file pair per page: `ir-ta-anode-*.ts`,
+`platinized-anode-*.ts`, `pb-o2-anode-*.ts`, `anti-fouling-*.ts`,
+`cathodic-protection-*.ts`, `reference-electrode-*.ts`. The copy follows the
+people-first / E-E-A-T brief: the hero states the buyer's problem, every
+technical statement is tied to a condition (current density, pH, temperature,
+duty cycle, contaminant load, flow speed), reference windows are labelled as
+reference windows, and no company metric is invented. The JSON-LD is built from
+the same FAQ data, so the published answers are the answers a reader sees, and
+the three system pages carry `WebPage + FAQPage` while the three product pages
+carry `WebPage + Product + FAQPage`.
+
+**Routing.** Every URL is unchanged. The three coating pages that the shared
+coating template used to render are now static routes and the template
+excludes their slugs; `anodeCoatings` still has four entries, so the hub, the
+navigation and the sibling pages are untouched. The anti-fouling page had a
+duplicated `</BaseLayout>` in its markup — that defect disappeared with the
+rewrite, because the page is now a three-line wrapper.
+
+**A new gate.** `scripts/qa/check-scoped-classes.mjs` — the `.mmo-page`
+utilities are scoped, so a class that the utility layer does not define fails
+silently: the page renders, the layout is wrong, and nothing complains. The
+script reads the class tokens of the renderers and the literal band classes of
+the page models and compares them with the 490 classes the utility layer
+defines. It found three that did not exist: `sm:grid-cols-4` (also on the
+ruthenium page), `lg:grid-cols-4` was fine but `md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]`
+was not, and `sm:grid-cols-4` had to become `lg:grid-cols-4`.
+
+**Verified.** `npm run build` → 67 pages, exit 0. `verify-task
+expansion-anode-pages` → 74/74. `verify-task ruthenium-anode-rewrite` → 30/30,
+`verify-task titanium-anode-taxonomy` → 51/51. `verify-seo` → 67 unique titles
+and 67 unique descriptions, all checks passed. `list-dead-links` → no dead
+internal links. `check-scoped-classes` → every scoped class is defined.
+`audit` → no new failure; the one failure is the pre-existing baseline entry
+for two video slots.
+
+Task file: `docs/tasks/expansion-anode-pages.json` (74 assertions).
+
+Traps of this round: an Astro component file cannot be written by inserting
+into it at a line number — the insert offsets are computed against the file
+as it is read, so a second insert lands in the middle of the previous block
+and the file no longer parses. Write a component in one piece, or split it
+into small components and write each of them in one piece. The editor refuses
+a payload above about 6000 characters, so a long content file has to be
+written in chunks that each end at a complete block. The command line on this
+machine cannot carry a long `node -e` program — the PowerShell quoting
+silently mangles it and the output is wrong, so a script has to be written to
+a file first. `npm run build` occasionally dies with a Win32 pipe error from
+the console host; that is the terminal, not the code, and a second run
+succeeds.
+
+---
+
+### Round 10 — the wire skeleton, taken literally
+
+Task `wire-skeleton-parity` — the previous round rebuilt six pages on the
+MMO wire anode skeleton, but the skeleton was an approximation of it. The
+wire page carries twelve sections and three dark bands; the six pages carried
+seven to nine sections and one dark band. The class names were the same
+family, the rhythm was not the same. This round made the parity literal.
+
+**What the wire page actually is.** Measured from the built output, not from
+memory: a hero with an eyebrow, a people-first lead, two calls to action and an
+engineering-boundary note; a hero figure with three thumbnails; a four-cell
+data strip; an anchor navigation; then the sections, then the dark quote band.
+Its twelve sections are `definition`, `geometry`, `technical-data`, `output`,
+`custom-engineering` (dark navy), `applications`, `quality-evidence`,
+`comparison`, `before-quote-boundary` (light), `faq`, `manufacturing-quality`
+(dark), `rfq` (darkest). The two dark bands inside the body are
+`bg-[#003366]` and `bg-blue-950`; the closing band is `bg-slate-950`.
+
+**The engine.** `src/components/anode/PageBand.astro` is new and carries the
+four layouts the reference page uses — `standard` (blocks under a heading),
+`showcase` (a dark band with a picture beside the copy), `boundary` (a light
+band of two contrasting cards) and `quality` (a dark band with a picture
+beside the copy). `src/data/coating-page-model.ts` declares the layouts and
+the three new block kinds — `checks`, `pills` and `links`. A section can be
+marked `afterFaq`, which is how the factory band lands after the questions,
+as it does on the reference page. `src/components/anode/ProductPage.astro`
+now delegates every section to the band renderer.
+
+**The pages.** Each of the six pages gained the three bands the reference
+page closes with — the custom engineering band, the quote boundary band and
+the factory band — with its own copy, because the coating, the electrolyte
+and the failure mode differ. The quote boundary band states what is reviewed
+before manufacture, what the product name cannot replace, and the pages that
+are adjacent to it. The two cathodic protection pages already carried a
+`before-quote` band; it was converted into the boundary band and kept its own
+closing note, so the two pages do not carry the same band twice.
+
+**Verified.** `npm run build` → 67 pages, exit 0. `verify-task
+wire-skeleton-parity` → 40/40. `verify-task expansion-anode-pages` → 74/74.
+`verify-task ruthenium-anode-rewrite` → 30/30. `verify-task
+titanium-anode-taxonomy` → 51/51. `verify-seo` → 67 unique titles and 67
+unique descriptions, all checks passed. `list-dead-links` → no dead internal
+links. `check-scoped-classes` → every scoped class is defined.
+`audit` → no new failure; the one failure is the pre-existing baseline entry
+for two video slots.
+
+Task file: `docs/tasks/wire-skeleton-parity.json` (40 assertions).
+
+Traps of this round: the utility layer of the reference pages is scoped, so
+the classes of the new bands had to be read out of the built wire page rather
+than written from memory — the first draft used `lg:grid-cols-4` and
+`md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]`, and the first of those does not
+exist in the layer. An Astro component file cannot be edited by inserting
+into it at a line number; a long component has to be written in one piece or
+split into pieces that each parse. The editor refuses a payload above about
+6000 characters, so a long data file is written in chunks that each end at a
+complete block. `verify-task` reads the field of `fileExists` as `path`, not
+as `file`.
+
+---
+
+### Round 11 — the electrolysis and gas generation family
+
+Task `electrolysis-page-family` — four pages that were still temporary
+placeholders were rebuilt on the wire skeleton: `/pem-electrolyzer/`,
+`/hydrogen-generators/`, `/salt-chlorinator-for-pool/` and
+`/sodium-hypochlorite-generator/`.
+
+**No new engine.** The engine of round 10 was reused as it stands. A page of
+this family is two data files and one route file, and nothing else:
+`src/data/<name>-page.ts` holds the hero, the navigation, the quote band and
+the questions; `src/data/<name>-sections.ts` holds the sections; the route
+file renders `<ProductPage page={model} />`. The four pages were written
+against the same model and the same four band layouts, so the band rhythm
+came out at twelve sections and three dark bands per page, the same as the
+reference page, without a single change to the renderer.
+
+**The pages.** The PEM electrolyzer page leads with the route question — PEM
+against alkaline, and what the feed water has to be — rather than with the
+product. The hydrogen page is written against the instrument that will consume
+the gas: purity, oxygen content, dew point and pressure stability at the
+delivery point. The pool page treats the cell as a service item: the brine,
+the residual, the polarity reversal and the replacement interval. The
+hypochlorite page is written around the strength the plant has to hold and
+the fact that a delivered chemical is often the better answer.
+
+**Verified.** `npm run build` → 67 pages, exit 0. `verify-task
+electrolysis-page-family` → 44/44. `verify-task wire-skeleton-parity` →
+40/40. `verify-task expansion-anode-pages` → 74/74. `verify-task
+ruthenium-anode-rewrite` → 30/30. `verify-task titanium-anode-taxonomy` →
+51/51. `verify-seo` → 67 unique titles and 67 unique descriptions, all checks
+passed. `list-dead-links` → no dead internal links. `check-scoped-classes` →
+every scoped class is defined, with the eight new data files now in its
+scope. `audit` → no new failure; the one failure is the pre-existing baseline
+entry for two video slots.
+
+Task file: `docs/tasks/electrolysis-page-family.json` (44 assertions).
+
+Traps of this round: a page of the family can carry a band that the previous
+family did not, so the sections were compared against the reference page
+before the pages were called done — the hypochlorite page was missing the
+product family band and the hydrogen page ran its quality band after the
+custom engineering band instead of before it. The data files were written in
+chunks and two of them interleaved, which is why the pages were parsed
+before the build rather than after it. The title limit is seventy
+characters, not the sixty that a search snippet suggests, and the descriptions
+have to sit between seventy and one hundred and seventy-five. Three links
+named routes that the site does not have — `/applications/electrochlorination/`,
+`/industries/food-beverage/` and `/service/oem-supply/` — so the internal
+links of a new page have to be checked against the built output rather than
+against what the page seems to offer.
+
+
+
+
+---
+
+### Round 12 — the nine industry spoke pages
+
+#### Current Status
+
+Task `industries-spoke-pages` — **complete**. All nine industry detail pages
+under `/industries/*/` now render a deep spoke page: a visible breadcrumb,
+the sector failure mechanisms, the process-to-specification matrix, the
+standards and field evidence, the sector RFQ inputs and a sector FAQ backed
+by matching FAQPage JSON-LD.
+
+What changed in this final round:
+
+- `src/data/spoke/` — new directory, one module per sector:
+  - `types.ts` — the `SpokeContent` model and its sub-interfaces.
+  - `assert-route.ts` — the shared route guard. Every product link in every
+    sector is checked against `src/data/routes.json` at module load, so a
+    link that is not part of the build fails the build instead of shipping a
+    dead internal link.
+  - `chemical-processing.ts`, `marine-offshore.ts`, `aerospace.ts`,
+    `medical.ts`, `cathodic-protection.ts`, `water-treatment.ts`,
+    `electroplating.ts`, `electrowinning.ts`, `hydrogen-energy.ts` — the
+    nine content sets. Each is written for its own sector: the failure
+    mechanisms are per duty, the matrix rows are the real sub-processes,
+    the standards are the ones that apply, and the FAQs are the questions
+    engineers in that sector actually ask. The field records are anonymised
+    delivery summaries in the "duty + specification + result" form.
+- `src/data/industries-spoke.ts` — reduced to a pure registry. It maps a
+  slug to a content set and re-exports the types, so a sector can be
+  reviewed and edited without touching the index.
+- `src/pages/industries/[slug]/index.astro` — the page-local JSON-LD now
+  carries a `WebPage` node next to the `FAQPage` node. The site-wide
+  `BaseLayout` graph deliberately does not emit one, and changing that
+  layout was out of scope, so the node is added on the spoke page only.
+- `docs/tasks/industries-spoke-pages.json` — extended to all nine slugs.
+  176 assertions: per sector `routeExists`, `routeMeta`, `routeJsonLdType`,
+  `routeHasTable`, the `routeContains` markers (H1, risk section, three
+  failure modes, solution section, matrix section, a matrix row, RFQ
+  section, FAQ section, the table header), the breadcrumb and table
+  selectors, and the `routeLinksTo` targets for that sector; plus a
+  `dataEntries` assertion on `spokeContent` with count nine and the nine
+  slugs.
+
+Verification, all green:
+
+- `npm run build` — 67 pages, `Complete!`
+- `npm run qa:seo` — 67 unique titles and 67 unique descriptions, all checks
+  passed. Every spoke title is 47 to 67 characters and every spoke meta
+  description is 149 to 174 characters.
+- `npm run qa:links` — no dead internal links
+- `npm run qa:audit` — only the two known baseline failures (the unshot
+  video footage registered in `docs/qa/baseline.json`), no new failures
+- `npm run task:verify -- industries-spoke-pages` — 176/176 checks passed
+
+#### Next Step
+
+The spoke work is finished and verified. Nothing is outstanding for this
+task, and no next action is scheduled here.
+
+If a follow-up is opened, the natural candidates are the two things this
+round deliberately did not touch:
+
+1. The `WebPage` JSON-LD node is added page-locally on the spoke pages
+   only. Every other page type still has `FAQPage` without `WebPage`. Adding
+   it to `src/layouts/BaseLayout.astro` is a global layout change and needs
+   its own task, with the full-site structured-data review that implies.
+2. The `SpokeContent` model has no field for the industry image, the hero
+   image or a second table. A sector that needs a comparison table beyond
+   the single spec matrix would need the model and the component extended
+   together.
+
+#### Known Pitfalls
+
+- The editor payload limit is about 6000 characters, so a sector file has to
+  be written in chunks that each end at a complete object. PowerShell
+  here-strings (`@'...'@ | Set-Content` then `Add-Content`) work well for
+  this and avoid the limit entirely.
+- `dataEntries` needs both `count` and `slugs`.
+- `routeContains` matches the decoded page text, so write `&` and not
+  `&amp;`.
+- The site-wide `BaseLayout` graph does not emit a `WebPage` node. A
+  `routeJsonLdType` assertion that expects `WebPage` fails unless the page
+  emits the node itself.
+- `src/data/industries-spoke.ts` is now a registry only. Adding a sector
+  means writing the module under `src/data/spoke/` and adding one line to
+  the `spokeContent` array.
+
+#### Context Summary
+
+1. Goal and acceptance. Task `industries-spoke-pages`, assertions in
+   `docs/tasks/industries-spoke-pages.json`. All nine industry pages under
+   `/industries/*/` must render a deep spoke page. **Met.**
+2. Done. All nine content sets written, one module per sector under
+   `src/data/spoke/`, each written for its own sector and each linking only
+   to routes that exist in `src/data/routes.json`. The registry, the route
+   guard, the page-local `WebPage` JSON-LD and the 176 assertions are all in
+   place. Build 67 pages, QA green, task verify 176/176.
+3. Files changed this round. `src/data/spoke/types.ts` (new),
+   `src/data/spoke/assert-route.ts` (new), the nine
+   `src/data/spoke/<sector>.ts` content modules (new),
+   `src/data/industries-spoke.ts` (rewritten as a registry),
+   `src/pages/industries/[slug]/index.astro` (WebPage JSON-LD node),
+   `docs/tasks/industries-spoke-pages.json` (172 assertions added),
+   `HANDOFF.md` (this file).
+4. Next actions, in order. None outstanding. The two follow-up candidates
+   are listed under **Next Step** above.
+5. Known traps. The editor payload limit is about 6000 characters, so the
+   content files are written in chunks that each end at a complete object.
+   `dataEntries` needs `count` and `slugs`. `routeContains` matches the
+   decoded page text, so write `&` and not `&amp;`. The hub needs no
+   change, because `industryHref()` already resolves to the sector route.

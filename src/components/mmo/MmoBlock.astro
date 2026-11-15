@@ -1,0 +1,233 @@
+---
+/**
+ * Renders one content block of the MMO anode family pages.
+ *
+ * The family pages share a single block vocabulary (see
+ * `src/data/mmo-family-pages.ts`), so one component can present all of them
+ * without per-page templates.
+ */
+import type { MmoBlock, MmoListItem, MmoTone } from '../../data/mmo-family-pages';
+
+interface Props {
+  block: MmoBlock;
+  /** The band this block sits on — it decides whether the copy turns light. */
+  tone?: MmoTone;
+}
+
+const { block, tone = 'plain' } = Astro.props;
+
+/**
+ * A navy or near black band needs light copy. The shared blocks are written
+ * for a light surface, so the band decides which variant they render with.
+ */
+const dark = tone === 'dark' || tone === 'navy';
+
+/**
+ * A dark table only works on a dark band: its body cells carry no background
+ * of their own, so light text on a light band would be unreadable.
+ */
+const tableDark = dark && block.kind === 'table' && block.dark !== false;
+
+/** Widest column of a table — picks the minimum width that fits the data. */
+const tableColumns =
+  block.kind === 'table'
+    ? Math.max(block.header.length, ...block.rows.map((row) => row.length))
+    : 0;
+
+/**
+ * A metric card pairs one short value with its caption, e.g. "100 A/m²" above
+ * "Reference Design Value — Rated Conditions Apply".
+ */
+const isMetric = (item: MmoListItem) =>
+  item.paras.length === 2 && item.paras[0].length <= 16;
+---
+
+{
+  block.kind === 'items' && (
+    <div class="mmo-item-grid">
+      {block.items.map((item) => (
+        <div class="mmo-item">
+          <h3>{item.title}</h3>
+          {item.paras.map((para, index) => (
+            <p class={isMetric(item) ? (index === 0 ? 'mmo-item-value' : 'mmo-item-caption') : undefined}>
+              {para}
+            </p>
+          ))}
+          {item.list && (
+            <ul class="mmo-bullets">
+              {item.list.map((entry) => (
+                <li>{entry}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.kind === 'cards' && (
+    <div class="mmo-grid-2">
+      {block.items.map((item) => (
+        <div class={dark ? 'mmo-card-navy' : 'mmo-card-blue'}>
+          {item.index && <p class="mmo-card-index">{item.index}</p>}
+          <h3>{item.title}</h3>
+          {item.paras.map((para) => (
+            <p>{para}</p>
+          ))}
+          {item.list && (
+            <ul class="mmo-bullets">
+              {item.list.map((entry) => (
+                <li>{entry}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.kind === 'imageCards' && (
+    <div class="mmo-grid-4">
+      {block.items.map((item) => (
+        <article class="mmo-card-image">
+          <img src={item.image.src} alt={item.image.alt} loading="lazy" decoding="async" />
+          <div class="mmo-card-image-body">
+            <h3>{item.title}</h3>
+            {item.paras.map((para) => (
+              <p>{para}</p>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.kind === 'table' && (
+    <div class={tableDark ? 'mmo-table-dark-wrap' : 'mmo-table-wrap'}>
+      <table
+        class={
+          tableDark
+            ? 'mmo-table-dark'
+            : `mmo-table${tableColumns <= 4 ? ' mmo-table-narrow' : ''}`
+        }
+      >
+        {block.header.length > 0 && (
+          <thead>
+            <tr>
+              {block.header.map((cell) => (
+                <th>{cell}</th>
+              ))}
+            </tr>
+          </thead>
+        )}
+        <tbody>
+          {block.rows.map((row) => (
+            <tr>
+              {row.map((cell) => (
+                <td>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+{
+  block.kind === 'list' && (
+    <ul class={`mmo-bullets${dark ? ' mmo-bullets-light' : ''}`}>
+      {block.items.map((entry) => (
+        <li>{entry}</li>
+      ))}
+    </ul>
+  )
+}
+
+{
+  block.kind === 'faq' && (
+    <div class="mmo-faq-grid">
+      {block.items.map((item) => (
+        <details class="mmo-faq">
+          <summary>
+            {item.q}
+            <span class="mmo-faq-plus" aria-hidden="true">+</span>
+          </summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.kind === 'pills' && (
+    <div class="mmo-pill-row">
+      {block.items.map((entry) => (
+        <span class="mmo-pill">{entry}</span>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.kind === 'paragraphs' && (
+    <div class="mmo-prose">
+      {block.texts.map((text) => (
+        <p>{text}</p>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.kind === 'note' && (
+    <div class="mmo-callout mmo-callout-blue">
+      <p class="mmo-note-label">{block.label}</p>
+      {block.paras.map((para) => (
+        <p>{para}</p>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.kind === 'subheading' && (
+    <div class="mmo-subheading">
+      {block.eyebrow && <p class="mmo-eyebrow">{block.eyebrow}</p>}
+      <h2 class="mmo-h2">{block.text}</h2>
+    </div>
+  )
+}
+
+{block.kind === 'label' && <p class="mmo-inline-label">{block.text}</p>}
+
+{
+  block.kind === 'button' && (
+    <a href={block.href} class="mmo-btn mmo-btn-primary">
+      {block.label}
+    </a>
+  )
+}
+
+{
+  block.kind === 'link' && (
+    <a href={block.href} class="mmo-text-link">
+      {block.text}
+    </a>
+  )
+}
+
+{
+  block.kind === 'figure' && (
+    <figure class="mmo-figure">
+      <img src={block.image.src} alt={block.image.alt} loading="lazy" decoding="async" />
+    </figure>
+  )
+}

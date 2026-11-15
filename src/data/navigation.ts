@@ -8,6 +8,8 @@
  *   node scripts/qa/list-routes.mjs > src/data/routes.json
  */
 
+import { anodeNavGroups } from './anode-catalog';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -53,11 +55,17 @@ export const mainNav: NavItem[] = [
   {
     label: 'Titanium Anodes',
     href: '/titanium-anode/',
-    children: [
-      { label: 'Titanium Anodes', href: '/titanium-anode/', description: 'MMO, Pt/Ti and custom coating' },
-      { label: 'Cathodic Protection', href: '/cathodic-protection/', description: 'ICCP and sacrificial systems' },
-      { label: 'Anode Baskets', href: '/titanium-products/titanium-baskets/' },
-    ],
+    // Four groups, one per taxonomy dimension: geometry, coating system,
+    // application and supporting components. The mega menu renders four
+    // columns, so the grouping matches the layout exactly.
+    children: anodeNavGroups.map((group) => ({
+      label: group.label,
+      href: group.href,
+      children: group.children.map((child) => ({
+        label: child.label,
+        href: child.href,
+      })),
+    })),
   },
   {
     label: 'PEM Electrolyzer',
@@ -97,6 +105,9 @@ export function filterAvailable(items: NavItem[], routes: Set<string>): NavItem[
       if (!item.children) continue;
       const children = filterAvailable(item.children, routes);
       if (!children.length) continue;
+      // A group whose own landing page is missing falls back to its first
+      // reachable child, so the branch stays in the menu instead of
+      // disappearing silently after an incomplete build.
       out.push({ ...item, href: children[0].href, children });
       continue;
     }

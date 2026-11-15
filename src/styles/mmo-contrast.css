@@ -1,0 +1,133 @@
+/*
+ * Contrast of the dark bands on the MMO family pages.
+ *
+ * The reference pages carry their dark bands with utility classes such as
+ * `bg-blue-950` and `text-slate-700`. On the reference site a theme layer
+ * re-tints those utilities, so the copy stays legible. Here the utilities come
+ * from `mmo-reference.css` unchanged, which leaves two problems:
+ *
+ *   1. a heading inside a band often carries no colour class, so the global
+ *      heading colour (near black) wins over the band colour;
+ *   2. the copy of a band uses the dark `text-slate-500`…`text-slate-900` and
+ *      `text-gray-600`/`text-gray-700` utilities, whose contrast against the
+ *      band background is 1.0 to 2.8 instead of the required 4.5.
+ *
+ * The rules below lift that copy to a light tone and keep the solid light
+ * surfaces (the quote form card) on the dark palette.
+ *
+ * Everything is scoped under `.mmo-page`, so the rest of the site is not
+ * affected. The band list is written out because a custom property cannot
+ * carry a selector.
+ */
+
+/* The band states its own colour, so a band without `text-white` is legible. */
+.mmo-page :is(
+    .bg-blue-950,
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-blue-900,
+    .bg-slate-800,
+    [class~="bg-[#003366]"]
+  ) {
+  color: #ffffff;
+}
+
+/*
+ * Headings of a band take the colour of the band. The global rule sets the
+ * colour on the heading itself, so the band colour cannot reach it by
+ * inheritance alone.
+ */
+.mmo-page :is(
+    .bg-blue-950,
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-blue-900,
+    .bg-slate-800,
+    [class~="bg-[#003366]"]
+  )
+  :is(h1, h2, h3, h4, h5, h6) {
+  color: inherit;
+}
+
+/* The dark text utilities of a band are lifted to a light tone. */
+.mmo-page :is(
+    .bg-blue-950,
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-blue-900,
+    .bg-slate-800,
+    [class~="bg-[#003366]"]
+  )
+  :is(.text-slate-900, .text-slate-800, .text-slate-700) {
+  color: #e2e8f0;
+}
+
+.mmo-page :is(
+    .bg-blue-950,
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-blue-900,
+    .bg-slate-800,
+    [class~="bg-[#003366]"]
+  )
+  :is(.text-slate-600, .text-slate-500, .text-gray-700, .text-gray-600) {
+  color: #cbd5e1;
+}
+
+.mmo-page :is(
+    .bg-blue-950,
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-blue-900,
+    .bg-slate-800,
+    [class~="bg-[#003366]"]
+  )
+  .text-blue-700 {
+  color: #93c5fd;
+}
+
+/*
+ * A solid light surface inside a band (the quote form card) keeps the dark
+ * palette: the card states its own colour and the copy inside it inherits
+ * from the card.
+ */
+.mmo-page :is(
+    .bg-blue-950,
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-blue-900,
+    .bg-slate-800,
+    [class~="bg-[#003366]"]
+  )
+  :is(.bg-white, .bg-slate-50, .bg-slate-100, .bg-gray-50, .bg-gray-100) {
+  color: #0f172a;
+}
+
+.mmo-page :is(
+    .bg-blue-950,
+    .bg-slate-950,
+    .bg-slate-900,
+    .bg-blue-900,
+    .bg-slate-800,
+    [class~="bg-[#003366]"]
+  )
+  :is(.bg-white, .bg-slate-50, .bg-slate-100, .bg-gray-50, .bg-gray-100)
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .text-slate-900,
+    .text-slate-800,
+    .text-slate-700,
+    .text-slate-600,
+    .text-slate-500,
+    .text-slate-400,
+    .text-gray-700,
+    .text-gray-600,
+    .text-blue-700
+  ) {
+  color: inherit;
+}

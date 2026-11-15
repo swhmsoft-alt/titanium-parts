@@ -1,0 +1,14 @@
+---
+/**
+ * A free-standing paragraph inside a section.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'paragraph' }>;
+}
+
+const { part } = Astro.props;
+---
+
+<p class="mmo-body">{part.text}</p>

@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PageHero from '../../../../components/PageHero.astro';
+import RFQForm from '../../../../components/RFQForm.astro';
+import Icon from '../../../../components/Icon.astro';
+import { mmoAnodes, mmoGeometryComparison, type MmoAnode } from '../../../../data/mmo-anodes';
+import { site } from '../../../../data/site';
+import '../../../../styles/anode-catalog.css';
+
+export function getStaticPaths() {
+  // The linear anode and the rest of the family have their own pages
+  // (`mmo-*.astro`), which are 1:1 replicas of the reference layout. They are
+  // excluded here so that the two routes do not collide.
+  const familyPages = new Set([
+    'mmo-linear-anode',
+    'mmo-wire-anode',
+    'mmo-ribbon-anode',
+    'mmo-mesh-ribbon-anode',
+    'mmo-canister-anode',
+    'mmo-tubular-anode',
+    'mmo-disc-anode',
+    'mmo-rod-anode',
+  ]);
+  return mmoAnodes
+    .filter((anode) => !familyPages.has(anode.slug))
+    .map((anode) => ({
+      params: { slug: anode.slug },
+      props: { anode },
+    }));
+}
+
+interface Props {
+  anode: MmoAnode;
+}
+
+const { anode } = Astro.props;
+const others = mmoAnodes.filter((a) => a.slug !== anode.slug);
+
+const origin = site.url.replace(/\/$/, '');
+const canonicalUrl = new URL(Astro.url.pathname, origin).href;
+
+// --- Structured data ---------------------------------------------------
+// The graph is emitted by the shared layout; these nodes describe this
+// page: the page itself, its hero image and the visible FAQ answers.
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@type': 'WebPage',
+    '@id': `${canonicalUrl}#webpage`,
+    url: canonicalUrl,
+    name: anode.seoTitle ?? `${anode.title} | ${site.name}`,
+    description: anode.description,
+    isPartOf: { '@id': `${origin}/#website` },
+    inLanguage: site.locale,
+    primaryImageOfPage: { '@id': `${canonicalUrl}#primaryimage` },
+    about: { '@id': `${canonicalUrl}#product` },
+    breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+  },
+  {
+    '@type': 'ImageObject',
+    '@id': `${canonicalUrl}#primaryimage`,
+    url: new URL(anode.image, origin).href,
+    contentUrl: new URL(anode.image, origin).href,
+    caption: anode.imageAlt,
+    representativeOfPage: true,
+  },
+  {
+    '@type': 'Product',
+    '@id': `${canonicalUrl}#product`,
+    name: anode.title,
+    description: anode.description,
+    url: canonicalUrl,
+    image: new URL(anode.image, origin).href,
+    category: 'Titanium Anodes',
+    brand: { '@type': 'Brand', name: site.name },
+    manufacturer: { '@id': `${origin}/#organization` },
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    mainEntity: anode.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={anode.seoTitle ?? `${anode.title} | Titanium Parts`}
+  description={anode.description}
+  ogImage={anode.image}
+  jsonLd={jsonLd}
+>
+  <PageHero eyebrow="MMO Titanium Anodes" title={anode.title} description={anode.summary} />
+
+  <section class="ac-section">
+    <div class="ac-inner">
+      <div class="ac-hero-img">
+        <img src={anode.image} alt={anode.imageAlt} loading="eager" decoding="async" width="1536" height="1024" />
+      </div>
+
+      <div class="ac-layout">
+        <div>
+          <h2 class="ac-h2">What An {anode.title} Is And When It Is Used</h2>
+          <p class="ac-lede">{anode.detail}</p>
+
+          <div class="ac-note">
+            <h3>Product Boundary</h3>
+            <p>{anode.boundary}</p>
+          </div>
+
+          <h2 class="ac-h2" style="margin-top: 2.5rem;">How An {anode.title} Is Built</h2>
+          <ul class="ac-list">
+            {anode.build.map((item) => (
+              <li><Icon name="check" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="ac-h2" style="margin-top: 2.5rem;">What To Specify When Ordering An {anode.title}</h2>
+          <p class="ac-p">
+            These are the inputs the quotation is built on. A current value without an
+            active-area basis, or a coating name without its loading method, is not a
+            comparable specification.
+          </p>
+          <div class="ac-table-wrap" role="region" aria-label={`Order inputs for the ${anode.title}`} tabindex="0">
+            <table class="ac-table ac-table-spec">
+              <thead>
+                <tr><th scope="col">Order Input</th><th scope="col">What The Order Has To State</th></tr>
+              </thead>
+              <tbody>
+                {anode.specRows.map((row) => (
+                  <tr>
+                    <th scope="row">{row.label}</th>
+                    <td>{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {anode.ratings && (
+            <>
+              <h2 class="ac-h2" style="margin-top: 2.5rem;">Standard Output Ratings For An {anode.title}</h2>
+              <p class="ac-p">
+                Output is quoted per metre of installed anode, in both metric and imperial units.
+                These are the reference ratings used to size an installation; the rating written
+                on the order is the one the project design justifies.
+              </p>
+              <div class="ac-table-wrap" role="region" aria-label={`Output ratings for the ${anode.title}`} tabindex="0">
+                <table class="ac-table ac-table-ratings">
+                  <thead>
+                    <tr>
+                      <th scope="col">Output Rating (Metric)</th>
+                      <th scope="col">Output Rating (Imperial)</th>
+                      <th scope="col">Typical Application</th>
+                      <th scope="col">Confirmed Against</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {anode.ratings.map((row) => (
+                      <tr>
+                        <th scope="row">{row.metric}</th>
+                        <td>{row.imperial}</td>
+                        <td>{row.use}</td>
+                        <td>{row.confirm}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+
+          <h2 class="ac-h2" style="margin-top: 2.5rem;">Where An {anode.title} Is Applied</h2>
+          <div class="ac-grid-3">
+            {anode.applications.map((app) => (
+              <article class="ac-card">
+                <h3 class="ac-h3">{app.title}</h3>
+                <p class="ac-p" style="margin: 0;">{app.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <h2 class="ac-h2" style="margin-top: 2.5rem;">What We Confirm Before Quoting</h2>
+          <ul class="ac-list">
+            {anode.reviewBasis.map((item) => (
+              <li><Icon name="check-circle" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="ac-h2" style="margin-top: 2.5rem;">Inspection &amp; Documentation Scope</h2>
+          <ul class="ac-list">
+            {anode.evidence.map((item) => (
+              <li><Icon name="package" size={16} /> {item}</li>
+            ))}
+          </ul>
+
+          <h2 class="ac-h2" style="margin-top: 2.5rem;">MMO Anode Geometry Comparison</h2>
+          <p class="ac-p">
+            The coating is the same across the family; the geometry follows the installation
+            and the way the current has to be distributed. Compare the forms before the order.
+          </p>
+          <div class="ac-table-wrap" role="region" aria-label="MMO anode geometry comparison" tabindex="0">
+            <table class="ac-table">
+              <thead>
+                <tr>
+                  <th scope="col">Geometry</th>
+                  <th scope="col">What You Receive</th>
+                  <th scope="col">Normally Used For</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mmoGeometryComparison.map((row) => (
+                  <tr>
+                    <th scope="row">
+                      {row.href === Astro.url.pathname ? row.geometry : <a href={row.href}>{row.geometry}</a>}
+                    </th>
+                    <td>{row.form}</td>
+                    <td>{row.bestFor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="ac-side">
+          <div class="ac-side-card">
+            <h3 class="ac-h3">Send Your Process Data</h3>
+            <p class="ac-p">
+              Share the electrolyte or soil, the current duty, the geometry and the required
+              lifetime. A project engineer responds within 1 business day.
+            </p>
+            <ul class="ac-side-list">
+              <li><Icon name="mail" size={15} /> {site.contact.salesEmail}</li>
+              <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
+            </ul>
+            <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+          </div>
+
+          <div class="ac-side-card ac-side-card-muted">
+            <h3 class="ac-h3">Other MMO Geometries</h3>
+            <ul class="ac-side-links">
+              {others.map((o) => (
+                <li><a href={`/titanium-anode/mmo-anode/${o.slug}/`}>{o.title}</a></li>
+              ))}
+              <li><a href="/titanium-anode/mmo-anode/">All MMO anodes</a></li>
+            </ul>
+          </div>
+
+          <div class="ac-side-card ac-side-card-muted">
+            <h3 class="ac-h3">Related Coating Systems</h3>
+            <ul class="ac-side-links">
+              <li><a href="/titanium-anode/ruthenium-coated-titanium-anodes/">Ru-Ir MMO Titanium Anodes</a></li>
+              <li><a href="/titanium-anode/iridium-oxide-coated-titanium-anodes/">Ir-Ta &amp; Ir-Based MMO Anodes</a></li>
+              <li><a href="/titanium-anode/platinized-anode/">Platinized Titanium Anodes</a></li>
+              <li><a href="/titanium-anode/coating-systems/">Compare all coating systems</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-alt">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">FAQ</p>
+        <h2 class="ac-h2">{anode.title} FAQs</h2>
+      </div>
+      <div class="ac-faq">
+        {anode.faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-dark">
+    <div class="ac-inner">
+      <div class="ac-rfq">
+        <div>
+          <span class="ac-eyebrow-light">Send Details</span>
+          <h2 class="ac-h2 ac-h2-light">Describe The Installation And The Electrical Duty</h2>
+          <p class="ac-lede ac-lede-light">
+            Geometry, dimensions, coating family, current basis, connection method and the
+            documents you need. A complete specification is not required for the first review.
+          </p>
+        </div>
+        <RFQForm title="Request an MMO Anode Quotation" subtitle="A project engineer will respond within 1 business day." variant="anode" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

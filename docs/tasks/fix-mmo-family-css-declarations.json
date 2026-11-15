@@ -1,0 +1,22 @@
+{
+  "id": "fix-mmo-family-css-declarations",
+  "title": "MMO family pages render the reference utility layer without losing declarations",
+  "summary": "The extractor that writes src/styles/mmo-reference.css treated every semicolon as the end of an at-rule, so a reference rule that carries several declarations kept only its last one. `.mx-auto` lost `margin-left:auto`, `.px-5` lost `padding-left` and the page container lost `width`, `max-width` and both auto margins, which is why the family pages sat hard against the left edge with a wide empty column on the right. The parser now keeps a semicolon that separates two declarations and the utility layer was regenerated.",
+  "assertions": [
+    { "type": "fileExists", "path": "src/styles/mmo-reference.css" },
+    { "type": "fileExists", "path": "scripts/mmo/extract-reference-css.mjs" },
+    { "type": "fileContains", "path": "src/styles/mmo-reference.css", "text": ".mmo-page .mx-auto{margin-left:auto;margin-right:auto}" },
+    { "type": "fileContains", "path": "src/styles/mmo-reference.css", "text": ".mmo-page .px-5{padding-left:1.25rem;padding-right:1.25rem}" },
+    { "type": "fileContains", "path": "src/styles/mmo-reference.css", "text": "margin-left:auto!important;margin-right:auto!important;padding-left:2rem!important" },
+    { "type": "fileContains", "path": "src/styles/mmo-reference.css", "text": ".mmo-page .max-w-7xl{max-width:80rem}" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/", "selector": "data-mmo-container" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-ribbon-anode/", "selector": "data-mmo-container" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-tubular-anode/", "selector": "data-mmo-container" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-disc-anode/", "selector": "data-mmo-container" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-rod-anode/", "selector": "data-mmo-container" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-canister-anode/", "selector": "data-mmo-container" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-mesh-ribbon-anode/", "selector": "data-mmo-container" },
+    { "type": "pageCount", "min": 67 }
+  ]
+}

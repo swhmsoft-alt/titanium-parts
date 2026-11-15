@@ -10,8 +10,17 @@ const objectives = [
   { title: 'Treat Water or Support Separation', desc: 'Treat industrial, municipal or process water through defined electrochemical reactions or support downstream separation, polishing or oxidation duties.' },
 ];
 
-const processes = [
-  { title: 'Cathodic Protection', desc: 'Route pipeline, tank, marine, offshore, buried-structure or concrete protection requirements to an impressed-current or sacrificial-protection review.', send: 'Start with: Protected asset, environment, coating condition, current demand, resistivity, installation, design life and project standard.', image: '/images/applications/cathodic-protection.webp' },
+interface ApplicationProcess {
+  title: string;
+  desc: string;
+  send: string;
+  image: string;
+  /** Dedicated review page, when one exists for this process. */
+  href?: string;
+}
+
+const processes: ApplicationProcess[] = [
+  { title: 'Cathodic Protection', desc: 'Route pipeline, tank, marine, offshore, buried-structure or concrete protection requirements to an impressed-current or sacrificial-protection review.', send: 'Start with: Protected asset, environment, coating condition, current demand, resistivity, installation, design life and project standard.', image: '/images/applications/cathodic-protection.webp', href: '/cathodic-protection/' },
   { title: 'Electrochlorination', desc: 'Review brine, seawater, cooling-water or on-site hypochlorite duties using actual chloride level, output target and cell conditions.', send: 'Start with: Chloride level, output target, flow, residence time, cell geometry and operating mode.', image: '/images/applications/electrochlorination.webp' },
   { title: 'Chlor-Alkali Process', desc: 'Review membrane, diaphragm or mercury cell routes for chlorine, hydrogen and caustic soda production under specified electrolyte, current density and product purity targets.', send: 'Start with: Cell type, brine quality, current density, target products and downstream purification.', image: '/images/applications/chlor-alkali.webp' },
   { title: 'Sodium Chlorate Production', desc: 'Review sodium chlorate cells with defined electrolyte composition, current density, pH, temperature and product specification.', send: 'Start with: Electrolyte composition, current density, operating temperature, cell voltage and product purity.', image: '/images/applications/sodium-chlorate.webp' },
@@ -19,7 +28,7 @@ const processes = [
   { title: 'Electrolytic Copper Foil', desc: 'Produce electrodeposited copper foil for lithium battery or PCB substrate with defined thickness profile, surface treatment and mechanical property.', send: 'Start with: Target thickness, width, surface profile, mechanical property and downstream process.', image: '/images/applications/copper-foil.webp' },
   { title: 'PCB Electroplating', desc: 'Copper, tin, nickel, gold or other metal plating on printed circuit board substrates using defined chemistry, current density and rack or continuous operation.', send: 'Start with: Substrate, plating metal, chemistry, current density, throughput requirement and surface criteria.', image: '/images/applications/pcb-plating.webp' },
   { title: 'Electrochemical Water Treatment', desc: 'Review electrochemical oxidation, reduction or disinfection duties for industrial or municipal water under defined contaminant, conductivity and flow conditions.', send: 'Start with: Target contaminant, influent quality, flow rate, conductivity, current density and discharge standard.', image: '/images/applications/water-treatment.webp' },
-  { title: 'Marine Anti-Fouling', desc: 'Control marine biological fouling in seawater cooling circuits, ballast lines or intake structures through defined electrochlorination or impressed-current systems.', send: 'Start with: Pipe diameter, flow rate, seawater quality, biofouling history, current demand and installation environment.', image: '/images/applications/marine-antifouling.webp' },
+  { title: 'Marine Anti-Fouling', desc: 'Control marine biological fouling in seawater cooling circuits, ballast lines or intake structures through defined electrochlorination or impressed-current systems.', send: 'Start with: Pipe diameter, flow rate, seawater quality, biofouling history, current demand and installation environment.', image: '/images/applications/marine-antifouling.webp', href: '/titanium-anode/anti-fouling-system/' },
 ];
 
 const routingMatrix = [
@@ -114,6 +123,7 @@ const meta = pageMeta['applications'];
               <h3 class="app-proc-title">{p.title}</h3>
               <p class="app-proc-desc">{p.desc}</p>
               <p class="app-proc-send">{p.send}</p>
+              {p.href && <a href={p.href} class="app-proc-link">Review this process →</a>}
             </div>
           </div>
         ))}
@@ -355,6 +365,8 @@ const meta = pageMeta['applications'];
   .app-proc-title { font-size: 20px; font-weight: 700; color: #020617; line-height: 28px; margin-bottom: 0.625rem; }
   .app-proc-desc { font-size: 14px; color: #475569; line-height: 24px; margin-bottom: 0.875rem; }
   .app-proc-send { font-size: 13px; color: #64748B; line-height: 22px; padding-top: 0.75rem; border-top: 1px solid #F1F5F9; margin: 0; }
+  .app-proc-link { display: inline-block; margin-top: 0.875rem; font-size: 14px; font-weight: 600; color: #2563EB; text-decoration: none; }
+  .app-proc-link:hover { text-decoration: underline; }
 
   /* ===== TABLE ===== */
   .app-table-wrap { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden; }

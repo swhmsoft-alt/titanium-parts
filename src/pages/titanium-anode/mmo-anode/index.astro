@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import RFQForm from '../../../components/RFQForm.astro';
+import Icon from '../../../components/Icon.astro';
+import { mmoAnodes } from '../../../data/mmo-anodes';
+import { mmoHub } from '../../../data/anode-hubs';
+import { site } from '../../../data/site';
+import '../../../styles/anode-catalog.css';
+
+const origin = site.url.replace(/\/$/, '');
+const canonicalUrl = new URL(Astro.url.pathname, origin).href;
+
+// The graph is emitted by the shared layout; these nodes describe this page.
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@type': 'WebPage',
+    '@id': `${canonicalUrl}#webpage`,
+    url: canonicalUrl,
+    name: `${mmoHub.title} | ${site.name}`,
+    description: mmoHub.description,
+    isPartOf: { '@id': `${origin}/#website` },
+    inLanguage: site.locale,
+    primaryImageOfPage: { '@id': `${canonicalUrl}#primaryimage` },
+    breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+  },
+  {
+    '@type': 'ImageObject',
+    '@id': `${canonicalUrl}#primaryimage`,
+    url: new URL(mmoHub.heroImage, origin).href,
+    contentUrl: new URL(mmoHub.heroImage, origin).href,
+    caption: mmoHub.heroImageAlt,
+    representativeOfPage: true,
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    mainEntity: mmoHub.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="MMO Titanium Anodes | Titanium Parts"
+  description={mmoHub.description}
+  ogImage={mmoHub.heroImage}
+  jsonLd={jsonLd}
+>
+  <PageHero eyebrow="Product Family" title={mmoHub.title} description={mmoHub.lede} image={mmoHub.heroImage} />
+
+  <section class="ac-section">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">Coating Family</p>
+        <h2 class="ac-h2">{mmoHub.naming.title}</h2>
+        <p class="ac-lede">{mmoHub.naming.body}</p>
+      </div>
+      <div class="ac-grid-3">
+        {mmoHub.subsystems.map((sub) => (
+          <a href={sub.href} class="ac-card-link">
+            <h3 class="ac-h3">{sub.title}</h3>
+            <p class="ac-p" style="margin: 0 0 0.75rem;">{sub.body}</p>
+            <span class="ac-card-more">Review this coating system →</span>
+          </a>
+        ))}
+      </div>
+      <div class="ac-note">
+        <h3>Where the geometry pages sit</h3>
+        <p>
+          The coating and the shape are independent decisions. Each of the eight pages below
+          covers one geometry in depth — its construction, its order basis, its installation
+          and the boundary against the closest alternative.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-alt">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">Geometry Range</p>
+        <h2 class="ac-h2">Eight MMO Anode Geometries</h2>
+        <p class="ac-lede">
+          The geometry follows the installation and the way the current has to be distributed,
+          not the shape name. Each card opens the product page for that form.
+        </p>
+      </div>
+      <div class="ac-grid-4">
+        {mmoAnodes.map((anode) => (
+          <a href={`/titanium-anode/mmo-anode/${anode.slug}/`} class="ac-card-link">
+            <h3 class="ac-h3">{anode.title}</h3>
+            <p class="ac-p" style="margin: 0 0 0.75rem;">{anode.summary}</p>
+            <span class="ac-card-more">Review {anode.title} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">Selection Matrix</p>
+        <h2 class="ac-h2">Match The Geometry To The Installation</h2>
+        <p class="ac-lede">
+          Use the installation environment and the way the current has to be distributed to
+          shortlist the form. The design current, the environment and the access then fix
+          the size.
+        </p>
+      </div>
+      <div class="ac-table-wrap" role="region" aria-label="MMO anode geometry selection matrix" tabindex="0">
+        <table class="ac-table">
+          <thead>
+            <tr><th>Geometry</th><th>Form</th><th>Normally Used For</th><th>What Limits The Choice</th></tr>
+          </thead>
+          <tbody>
+            {mmoHub.selectionRows.map((row) => (
+              <tr>
+                <td><a href={row.href}>{row.geometry}</a></td>
+                <td>{row.form}</td>
+                <td>{row.bestFor}</td>
+                <td>{row.constraint}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-alt">
+    <div class="ac-inner">
+      <div class="ac-layout">
+        <div>
+          <div class="ac-head">
+            <p class="ac-eyebrow">Order Basis</p>
+            <h2 class="ac-h2">What Has To Be Defined For The Quotation</h2>
+            <p class="ac-lede">
+              An anode order is more than a coating name. These are the inputs the
+              specification and the inspection plan are built on.
+            </p>
+          </div>
+          <div class="ac-table-wrap" role="region" aria-label="What has to be defined for the quotation" tabindex="0">
+            <table class="ac-table ac-table-spec">
+              <thead>
+                <tr><th scope="col">Order Input</th><th scope="col">What The Order Has To State</th></tr>
+              </thead>
+              <tbody>
+                {mmoHub.specRows.map((row) => (
+                  <tr>
+                    <th scope="row">{row.label}</th>
+                    <td>{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="ac-side">
+          <div class="ac-side-card">
+            <h3 class="ac-h3">Evidence Supplied With The Order</h3>
+            <ul class="ac-list">
+              {mmoHub.evidence.map((item) => (
+                <li><Icon name="check-circle" size={16} /> {item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="ac-side-card ac-side-card-muted">
+            <h3 class="ac-h3">Discuss Your Project</h3>
+            <p class="ac-p">
+              Share the service conditions, the current duty and the geometry. A project
+              engineer responds within 1 business day.
+            </p>
+            <ul class="ac-side-list">
+              <li><Icon name="mail" size={15} /> {site.contact.salesEmail}</li>
+              <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
+            </ul>
+            <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section">
+    <div class="ac-inner">
+      <div class="ac-head">
+        <p class="ac-eyebrow">FAQ</p>
+        <h2 class="ac-h2">MMO Titanium Anode Questions</h2>
+      </div>
+      <div class="ac-faq">
+        {mmoHub.faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section ac-section-dark">
+    <div class="ac-inner">
+      <div class="ac-rfq">
+        <div>
+          <span class="ac-eyebrow-light">Send Details</span>
+          <h2 class="ac-h2 ac-h2-light">Describe The Electrochemical Duty</h2>
+          <p class="ac-lede ac-lede-light">
+            Reaction, electrolyte, current density with its active-area basis, geometry, target
+            life and the inspection evidence you need. A complete specification is not
+            required for the first review.
+          </p>
+        </div>
+        <RFQForm title="Request an MMO Anode Quotation" subtitle="A project engineer will respond within 1 business day." variant="anode" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

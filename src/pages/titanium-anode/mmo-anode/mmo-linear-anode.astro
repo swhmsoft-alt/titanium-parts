@@ -1,0 +1,555 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { mmoLinearPage } from '../../../data/mmo-linear-page';
+import { site } from '../../../data/site';
+
+const page = mmoLinearPage;
+const origin = site.url.replace(/\/$/, '');
+const canonicalUrl = new URL(Astro.url.pathname, origin).href;
+
+// --- Structured data ---------------------------------------------------
+// The graph is emitted by the shared layout; these nodes describe this
+// page: the page itself, its hero image and the visible FAQ answers.
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@type': 'WebPage',
+    '@id': `${canonicalUrl}#webpage`,
+    url: canonicalUrl,
+    name: page.seoTitle,
+    description: page.description,
+    isPartOf: { '@id': `${origin}/#website` },
+    inLanguage: site.locale,
+    primaryImageOfPage: { '@id': `${canonicalUrl}#primaryimage` },
+    about: { '@id': `${canonicalUrl}#product` },
+    breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+  },
+  {
+    '@type': 'ImageObject',
+    '@id': `${canonicalUrl}#primaryimage`,
+    url: new URL(page.hero.image.src, origin).href,
+    contentUrl: new URL(page.hero.image.src, origin).href,
+    caption: page.hero.image.alt,
+    representativeOfPage: true,
+  },
+  {
+    '@type': 'Product',
+    '@id': `${canonicalUrl}#product`,
+    name: 'MMO Linear Anode',
+    description: page.description,
+    url: canonicalUrl,
+    image: new URL(page.hero.image.src, origin).href,
+    category: 'Titanium Anodes',
+    brand: { '@type': 'Brand', name: site.name },
+    manufacturer: { '@id': `${origin}/#organization` },
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    mainEntity: page.faq.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={page.seoTitle}
+  description={page.description}
+  ogImage={page.hero.image.src}
+  jsonLd={jsonLd}
+>
+  <!-- 1. Hero -->
+  <section class="mmo-hero">
+    <div class="mmo-inner mmo-hero-inner">
+      <div class="mmo-hero-grid">
+        <div class="mmo-hero-copy">
+          <p class="mmo-eyebrow">{page.hero.eyebrow}</p>
+          <h1 class="mmo-h1">{page.hero.title}</h1>
+          <p class="mmo-hero-lede">{page.hero.lede}</p>
+          <div class="mmo-cta-row">
+            <a href={page.hero.primaryCta.href} class="mmo-btn mmo-btn-primary">
+              {page.hero.primaryCta.label}
+            </a>
+            <a href={page.hero.secondaryCta.href} class="mmo-btn mmo-btn-secondary">
+              {page.hero.secondaryCta.label}
+            </a>
+          </div>
+          <div class="mmo-note">
+            <p>{page.hero.note}</p>
+          </div>
+        </div>
+        <div>
+          <figure class="mmo-figure mmo-figure-ratio">
+            <img
+              src={page.hero.image.src}
+              alt={page.hero.image.alt}
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </figure>
+          <div class="mmo-thumbs">
+            {page.hero.thumbnails.map((thumb) => (
+              <figure class="mmo-thumb">
+                <img src={thumb.src} alt={thumb.alt} loading="lazy" decoding="async" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="mmo-stats">
+        {page.hero.stats.map((stat) => (
+          <div class="mmo-stat">
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Section navigation -->
+  <nav class="mmo-anchor-nav" aria-label="Page sections">
+    <div class="mmo-anchor-nav-inner">
+      {page.nav.map((item) => (
+        <a href={item.href} class={item.href === '#linear-rfq' ? 'is-active' : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <!-- 3. Design basis -->
+  <section id="design-basis" class="mmo-section mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-lead-col">
+        <p class="mmo-eyebrow">{page.designBasis.eyebrow}</p>
+        <h2 class="mmo-h2">{page.designBasis.title}</h2>
+        <p class="mmo-lede">{page.designBasis.lede}</p>
+      </div>
+      <div class="mmo-grid-4 mmo-mt-4">
+        {page.designBasis.cards.map((card) => (
+          <article class="mmo-card">
+            <span class="mmo-card-index">{card.index}</span>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mmo-callout">
+        <p><strong>{page.designBasis.note.title}</strong> {page.designBasis.note.body}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Assembly -->
+  <section id="assembly" class="mmo-section mmo-band-alt mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-split">
+        <div>
+          <p class="mmo-eyebrow">{page.assembly.eyebrow}</p>
+          <h2 class="mmo-h2">{page.assembly.title}</h2>
+          <p class="mmo-lede">{page.assembly.lede}</p>
+          {page.assembly.paragraphs.map((text) => (
+            <p class="mmo-body mmo-mt-3">{text}</p>
+          ))}
+          <div class="mmo-item-grid-tight mmo-item-grid">
+            {page.assembly.components.map((item, index) => (
+              <div class={index === page.assembly.components.length - 1 ? 'mmo-card-outline mmo-card-outline-wide' : 'mmo-card-outline'}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <figure class="mmo-figure">
+          <img
+            src={page.assembly.image.src}
+            alt={page.assembly.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="mmo-figure-cap">{page.assembly.caption}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Output ratings -->
+  <section id="outputs" class="mmo-section mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-lead-col">
+        <p class="mmo-eyebrow">{page.outputs.eyebrow}</p>
+        <h2 class="mmo-h2">{page.outputs.title}</h2>
+        <p class="mmo-lede">{page.outputs.lede}</p>
+      </div>
+      <div class="mmo-table-wrap" role="region" aria-label="Linear anode output ratings" tabindex="0">
+        <table class="mmo-table">
+          <thead>
+            <tr>
+              {page.outputs.tableHead.map((head) => (
+                <th scope="col">{head}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {page.outputs.rows.map((row) => (
+              <tr>
+                <th scope="row">{row.metric}</th>
+                <td>{row.imperial}</td>
+                <td>{row.status}</td>
+                <td>{row.confirm}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="mmo-grid-2 mmo-mt-3">
+        {page.outputs.cards.map((card) => (
+          <article class="mmo-card-blue">
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mmo-callout-soft">
+        <p><strong>{page.outputs.note.title}</strong> {page.outputs.note.body}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Technical data -->
+  <section id="technical-data" class="mmo-section mmo-band-dark mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-lead-col">
+        <p class="mmo-eyebrow mmo-eyebrow-light">{page.technicalData.eyebrow}</p>
+        <h2 class="mmo-h2 mmo-h2-light">{page.technicalData.title}</h2>
+        <p class="mmo-lede mmo-lede-light">{page.technicalData.lede}</p>
+      </div>
+      <div class="mmo-grid-2 mmo-mt-3">
+        {page.technicalData.tables.map((table) => (
+          <div class="mmo-table-dark-wrap" role="region" aria-label={table.heading} tabindex="0">
+            <table class="mmo-table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">{table.heading}</th>
+                  <th scope="col">Reference Supply Basis</th>
+                </tr>
+              </thead>
+              <tbody>
+                {table.rows.map((row) => (
+                  <tr>
+                    <td>{row.label}</td>
+                    <td>{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
+      </div>
+      <div class="mmo-callout-dark">
+        <p><strong>{page.technicalData.note.title}</strong> {page.technicalData.note.body}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Custom engineering -->
+  <section class="mmo-section">
+    <div class="mmo-inner">
+      <div class="mmo-split mmo-split-wide">
+        <figure class="mmo-figure mmo-figure-ratio">
+          <img
+            src={page.customEngineering.image.src}
+            alt={page.customEngineering.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div>
+          <p class="mmo-eyebrow">{page.customEngineering.eyebrow}</p>
+          <h2 class="mmo-h2">{page.customEngineering.title}</h2>
+          <p class="mmo-lede">{page.customEngineering.lede}</p>
+          <div class="mmo-item-grid">
+            {page.customEngineering.items.map((item) => (
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Applications -->
+  <section id="applications" class="mmo-section mmo-band-alt mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-lead-col">
+        <p class="mmo-eyebrow">{page.applications.eyebrow}</p>
+        <h2 class="mmo-h2">{page.applications.title}</h2>
+        <p class="mmo-lede">{page.applications.lede}</p>
+      </div>
+      <div class="mmo-grid-4 mmo-mt-4">
+        {page.applications.cards.map((card) => (
+          <article class="mmo-card-image">
+            <img src={card.image.src} alt={card.image.alt} loading="lazy" decoding="async" />
+            <div class="mmo-card-image-body">
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Electrical review and installation controls -->
+  <section class="mmo-section">
+    <div class="mmo-inner">
+      <div class="mmo-split mmo-split-even">
+        <div>
+          <p class="mmo-eyebrow">{page.review.electrical.eyebrow}</p>
+          <h2 class="mmo-h2">{page.review.electrical.title}</h2>
+          <p class="mmo-lede">{page.review.electrical.lede}</p>
+          <div class="mmo-stack">
+            {page.review.electrical.cards.map((card) => (
+              <div class="mmo-stack-panel">
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p class="mmo-eyebrow">{page.review.installation.eyebrow}</p>
+          <h2 class="mmo-h2">{page.review.installation.title}</h2>
+          <p class="mmo-lede">{page.review.installation.lede}</p>
+          <div class="mmo-item-grid-tight mmo-item-grid">
+            {page.review.installation.cards.map((card) => (
+              <div class="mmo-card-muted">
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Manufacturing and quality system -->
+  <section id="quality" class="mmo-section mmo-band-navy mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-split mmo-split-narrow">
+        <div>
+          <p class="mmo-eyebrow mmo-eyebrow-light">{page.quality.eyebrow}</p>
+          <h2 class="mmo-h2 mmo-h2-light">{page.quality.title}</h2>
+          <p class="mmo-lede mmo-lede-light">{page.quality.lede}</p>
+          <div class="mmo-grid-2 mmo-mt-3">
+            {page.quality.cards.map((card) => (
+              <div class="mmo-card-navy">
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+              </div>
+            ))}
+          </div>
+          <p class="mmo-body mmo-lede-light mmo-mt-3">{page.quality.records}</p>
+        </div>
+        <figure class="mmo-figure">
+          <img
+            src={page.quality.image.src}
+            alt={page.quality.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="mmo-figure-cap mmo-figure-cap-light">{page.quality.caption}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Anode form comparison -->
+  <section class="mmo-section">
+    <div class="mmo-inner">
+      <div class="mmo-lead-col">
+        <p class="mmo-eyebrow">{page.comparison.eyebrow}</p>
+        <h2 class="mmo-h2">{page.comparison.title}</h2>
+        <p class="mmo-lede">{page.comparison.lede}</p>
+      </div>
+      <div class="mmo-table-wrap" role="region" aria-label="Anode form comparison" tabindex="0">
+        <table class="mmo-table">
+          <thead>
+            <tr>
+              {page.comparison.tableHead.map((head) => (
+                <th scope="col">{head}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {page.comparison.rows.map((row) => (
+              <tr>
+                <th scope="row">{row.product}</th>
+                <td>{row.whatItIs}</td>
+                <td>{row.direction}</td>
+                <td>
+                  {row.href && row.linkLabel ? (
+                    <a href={row.href} class="mmo-table-link">{row.linkLabel}</a>
+                  ) : (
+                    'Confirm output, active length, electrical layout and installation.'
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="mmo-cta-row mmo-mt-2">
+        {page.comparison.related.map((item) => (
+          <a href={item.href} class="mmo-pill mmo-pill-plain">{item.label}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Quotation boundary -->
+  <section id="before-quote-boundary" class="mmo-section mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-lead-col">
+        <p class="mmo-eyebrow">{page.boundary.eyebrow}</p>
+        <h2 class="mmo-h2">{page.boundary.title}</h2>
+        <p class="mmo-lede">{page.boundary.lede}</p>
+      </div>
+      <div class="mmo-pair">
+        <article class="mmo-pair-panel mmo-pair-panel-blue">
+          <h3>{page.boundary.review.title}</h3>
+          <ul class="mmo-bullets">
+            {page.boundary.review.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+        <article class="mmo-pair-panel mmo-pair-panel-amber">
+          <h3>{page.boundary.limits.title}</h3>
+          <ul class="mmo-bullets">
+            {page.boundary.limits.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+      <div class="mmo-callout-soft mmo-mt-2 mmo-panel-wide">
+        <h3 class="mmo-h3">{page.boundary.related.title}</h3>
+        <p class="mmo-body mmo-mt-1">{page.boundary.related.body}</p>
+        <div class="mmo-cta-row mmo-mt-2">
+          {page.boundary.related.links.map((link) => (
+            <a href={link.href} class="mmo-pill">{link.label}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. FAQ -->
+  <section id="faq" class="mmo-section mmo-band-alt mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-narrow-col">
+        <p class="mmo-eyebrow">{page.faq.eyebrow}</p>
+        <h2 class="mmo-h2">{page.faq.title}</h2>
+      </div>
+      <div class="mmo-faq-grid">
+        {page.faq.items.map((item) => (
+          <details class="mmo-faq">
+            <summary>
+              <span>{item.q}</span>
+              <span class="mmo-faq-plus" aria-hidden="true">+</span>
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. Engineering RFQ -->
+  <section id="linear-rfq" class="mmo-section mmo-band-dark mmo-scroll">
+    <div class="mmo-inner">
+      <div class="mmo-rfq-grid">
+        <div>
+          <p class="mmo-eyebrow mmo-eyebrow-light">{page.rfq.eyebrow}</p>
+          <h2 class="mmo-h2 mmo-h2-light">{page.rfq.title}</h2>
+          <p class="mmo-lede mmo-lede-light">{page.rfq.intro}</p>
+          <ul class="mmo-rfq-list">
+            {page.rfq.checklist.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <div class="mmo-rfq-contact">
+            <p class="mmo-rfq-contact-label">{page.rfq.emailLabel}</p>
+            <a href={`mailto:${page.rfq.email}`}>{page.rfq.email}</a>
+            <p class="mmo-rfq-address">{page.rfq.address}</p>
+          </div>
+        </div>
+        <div class="mmo-form-card">
+          <form class="mmo-form" method="post" action="/contact/">
+            <div class="mmo-form-row">
+              <div class="mmo-form-field">
+                <label for="linear-name">Full Name *</label>
+                <input id="linear-name" name="fullName" type="text" class="mmo-input" required />
+              </div>
+              <div class="mmo-form-field">
+                <label for="linear-email">Business Email *</label>
+                <input id="linear-email" name="email" type="email" class="mmo-input" required />
+              </div>
+            </div>
+            <div class="mmo-form-field">
+              <label for="linear-product">Product / Output Direction *</label>
+              <select id="linear-product" name="product" class="mmo-input" required>
+                <option value="">Select an option...</option>
+                {page.rfq.options.map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+            <div class="mmo-form-field">
+              <label for="linear-file">
+                Drawing / CP Specification <span class="mmo-optional">(Optional)</span>
+              </label>
+              <input
+                id="linear-file"
+                name="attachment"
+                type="file"
+                multiple
+                accept=".pdf,.jpg,.jpeg,.png,.step,.stp,.iges,.igs,.stl,.dwg,.dxf"
+                class="mmo-file"
+              />
+              <p class="mmo-file-hint">
+                Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)
+              </p>
+              <p class="mmo-file-note">PDF, image and common CAD formats are accepted.</p>
+            </div>
+            <div class="mmo-form-field">
+              <label for="linear-message">Project Requirements *</label>
+              <textarea
+                id="linear-message"
+                name="message"
+                rows="7"
+                class="mmo-input"
+                placeholder="Share the protected structure, CP current, output per meter, active/total length, soil or backfill, layout, cable/feed arrangement, design life, quantity and required documents."
+                required></textarea>
+            </div>
+            <button type="submit" class="mmo-btn mmo-btn-primary mmo-btn-block">
+              {page.rfq.submitLabel}
+            </button>
+            <p class="mmo-form-privacy">{page.rfq.privacy}</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+

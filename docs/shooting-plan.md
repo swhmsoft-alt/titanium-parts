@@ -112,7 +112,7 @@ appears in, so one sheet shot covers the chemical, marine and medical pages.
 | Marine offshore | `industries/marine-offshore.webp` | 3 pages |
 | Metal electrowinning | `industries/metal-electrowinning.webp` | 3 pages |
 | Water treatment | `industries/water-treatment.webp` | 3 pages |
-| Titanium parts logo | `logos/titanium-parts-logo.png` | 55 pages |
+| Titanium parts logo | `logos/titanium-parts-logo.svg` | 55 pages |
 | Pem electrolyzer | `products/pem-electrolyzer.webp` | 2 pages |
 | Titanium anodes | `products/titanium-anodes.webp` | 4 pages |
 | Titanium fasteners | `products/titanium-fasteners.webp` | 2 pages |

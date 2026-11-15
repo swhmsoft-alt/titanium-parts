@@ -1,0 +1,55 @@
+{
+  "id": "electrolysis-page-family",
+  "title": "Electrolysis And Gas Generation Page Family",
+  "summary": "Four pages that were temporary placeholders — PEM electrolyzer, hydrogen generators, salt chlorinator for pool and sodium hypochlorite generator — rebuilt on the MMO wire anode skeleton, with the same band rhythm, people-first copy, engineering depth, answered questions and their own structured data, keeping every URL unchanged.",
+  "assertions": [
+    { "type": "routeExists", "route": "/pem-electrolyzer/" },
+    { "type": "routeExists", "route": "/hydrogen-generators/" },
+    { "type": "routeExists", "route": "/salt-chlorinator-for-pool/" },
+    { "type": "routeExists", "route": "/sodium-hypochlorite-generator/" },
+
+    { "type": "routeMeta", "route": "/pem-electrolyzer/" },
+    { "type": "routeMeta", "route": "/hydrogen-generators/" },
+    { "type": "routeMeta", "route": "/salt-chlorinator-for-pool/" },
+    { "type": "routeMeta", "route": "/sodium-hypochlorite-generator/" },
+
+    { "type": "routeJsonLdType", "route": "/pem-electrolyzer/", "types": ["WebPage", "FAQPage"] },
+    { "type": "routeJsonLdType", "route": "/hydrogen-generators/", "types": ["WebPage", "FAQPage"] },
+    { "type": "routeJsonLdType", "route": "/salt-chlorinator-for-pool/", "types": ["WebPage", "FAQPage"] },
+    { "type": "routeJsonLdType", "route": "/sodium-hypochlorite-generator/", "types": ["WebPage", "FAQPage"] },
+
+    { "type": "routeHasTable", "route": "/pem-electrolyzer/", "minRows": 7 },
+    { "type": "routeHasTable", "route": "/hydrogen-generators/", "minRows": 7 },
+    { "type": "routeHasTable", "route": "/salt-chlorinator-for-pool/", "minRows": 7 },
+    { "type": "routeHasTable", "route": "/sodium-hypochlorite-generator/", "minRows": 7 },
+
+    { "type": "routeContains", "route": "/pem-electrolyzer/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/hydrogen-generators/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/salt-chlorinator-for-pool/", "text": "Custom Engineering" },
+    { "type": "routeContains", "route": "/sodium-hypochlorite-generator/", "text": "Custom Engineering" },
+
+    { "type": "routeContains", "route": "/pem-electrolyzer/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/hydrogen-generators/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/salt-chlorinator-for-pool/", "text": "Before Requesting a Quote" },
+    { "type": "routeContains", "route": "/sodium-hypochlorite-generator/", "text": "Before Requesting a Quote" },
+
+    { "type": "routeContains", "route": "/pem-electrolyzer/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/hydrogen-generators/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/salt-chlorinator-for-pool/", "text": "Inside our factory" },
+    { "type": "routeContains", "route": "/sodium-hypochlorite-generator/", "text": "Inside our factory" },
+
+    { "type": "routeLinksTo", "route": "/pem-electrolyzer/", "href": "/hydrogen-generators/" },
+    { "type": "routeLinksTo", "route": "/hydrogen-generators/", "href": "/pem-electrolyzer/" },
+    { "type": "routeLinksTo", "route": "/salt-chlorinator-for-pool/", "href": "/sodium-hypochlorite-generator/" },
+    { "type": "routeLinksTo", "route": "/sodium-hypochlorite-generator/", "href": "/salt-chlorinator-for-pool/" },
+
+    { "type": "fileExists", "path": "src/data/pem-electrolyzer-page.ts" },
+    { "type": "fileExists", "path": "src/data/pem-electrolyzer-sections.ts" },
+    { "type": "fileExists", "path": "src/data/hydrogen-generator-page.ts" },
+    { "type": "fileExists", "path": "src/data/hydrogen-generator-sections.ts" },
+    { "type": "fileExists", "path": "src/data/salt-chlorinator-page.ts" },
+    { "type": "fileExists", "path": "src/data/salt-chlorinator-sections.ts" },
+    { "type": "fileExists", "path": "src/data/sodium-hypochlorite-page.ts" },
+    { "type": "fileExists", "path": "src/data/sodium-hypochlorite-sections.ts" }
+  ]
+}

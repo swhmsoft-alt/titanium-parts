@@ -1,0 +1,8 @@
+---
+import MmoProductPage from '../../../components/mmo/MmoProductPage.astro';
+import { mmoFamilyPageBySlug } from '../../../data/mmo-family-pages';
+
+const page = mmoFamilyPageBySlug['mmo-wire-anode'];
+---
+
+<MmoProductPage page={page} />

@@ -2,6 +2,9 @@
 dist/
 .astro/
 
+# command runner state (logs, status files, invocation audit trail)
+tmp/
+
 # dependencies
 node_modules/
 
@@ -10,10 +13,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
 
 # environment variables
 .env
 .env.production
+
+# local secrets (never commit)
+MINIMAX_API_KEY.txt
 
 # macOS-specific files
 .DS_Store

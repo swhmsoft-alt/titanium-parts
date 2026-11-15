@@ -1,0 +1,16 @@
+---
+/**
+ * A link that leaves the section — to another anode page of this family.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'cta' }>;
+}
+
+const { part } = Astro.props;
+---
+
+<a href={part.href} class="mmo-pill mmo-pill-plain">
+  {part.label}
+</a>

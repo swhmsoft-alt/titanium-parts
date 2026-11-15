@@ -1,0 +1,12 @@
+---
+/**
+ * The lead dioxide coated titanium anode page.
+ *
+ * The URL is owned by this static route, so the shared coating template in
+ * `src/pages/titanium-anode/[slug]/index.astro` excludes this slug.
+ */
+import ProductPage from '../../../components/anode/ProductPage.astro';
+import { pbO2Page } from '../../../data/pb-o2-anode-page';
+---
+
+<ProductPage page={pbO2Page} />

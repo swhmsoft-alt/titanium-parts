@@ -1,0 +1,42 @@
+{
+  "id": "mmo-anode-geo-seo",
+  "title": "MMO Anode Cluster GEO And SEO Upgrade",
+  "summary": "Make the MMO anode cluster machine-readable and query-aligned: semantic spec tables, FAQPage and WebPage structured data, intent-matched headings and titles, an output-rating reference table, plus build-time llms.txt and image-annotated sitemap.",
+  "assertions": [
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-ribbon-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-mesh-ribbon-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-canister-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-tubular-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-disc-anode/" },
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-rod-anode/" },
+
+    { "type": "routeMeta", "route": "/titanium-anode/mmo-anode/" },
+    { "type": "routeMeta", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/" },
+    { "type": "routeMeta", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+
+    { "type": "routeHasTable", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "minRows": 8 },
+    { "type": "routeHasTable", "route": "/titanium-anode/mmo-anode/", "minRows": 8 },
+
+    { "type": "routeJsonLdType", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "types": ["FAQPage", "WebPage", "ImageObject", "Product", "BreadcrumbList"] },
+    { "type": "routeJsonLdType", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/", "types": ["FAQPage", "WebPage", "ImageObject"] },
+    { "type": "routeJsonLdType", "route": "/titanium-anode/mmo-anode/", "types": ["FAQPage", "WebPage"] },
+
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "mA/m" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "mA/ft" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "FAQs" },
+
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/", "text": "MMO Wire Anode vs Linear Anode Assembly" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-wire-anode/", "text": "Define the Active Wire, Connection and Service Environment Before Quotation" },
+
+    { "type": "fileExists", "path": "scripts/seo/build-llms-txt.mjs" },
+    { "type": "fileExists", "path": "dist/llms.txt" },
+    { "type": "fileContains", "path": "dist/llms.txt", "text": "mmo-linear-anode" },
+    { "type": "fileContains", "path": "dist/sitemap-0.xml", "text": "<image:image>" },
+
+    { "type": "dataEntries", "module": "src/data/mmo-anodes.ts", "export": "mmoAnodes", "count": 8, "slugs": ["mmo-linear-anode", "mmo-wire-anode", "mmo-ribbon-anode", "mmo-mesh-ribbon-anode", "mmo-canister-anode", "mmo-tubular-anode", "mmo-disc-anode", "mmo-rod-anode"] },
+    { "type": "pageCount", "min": 67 }
+  ]
+}

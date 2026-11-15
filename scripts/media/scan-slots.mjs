@@ -29,7 +29,7 @@ const LOCAL_RE = /\/images\/[A-Za-z0-9\-_/.]+/g;
 
 /** Brand assets and third-party logos are handled separately, not batched. */
 const BRAND_SKIP = new Set([
-  '/images/logos/titanium-parts-logo.png',
+  '/images/logos/titanium-parts-logo.svg',
   '/images/logos/titanium-parts-logo-white.svg',
   '/images/logos/electra.png',
   '/images/logos/gonvarri.png',

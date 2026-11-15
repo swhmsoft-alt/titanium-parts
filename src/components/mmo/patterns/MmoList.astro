@@ -1,0 +1,19 @@
+---
+/**
+ * A bullet list inside a section.
+ */
+import type { MmoPart, MmoTone } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'list' }>;
+  tone?: MmoTone;
+}
+
+const { part, tone = 'plain' } = Astro.props;
+
+const dark = tone === 'dark' || tone === 'navy';
+---
+
+<ul class={`mmo-bullets${dark ? ' mmo-bullets-light' : ''}`}>
+  {part.items.map((entry) => <li>{entry}</li>)}
+</ul>

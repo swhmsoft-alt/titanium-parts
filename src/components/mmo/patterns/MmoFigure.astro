@@ -1,0 +1,26 @@
+---
+/**
+ * A picture with its caption.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'figure' }>;
+}
+
+const { part } = Astro.props;
+---
+
+{
+  part.image && (
+    <figure class="mmo-figure">
+      <img
+        src={part.image.src}
+        alt={part.image.alt}
+        loading="lazy"
+        decoding="async"
+      />
+      {part.caption && <figcaption class="mmo-figure-cap">{part.caption}</figcaption>}
+    </figure>
+  )
+}

@@ -1,0 +1,167 @@
+---
+/**
+ * Renders the blocks of a content section.
+ *
+ * The block vocabulary is shared by every page of the family, so the markup
+ * of each block kind lives here once and the pages carry copy only.
+ */
+import type { PageBlock } from '../../data/coating-page-model';
+
+interface Props {
+  blocks: PageBlock[];
+}
+
+const { blocks } = Astro.props;
+---
+
+{
+  blocks.map((block) => (
+    <Fragment>
+      {block.kind === 'paragraphs' && (
+        <div class="max-w-4xl space-y-5 mb-10">
+          {block.paragraphs?.map((text) => (
+            <p class="text-lg text-gray-600 leading-relaxed">{text}</p>
+          ))}
+        </div>
+      )}
+
+      {block.kind === 'cards' && (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          {block.items?.map((item, index) => (
+            <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+              <div class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-blue-600 font-bold mb-4 shadow-sm">
+                {item.tag ?? String(index + 1).padStart(2, '0')}
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {block.kind === 'linkcards' && (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          {block.items?.map((item) => (
+            <a href={item.href} class="group bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col hover:border-blue-300 transition-colors">
+              <h3 class="font-bold text-gray-900 text-lg mb-2 group-hover:text-blue-800">{item.title}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">{item.body}</p>
+              <span class="text-blue-700 font-semibold text-sm flex items-center gap-1 mt-auto">
+                Learn more
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {block.kind === 'table' && (
+        <div class="mb-8">
+          <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white mb-6">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-gray-50">
+                  {block.columns?.map((column, index) => (
+                    <th class={`py-4 px-6 text-gray-900 font-bold ${index === 0 ? 'w-1/3' : ''}`} scope="col">{column}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                {block.rows?.map((row) => (
+                  <tr class="hover:bg-gray-50/50 transition-colors">
+                    {row.map((cell, index) => (
+                      <td class={`py-4 px-6 ${index === 0 ? 'text-gray-900 font-semibold' : 'text-gray-700'}`}>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {block.note && <p class="text-sm text-gray-500 italic">{block.note}</p>}
+        </div>
+      )}
+
+      {block.kind === 'checks' && (
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-10">
+          {block.entries?.map((entry) => (
+            <div class="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg p-3">
+              <div class="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></div>
+              <span class="font-medium text-sm text-gray-100">{entry}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {block.kind === 'pills' && (
+        <div class="flex flex-wrap gap-2 text-sm text-blue-100 font-medium mb-10">
+          {block.entries?.map((entry) => (
+            <span class="bg-blue-800/50 px-3 py-1 rounded-full border border-blue-700/50">{entry}</span>
+          ))}
+        </div>
+      )}
+
+      {block.kind === 'links' && (
+        <nav class="flex flex-wrap gap-3" aria-label="Related pages">
+          {block.entries?.map((entry, index) => (
+            <a
+              href={block.hrefs?.[index]}
+              class="inline-flex min-h-11 items-center rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-bold text-blue-800 transition hover:border-blue-500 hover:text-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            >
+              {entry}
+            </a>
+          ))}
+        </nav>
+      )}
+
+      {block.kind === 'list' && (
+        <div class="max-w-4xl mb-10">
+          {block.intro && <p class="text-lg text-gray-600 leading-relaxed mb-6">{block.intro}</p>}
+          <ul class="grid md:grid-cols-2 gap-x-8 gap-y-3">
+            {block.points?.map((point) => (
+              <li class="flex gap-3 text-gray-700 leading-relaxed">
+                <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600"></span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {block.kind === 'spec' && (
+        <div class="max-w-5xl mb-10 overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
+          <dl class="divide-y divide-gray-100">
+            {block.specs?.map((spec) => (
+              <div class="grid lg:grid-cols-[40%_60%] gap-4 px-6 py-4">
+                <dt class="text-gray-900 font-bold">{spec.label}</dt>
+                <dd class="text-gray-700 leading-relaxed">{spec.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+
+      {block.kind === 'note' && (
+        <div class="max-w-4xl mb-10 border-l-4 border-blue-600 pl-5">
+          {block.title && <h3 class="text-lg font-bold text-gray-900 mb-2">{block.title}</h3>}
+          {block.intro && <p class="text-lg text-gray-600 leading-relaxed mb-4">{block.intro}</p>}
+          {block.note && <p class="text-gray-600 leading-relaxed">{block.note}</p>}
+        </div>
+      )}
+
+      {block.kind === 'steps' && (
+        <div class="max-w-4xl mb-10">
+          <ol class="grid gap-6">
+            {block.items?.map((item, index) => (
+              <li class="flex gap-5">
+                <span class="w-10 h-10 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">{index + 1}</span>
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>
+                  <p class="text-gray-600 leading-relaxed">{item.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+    </Fragment>
+  ))
+}

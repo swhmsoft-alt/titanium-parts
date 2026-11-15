@@ -1,0 +1,28 @@
+---
+/**
+ * The questions of a section, each with its answer.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'faq' }>;
+}
+
+const { part } = Astro.props;
+---
+
+<div class="mmo-faq-grid">
+  {
+    part.items.map((item) => (
+      <details class="mmo-faq">
+        <summary>
+          {item.q}
+          <span class="mmo-faq-plus" aria-hidden="true">
+            +
+          </span>
+        </summary>
+        <p>{item.a}</p>
+      </details>
+    ))
+  }
+</div>

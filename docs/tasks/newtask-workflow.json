@@ -1,0 +1,27 @@
+{
+  "id": "newtask-workflow",
+  "title": "A new session starts from the task the handoff names, and only from that task",
+  "summary": "The /newtask flow is written down as four fixed steps: read the root HANDOFF.md, open the context ledger with `npm run budget -- --reset --task <id>`, pick one and only one task file out of docs/tasks/*.json, and work on that task's assertions alone. The id comes from the single machine readable `Task: <id>` line of the handoff and from nowhere else — a missing, ambiguous or unknown id is a hard error, there is no fallback and no automatic pick. The failures of the other task files may be reported but must never be fixed on the side.",
+  "assertions": [
+    { "type": "fileExists", "path": "scripts/handoff/newtask.mjs" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "the handoff must carry the marked block" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "the handoff must name exactly one task" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "the task of a new session has to be unique" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "the task of a new session has to be unique and inside the block" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "const BLOCK_START = '<!-- newtask -->';" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "const BLOCK_END = '<!-- /newtask -->';" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "task definition not found: docs/tasks/" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "'--reset', '--task', taskId" },
+    { "type": "fileContains", "path": "scripts/handoff/newtask.mjs", "text": "report only, do not touch" },
+    { "type": "fileExists", "path": "docs/tasks/newtask-workflow.json" },
+    { "type": "fileContains", "path": "package.json", "text": "\"newtask\": \"node scripts/handoff/newtask.mjs\"" },
+    { "type": "fileContains", "path": ".clinerules/.clinerules.md", "text": "选且仅选一个" },
+    { "type": "fileContains", "path": ".clinerules/.clinerules.md", "text": "其他任务的失败最多写进报告" },
+    { "type": "fileContains", "path": ".clinerules/.clinerules.md", "text": "Task: <id>" },
+    { "type": "fileContains", "path": ".clinerules/.clinerules.md", "text": "<!-- newtask -->" },
+    { "type": "fileContains", "path": "HANDOFF.md", "text": "Task: newtask-workflow" },
+    { "type": "fileContains", "path": "HANDOFF.md", "text": "<!-- newtask -->" },
+    { "type": "fileContains", "path": "HANDOFF.md", "text": "<!-- /newtask -->" },
+    { "type": "pageCount", "min": 67 }
+  ]
+}

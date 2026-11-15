@@ -8,8 +8,13 @@ import { evidenceCards, applications } from '../../data/titanium-anode-page-4';
 import { beforeQuoteDo, beforeQuoteDont, recoatingCards } from '../../data/titanium-anode-page-5';
 import { faqItems } from '../../data/titanium-anode-page-6';
 import { faqItemsExtra, quickPoints, rfqChecks } from '../../data/titanium-anode-page-7';
+import { anodeFamilyCards, anodeNavGroups } from '../../data/anode-catalog';
 import { pageMeta } from '../../data/page-meta';
 const allFaq = [...faqItems, ...faqItemsExtra];
+
+// Product-family block — the same taxonomy the navigation menu is built from.
+const familyCards = anodeFamilyCards;
+const geometryLinks = anodeNavGroups.find((g) => g.key === 'mmo')?.children ?? [];
 
 const meta = pageMeta['titaniumAnode'];
 ---
@@ -98,6 +103,41 @@ const meta = pageMeta['titaniumAnode'];
               <p class="anode-coating-text">{c.body}</p>
               <span class="anode-card-link">Review {c.title.replace(' Anodes','').replace('Anodes','').trim()} →</span>
             </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT FAMILIES ============================================= -->
+  <section id="product-families" class="anode-section anode-section-blue">
+    <div class="anode-section-inner">
+      <header class="anode-section-head">
+        <p class="anode-eyebrow">Product Families</p>
+        <h2>Choose the Product Family, Then the Geometry</h2>
+        <p class="anode-section-lede">The titanium anode range is organised along four independent dimensions — the MMO product family, the coating system, the cathodic protection application and the supporting system components. Start with the family that matches the decision you are making.</p>
+      </header>
+      <div class="anode-families-grid">
+        {familyCards.map((c) => (
+          <a href={c.href} class="anode-coating-card">
+            <div class="anode-coating-img"><img src={c.image} alt={c.imageAlt} loading="lazy" decoding="async" /></div>
+            <div class="anode-coating-body">
+              <h3>{c.title}</h3>
+              <p class="anode-coating-text">{c.body}</p>
+              <span class="anode-card-link">Review {c.title} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="anode-geometry-head">
+        <h3>MMO Anode Geometries</h3>
+        <p>Each geometry is a separate product with its own construction, installation method and order basis.</p>
+      </div>
+      <div class="anode-geometry-grid">
+        {geometryLinks.map((g) => (
+          <a href={g.href} class="anode-geometry-link">
+            <span>{g.label}</span>
+            <Icon name="arrow-right" size={14} />
           </a>
         ))}
       </div>
@@ -456,6 +496,25 @@ const meta = pageMeta['titaniumAnode'];
 .anode-coating-text { font-size: 0.9375rem; color: #64748b; line-height: 1.6; margin: 0 0 1.25rem; }
 .anode-card-link { color: #2563eb; font-weight: 600; font-size: 0.9375rem; }
 .anode-coating-card:hover .anode-card-link { text-decoration: underline; }
+
+  /* Product families */
+  .anode-families-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  @media (max-width: 1024px) { .anode-families-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .anode-families-grid { grid-template-columns: 1fr; } }
+  .anode-geometry-head { margin: 3rem 0 1.25rem; }
+  .anode-geometry-head h3 { font-size: 1.25rem; font-weight: 700; color: #0f172a; margin: 0 0 0.375rem; }
+  .anode-geometry-head p { font-size: 0.9375rem; color: #64748b; margin: 0; }
+  .anode-geometry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  @media (max-width: 768px) { .anode-geometry-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .anode-geometry-grid { grid-template-columns: 1fr; } }
+  .anode-geometry-link {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+    padding: 0.875rem 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    font-size: 0.9375rem; font-weight: 600; color: #334155; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .anode-geometry-link:hover { border-color: #2563eb; color: #2563eb; }
+  .anode-geometry-link :global(svg) { color: #2563eb; flex-shrink: 0; }
 
 /* Manufacturing scope */
 .anode-scope-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }

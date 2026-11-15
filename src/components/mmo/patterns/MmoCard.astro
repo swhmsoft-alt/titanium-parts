@@ -1,0 +1,48 @@
+---
+/**
+ * A single card — the one box of a section that has no row of them.
+ */
+import type { MmoPart, MmoTone } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'card' }>;
+  tone?: MmoTone;
+}
+
+const { part, tone = 'plain' } = Astro.props;
+
+const dark = tone === 'dark' || tone === 'navy';
+---
+
+<article
+  class={
+    part.variant === 'blue'
+      ? 'mmo-card-blue'
+      : dark
+        ? 'mmo-card-navy'
+        : 'mmo-card'
+  }
+>
+  {part.index && <span class="mmo-card-index">{part.index}</span>}
+  {part.image && (
+    <img
+      class="mmo-card-media"
+      src={part.image.src}
+      alt={part.image.alt}
+      loading="lazy"
+      decoding="async"
+    />
+  )}
+  <h3>{part.title}</h3>
+  {part.body && <p>{part.body}</p>}
+  {part.extra.map((line) => (
+    <p>{line}</p>
+  ))}
+  {part.list.length > 0 && (
+    <ul class="mmo-bullets">
+      {part.list.map((entry) => (
+        <li>{entry}</li>
+      ))}
+    </ul>
+  )}
+</article>

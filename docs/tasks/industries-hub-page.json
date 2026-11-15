@@ -1,0 +1,86 @@
+{
+  "id": "industries-hub-page",
+  "title": "Industries Hub Page Rebuild",
+  "summary": "Rebuild /industries/ as an EEAT industry hub: one H1, ordered H2/H3 sections, a data-driven 9-industry matrix, a cross-industry comparison table, a qualification boundary, an RFQ section and an FAQ accordion backed by matching FAQPage JSON-LD.",
+  "assertions": [
+    { "type": "routeExists", "route": "/industries/" },
+    { "type": "routeMeta", "route": "/industries/" },
+
+    { "type": "routeContains", "route": "/industries/", "text": "Titanium, Electrochemical & Hydrogen Solutions by Industry" },
+    { "type": "routeContains", "route": "/industries/", "text": "Industry Is the Starting Point" },
+    { "type": "routeContains", "route": "/industries/", "text": "Three Technical Routes, Selected by Application" },
+    { "type": "routeContains", "route": "/industries/", "text": "Explore Solutions by Industrial Process and Operating Risk" },
+    { "type": "routeContains", "route": "/industries/", "text": "Match the Industry to Required Engineering Inputs" },
+    { "type": "routeContains", "route": "/industries/", "text": "Industry Relevance Is Not Automatic Qualification" },
+    { "type": "routeContains", "route": "/industries/", "text": "From Technical Inquiry to Qualified Scope" },
+    { "type": "routeContains", "route": "/industries/", "text": "Specialized Applications Requiring Qualification Review" },
+    { "type": "routeContains", "route": "/industries/", "text": "Send the Parameters That Control the Decision" },
+    { "type": "routeContains", "route": "/industries/", "text": "Technical Questions Before Product Selection" },
+    { "type": "routeContains", "route": "/industries/", "selector": "id=\"rfq\"" },
+    { "type": "routeContains", "route": "/industries/", "selector": "<table" },
+    { "type": "routeContains", "route": "/industries/", "text": "Aerospace" },
+    { "type": "routeContains", "route": "/industries/", "text": "Medical" },
+    { "type": "routeContains", "route": "/industries/", "text": "Transportation" },
+
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/titanium-products/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/titanium-anode/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/pem-electrolyzer/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/chemical-processing/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/marine-offshore/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/aerospace/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/medical/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/cathodic-protection/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/water-treatment/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/electroplating/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/electrowinning/" },
+    { "type": "routeLinksTo", "route": "/industries/", "href": "/industries/hydrogen-energy/" },
+
+    { "type": "dataExportExists", "module": "src/data/industries-hub.ts", "export": "technicalRoutes" },
+    { "type": "dataExportExists", "module": "src/data/industries-hub.ts", "export": "rfqGroups" },
+    { "type": "dataExportExists", "module": "src/data/industries-hub.ts", "export": "hubFaqs" },
+    { "type": "dataExportExists", "module": "src/data/industries-hub.ts", "export": "qualification" },
+    {
+      "type": "dataEntries",
+      "module": "src/data/industries-hub.ts",
+      "export": "industryMatrix",
+      "count": 9,
+      "slugs": [
+        "chemical-processing",
+        "marine-offshore",
+        "aerospace",
+        "medical",
+        "cathodic-protection",
+        "water-treatment",
+        "electroplating",
+        "electrowinning",
+        "hydrogen-energy"
+      ]
+    },
+    {
+      "type": "dataEntries",
+      "module": "src/data/industries-hub.ts",
+      "export": "technicalRoutes",
+      "count": 3,
+      "slugs": ["titanium-products", "titanium-anodes", "pem-electrolyzer"]
+    },
+    {
+      "type": "dataEntries",
+      "module": "src/data/industries-hub.ts",
+      "export": "rfqGroups",
+      "idField": "title",
+      "count": 3
+    },
+    {
+      "type": "dataEntries",
+      "module": "src/data/industries-hub.ts",
+      "export": "hubFaqs",
+      "idField": "question",
+      "count": 5
+    },
+    { "type": "dataExportExists", "module": "src/data/industries-hub.ts", "export": "industryCards" },
+    { "type": "dataExportExists", "module": "src/data/industries-hub.ts", "export": "comparisonRows" },
+
+    { "type": "fileExists", "path": "src/data/industries-hub.ts" },
+    { "type": "pageCount", "min": 67 }
+  ]
+}

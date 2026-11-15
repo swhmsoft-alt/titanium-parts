@@ -1,0 +1,273 @@
+---
+/**
+ * The deep layout of an industry spoke page.
+ *
+ * Rendered when a sector has a completed content set in
+ * `src/data/industries-spoke.ts`. The visible copy and the FAQPage JSON-LD
+ * are generated from the same data, so they cannot drift apart.
+ */
+import PageHero from '../PageHero.astro';
+import RFQForm from '../RFQForm.astro';
+import Icon from '../Icon.astro';
+import type { Industry } from '../../data/industries-data';
+import type { SpokeContent } from '../../data/industries-spoke';
+import { site } from '../../data/site';
+
+interface Props {
+  industry: Industry;
+  spoke: SpokeContent;
+  others: Industry[];
+}
+
+const { industry, spoke, others } = Astro.props;
+---
+
+<nav class="ind-crumb" aria-label="Breadcrumb">
+  <div class="container">
+    <ol class="ind-crumb-list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/industries/">Industries</a></li>
+      <li aria-current="page">{industry.title}</li>
+    </ol>
+  </div>
+</nav>
+
+<PageHero eyebrow="Industry" title={spoke.h1} description={spoke.heroLede} />
+
+<section class="ind-sec ind-white">
+  <div class="container">
+    <div class="ind-hero-img">
+      <img src={industry.image} alt={industry.title} loading="eager" decoding="async" width="1536" height="1024" />
+    </div>
+
+    <div class="ind-grid">
+      <div class="ind-main">
+        <h2 class="ind-h2">{spoke.riskSectionTitle}</h2>
+        <p class="ind-lede">{industry.detail}</p>
+        {spoke.failureModes.map((mode) => (
+          <div class="ind-block">
+            <h3 class="ind-h3">{mode.title}</h3>
+            <p class="ind-body">{mode.body}</p>
+          </div>
+        ))}
+
+        <h2 class="ind-h2">{spoke.solutionSectionTitle}</h2>
+        {spoke.solutions.map((solution) => (
+          <div class="ind-block">
+            <h3 class="ind-h3">{solution.title}</h3>
+            <p class="ind-body">{solution.body}</p>
+            <ul class="ind-checks">
+              {solution.points.map((point) => (
+                <li><Icon name="check" size={16} /> {point}</li>
+              ))}
+            </ul>
+            <a href={solution.href} class="ind-link">
+              {solution.hrefLabel} <Icon name="arrow-right" size={15} />
+            </a>
+          </div>
+        ))}
+
+        <h2 class="ind-h2">{spoke.matrixSectionTitle}</h2>
+        <div class="ind-table-wrap">
+          <table class="ind-table">
+            <thead>
+              <tr>
+                <th scope="col">Sub-Process / Application</th>
+                <th scope="col">Typical Medium &amp; Temp</th>
+                <th scope="col">Primary Corrosion / Electrochemical Risk</th>
+                <th scope="col">Recommended Material / Coating</th>
+              </tr>
+            </thead>
+            <tbody>
+              {spoke.specMatrix.map((row) => (
+                <tr>
+                  <th scope="row">{row.process}</th>
+                  <td>{row.medium}</td>
+                  <td>{row.risk}</td>
+                  <td>{row.recommendation}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <h2 class="ind-h2">{spoke.standardsSectionTitle}</h2>
+        <div class="ind-block">
+          <h3 class="ind-h3">{spoke.standardsSubTitle}</h3>
+          <ul class="ind-checks">
+            {spoke.standards.map((item) => (
+              <li><Icon name="check-circle" size={16} /> {item}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="ind-block">
+          <h3 class="ind-h3">{spoke.fieldSubTitle}</h3>
+          {spoke.fieldExperience.map((record) => (
+            <div class="ind-field">
+              <p class="ind-field-row"><span class="ind-field-label">Duty</span>{record.duty}</p>
+              <p class="ind-field-row"><span class="ind-field-label">Specification</span>{record.spec}</p>
+              <p class="ind-field-row"><span class="ind-field-label">Result</span>{record.result}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 class="ind-h2">{spoke.rfqSectionTitle}</h2>
+        <ul class="ind-checks">
+          {spoke.rfqInputs.map((item) => (
+            <li><Icon name="check" size={16} /> {item}</li>
+          ))}
+        </ul>
+
+        <h2 class="ind-h2" id="faq">{spoke.faqSectionTitle}</h2>
+        <div class="ind-faq">
+          {spoke.faqs.map((item) => (
+            <details class="ind-faq-item">
+              <summary class="ind-faq-question">
+                {item.question}
+                <span class="ind-faq-mark"><Icon name="chevron-down" size={18} /></span>
+              </summary>
+              <div class="ind-faq-answer">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <aside class="ind-side">
+        <div class="ind-card">
+          <h3 class="ind-card-title">Discuss Your Project</h3>
+          <p class="ind-card-desc">
+            Send the service conditions, the material requirement and the drawing. A project
+            engineer responds within 1 business day.
+          </p>
+          <ul class="ind-card-list">
+            <li><Icon name="mail" size={15} /> {site.contact.salesEmail}</li>
+            <li><Icon name="phone-call" size={15} /> {site.contact.phoneDisplay}</li>
+          </ul>
+          <a href="/contact/" class="btn btn-primary btn-block">Request a Quote</a>
+        </div>
+
+        <div class="ind-card ind-card-muted">
+          <h3 class="ind-card-title">Related Routes</h3>
+          <ul class="ind-other">
+            {spoke.relatedLinks.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+                <span class="ind-other-note">{link.note}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="ind-card ind-card-muted">
+          <h3 class="ind-card-title">Other Industries</h3>
+          <ul class="ind-other">
+            {others.map((o) => (
+              <li><a href={`/industries/${o.slug}/`}>{o.title}</a></li>
+            ))}
+            <li><a href="/industries/">All industries</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="ind-sec ind-slate">
+  <div class="container">
+    <div class="ind-rfq">
+      <div>
+        <span class="ind-eyebrow">Send Details</span>
+        <h2 class="ind-h2 ind-h2-light">Describe The Service Condition</h2>
+        <p class="ind-lede ind-lede-light">
+          Media, temperature, pressure, current density, quantity and required documents.
+          A complete specification is not needed for the first review — unknown items can be
+          identified during technical communication.
+        </p>
+      </div>
+      <RFQForm title="Request a Quotation" subtitle="A project engineer will respond within 1 business day." variant="anode" />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Breadcrumb ---------------------------------------------------------- */
+  .ind-crumb { background: #fff; border-bottom: 1px solid var(--color-slate-200); }
+  .ind-crumb-list { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0.875rem 0; font-size: 0.8125rem; color: var(--color-slate-500); }
+  .ind-crumb-list li + li::before { content: '/'; margin-right: 0.5rem; color: var(--color-slate-300); }
+  .ind-crumb-list a { color: var(--color-slate-600); text-decoration: none; }
+  .ind-crumb-list a:hover { color: var(--color-primary); }
+  .ind-crumb-list [aria-current='page'] { color: var(--color-slate-900); font-weight: 600; }
+
+  /* Layout -------------------------------------------------------------- */
+  .ind-sec { padding: 5rem 0; }
+  .ind-white { background: #fff; }
+  /* The RFQ band is dark: the heading and lede use the light text variant. */
+  .ind-slate { background: var(--color-slate-900); }
+  .ind-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary-300); margin-bottom: 0.75rem; }
+  .ind-h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-slate-900); margin: 2.5rem 0 1rem; }
+  .ind-h2:first-child { margin-top: 0; }
+  .ind-h2-light { color: #fff; }
+  .ind-h3 { font-size: 1.0625rem; font-weight: 700; color: var(--color-slate-900); margin: 1.75rem 0 0.625rem; }
+  .ind-lede { font-size: 1rem; line-height: 1.75; color: var(--color-slate-600); margin: 0; }
+  .ind-lede-light { color: rgba(255, 255, 255, 0.82); }
+  .ind-body { font-size: 0.9375rem; line-height: 1.75; color: var(--color-slate-600); margin: 0 0 1rem; }
+  .ind-block { margin-bottom: 1.5rem; }
+
+  .ind-hero-img { margin-bottom: 3rem; border-radius: 1rem; overflow: hidden; }
+  .ind-hero-img img { width: 100%; height: auto; display: block; }
+
+  .ind-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3.5rem; align-items: start; }
+  @media (max-width: 1024px) { .ind-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  /* Lists --------------------------------------------------------------- */
+  .ind-checks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .ind-checks li { display: flex; align-items: flex-start; gap: 0.625rem; font-size: 0.9375rem; line-height: 1.6; color: var(--color-slate-700); }
+  .ind-checks :global(svg) { color: var(--color-primary); flex-shrink: 0; margin-top: 0.2rem; }
+
+  .ind-link { display: inline-flex; align-items: center; gap: 0.375rem; margin-top: 0.875rem; font-size: 0.9375rem; font-weight: 600; color: var(--color-primary); text-decoration: none; }
+  .ind-link:hover { text-decoration: underline; }
+
+  /* Matrix table -------------------------------------------------------- */
+  .ind-table-wrap { overflow-x: auto; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; background: #fff; }
+  .ind-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 720px; }
+  .ind-table thead th { background: var(--color-slate-900); color: #fff; text-align: left; padding: 0.875rem 1rem; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.02em; }
+  .ind-table tbody th, .ind-table tbody td { padding: 0.875rem 1rem; border-top: 1px solid var(--color-slate-200); text-align: left; vertical-align: top; line-height: 1.6; color: var(--color-slate-600); }
+  .ind-table tbody th { color: var(--color-slate-900); font-weight: 700; }
+  .ind-table tbody tr:nth-child(even) { background: var(--color-slate-50); }
+
+  /* Field records ------------------------------------------------------- */
+  .ind-field { background: var(--color-slate-50); border: 1px solid var(--color-slate-200); border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .ind-field-row { font-size: 0.9375rem; line-height: 1.7; color: var(--color-slate-600); margin: 0 0 0.5rem; }
+  .ind-field-row:last-child { margin-bottom: 0; }
+  .ind-field-label { display: inline-block; min-width: 7.5rem; font-weight: 700; color: var(--color-slate-900); }
+
+  /* FAQ ----------------------------------------------------------------- */
+  .ind-faq { display: flex; flex-direction: column; gap: 0.75rem; }
+  .ind-faq-item { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; }
+  .ind-faq-item[open] { border-color: var(--color-primary-200); box-shadow: 0 6px 20px -12px rgba(15, 23, 42, 0.25); }
+  .ind-faq-question { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.125rem 1.5rem; cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--color-slate-900); list-style: none; }
+  .ind-faq-question::-webkit-details-marker { display: none; }
+  .ind-faq-mark { flex-shrink: 0; display: inline-flex; color: var(--color-primary); transition: transform 0.25s; }
+  .ind-faq-item[open] .ind-faq-mark { transform: rotate(180deg); }
+  .ind-faq-answer { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--color-slate-100); }
+  .ind-faq-answer p { margin: 0; padding-top: 1rem; font-size: 0.9375rem; line-height: 1.75; color: var(--color-slate-600); }
+
+  /* Sidebar ------------------------------------------------------------- */
+  .ind-side { display: flex; flex-direction: column; gap: 1.5rem; }
+  .ind-card { padding: 1.75rem; background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
+  .ind-card-muted { background: var(--color-slate-50); }
+  .ind-card-title { font-size: 1.0625rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.75rem; }
+  .ind-card-desc { font-size: 0.875rem; line-height: 1.65; color: var(--color-slate-600); margin: 0 0 1rem; }
+  .ind-card-list { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .ind-card-list li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--color-slate-700); }
+  .ind-card-list :global(svg) { color: var(--color-primary); }
+  .ind-other { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .ind-other a { font-size: 0.875rem; color: var(--color-slate-700); text-decoration: none; }
+  .ind-other a:hover { color: var(--color-primary); }
+  .ind-other-note { display: block; font-size: 0.75rem; line-height: 1.55; color: var(--color-slate-500); margin-top: 0.125rem; }
+
+  /* RFQ ----------------------------------------------------------------- */
+  .ind-rfq { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 1024px) { .ind-rfq { grid-template-columns: 1fr; gap: 2rem; } }
+</style>

@@ -1,0 +1,15 @@
+---
+/**
+ * The Ru-Ir coated titanium anode page.
+ *
+ * The page is rendered by the shared renderer of the family,
+ * `src/components/anode/ProductPage.astro`, from the content model in
+ * `src/data/ru-ir-anode-page.ts`. This file stays the entry point of the
+ * ruthenium page so the route keeps its own name.
+ */
+import ProductPage from './ProductPage.astro';
+import { ruIrPage } from '../../data/ru-ir-anode-page';
+---
+
+<ProductPage page={ruIrPage} />
+

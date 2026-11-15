@@ -1,0 +1,12 @@
+---
+/**
+ * The platinized titanium anode page.
+ *
+ * The URL is owned by this static route, so the shared coating template in
+ * `src/pages/titanium-anode/[slug]/index.astro` excludes this slug.
+ */
+import ProductPage from '../../../components/anode/ProductPage.astro';
+import { platinizedPage } from '../../../data/platinized-anode-page';
+---
+
+<ProductPage page={platinizedPage} />

@@ -1,50 +1,13 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
-import SectionTitle from '../../components/SectionTitle.astro';
-import RFQForm from '../../components/RFQForm.astro';
-import { pageMeta } from '../../data/page-meta';
-import Icon from '../../components/Icon.astro';
-
-const meta = pageMeta['hydrogenGenerators'];
+/**
+ * The page of the PEM hydrogen generator.
+ *
+ * The page is rendered by the shared renderer of the family,
+ * `src/components/anode/ProductPage.astro`, from the content model in
+ * `src/data/hydrogen-generator-page.ts`. The skeleton is the MMO wire anode page.
+ */
+import ProductPage from '../../components/anode/ProductPage.astro';
+import { hydrogenGeneratorPage } from '../../data/hydrogen-generator-page';
 ---
-<BaseLayout
-    title={meta.title}
-    description={meta.description}
-  >
-  <PageHero eyebrow="Hydrogen Generators" title="PEM Hydrogen Generator for High-Purity Lab & OEM Supply" description="PEM hydrogen generators for laboratory, analytical instrument, fuel cell testing, and OEM supply." />
-  <section class="section">
-    <div class="container">
-      <SectionTitle eyebrow="PEM Hydrogen Generators" title="High-Purity Hydrogen for Lab, Analytical & OEM" description="Titanium Parts' PEM hydrogen generators deliver high-purity hydrogen for laboratory and OEM applications." />
-      <div class="product-spec-table">
-        <h3>Technical Specifications</h3>
-        <div class="spec-row"><span>Standard hydrogen purity</span><span>&gt; 99.99%</span></div>
-        <div class="spec-row"><span>Hydrogen delivery pressure</span><span>0 – 3 MPa configurations</span></div>
-        <div class="spec-row"><span>Applications</span><span>Laboratory, GC / GC-MS / ICP-MS, fuel cell testing, semiconductor, CVD</span></div>
-        <div class="spec-row"><span>Configurations</span><span>S-Series Compact, OEM Modules, Custom</span></div>
-      </div>
-    </div>
-  </section>
-  <section class="section section-light">
-    <div class="container">
-      <SectionTitle eyebrow="Inquiry" title="Request a PEM Hydrogen Generator Review" description="Titanium Parts can review the generator configuration, delivery boundary and acceptance plan." />
-      <div class="rfq-section-grid">
-        <div>
-          <span class="section-title-eyebrow">Inquiry</span>
-          <h2 class="section-title-heading">Request a PEM Hydrogen Generator Review</h2>
-        </div>
-        <RFQForm title="Send Inquiry" subtitle="Tell us the required hydrogen flow, where the gas will be used and which utilities are available." variant="pem" />
-      </div>
-    </div>
-  </section>
-</BaseLayout>
-<style>
-  .product-spec-table { padding: 2rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
-  .product-spec-table h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin-bottom: 1.5rem; }
-  .spec-row { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--color-border-light); }
-  .spec-row:last-child { border-bottom: none; }
-  .spec-row span:first-child { font-weight: 600; color: var(--color-text); }
-  .spec-row span:last-child { color: var(--color-text-secondary); text-align: right; }
-  .rfq-section-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
-  @media (max-width: 1024px) { .rfq-section-grid { grid-template-columns: 1fr; } }
-</style>
+
+<ProductPage page={hydrogenGeneratorPage} />

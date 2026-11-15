@@ -4,6 +4,8 @@ import PageHero from '../../../components/PageHero.astro';
 import RFQForm from '../../../components/RFQForm.astro';
 import Icon from '../../../components/Icon.astro';
 import { industries, type Industry } from '../../../data/industries-data';
+import { getSpokeContent } from '../../../data/industries-spoke';
+import IndustrySpoke from '../../../components/industry/IndustrySpoke.astro';
 import { site } from '../../../data/site';
 
 export function getStaticPaths() {
@@ -19,12 +21,56 @@ interface Props {
 
 const { industry } = Astro.props;
 const others = industries.filter((i) => i.slug !== industry.slug);
+
+/**
+ * The deep sector content, when it has been written.
+ *
+ * A sector without a completed content set keeps the generic layout, so a
+ * page is never published with an empty section.
+ */
+const spoke = getSpokeContent(industry.slug);
+
+const origin = site.url.replace(/\/$/, '');
+const canonicalUrl = new URL(Astro.url.pathname, origin).href;
+
+/**
+ * The FAQPage node is generated from the same array that renders the
+ * accordion on the page, so the visible copy and the structured data can
+ * never disagree.
+ */
+const jsonLd: Record<string, unknown>[] = spoke
+  ? [
+      {
+        '@type': 'WebPage',
+        '@id': `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: spoke.seoTitle,
+        description: spoke.metaDescription,
+        isPartOf: { '@id': `${origin}/#website` },
+        inLanguage: site.locale,
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${canonicalUrl}#faq`,
+        mainEntity: spoke.faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+    ]
+  : [];
 ---
 
 <BaseLayout
-  title={`${industry.title} | Titanium Parts`}
-  description={industry.description}
+  title={spoke ? spoke.seoTitle : `${industry.title} | Titanium Parts`}
+  description={spoke ? spoke.metaDescription : industry.description}
+  jsonLd={jsonLd}
 >
+  {spoke ? (
+    <IndustrySpoke industry={industry} spoke={spoke} others={others} />
+  ) : (
+    <>
   <PageHero eyebrow="Industry" title={industry.title} description={industry.summary} />
 
   <section class="ind-sec ind-white">
@@ -104,13 +150,16 @@ const others = industries.filter((i) => i.slug !== industry.slug);
       </div>
     </div>
   </section>
+    </>
+  )}
 </BaseLayout>
 
 <style>
   .ind-sec { padding: 5rem 0; }
   .ind-white { background: #fff; }
-  .ind-slate { background: var(--color-slate-50); }
-  .ind-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+  /* The RFQ band is dark: the heading and lede use the light text variant. */
+  .ind-slate { background: var(--color-slate-900); }
+  .ind-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary-300); margin-bottom: 0.75rem; }
   .ind-h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-slate-900); margin: 2.5rem 0 1rem; }
   .ind-h2:first-child { margin-top: 0; }
   .ind-h2-light { color: #fff; }

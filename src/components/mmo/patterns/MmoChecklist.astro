@@ -1,0 +1,16 @@
+---
+/**
+ * A checklist: one short line per item, each with its own mark.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'checklist' }>;
+}
+
+const { part } = Astro.props;
+---
+
+<ul class="mmo-bullets">
+  {part.items.map((entry) => <li>{entry}</li>)}
+</ul>

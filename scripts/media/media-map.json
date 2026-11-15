@@ -2,13 +2,44 @@
   "_comment": "Media replacement work order. For each slot: set `file` to the incoming asset path relative to assets-incoming/, set `alt` to original copy, and keep `target` as the destination path under public/images/.",
   "remote": {},
   "local": {
-    "/images/og-default.jpg": {
-      "file": "products/og-default.webp",
-      "alt": "Og default — titanium component",
-      "target": "og-default.jpg",
+    "/images/titanium-anode/mesh-anodes.webp": {
+      "file": "products/mesh-anodes.webp",
+      "alt": "Mesh anodes — titanium anode",
+      "target": "titanium-anode/mesh-anodes.webp",
       "usedIn": [
-        "data/site.ts",
-        "layouts/BaseLayout.astro"
+        "data/anode-catalog.ts",
+        "data/mmo-anodes.ts",
+        "data/titanium-anode-page-2.ts"
+      ]
+    },
+    "/images/titanium-anode/coating-process-loading-control.webp": {
+      "file": "products/coating-process-loading-control.webp",
+      "alt": "Coating process loading control — titanium anode",
+      "target": "titanium-anode/coating-process-loading-control.webp",
+      "usedIn": [
+        "data/anode-catalog.ts",
+        "data/anode-hubs.ts",
+        "data/titanium-anode-page-3.ts"
+      ]
+    },
+    "/images/titanium-anode/iccp-marine-protection.webp": {
+      "file": "products/iccp-marine-protection.webp",
+      "alt": "Iccp marine protection — titanium anode",
+      "target": "titanium-anode/iccp-marine-protection.webp",
+      "usedIn": [
+        "data/anode-catalog.ts",
+        "data/titanium-anode-page-4.ts"
+      ]
+    },
+    "/images/products/titanium-anodes.webp": {
+      "file": "products/titanium-anodes.webp",
+      "alt": "Titanium anodes",
+      "target": "products/titanium-anodes.webp",
+      "usedIn": [
+        "data/anode-catalog.ts",
+        "data/industries-data.ts",
+        "pages/index.astro",
+        "pages/manufacturing-capabilities/index.astro"
       ]
     },
     "/images/titanium-anode/ru-ir-mmo-anodes.webp": {
@@ -16,6 +47,8 @@
       "alt": "Ru ir mmo anodes — titanium anode",
       "target": "titanium-anode/ru-ir-mmo-anodes.webp",
       "usedIn": [
+        "data/anode-coatings.ts",
+        "data/anode-hubs.ts",
         "data/titanium-anode-page-1.ts",
         "data/titanium-anode-page-4.ts"
       ]
@@ -25,6 +58,7 @@
       "alt": "Ir ta mmo anodes — titanium anode",
       "target": "titanium-anode/ir-ta-mmo-anodes.webp",
       "usedIn": [
+        "data/anode-coatings.ts",
         "data/titanium-anode-page-1.ts",
         "data/titanium-anode-page-4.ts"
       ]
@@ -34,6 +68,7 @@
       "alt": "Platinized titanium anodes — titanium anode",
       "target": "titanium-anode/platinized-titanium-anodes.webp",
       "usedIn": [
+        "data/anode-coatings.ts",
         "data/titanium-anode-page-1.ts"
       ]
     },
@@ -42,38 +77,109 @@
       "alt": "Pbo2 coated anodes — titanium anode",
       "target": "titanium-anode/pbo2-coated-anodes.webp",
       "usedIn": [
+        "data/anode-coatings.ts",
         "data/titanium-anode-page-1.ts"
       ]
     },
-    "/images/titanium-anode/mesh-anodes.webp": {
-      "file": "products/mesh-anodes.webp",
-      "alt": "Mesh anodes — titanium anode",
-      "target": "titanium-anode/mesh-anodes.webp",
+    "/images/applications/marine-antifouling.webp": {
+      "file": "products/marine-antifouling.webp",
+      "alt": "Marine antifouling — titanium component in service",
+      "target": "applications/marine-antifouling.webp",
       "usedIn": [
-        "data/titanium-anode-page-2.ts"
+        "data/anode-hubs.ts",
+        "pages/applications/index.astro"
       ]
     },
-    "/images/titanium-anode/plate-anodes.webp": {
-      "file": "products/plate-anodes.webp",
-      "alt": "Plate anodes — titanium anode",
-      "target": "titanium-anode/plate-anodes.webp",
+    "/images/industries/cathodic-protection.webp": {
+      "file": "products/cathodic-protection.webp",
+      "alt": "Cathodic protection — industrial application",
+      "target": "industries/cathodic-protection.webp",
       "usedIn": [
-        "data/titanium-anode-page-2.ts"
+        "data/anode-hubs.ts",
+        "data/industries-data.ts",
+        "pages/cathodic-protection/index.astro",
+        "pages/index.astro"
       ]
     },
-    "/images/titanium-anode/tubular-anodes.webp": {
-      "file": "products/tubular-anodes.webp",
-      "alt": "Tubular anodes — titanium anode",
-      "target": "titanium-anode/tubular-anodes.webp",
+    "/images/products/titanium-fittings.webp": {
+      "file": "products/titanium-fittings.webp",
+      "alt": "Titanium fittings",
+      "target": "products/titanium-fittings.webp",
       "usedIn": [
-        "data/titanium-anode-page-2.ts"
+        "data/industries-data.ts",
+        "pages/index.astro"
       ]
     },
-    "/images/titanium-anode/rod-anodes.webp": {
-      "file": "products/rod-anodes.webp",
-      "alt": "Rod anodes — titanium anode",
-      "target": "titanium-anode/rod-anodes.webp",
+    "/images/industries/marine-offshore.webp": {
+      "file": "products/marine-offshore.webp",
+      "alt": "Marine offshore — titanium component in service",
+      "target": "industries/marine-offshore.webp",
       "usedIn": [
+        "data/industries-data.ts",
+        "pages/index.astro"
+      ]
+    },
+    "/images/industries/aerospace.webp": {
+      "file": "products/aerospace.webp",
+      "alt": "Aerospace — titanium component in service",
+      "target": "industries/aerospace.webp",
+      "usedIn": [
+        "data/industries-data.ts",
+        "pages/index.astro"
+      ]
+    },
+    "/images/titanium-products/industry-medical-precision.webp": {
+      "file": "products/industry-medical-precision.webp",
+      "alt": "Industry medical precision — titanium product",
+      "target": "titanium-products/industry-medical-precision.webp",
+      "usedIn": [
+        "data/industries-data.ts",
+        "data/titanium-products-page-4.ts"
+      ]
+    },
+    "/images/industries/water-treatment.webp": {
+      "file": "products/water-treatment.webp",
+      "alt": "Water treatment — industrial application",
+      "target": "industries/water-treatment.webp",
+      "usedIn": [
+        "data/industries-data.ts",
+        "pages/index.astro"
+      ]
+    },
+    "/images/industries/metal-electrowinning.webp": {
+      "file": "products/metal-electrowinning.webp",
+      "alt": "Metal electrowinning — industrial application",
+      "target": "industries/metal-electrowinning.webp",
+      "usedIn": [
+        "data/industries-data.ts",
+        "pages/index.astro"
+      ]
+    },
+    "/images/industries/energy-hydrogen.webp": {
+      "file": "products/energy-hydrogen.webp",
+      "alt": "Energy hydrogen — titanium component in service",
+      "target": "industries/energy-hydrogen.webp",
+      "usedIn": [
+        "data/industries-data.ts",
+        "pages/index.astro"
+      ]
+    },
+    "/images/titanium-anode/titanium-anode-manufacturer.webp": {
+      "file": "products/titanium-anode-manufacturer.webp",
+      "alt": "Titanium anode manufacturer",
+      "target": "titanium-anode/titanium-anode-manufacturer.webp",
+      "usedIn": [
+        "data/mmo-anodes.ts",
+        "data/titanium-anode-page-2.ts",
+        "pages/titanium-anode/index.astro"
+      ]
+    },
+    "/images/titanium-anode/wire-anodes.webp": {
+      "file": "products/wire-anodes.webp",
+      "alt": "Wire anodes — titanium anode",
+      "target": "titanium-anode/wire-anodes.webp",
+      "usedIn": [
+        "data/mmo-anodes.ts",
         "data/titanium-anode-page-2.ts"
       ]
     },
@@ -82,14 +188,25 @@
       "alt": "Ribbon strip anodes — titanium anode",
       "target": "titanium-anode/ribbon-strip-anodes.webp",
       "usedIn": [
+        "data/mmo-anodes.ts",
         "data/titanium-anode-page-2.ts"
       ]
     },
-    "/images/titanium-anode/wire-anodes.webp": {
-      "file": "products/wire-anodes.webp",
-      "alt": "Wire anodes — titanium anode",
-      "target": "titanium-anode/wire-anodes.webp",
+    "/images/titanium-anode/geometry-electrical-connection-inspection.webp": {
+      "file": "products/geometry-electrical-connection-inspection.webp",
+      "alt": "Geometry electrical connection inspection — titanium anode",
+      "target": "titanium-anode/geometry-electrical-connection-inspection.webp",
       "usedIn": [
+        "data/mmo-anodes.ts",
+        "data/titanium-anode-page-3.ts"
+      ]
+    },
+    "/images/titanium-anode/tubular-anodes.webp": {
+      "file": "products/tubular-anodes.webp",
+      "alt": "Tubular anodes — titanium anode",
+      "target": "titanium-anode/tubular-anodes.webp",
+      "usedIn": [
+        "data/mmo-anodes.ts",
         "data/titanium-anode-page-2.ts"
       ]
     },
@@ -98,16 +215,501 @@
       "alt": "Disc special geometry — titanium anode",
       "target": "titanium-anode/disc-special-geometry.webp",
       "usedIn": [
+        "data/mmo-anodes.ts",
         "data/titanium-anode-page-2.ts"
       ]
     },
-    "/images/titanium-anode/titanium-anode-manufacturer.webp": {
-      "file": "products/titanium-anode-manufacturer.webp",
-      "alt": "Titanium anode manufacturer",
-      "target": "titanium-anode/titanium-anode-manufacturer.webp",
+    "/images/titanium-anode/rod-anodes.webp": {
+      "file": "products/rod-anodes.webp",
+      "alt": "Rod anodes — titanium anode",
+      "target": "titanium-anode/rod-anodes.webp",
       "usedIn": [
-        "data/titanium-anode-page-2.ts",
-        "pages/titanium-anode/index.astro"
+        "data/mmo-anodes.ts",
+        "data/titanium-anode-page-2.ts"
+      ]
+    },
+    "/images/titanium-anode/": {
+      "file": "products/titanium-anode.webp",
+      "alt": "Titanium anode",
+      "target": "titanium-anode/",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-wire-anode-mmo-wire-anode-for-distributed-current-output.webp": {
+      "file": "products/mmo-wire-anode-mmo-wire-anode-for-distributed-current-output.webp",
+      "alt": "Mmo wire anode mmo wire anode for distributed current output — titanium anode",
+      "target": "titanium-anode/mmo-wire-anode-mmo-wire-anode-for-distributed-current-output.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-wire-anode-mmo-coated-titanium-wire4.webp": {
+      "file": "products/mmo-wire-anode-mmo-coated-titanium-wire4.webp",
+      "alt": "Mmo wire anode mmo coated titanium wire4 — titanium anode",
+      "target": "titanium-anode/mmo-wire-anode-mmo-coated-titanium-wire4.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-wire-anode-mmo-coated-titanium-wire1.webp": {
+      "file": "products/mmo-wire-anode-mmo-coated-titanium-wire1.webp",
+      "alt": "Mmo wire anode mmo coated titanium wire1 — titanium anode",
+      "target": "titanium-anode/mmo-wire-anode-mmo-coated-titanium-wire1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-wire-anode-mmo-coated-titanium-wire2.webp": {
+      "file": "products/mmo-wire-anode-mmo-coated-titanium-wire2.webp",
+      "alt": "Mmo wire anode mmo coated titanium wire2 — titanium anode",
+      "target": "titanium-anode/mmo-wire-anode-mmo-coated-titanium-wire2.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes0.webp": {
+      "file": "products/mmo-ribbon-anode-mmo-ribbon-anodes0.webp",
+      "alt": "Mmo ribbon anode mmo ribbon anodes0 — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes0.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes4.webp": {
+      "file": "products/mmo-ribbon-anode-mmo-ribbon-anodes4.webp",
+      "alt": "Mmo ribbon anode mmo ribbon anodes4 — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes4.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes3.webp": {
+      "file": "products/mmo-ribbon-anode-mmo-ribbon-anodes3.webp",
+      "alt": "Mmo ribbon anode mmo ribbon anodes3 — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes2.webp": {
+      "file": "products/mmo-ribbon-anode-mmo-ribbon-anodes2.webp",
+      "alt": "Mmo ribbon anode mmo ribbon anodes2 — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes2.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-mmo-mesh-ribbon.webp": {
+      "file": "products/mmo-ribbon-anode-mmo-mesh-ribbon.webp",
+      "alt": "Mmo ribbon anode mmo mesh ribbon — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-mmo-mesh-ribbon.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-titanium-conductor-bar.webp": {
+      "file": "products/mmo-ribbon-anode-titanium-conductor-bar.webp",
+      "alt": "Mmo ribbon anode titanium conductor bar — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-titanium-conductor-bar.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes1.webp": {
+      "file": "products/mmo-ribbon-anode-mmo-ribbon-anodes1.webp",
+      "alt": "Mmo ribbon anode mmo ribbon anodes1 — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-mmo-ribbon-anodes1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-ribbon-anode-custom-mmo-ribbon-anode.webp": {
+      "file": "products/mmo-ribbon-anode-custom-mmo-ribbon-anode.webp",
+      "alt": "Mmo ribbon anode custom mmo ribbon anode — titanium anode",
+      "target": "titanium-anode/mmo-ribbon-anode-custom-mmo-ribbon-anode.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anodes.webp": {
+      "file": "products/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anodes.webp",
+      "alt": "Mmo mesh ribbon anode mmo mesh ribbon anodes — titanium anode",
+      "target": "titanium-anode/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-mesh-ribbon-anode-chatgpt-image-2026-e5-b9-b45-e6-9c-8831-e6-97-a5-09-38-06-3.webp": {
+      "file": "products/mmo-mesh-ribbon-anode-chatgpt-image-2026-e5-b9-b45-e6-9c-8831-e6-97-a5-09-38-06-3.webp",
+      "alt": "Mmo mesh ribbon anode chatgpt image 2026 e5 b9 b45 e6 9c 8831 e6 97 a5 09 38 06 3 — titanium anode",
+      "target": "titanium-anode/mmo-mesh-ribbon-anode-chatgpt-image-2026-e5-b9-b45-e6-9c-8831-e6-97-a5-09-38-06-3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anodes3.webp": {
+      "file": "products/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anodes3.webp",
+      "alt": "Mmo mesh ribbon anode mmo mesh ribbon anodes3 — titanium anode",
+      "target": "titanium-anode/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anodes3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anode-3.webp": {
+      "file": "products/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anode-3.webp",
+      "alt": "Mmo mesh ribbon anode mmo mesh ribbon anode 3 — titanium anode",
+      "target": "titanium-anode/mmo-mesh-ribbon-anode-mmo-mesh-ribbon-anode-3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-prepackaged-mmo-canister-anodes.webp": {
+      "file": "products/mmo-canister-anode-prepackaged-mmo-canister-anodes.webp",
+      "alt": "Mmo canister anode prepackaged mmo canister anodes — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-prepackaged-mmo-canister-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-canistered-mmo-anodes.webp": {
+      "file": "products/mmo-canister-anode-canistered-mmo-anodes.webp",
+      "alt": "Mmo canister anode canistered mmo anodes — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-canistered-mmo-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-prepackaged-mmo-canister-anodes2.webp": {
+      "file": "products/mmo-canister-anode-prepackaged-mmo-canister-anodes2.webp",
+      "alt": "Mmo canister anode prepackaged mmo canister anodes2 — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-prepackaged-mmo-canister-anodes2.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-chatgpt-image-2026-e5-b9-b45-e6-9c-8831-e6-97-a5-13-16-49-2.webp": {
+      "file": "products/mmo-canister-anode-chatgpt-image-2026-e5-b9-b45-e6-9c-8831-e6-97-a5-13-16-49-2.webp",
+      "alt": "Mmo canister anode chatgpt image 2026 e5 b9 b45 e6 9c 8831 e6 97 a5 13 16 49 2 — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-chatgpt-image-2026-e5-b9-b45-e6-9c-8831-e6-97-a5-13-16-49-2.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-mmo-canister-anode1.webp": {
+      "file": "products/mmo-canister-anode-mmo-canister-anode1.webp",
+      "alt": "Mmo canister anode mmo canister anode1 — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-mmo-canister-anode1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-deep-groundbed-installation.webp": {
+      "file": "products/mmo-canister-anode-deep-groundbed-installation.webp",
+      "alt": "Mmo canister anode deep groundbed installation — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-deep-groundbed-installation.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-shallow-groundbed-installation.webp": {
+      "file": "products/mmo-canister-anode-shallow-groundbed-installation.webp",
+      "alt": "Mmo canister anode shallow groundbed installation — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-shallow-groundbed-installation.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-canister-anode-mmo-canister-anodes01.webp": {
+      "file": "products/mmo-canister-anode-mmo-canister-anodes01.webp",
+      "alt": "Mmo canister anode mmo canister anodes01 — titanium anode",
+      "target": "titanium-anode/mmo-canister-anode-mmo-canister-anodes01.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-tubular-anode-mmo-tubular-anodes1.webp": {
+      "file": "products/mmo-tubular-anode-mmo-tubular-anodes1.webp",
+      "alt": "Mmo tubular anode mmo tubular anodes1 — titanium anode",
+      "target": "titanium-anode/mmo-tubular-anode-mmo-tubular-anodes1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes.webp": {
+      "file": "products/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes.webp",
+      "alt": "Mmo tubular anode mmo coated titanium tubular anodes — titanium anode",
+      "target": "titanium-anode/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes2.webp": {
+      "file": "products/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes2.webp",
+      "alt": "Mmo tubular anode mmo coated titanium tubular anodes2 — titanium anode",
+      "target": "titanium-anode/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes2.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes3.webp": {
+      "file": "products/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes3.webp",
+      "alt": "Mmo tubular anode mmo coated titanium tubular anodes3 — titanium anode",
+      "target": "titanium-anode/mmo-tubular-anode-mmo-coated-titanium-tubular-anodes3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-tubular-anode-mmo-tubular-anodes2.webp": {
+      "file": "products/mmo-tubular-anode-mmo-tubular-anodes2.webp",
+      "alt": "Mmo tubular anode mmo tubular anodes2 — titanium anode",
+      "target": "titanium-anode/mmo-tubular-anode-mmo-tubular-anodes2.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-tubular-anode-mmo-tubular-anode-1.webp": {
+      "file": "products/mmo-tubular-anode-mmo-tubular-anode-1.webp",
+      "alt": "Mmo tubular anode mmo tubular anode 1 — titanium anode",
+      "target": "titanium-anode/mmo-tubular-anode-mmo-tubular-anode-1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-tubular-anode-mmo-tubular-anode-hele1.webp": {
+      "file": "products/mmo-tubular-anode-mmo-tubular-anode-hele1.webp",
+      "alt": "Mmo tubular anode mmo tubular anode hele1 — titanium anode",
+      "target": "titanium-anode/mmo-tubular-anode-mmo-tubular-anode-hele1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-round-mmo-disc-anodes1.webp": {
+      "file": "products/mmo-disc-anode-round-mmo-disc-anodes1.webp",
+      "alt": "Mmo disc anode round mmo disc anodes1 — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-round-mmo-disc-anodes1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-round-mmo-disc-anodes.webp": {
+      "file": "products/mmo-disc-anode-round-mmo-disc-anodes.webp",
+      "alt": "Mmo disc anode round mmo disc anodes — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-round-mmo-disc-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-oval-mmo-anodes.webp": {
+      "file": "products/mmo-disc-anode-oval-mmo-anodes.webp",
+      "alt": "Mmo disc anode oval mmo anodes — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-oval-mmo-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-elliptical-mmo-anodes.webp": {
+      "file": "products/mmo-disc-anode-elliptical-mmo-anodes.webp",
+      "alt": "Mmo disc anode elliptical mmo anodes — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-elliptical-mmo-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-mmo-disc-anodes-1.webp": {
+      "file": "products/mmo-disc-anode-mmo-disc-anodes-1.webp",
+      "alt": "Mmo disc anode mmo disc anodes 1 — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-mmo-disc-anodes-1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-mmo-disc-anodes3.webp": {
+      "file": "products/mmo-disc-anode-mmo-disc-anodes3.webp",
+      "alt": "Mmo disc anode mmo disc anodes3 — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-mmo-disc-anodes3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-mmo-disc-anodes-for-ship-iccp-systems.webp": {
+      "file": "products/mmo-disc-anode-mmo-disc-anodes-for-ship-iccp-systems.webp",
+      "alt": "Mmo disc anode mmo disc anodes for ship iccp systems — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-mmo-disc-anodes-for-ship-iccp-systems.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-disc-anode-quality-control-for-mmo-disc-anodes.webp": {
+      "file": "products/mmo-disc-anode-quality-control-for-mmo-disc-anodes.webp",
+      "alt": "Mmo disc anode quality control for mmo disc anodes — titanium anode",
+      "target": "titanium-anode/mmo-disc-anode-quality-control-for-mmo-disc-anodes.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-mmo-rod-anode-hele-titanium.webp": {
+      "file": "products/mmo-rod-anode-mmo-rod-anode.webp",
+      "alt": "Mmo rod anode mmo rod anode — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-mmo-rod-anode-hele-titanium.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-mmo-rod-anode1.webp": {
+      "file": "products/mmo-rod-anode-mmo-rod-anode1.webp",
+      "alt": "Mmo rod anode mmo rod anode1 — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-mmo-rod-anode1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-mmo-rod-anode3.webp": {
+      "file": "products/mmo-rod-anode-mmo-rod-anode3.webp",
+      "alt": "Mmo rod anode mmo rod anode3 — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-mmo-rod-anode3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts",
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-mmo-rod-anode2.webp": {
+      "file": "products/mmo-rod-anode-mmo-rod-anode2.webp",
+      "alt": "Mmo rod anode mmo rod anode2 — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-mmo-rod-anode2.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-mmo-rod-anode4.webp": {
+      "file": "products/mmo-rod-anode-mmo-rod-anode4.webp",
+      "alt": "Mmo rod anode mmo rod anode4 — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-mmo-rod-anode4.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-custom-mmo-rod.webp": {
+      "file": "products/mmo-rod-anode-custom-mmo-rod.webp",
+      "alt": "Mmo rod anode custom mmo rod — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-custom-mmo-rod.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-mmo-rod-anode-1.webp": {
+      "file": "products/mmo-rod-anode-mmo-rod-anode-1.webp",
+      "alt": "Mmo rod anode mmo rod anode 1 — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-mmo-rod-anode-1.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-rod-anode-mmo-rod-anode-3.webp": {
+      "file": "products/mmo-rod-anode-mmo-rod-anode-3.webp",
+      "alt": "Mmo rod anode mmo rod anode 3 — titanium anode",
+      "target": "titanium-anode/mmo-rod-anode-mmo-rod-anode-3.webp",
+      "usedIn": [
+        "data/mmo-family-pages.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-hero-reel.webp": {
+      "file": "products/mmo-linear-anode-hero-reel.webp",
+      "alt": "Mmo linear anode hero reel — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-hero-reel.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-distributed-installation.webp": {
+      "file": "products/mmo-linear-anode-distributed-installation.webp",
+      "alt": "Mmo linear anode distributed installation — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-distributed-installation.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts",
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-assembly-cross-section.webp": {
+      "file": "products/mmo-linear-anode-assembly-cross-section.webp",
+      "alt": "Mmo linear anode assembly cross section — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-assembly-cross-section.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts",
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-components-inspection.webp": {
+      "file": "products/mmo-linear-anode-components-inspection.webp",
+      "alt": "Mmo linear anode components inspection — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-components-inspection.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts",
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-custom-assembly.webp": {
+      "file": "products/mmo-linear-anode-custom-assembly.webp",
+      "alt": "Mmo linear anode custom assembly — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-custom-assembly.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-buried-pipeline.webp": {
+      "file": "products/mmo-linear-anode-buried-pipeline.webp",
+      "alt": "Mmo linear anode buried pipeline — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-buried-pipeline.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-dense-piping-network.webp": {
+      "file": "products/mmo-linear-anode-dense-piping-network.webp",
+      "alt": "Mmo linear anode dense piping network — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-dense-piping-network.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/titanium-anode/mmo-linear-anode-buried-assets.webp": {
+      "file": "products/mmo-linear-anode-buried-assets.webp",
+      "alt": "Mmo linear anode buried assets — titanium anode",
+      "target": "titanium-anode/mmo-linear-anode-buried-assets.webp",
+      "usedIn": [
+        "data/mmo-linear-page.ts"
+      ]
+    },
+    "/images/og-default.jpg": {
+      "file": "products/og-default.webp",
+      "alt": "Og default — titanium component",
+      "target": "og-default.jpg",
+      "usedIn": [
+        "data/site.ts"
+      ]
+    },
+    "/images/titanium-anode/plate-anodes.webp": {
+      "file": "products/plate-anodes.webp",
+      "alt": "Plate anodes — titanium anode",
+      "target": "titanium-anode/plate-anodes.webp",
+      "usedIn": [
+        "data/titanium-anode-page-2.ts"
       ]
     },
     "/images/titanium-anode/titanium-substrate-traceability.webp": {
@@ -126,30 +728,6 @@
         "data/titanium-anode-page-3.ts"
       ]
     },
-    "/images/titanium-anode/coating-process-loading-control.webp": {
-      "file": "products/coating-process-loading-control.webp",
-      "alt": "Coating process loading control — titanium anode",
-      "target": "titanium-anode/coating-process-loading-control.webp",
-      "usedIn": [
-        "data/titanium-anode-page-3.ts"
-      ]
-    },
-    "/images/titanium-anode/geometry-electrical-connection-inspection.webp": {
-      "file": "products/geometry-electrical-connection-inspection.webp",
-      "alt": "Geometry electrical connection inspection — titanium anode",
-      "target": "titanium-anode/geometry-electrical-connection-inspection.webp",
-      "usedIn": [
-        "data/titanium-anode-page-3.ts"
-      ]
-    },
-    "/images/titanium-anode/iccp-marine-protection.webp": {
-      "file": "products/iccp-marine-protection.webp",
-      "alt": "Iccp marine protection — titanium anode",
-      "target": "titanium-anode/iccp-marine-protection.webp",
-      "usedIn": [
-        "data/titanium-anode-page-4.ts"
-      ]
-    },
     "/images/titanium-anode/electrowinning-surface-finishing.webp": {
       "file": "products/electrowinning-surface-finishing.webp",
       "alt": "Electrowinning surface finishing — titanium component in service",
@@ -163,7 +741,8 @@
       "alt": "Titanium plate",
       "target": "titanium-products/titanium-plate.webp",
       "usedIn": [
-        "data/titanium-products-page-1.ts"
+        "data/titanium-products-page-1.ts",
+        "pages/titanium-products/titanium-tubing.astro"
       ]
     },
     "/images/titanium-products/titanium-coil-strip.webp": {
@@ -274,14 +853,6 @@
         "data/titanium-products-page-4.ts"
       ]
     },
-    "/images/titanium-products/industry-medical-precision.webp": {
-      "file": "products/industry-medical-precision.webp",
-      "alt": "Industry medical precision — titanium product",
-      "target": "titanium-products/industry-medical-precision.webp",
-      "usedIn": [
-        "data/titanium-products-page-4.ts"
-      ]
-    },
     "/images/titanium-products/industry-aerospace.webp": {
       "file": "products/industry-aerospace.webp",
       "alt": "Industry aerospace — titanium product",
@@ -370,14 +941,6 @@
         "pages/applications/index.astro"
       ]
     },
-    "/images/applications/marine-antifouling.webp": {
-      "file": "products/marine-antifouling.webp",
-      "alt": "Marine antifouling — titanium component in service",
-      "target": "applications/marine-antifouling.webp",
-      "usedIn": [
-        "pages/applications/index.astro"
-      ]
-    },
     "/images/applications/hero.webp": {
       "file": "products/hero.webp",
       "alt": "Industrial electrochemical process and titanium electrodes",
@@ -394,32 +957,12 @@
         "pages/applications/index.astro"
       ]
     },
-    "/images/industries/cathodic-protection.webp": {
-      "file": "products/cathodic-protection.webp",
-      "alt": "Cathodic protection — industrial application",
-      "target": "industries/cathodic-protection.webp",
-      "usedIn": [
-        "pages/cathodic-protection/index.astro",
-        "pages/index.astro",
-        "pages/industries/index.astro"
-      ]
-    },
     "/images/scenarios/system-integration.webp": {
       "file": "products/system-integration.webp",
       "alt": "System integration — industrial process",
       "target": "scenarios/system-integration.webp",
       "usedIn": [
         "pages/contact/index.astro",
-        "pages/manufacturing-capabilities/index.astro"
-      ]
-    },
-    "/images/products/titanium-anodes.webp": {
-      "file": "products/titanium-anodes.webp",
-      "alt": "Titanium anodes",
-      "target": "products/titanium-anodes.webp",
-      "usedIn": [
-        "pages/index.astro",
-        "pages/industries/index.astro",
         "pages/manufacturing-capabilities/index.astro"
       ]
     },
@@ -456,15 +999,6 @@
         "pages/index.astro"
       ]
     },
-    "/images/products/titanium-fittings.webp": {
-      "file": "products/titanium-fittings.webp",
-      "alt": "Titanium fittings",
-      "target": "products/titanium-fittings.webp",
-      "usedIn": [
-        "pages/index.astro",
-        "pages/industries/index.astro"
-      ]
-    },
     "/images/products/titanium-fasteners.webp": {
       "file": "products/titanium-fasteners.webp",
       "alt": "Titanium fasteners",
@@ -480,51 +1014,6 @@
       "target": "products/titanium-parts.webp",
       "usedIn": [
         "pages/index.astro"
-      ]
-    },
-    "/images/industries/energy-hydrogen.webp": {
-      "file": "products/energy-hydrogen.webp",
-      "alt": "Energy hydrogen — titanium component in service",
-      "target": "industries/energy-hydrogen.webp",
-      "usedIn": [
-        "pages/index.astro",
-        "pages/industries/index.astro"
-      ]
-    },
-    "/images/industries/water-treatment.webp": {
-      "file": "products/water-treatment.webp",
-      "alt": "Water treatment — industrial application",
-      "target": "industries/water-treatment.webp",
-      "usedIn": [
-        "pages/index.astro",
-        "pages/industries/index.astro"
-      ]
-    },
-    "/images/industries/marine-offshore.webp": {
-      "file": "products/marine-offshore.webp",
-      "alt": "Marine offshore — titanium component in service",
-      "target": "industries/marine-offshore.webp",
-      "usedIn": [
-        "pages/index.astro",
-        "pages/industries/index.astro"
-      ]
-    },
-    "/images/industries/metal-electrowinning.webp": {
-      "file": "products/metal-electrowinning.webp",
-      "alt": "Metal electrowinning — industrial application",
-      "target": "industries/metal-electrowinning.webp",
-      "usedIn": [
-        "pages/index.astro",
-        "pages/industries/index.astro"
-      ]
-    },
-    "/images/industries/aerospace.webp": {
-      "file": "products/aerospace.webp",
-      "alt": "Aerospace — titanium component in service",
-      "target": "industries/aerospace.webp",
-      "usedIn": [
-        "pages/index.astro",
-        "pages/industries/index.astro"
       ]
     },
     "/images/quality/mtc.webp": {
@@ -617,66 +1106,18 @@
         "pages/manufacturing-capabilities/index.astro"
       ]
     },
-    "/images/team/bobby-fu.webp": {
-      "file": "products/bobby-fu.webp",
-      "alt": "Titanium Parts team member",
-      "target": "team/bobby-fu.webp",
-      "usedIn": [
-        "pages/our-team/index.astro"
-      ]
-    },
-    "/images/team/stephen-fu.webp": {
-      "file": "products/stephen-fu.webp",
-      "alt": "Titanium Parts team member",
-      "target": "team/stephen-fu.webp",
-      "usedIn": [
-        "pages/our-team/index.astro"
-      ]
-    },
-    "/images/team/alex-liu.webp": {
-      "file": "products/alex-liu.webp",
-      "alt": "Titanium Parts team member",
-      "target": "team/alex-liu.webp",
-      "usedIn": [
-        "pages/our-team/index.astro"
-      ]
-    },
-    "/images/team/roger-liu.webp": {
-      "file": "products/roger-liu.webp",
-      "alt": "Titanium Parts team member",
-      "target": "team/roger-liu.webp",
-      "usedIn": [
-        "pages/our-team/index.astro"
-      ]
-    },
-    "/images/team/tom-liu.webp": {
-      "file": "products/tom-liu.webp",
-      "alt": "Titanium Parts team member",
-      "target": "team/tom-liu.webp",
-      "usedIn": [
-        "pages/our-team/index.astro"
-      ]
-    },
-    "/images/team/bobby-fu-marketing.webp": {
-      "file": "products/bobby-fu-marketing.webp",
-      "alt": "Titanium Parts team member",
-      "target": "team/bobby-fu-marketing.webp",
-      "usedIn": [
-        "pages/our-team/index.astro"
-      ]
-    },
-    "/images/team/wechat-team.webp": {
-      "file": "products/wechat-team.webp",
-      "alt": "Titanium Parts team",
-      "target": "team/wechat-team.webp",
-      "usedIn": [
-        "pages/our-team/index.astro"
-      ]
-    },
     "/images/titanium-anode/titanium-anodes-video-poster.webp": {
       "file": "products/titanium-anodes-video-poster.webp",
       "alt": "Titanium anodes video poster — production video still",
       "target": "titanium-anode/titanium-anodes-video-poster.webp",
+      "usedIn": [
+        "pages/titanium-anode/index.astro"
+      ]
+    },
+    "/images/titanium-anode/website-video-02-clean-1080p.mp4": {
+      "file": "local/website-video-02-clean-1080p.mp4",
+      "alt": "Website video 02 clean 1080p — production video still",
+      "target": "titanium-anode/website-video-02-clean-1080p.mp4",
       "usedIn": [
         "pages/titanium-anode/index.astro"
       ]
@@ -810,110 +1251,6 @@
         "pages/titanium-products/index.astro"
       ]
     },
-    "/images/titanium-products/inspection-qa.webp": {
-      "file": "products/inspection-qa.webp",
-      "alt": "Titanium inspection records and shipment documentation",
-      "target": "titanium-products/inspection-qa.webp",
-      "usedIn": [
-        "pages/titanium-products/index.astro"
-      ]
-    },
-    "/images/service/cnc-machining.webp": {
-      "file": "products/cnc-machining.webp",
-      "alt": "Cnc machining — titanium fabrication",
-      "target": "service/cnc-machining.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/cutting-sizing.webp": {
-      "file": "products/cutting-sizing.webp",
-      "alt": "Cutting sizing — titanium fabrication",
-      "target": "service/cutting-sizing.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/forming-bending.webp": {
-      "file": "products/forming-bending.webp",
-      "alt": "Forming bending — titanium fabrication",
-      "target": "service/forming-bending.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/welding-assembly.webp": {
-      "file": "products/welding-assembly.webp",
-      "alt": "Welding assembly — titanium fabrication",
-      "target": "service/welding-assembly.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/surface-finishing.webp": {
-      "file": "products/surface-finishing.webp",
-      "alt": "Surface finishing at the Titanium Parts workshop",
-      "target": "service/surface-finishing.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/additive-manufacturing.jpg": {
-      "file": "products/additive-manufacturing.webp",
-      "alt": "Additive manufacturing — titanium fabrication",
-      "target": "service/additive-manufacturing.jpg",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/inspection-docs.webp": {
-      "file": "products/inspection-docs.webp",
-      "alt": "Inspection docs — titanium fabrication",
-      "target": "service/inspection-docs.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/oem-supply.webp": {
-      "file": "products/oem-supply.webp",
-      "alt": "Oem supply — titanium fabrication",
-      "target": "service/oem-supply.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/export-packing.jpeg": {
-      "file": "products/export-packing.webp",
-      "alt": "Export packing — titanium fabrication",
-      "target": "service/export-packing.jpeg",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/hero-fabrication.webp": {
-      "file": "products/hero-fabrication.webp",
-      "alt": "Titanium component fabrication and manufacturing environment",
-      "target": "service/hero-fabrication.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/service/engineering-review.webp": {
-      "file": "products/engineering-review.webp",
-      "alt": "Titanium component manufacturing review",
-      "target": "service/engineering-review.webp",
-      "usedIn": [
-        "pages/titanium-service/index.astro"
-      ]
-    },
-    "/images/titanium-anode/website-video-02-clean-1080p.mp4": {
-      "file": "local/website-video-02-clean-1080p.mp4",
-      "alt": "Website video 02 clean 1080p — production video still",
-      "target": "titanium-anode/website-video-02-clean-1080p.mp4",
-      "usedIn": [
-        "pages/titanium-anode/index.astro"
-      ]
-    },
     "/images/titanium-products/titanium-products-manufacturer.mp4": {
       "file": "local/titanium-products-manufacturer.mp4",
       "alt": "Titanium products manufacturer",
@@ -935,6 +1272,14 @@
         "pages/titanium-products/titanium-rod-bar.astro",
         "pages/titanium-products/titanium-tubing.astro",
         "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/titanium-products/inspection-qa.webp": {
+      "file": "products/inspection-qa.webp",
+      "alt": "Titanium inspection records and shipment documentation",
+      "target": "titanium-products/inspection-qa.webp",
+      "usedIn": [
+        "pages/titanium-products/index.astro"
       ]
     },
     "/images/titanium-products/titanium-balls-spheres.webp": {
@@ -1348,7 +1693,8 @@
       "alt": "Titanium foil manufacturer",
       "target": "titanium-products/titanium-foil-manufacturer.webp",
       "usedIn": [
-        "pages/titanium-products/titanium-coil.astro"
+        "pages/titanium-products/titanium-coil.astro",
+        "pages/titanium-products/titanium-foil-2.astro"
       ]
     },
     "/images/titanium-products/welded-tube-production-coil.webp": {
@@ -2147,14 +2493,6 @@
         "pages/titanium-products/titanium-tubing.astro"
       ]
     },
-    "/images/titanium-products/titanium-products-manufacturer.webp": {
-      "file": "local/titanium-products-manufacturer.webp",
-      "alt": "Titanium products manufacturer",
-      "target": "titanium-products/titanium-products-manufacturer.webp",
-      "usedIn": [
-        "pages/titanium-products/titanium-tubing.astro"
-      ]
-    },
     "/images/titanium-products/heat-exchangers-condensers.webp": {
       "file": "local/heat-exchangers-condensers.webp",
       "alt": "Heat exchangers condensers — titanium component in service",
@@ -2249,6 +2587,94 @@
       "target": "titanium-products/grade-23-eli-wire.webp",
       "usedIn": [
         "pages/titanium-products/titanium-wire.astro"
+      ]
+    },
+    "/images/service/cnc-machining.webp": {
+      "file": "products/cnc-machining.webp",
+      "alt": "Cnc machining — titanium fabrication",
+      "target": "service/cnc-machining.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/cutting-sizing.webp": {
+      "file": "products/cutting-sizing.webp",
+      "alt": "Cutting sizing — titanium fabrication",
+      "target": "service/cutting-sizing.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/forming-bending.webp": {
+      "file": "products/forming-bending.webp",
+      "alt": "Forming bending — titanium fabrication",
+      "target": "service/forming-bending.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/welding-assembly.webp": {
+      "file": "products/welding-assembly.webp",
+      "alt": "Welding assembly — titanium fabrication",
+      "target": "service/welding-assembly.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/surface-finishing.webp": {
+      "file": "products/surface-finishing.webp",
+      "alt": "Surface finishing at the Titanium Parts workshop",
+      "target": "service/surface-finishing.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/additive-manufacturing.jpg": {
+      "file": "products/additive-manufacturing.webp",
+      "alt": "Additive manufacturing — titanium fabrication",
+      "target": "service/additive-manufacturing.jpg",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/inspection-docs.webp": {
+      "file": "products/inspection-docs.webp",
+      "alt": "Inspection docs — titanium fabrication",
+      "target": "service/inspection-docs.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/oem-supply.webp": {
+      "file": "products/oem-supply.webp",
+      "alt": "Oem supply — titanium fabrication",
+      "target": "service/oem-supply.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/export-packing.jpeg": {
+      "file": "products/export-packing.webp",
+      "alt": "Export packing — titanium fabrication",
+      "target": "service/export-packing.jpeg",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/hero-fabrication.webp": {
+      "file": "products/hero-fabrication.webp",
+      "alt": "Titanium component fabrication and manufacturing environment",
+      "target": "service/hero-fabrication.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
+      ]
+    },
+    "/images/service/engineering-review.webp": {
+      "file": "products/engineering-review.webp",
+      "alt": "Titanium component manufacturing review",
+      "target": "service/engineering-review.webp",
+      "usedIn": [
+        "pages/titanium-service/index.astro"
       ]
     }
   }

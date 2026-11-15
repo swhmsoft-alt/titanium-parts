@@ -14,13 +14,17 @@ export interface AnodeCoating {
   /** One-line positioning. */
   summary: string;
   /** Coating family and substrate description. */
-  description: string;
+  detail: string;
   /** Reactions this family is commonly reviewed for. */
   reactions: string[];
   /** What must be confirmed before quoting. */
   reviewBasis: string[];
   /** Common anode geometries. */
   geometries: string[];
+  /** The oxide combinations the family covers, stated plainly. */
+  compositions: string[];
+  /** MMO geometry pages that carry this coating family. */
+  relatedGeometries: { label: string; href: string }[];
   /** Image path under public/images. */
   image: string;
 }
@@ -33,7 +37,7 @@ export const anodeCoatings: AnodeCoating[] = [
     title: 'Ru-Ir MMO Titanium Anodes',
     summary: 'Mixed metal oxide anodes commonly reviewed for chlorine-evolution service.',
     detail:
-      'Ruthenium-iridium mixed metal oxide coatings are widely reviewed for chlorine evolution in chloride media. Suitability is not fixed by the coating name: electrolyte composition, impurities, pH, temperature, current density and the required operating life all change how the coating behaves, so every request is reviewed against the actual service.',
+      'A ruthenium–iridium mixed metal oxide, typically RuO₂ with an IrO₂ addition, is the coating system most often reviewed for chlorine evolution in chloride media and for the electrochlorination and hypochlorite generation duties that sit next to it. The ruthenium carries the catalytic behaviour for the chloride oxidation reaction, while the iridium stabilises the surface. That balance is not fixed: the electrolyte composition, the impurity load, the pH, the temperature, the current density and the required operating life all change how the coating behaves, so every request is reviewed against the actual service rather than against the family name.',
     reactions: [
       'Chlorine evolution in chloride media',
       'Electrochlorination and hypochlorite generation',
@@ -52,6 +56,17 @@ export const anodeCoatings: AnodeCoating[] = [
       'Disc, rod and canister geometries',
       'Drawing-based custom assemblies with masks and tabs',
     ],
+    compositions: [
+      'RuO₂ – IrO₂ mixed metal oxide',
+      'RuO₂ – TiO₂ mixed metal oxide',
+      'Coating loading expressed in g/cm² of coated area',
+    ],
+    relatedGeometries: [
+      { label: 'MMO Tubular Anode', href: '/titanium-anode/mmo-anode/mmo-tubular-anode/' },
+      { label: 'MMO Ribbon Anode', href: '/titanium-anode/mmo-anode/mmo-ribbon-anode/' },
+      { label: 'MMO Mesh Ribbon Anode', href: '/titanium-anode/mmo-anode/mmo-mesh-ribbon-anode/' },
+      { label: 'MMO Wire Anode', href: '/titanium-anode/mmo-anode/mmo-wire-anode/' },
+    ],
     image: '/images/titanium-anode/ru-ir-mmo-anodes.webp',
   },
   {
@@ -61,7 +76,7 @@ export const anodeCoatings: AnodeCoating[] = [
     title: 'Ir-Ta & Ir-Based MMO Titanium Anodes',
     summary: 'Iridium-based mixed metal oxide anodes reviewed for oxygen evolution duties.',
     detail:
-      'Iridium-based mixed metal oxide systems are commonly evaluated for oxygen-evolution and other selected electrochemical duties. No single iridium formulation fits every process, so the electrolyte, contaminant behaviour, mass transfer and shutdown conditions are reviewed before a coating family is proposed.',
+      'An iridium-based mixed metal oxide, most often IrO₂ combined with Ta₂O₅ and sometimes with SnO₂ or ZrO₂, is the coating system commonly evaluated for oxygen evolution and for the selected advanced oxidation duties that run alongside it. The iridium oxide carries the oxygen evolution behaviour while the second oxide stabilises the surface in alkaline and acidic media. No single iridium formulation fits every process, so the electrolyte, the contaminant behaviour, the mass transfer and the shutdown conditions are reviewed before a coating family is proposed.',
     reactions: [
       'Oxygen evolution in alkaline and acidic media',
       'Advanced oxidation and specialty electrochemical processes',
@@ -79,6 +94,17 @@ export const anodeCoatings: AnodeCoating[] = [
       'Tube and custom geometry anodes',
       'Coated-zone and masked-area configurations',
       'Project-specific reactor assemblies',
+    ],
+    compositions: [
+      'IrO₂ – Ta₂O₅ mixed metal oxide',
+      'IrO₂ – SnO₂ or IrO₂ – ZrO₂ variants',
+      'Coating loading expressed in g/cm² of coated area',
+    ],
+    relatedGeometries: [
+      { label: 'MMO Tubular Anode', href: '/titanium-anode/mmo-anode/mmo-tubular-anode/' },
+      { label: 'MMO Disc Anode', href: '/titanium-anode/mmo-anode/mmo-disc-anode/' },
+      { label: 'MMO Rod Anode', href: '/titanium-anode/mmo-anode/mmo-rod-anode/' },
+      { label: 'MMO Linear Anode', href: '/titanium-anode/mmo-anode/mmo-linear-anode/' },
     ],
     image: '/images/titanium-anode/ir-ta-mmo-anodes.webp',
   },
@@ -108,6 +134,16 @@ export const anodeCoatings: AnodeCoating[] = [
       'Tabbed and threaded connection configurations',
       'Rack-mounted and custom fixtures',
     ],
+    compositions: [
+      'Platinum layer on a titanium substrate',
+      'Platinum loading expressed in g/cm² or a thickness basis',
+      'Porous or barrier-type coating variants for direct contact duties',
+    ],
+    relatedGeometries: [
+      { label: 'MMO Disc Anode', href: '/titanium-anode/mmo-anode/mmo-disc-anode/' },
+      { label: 'MMO Tubular Anode', href: '/titanium-anode/mmo-anode/mmo-tubular-anode/' },
+      { label: 'MMO Rod Anode', href: '/titanium-anode/mmo-anode/mmo-rod-anode/' },
+    ],
     image: '/images/titanium-anode/platinized-titanium-anodes.webp',
   },
   {
@@ -135,6 +171,15 @@ export const anodeCoatings: AnodeCoating[] = [
       'Project-specific reactor assemblies',
       'Replaceable cartridge configurations',
       'Custom geometry from a drawing or sample',
+    ],
+    compositions: [
+      'Lead dioxide based surface on a titanium substrate',
+      'Bimetallic or composite specialty systems reviewed per project',
+      'Coating loading expressed in g/cm² of coated area',
+    ],
+    relatedGeometries: [
+      { label: 'MMO Plate and Mesh Assemblies', href: '/titanium-anode/mmo-anode/' },
+      { label: 'MMO Tubular Anode', href: '/titanium-anode/mmo-anode/mmo-tubular-anode/' },
     ],
     image: '/images/titanium-anode/pbo2-coated-anodes.webp',
   },

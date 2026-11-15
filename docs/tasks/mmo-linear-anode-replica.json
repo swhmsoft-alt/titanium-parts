@@ -1,0 +1,51 @@
+{
+  "id": "mmo-linear-anode-replica",
+  "title": "MMO Linear Anode Page 1:1 Replica",
+  "summary": "Rebuild the MMO linear anode product page as a 1:1 replica of the reference page: fourteen sections, eight image cards, four data tables, an FAQ and an RFQ form, all rendered from local assets with no reference-site content.",
+  "assertions": [
+    { "type": "routeExists", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/" },
+    { "type": "routeMeta", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/" },
+    { "type": "routeHasTable", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "minRows": 30 },
+    { "type": "routeJsonLdType", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "types": ["FAQPage", "WebPage", "ImageObject", "Product", "BreadcrumbList"] },
+
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "MMO Linear Anodes for Distributed Cathodic Protection" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Define the Electrical Duty and Installation Boundary First" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "What Is an MMO Linear Anode Assembly?" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Standard and Custom Linear Anode Output Ratings" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "MMO Linear Anode Technical Data" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Configure the Assembly Around the Approved CP Layout" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Where Distributed Linear Anodes Fit" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Voltage Drop, Feed Points and Current Distribution" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Inside Our Manufacturing & Quality System" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Linear Anode vs MMO Wire, Ribbon and Mesh Ribbon" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Define the Linear-Anode Assembly and Electrical Boundary Before Quotation" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "MMO Linear Anode FAQs" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Request a Custom MMO Linear Anode Review" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "mA/m" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "mA/ft" },
+    { "type": "routeContains", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "text": "Send MMO Linear Anode Inquiry" },
+
+    { "type": "routeLinksTo", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "href": "/titanium-anode/mmo-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "href": "/titanium-anode/mmo-anode/mmo-wire-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "href": "/titanium-anode/mmo-anode/mmo-ribbon-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "href": "/titanium-anode/mmo-anode/mmo-canister-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "href": "/titanium-anode/mmo-anode/mmo-tubular-anode/" },
+    { "type": "routeLinksTo", "route": "/titanium-anode/mmo-anode/mmo-linear-anode/", "href": "/titanium-anode/mmo-anode/mmo-mesh-ribbon-anode/" },
+
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-hero-reel.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-distributed-installation.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-assembly-cross-section.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-components-inspection.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-custom-assembly.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-buried-pipeline.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-dense-piping-network.webp" },
+    { "type": "imageExists", "path": "public/images/titanium-anode/mmo-linear-anode-buried-assets.webp" },
+
+    { "type": "fileExists", "path": "src/data/mmo-linear-page.ts" },
+    { "type": "fileExists", "path": "src/styles/mmo-product.css" },
+    { "type": "fileExists", "path": "src/pages/titanium-anode/mmo-anode/mmo-linear-anode.astro" },
+    { "type": "dataExportExists", "module": "src/data/mmo-linear-page.ts", "export": "mmoLinearPage" },
+
+    { "type": "pageCount", "min": 67 }
+  ]
+}

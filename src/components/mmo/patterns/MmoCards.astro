@@ -1,0 +1,63 @@
+---
+/**
+ * A row of cards.
+ *
+ * The reference lays its cards out in a grid of two, three or four columns
+ * and leaves the column count to the section, so the grid travels with the
+ * data. A card may carry a picture above its copy, and a card on a dark band
+ * turns light.
+ */
+import type { MmoPart, MmoTone } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'cards' }>;
+  tone?: MmoTone;
+}
+
+const { part, tone = 'plain' } = Astro.props;
+
+/** A navy or near black band needs light copy inside its cards. */
+const dark = tone === 'dark' || tone === 'navy';
+
+const grid =
+  part.cols >= 4 ? 'mmo-grid-4' : part.cols === 3 ? 'mmo-grid-3' : 'mmo-grid-2';
+---
+
+<div class={grid}>
+  {
+    part.cards.map((card) => (
+      <article
+        class={
+          card.variant === 'blue'
+            ? 'mmo-card-blue'
+            : dark
+              ? 'mmo-card-navy'
+              : 'mmo-card'
+        }
+      >
+        {card.index && <span class="mmo-card-index">{card.index}</span>}
+        {card.image && (
+          <img
+            class="mmo-card-media"
+            src={card.image.src}
+            alt={card.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <h3>{card.title}</h3>
+        {card.body && <p>{card.body}</p>}
+        {card.extra.map((line) => (
+          <p>{line}</p>
+        ))}
+        {card.list.length > 0 && (
+          <ul class="mmo-bullets">
+            {card.list.map((entry) => (
+              <li>{entry}</li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))
+  }
+</div>

@@ -1,0 +1,60 @@
+---
+/**
+ * A data table with the heading that introduces it.
+ *
+ * Every reference table is a light table — a dark one has no background on
+ * its body cells and cannot read on a light band — so the band never turns
+ * the table dark.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'table' }>;
+}
+
+const { part } = Astro.props;
+
+/** Widest column of the table — picks the minimum width that fits the data. */
+const columns = Math.max(part.header.length, ...part.rows.map((row) => row.length));
+---
+
+{
+  part.caption && (
+    <div class="mmo-table-caption">
+      <h3 class="mmo-h3">{part.caption.title}</h3>
+      {part.caption.body && <p class="mmo-body mmo-mt-1">{part.caption.body}</p>}
+    </div>
+  )
+}
+
+<div
+  class="mmo-table-wrap"
+  role="region"
+  aria-label={part.caption?.title ?? 'Data table'}
+  tabindex="0"
+>
+  <table class={`mmo-table${columns <= 4 ? ' mmo-table-narrow' : ''}`}>
+    {
+      part.header.length > 0 && (
+        <thead>
+          <tr>
+            {part.header.map((cell) => (
+              <th>{cell}</th>
+            ))}
+          </tr>
+        </thead>
+      )
+    }
+    <tbody>
+      {
+        part.rows.map((row) => (
+          <tr>
+            {row.map((cell) => (
+              <td>{cell}</td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

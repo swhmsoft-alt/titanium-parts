@@ -1,0 +1,16 @@
+---
+/**
+ * The small rounded chips of the reference — a row of short labels.
+ */
+import type { MmoPart } from '../../../data/mmo-family-pages';
+
+interface Props {
+  part: Extract<MmoPart, { kind: 'pills' }>;
+}
+
+const { part } = Astro.props;
+---
+
+<div class="mmo-pill-row">
+  {part.items.map((entry) => <span class="mmo-pill">{entry}</span>)}
+</div>

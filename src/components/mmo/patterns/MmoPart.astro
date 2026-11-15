@@ -1,0 +1,55 @@
+---
+/**
+ * Renders one part of a section.
+ *
+ * The extractor (`scripts/mmo/extract-family-layout.mjs`) decides what a
+ * reference section is made of, and every kind it can produce has a
+ * component of its own here. A section is therefore a list of parts, and
+ * this component is the only place that knows which part is which.
+ */
+import type { MmoPart, MmoTone } from '../../../data/mmo-family-pages';
+import MmoBackground from './MmoBackground.astro';
+import MmoCard from './MmoCard.astro';
+import MmoCards from './MmoCards.astro';
+import MmoChecklist from './MmoChecklist.astro';
+import MmoCta from './MmoCta.astro';
+import MmoFaq from './MmoFaq.astro';
+import MmoFigure from './MmoFigure.astro';
+import MmoHeading from './MmoHeading.astro';
+import MmoList from './MmoList.astro';
+import MmoNote from './MmoNote.astro';
+import MmoParagraph from './MmoParagraph.astro';
+import MmoPills from './MmoPills.astro';
+import MmoSplit from './MmoSplit.astro';
+import MmoTable from './MmoTable.astro';
+
+interface Props {
+  part: MmoPart;
+  tone?: MmoTone;
+}
+
+const { part, tone = 'plain' } = Astro.props;
+---
+
+{part.kind === 'cards' && <MmoCards part={part} tone={tone} />}
+{part.kind === 'card' && <MmoCard part={part} tone={tone} />}
+{part.kind === 'table' && <MmoTable part={part} />}
+{part.kind === 'faq' && <MmoFaq part={part} />}
+{part.kind === 'note' && <MmoNote part={part} tone={tone} />}
+{part.kind === 'pills' && <MmoPills part={part} />}
+{part.kind === 'checklist' && <MmoChecklist part={part} />}
+{part.kind === 'figure' && <MmoFigure part={part} />}
+{part.kind === 'background' && <MmoBackground part={part} />}
+{part.kind === 'cta' && <MmoCta part={part} />}
+{part.kind === 'paragraph' && <MmoParagraph part={part} />}
+{part.kind === 'heading' && <MmoHeading part={part} />}
+{part.kind === 'list' && <MmoList part={part} tone={tone} />}
+{
+  part.kind === 'split' && (
+    <MmoSplit image={part.image} caption={part.caption}>
+      {part.parts.map((inner) => (
+        <MmoPart part={inner} tone={tone} />
+      ))}
+    </MmoSplit>
+  )
+}
