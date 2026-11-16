@@ -309,6 +309,55 @@ export const handlers = {
     };
   },
 
+  /** A source file does NOT contain a marker string. */
+  fileLacks(assertion, ctx) {
+    const file = path.join(ctx.root, assertion.path);
+    if (!fs.existsSync(file)) return { pass: false, detail: `file missing: ${assertion.path}` };
+    const source = fs.readFileSync(file, 'utf8');
+    const ok = !source.includes(assertion.text);
+    return {
+      pass: ok,
+      detail: ok ? `does not contain "${assertion.text}"` : `still contains "${assertion.text}"`,
+    };
+  },
+
+  /**
+   * Every built page carries a marker string.
+   *
+   * Used for site-wide guarantees such as "every page is noindex during the
+   * isolation period" — a per-route assertion would need 77 entries.
+   */
+  allRoutesContain(assertion, ctx) {
+    const missing = [];
+    for (const [route, html] of ctx.pages) {
+      if (!html.includes(assertion.text)) missing.push(route);
+    }
+    return {
+      pass: missing.length === 0,
+      detail: missing.length
+        ? `${missing.length}/${ctx.pages.size} pages lack "${assertion.text}" (e.g. ${missing.slice(0, 3).join(', ')})`
+        : `all ${ctx.pages.size} pages carry "${assertion.text}"`,
+    };
+  },
+
+  /**
+   * The built page does NOT carry a marker string.
+   *
+   * The counterpart of `routeContains` — it encodes "this claim must be gone"
+   * as a machine check instead of a review comment.
+   */
+  routeLacks(assertion, ctx) {
+    const html = ctx.pages.get(assertion.route);
+    if (!html) return { pass: false, detail: `route missing from dist: ${assertion.route}` };
+    const haystack = assertion.text ? textOf(html) : html;
+    const needle = assertion.text ?? assertion.selector ?? '';
+    const ok = !haystack.includes(needle);
+    return {
+      pass: ok,
+      detail: ok ? `does not contain "${needle}"` : `still contains "${needle}"`,
+    };
+  },
+
   /** A source file exists. */
   fileExists(assertion, ctx) {
     const file = path.join(ctx.root, assertion.path);

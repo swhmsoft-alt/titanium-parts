@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import GradeHub from '../../components/grade/GradeHub.astro';
+import { hubMeta, hubFaqs } from '../../data/titanium-grades-hub';
+import { site } from '../../data/site';
+
+const origin = site.url.replace(/\/$/, '');
+const canonicalUrl = new URL(Astro.url.pathname, origin).href;
+
+/**
+ * The FAQPage node is generated from the same array that renders the
+ * accordion in the hub body, so the visible copy and the structured data can
+ * never disagree.
+ */
+const faqJsonLd = {
+  '@type': 'FAQPage',
+  '@id': `${canonicalUrl}#faq`,
+  mainEntity: hubFaqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+
+const jsonLd: Record<string, unknown>[] = [faqJsonLd];
+---
+
+<BaseLayout title={hubMeta.title} description={hubMeta.description} jsonLd={jsonLd}>
+  <PageHero eyebrow={hubMeta.eyebrow} title={hubMeta.h1} description={hubMeta.lede} />
+  <GradeHub />
+</BaseLayout>

@@ -9,6 +9,10 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonical?: string;
+  /**
+   * Indexing is closed by default while the site is being rewritten.
+   * Set `noindex={false}` only once the de-originalisation work is finished.
+   */
   noindex?: boolean;
   /** Extra JSON-LD nodes merged into the page graph. */
   jsonLd?: Record<string, unknown>[];
@@ -25,7 +29,7 @@ const {
   description = site.description,
   ogImage = site.seo.ogImage,
   canonical,
-  noindex = false,
+  noindex = true,
   jsonLd = [],
   product,
 } = Astro.props;
@@ -60,17 +64,8 @@ const graph: Record<string, unknown>[] = [
     email: site.contact.salesEmail,
     telephone: site.contact.phone,
     sameAs: Object.values(site.social).filter((v) => v && v !== '#'),
-    address: [
-      { ...site.locations.hq, addressLocality: site.locations.hq.city, addressRegion: site.locations.hq.region, addressCountry: site.locations.hq.country },
-      { ...site.locations.office, addressLocality: site.locations.office.city, addressCountry: site.locations.office.country },
-      { ...site.locations.pem, addressLocality: site.locations.pem.city, addressCountry: site.locations.pem.country },
-    ].map((loc) => ({
-      '@type': 'PostalAddress',
-      streetAddress: loc.detail,
-      addressLocality: loc.addressLocality,
-      ...(loc.addressRegion ? { addressRegion: loc.addressRegion } : {}),
-      addressCountry: loc.addressCountry,
-    })),
+    // No `address`: we own no facility and publish no site address.
+    // `foundingDate` is deliberately absent — the company is not registered yet.
     contactPoint: [
       {
         '@type': 'ContactPoint',

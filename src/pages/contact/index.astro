@@ -15,7 +15,7 @@ import { company } from '../../data/company';
         <div class="contact-info">
           <div class="contact-card"><Icon name="mail" size={32} className="contact-icon" /><h3>Prefer email?</h3><p>Send drawings, application, material grade, coating requirement, quantity, and delivery target. Our team will review your request within 1 business day.</p><a href={`mailto:${company.contact.salesEmail}`} class="contact-link">{company.contact.salesEmail}</a></div>
           <div class="contact-card"><Icon name="phone-call" size={32} className="contact-icon" /><h3>WhatsApp / Phone</h3><p>Reach the project coordination team during China business hours. Same-day technical reply for active projects.</p><a href={`https://wa.me/${company.contact.whatsapp.replace(/[^0-9]/g,'')}`} class="contact-link">+{company.contact.phoneDisplay}</a></div>
-          <div class="contact-card"><Icon name="map-pin" size={32} className="contact-icon" /><h3>Factory</h3><p>Our engineering center and main manufacturing hub.</p><p class="contact-detail">{company.locations.hq.detail}</p></div>
+          <div class="contact-card"><Icon name="map-pin" size={32} className="contact-icon" /><h3>Sourcing Base</h3><p>Production is placed with qualified partner workshops in China. We define the specification, review the drawings and coordinate production, inspection and documentation.</p><p class="contact-detail">{company.sourcing.base}</p></div>
         </div>
         <RFQForm title="Send Inquiry" subtitle="We typically respond within 1 business day." variant="default" />
       </div>

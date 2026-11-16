@@ -1,0 +1,42 @@
+{
+  "id": "no-entity-about-team",
+  "title": "The about page loses its third-party owner and its invented history, the team page loses its invented hierarchy",
+  "summary": "Two pages still describe an organisation that does not exist. /company/ still names a third-party company as its owner, still counts ten years and three manufacturing hubs, and still walks a 2013-2026 milestone timeline. /our-team/ still publishes six invented job titles with bios - Managing Director through Project Engineer - and a five-department structure, which together imply a staff the company does not have while it is still being set up. This round removes the third-party entity name, the year count, the hub count and the timeline from /company/, and replaces the six role cards plus the department grid on /our-team/ with the single application and quotation contact block agreed in the work order. The page-level copy sweep, the product pages and the shared-layer response promise wording stay where they are - they belong to the later rounds.",
+  "assertions": [
+    { "type": "fileExists", "path": "docs/tasks/no-entity-about-team.json" },
+
+    { "type": "routeExists", "route": "/company/" },
+    { "type": "routeExists", "route": "/our-team/" },
+    { "type": "routeMeta", "route": "/company/" },
+    { "type": "routeMeta", "route": "/our-team/" },
+
+    { "type": "fileContains", "path": "src/pages/company/index.astro", "text": "About Titanium Parts | Engineering & Sourcing Support" },
+
+    { "type": "routeLacks", "route": "/company/", "text": "Ningbo Alto Nanotag Technology Co., Ltd." },
+    { "type": "routeLacks", "route": "/company/", "text": "A Decade of Capability Growth" },
+    { "type": "routeLacks", "route": "/company/", "text": "2013" },
+    { "type": "routeLacks", "route": "/company/", "text": "all built in-house" },
+    { "type": "routeLacks", "route": "/company/", "text": "Years Experience" },
+    { "type": "routeLacks", "route": "/company/", "text": "Manufacturing Hubs" },
+    { "type": "routeLacks", "route": "/company/", "text": "Factory-direct" },
+    { "type": "routeLacks", "route": "/company/", "text": "factory-direct" },
+
+    { "type": "routeContains", "route": "/company/", "text": "Titanium & Anode Engineering and Sourcing Support" },
+    { "type": "routeContains", "route": "/company/", "text": "independent engineering and sourcing resource" },
+    { "type": "routeContains", "route": "/company/", "text": "qualified partner workshops in China" },
+    { "type": "routeContains", "route": "/company/", "text": "Specification review, application selection support" },
+
+    { "type": "routeLacks", "route": "/our-team/", "text": "Managing Director" },
+    { "type": "routeLacks", "route": "/our-team/", "text": "Technical Director" },
+    { "type": "routeLacks", "route": "/our-team/", "text": "Anode Engineering Manager" },
+    { "type": "routeLacks", "route": "/our-team/", "text": "PEM Systems Engineer" },
+    { "type": "routeLacks", "route": "/our-team/", "text": "Quality & Documentation Lead" },
+    { "type": "routeLacks", "route": "/our-team/", "text": "Project Engineer" },
+    { "type": "routeLacks", "route": "/our-team/", "text": "Five Specialized Teams" },
+    { "type": "routeContains", "route": "/our-team/", "text": "Application & Quotation Contact" },
+
+    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"noindex, nofollow\">" },
+
+    { "type": "pageCount", "min": 67 }
+  ]
+}

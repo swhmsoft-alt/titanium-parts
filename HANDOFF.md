@@ -1,78 +1,178 @@
 # HANDOFF
 
 <!-- newtask -->
-Task: newtask-workflow
+Task: no-entity-about-team
 <!-- /newtask -->
 
 ## Current Status
 
-Task `newtask-workflow` — **complete**. The `/newtask` flow is now a
-deterministic launcher instead of a free-form restart. The four steps are
-written down and enforced by a script:
+### Round 13 — the shared layer stops advertising a factory
 
-1. read the root `HANDOFF.md` once and take its single `Task: <id>` line;
-2. open the context ledger with `npm run budget -- --reset --task <id>`;
-3. that id is the one and only task file of `docs/tasks/*.json` to work on;
-4. work on that task's assertions alone.
+Task `no-entity-shared-copy` — the three remaining "Direct Factory" statements in
+the shared layer are gone, and the footer's response promise is now one the
+company can actually keep while it is being set up.
 
-The task id comes from the handoff and from nowhere else. A missing,
-ambiguous or unknown id is a hard error (`EXIT=2`): there is no fallback,
-no automatic pick and no second entry point. Guessing the task is how scope
-leaks, so the script refuses instead.
+What changed:
 
-The task line is read from a marked block, not from the whole document.
-The block sits at the top of this file: the `<!-- newtask -->` marker, then
-exactly one line `Task: <id>`, then the `<!-- /newtask -->` marker.
+- `src/components/Header.astro` line 35 — the trust badge
+  `Direct Factory · Engineering Supplier` → `Engineering Support · Coordinated Supply`.
+- `src/components/Footer.astro` line 40 — the first column title
+  `Direct Factory` → `Product Sourcing`.
+- `src/components/Footer.astro` line 84 — the feature strip entry
+  `Direct Factory` → `Coordinated Supply`.
+- `src/components/Footer.astro` line 12 — the CTA promise
+  `Our team will review your request within 1 business day.` →
+  `We respond on China business days.`
+- `src/pages/index.astro` line 100 — the homepage RFQ block carried the same
+  promise twice (`Response Within 1 Business Day` in the benefit list and
+  `We typically respond within 1 business day.` as the form note). Both now
+  read `Response on China Business Days` / `We respond on China business days.`
+  This was required by the route assertion `routeLacks "/" "within 1 business day"`
+  — the footer alone could not satisfy it.
 
-The handoff is a prose archive that grows with every round. Without the
-block, one sentence in an archived round could break the launcher. With it,
-the prose cannot interfere, and a `Task:` line outside the block is reported
-with its line number instead of silently confusing the launcher.
+**Verified.** `npm run build` → 77 pages, exit 0. `npm run task:verify --
+no-entity-shared-copy` → 24/24 PASS (SEO gate, dead-link gate and baseline gate
+included).
 
-What changed in this round:
+Still out of scope for this round, by design: page-level factory language, and
+the `within 1 business day` wording that still sits in `src/components/RFQForm.astro`,
+`src/components/industry/IndustrySpoke.astro`, `src/components/grade/*.astro`,
+`src/pages/contact/index.astro`, `src/pages/titanium-products/index.astro`,
+`src/pages/titanium-service/[slug]/index.astro` and seven
+`src/data/*-page.ts` files. Those belong to the later page-level rounds.
 
-- `scripts/handoff/newtask.mjs` — new. Reads the handoff, resolves the one
-  task, opens the ledger, prints the opening contract and lists the other
-  task files as report-only. Exit codes: 0 = started, 1 = the ledger could
-  not be opened, 2 = the handoff does not name exactly one usable task. The
-  result is written to `tmp/handoff/newtask.status` as `EXIT=<code>`.
-  The task line is read from the `<!-- newtask -->` block only, so the
-  prose of the archive cannot interfere with it.
-- `package.json` — added the `newtask` script.
-- `.clinerules/.clinerules.md` — §0 gained the `npm run newtask` gate,
-  §7.3 now requires the `Task: <id>` line in the handoff, §7.4 was rewritten
-  as the four fixed steps and carries the red line: the failures of the
-  other tasks may be reported but must never be fixed on the side.
-- `docs/tasks/newtask-workflow.json` — the task definition of this round:
-  thirteen assertions over the script, the package script, the rules file,
-  the handoff line and the page count.
+---
 
-Verification, all green:
 
-- `npm run build` — 67 pages, `Complete!`
-- `npm run newtask` — reads the handoff, opens the ledger for
-  `newtask-workflow`, prints the opening contract and lists the other
-  thirteen task files as report-only. `EXIT=0`.
-- Failure cases, all `EXIT=2`: no marked block, a block without a task line,
-  two task lines inside the block, an unknown task id, an id that is not a
-  slug, a task line outside the block (reported with its line number) and
-  reversed markers.
-- `npm run task:verify -- newtask-workflow` — 24/24 checks passed
+Task `no-entity-isolation` — **complete**. The site is now closed to crawlers
+and no longer claims any facility, address or history it cannot document.
+
+### Round 12 — the isolation and shared-positioning round
+
+Task `no-entity-isolation` — the de-originalisation work order, item P0-1 plus
+the shared-configuration half of P0-3/P0-5. The company is not registered yet,
+so the site must not be indexed and must not publish a self-owned factory.
+
+What changed:
+
+- `public/robots.txt` — `User-agent: *` / `Disallow: /`. The `Sitemap:` line is
+  gone, so no crawler is pointed at the sitemap while the rewrite runs. The
+  sitemap itself is still generated by the build; it is simply not advertised.
+- `src/layouts/BaseLayout.astro` — `noindex` now defaults to `true`, so all 77
+  built pages carry `<meta name="robots" content="noindex, nofollow">` from one
+  place. The `Organization` node lost its `address` array (three `PostalAddress`
+  entries). `foundingDate` is deliberately absent — the company is not
+  registered. `WebSite.description` follows `site.description` automatically.
+- `src/data/site.ts` — `tagline` is now `Titanium & Anode Sourcing and
+  Engineering Support`; `description` is now `Independent engineering and
+  sourcing resource for titanium products, coated anodes and electrochemical
+  components, coordinated with qualified production partners in China.` The
+  whole `locations` object (hq / office / pem) is deleted and replaced by a
+  single `sourcing.base` string that names an industrial cluster, not a site.
+  The unverifiable `stats` block (`yearsExperience: '10+'`, `teamSize: '50+'`)
+  is deleted.
+- `src/components/Footer.astro`, `src/components/anode/ProductPage.astro`,
+  `src/pages/titanium-machining-parts.astro`, `src/pages/contact/index.astro` —
+  the four places that printed a site address now print `sourcing.base`. The
+  contact page's "Factory" card is now "Sourcing Base" and states that
+  production is placed with qualified partner workshops.
+- `scripts/qa/assertions.mjs` — three new assertion handlers, because the old
+  set could only say "this text is present" and could not express a removal
+  requirement: `fileLacks` (a source file must NOT contain a marker),
+  `allRoutesContain` (every built page carries a marker — used for the
+  site-wide noindex guarantee, which would otherwise need 77 entries) and
+  `routeLacks` (a built page must NOT contain a marker). A requirement that
+  "this claim must be gone" is now a machine check instead of a review comment.
+
+**Verified.** `npm run build` → 77 pages, exit 0. `verify-task
+no-entity-isolation` → 34/34, including the SEO gate, the dead-link gate and
+the baseline gate. `npm run qa` → SEO metadata 77 unique titles and 77 unique
+descriptions, all checks passed; internal links clean; the only audit failure
+is the pre-existing baseline entry for the two unshot video slots.
+
+**Two pre-existing breakages were found and fixed** (both left the working tree
+unbuildable before this round, so nothing could be verified until they were
+out of the way; neither is part of this task's scope):
+
+1. `src/pages/titanium-grades/[grade]/index.astro` — the five imports pointed
+   four levels up (`../../../../layouts/`) instead of three
+   (`../../../layouts/`). The build failed with "Could not resolve
+   BaseLayout.astro" and nothing could be built. Path depth only; no content was
+   touched.
+2. `src/data/titanium-grades-hub.ts` and the grade page — title and
+   description were over the SEO budget (title >70 characters on five grade
+   pages, description 182 characters on the hub). Shortened to fit the
+   existing budget. The `titanium-grades-hub` task file itself was NOT
+   modified.
+
+**Pre-existing failures of other tasks, reported and not touched** (confirmed
+identical before and after this round by a `git stash` A/B comparison of the
+whole task suite; they are not caused by this round and must not be fixed on
+the side):
+
+- `fix-mmo-band-contrast` — 17/18, `bg-blue-950` not found.
+- `fix-mmo-wire-anode-css` — 23/34, `mmo-band-navy` / `mmo-band-alt` missing,
+  `tmp/ref/family-model.json` missing.
+- `mmo-anode-geo-seo` — 31/32, missing `@type: ImageObject`.
+- `mmo-family-replica` — 221/228, missing `@type: ImageObject`.
+- `titanium-grades-hub` — 82/102, missing `@type: WebPage` on the grade routes,
+  no cross-links from the anode / PEM / knowledge-centre / product pages, and
+  `gradeBySlug` is not exported.
+
+**What was verified by parsing, not by assertion.** The `Organization` node in
+the built HTML was parsed directly: its keys are `@type, @id, name, url, logo,
+description, email, telephone, sameAs, contactPoint` — no `address`, no
+`foundingDate`. All 77 built pages carry the noindex meta tag.
 
 ## Next Step
 
-1. This task is finished and verified. Nothing is outstanding for it.
-2. When the next task is opened, **change the `Task: <id>` line at the top
-   of this file** to the id of that task and create its
-   `docs/tasks/<id>.json` first. The launcher exits with `EXIT=2` when the
-   line names a task that has no definition — that is the intended
-   behaviour, not a bug.
-3. Nothing else is scheduled. The two follow-up candidates of the previous
-   round (the site wide `WebPage` JSON-LD node and the industry image
-   fields of the `SpokeContent` model) still need their own task files.
+1. Task `no-entity-about-team` (round 14, B轮) is next in the plan. Its task
+   file `docs/tasks/no-entity-about-team.json` exists (28 assertions). It
+   strips the third-party owner and the invented history from `/company/`
+   (the `Ningbo Alto Nanotag Technology Co., Ltd.` sentence, the
+   `A Decade of Capability Growth` timeline, the `2013` milestone, the
+   `10+ Years Experience` / `3 Manufacturing Hubs` stat cards, the
+   `all built in-house` claim, the `Factory-direct` wording and the
+   `Titanium Products Manufacturer & Engineering Supplier` H2) and replaces
+   the six invented role cards plus the five-department grid on `/our-team/`
+   with the single `Application & Quotation Contact` block. The source files
+   are `src/pages/company/index.astro` and `src/pages/our-team/index.astro`,
+   with `src/data/team-data.ts` holding the six role titles. Note that
+   `routeLacks` matches the stripped page text, so `Project Engineer` on
+   `/our-team/` also forbids the `Project Engineer` job title but not the
+   lowercase phrase `A project engineer will respond ...` in the RFQ form.
+2. The rounds after that, in order: `no-entity-quality-capability` (quality,
+   manufacturing-capabilities and contact pages), `no-entity-copy-sweep` (page
+   TDK and body copy, plus the "Inside our factory" data-layer strings and the
+   remaining `within 1 business day` promises in `RFQForm.astro`,
+   `IndustrySpoke.astro`, `grade/*.astro`, `contact/`, `titanium-products/`,
+   `titanium-service/` and seven `src/data/*-page.ts` files),
+   `no-entity-media` (image renames and EXIF), `no-entity-product-pages`
+   (the 31 product pages).
+3. The site stays `noindex` and `Disallow: /` until the whole rewrite is
+   finished. Reopening the index is a separate decision and must be made
+   deliberately, not by accident.
 
 ## Known Pitfalls
 
+- `npm run build` writes to `dist/`. A `task:verify` that runs right after a
+  source edit but before a rebuild reads the OLD `dist/` and reports stale
+  failures. Rebuild before verifying, and read the exit code from
+  `tmp/qa/verify-task.log`, not from the terminal echo.
+- `scripts/qa/assertions.mjs` had no way to assert a removal. The three
+  handlers added this round (`fileLacks`, `allRoutesContain`, `routeLacks`)
+  exist for that reason — use them instead of a prose note.
+- The audit's `image-references-resolve` failure for the two unshot video
+  slots is registered in `docs/qa/baseline.json`. The verifier accepts it; the
+  standalone `npm run qa` still prints it as a failure. That is expected.
+- Do not read the whole `HANDOFF.md` — it is a long archive and grows every
+  round. Read the block at the top and the `Current Status` section only.
+- `git status` shows untracked files from earlier rounds (the whole
+  `titanium-grades` feature). They are not committed, so `git stash` leaves
+  them in place — an A/B comparison with `git stash` therefore compares the
+  tracked files only.
+- The Windows shell cannot capture the output of a long-running foreground
+  command. Redirect to a file under `tmp/qa/` and read the file.
 - The task id of a new session lives in exactly one place: the `Task: <id>`
   line inside the `<!-- newtask -->` block at the top of this file. A second
   `Task:` line inside the block, or any `Task:` line outside it, makes the

@@ -12,10 +12,10 @@ export const site = {
   /** Full legal entity name, used in structured data and footers. */
   legalName: 'Titanium Parts',
   /** One-line positioning statement. */
-  tagline: 'Titanium Products Manufacturer & Engineering Supplier',
+  tagline: 'Titanium & Anode Sourcing and Engineering Support',
   /** Default meta description, used when a page does not supply its own. */
   description:
-    'Factory-direct manufacturer and engineering supplier of titanium products, titanium anodes, and PEM electrolyzer systems for global OEMs, EPC contractors, and system integrators.',
+    'Independent engineering and sourcing resource for titanium products, coated anodes and electrochemical components, coordinated with qualified production partners in China.',
 
   /** Canonical origin. Keep in sync with astro.config.mjs `site`. */
   url: 'https://titanium-parts.com',
@@ -30,24 +30,15 @@ export const site = {
     whatsapp: '+86 17719570398',
   },
 
-  locations: {
-    hq: {
-      name: 'Factory & Engineering Center',
-      city: 'Baoji City',
-      region: 'Shaanxi Province',
-      country: 'China',
-      detail: 'Titanium Valley, Baoji City, Shaanxi Province, China',
-    },
-    office: {
-      name: 'Project Coordination Office',
-      city: 'Ningbo',
-      country: 'China',
-    },
-    pem: {
-      name: 'PEM Assembly Hub',
-      city: 'Dongguan',
-      country: 'China',
-    },
+  /**
+   * Sourcing context.
+   *
+   * We own no factory and publish no facility address. This describes the
+   * industrial cluster the qualified partner workshops are sourced from —
+   * it is not a company site and must never be written as one.
+   */
+  sourcing: {
+    base: 'Sourcing base in the Baoji titanium industrial cluster, China',
   },
 
   /** Product families advertised in navigation and capability lists. */
@@ -57,14 +48,6 @@ export const site = {
     'Cathodic Protection / MGPS Products',
     'PEM Electrolyzer Stack or System',
   ],
-
-  /** Headline metrics. Only publish figures that are verifiable. */
-  stats: {
-    yearsExperience: '10+',
-    teamSize: '50+',
-    countriesServed: '30+',
-    products: '100+',
-  },
 
   social: {
     linkedin: '#',

@@ -1,4 +1,4 @@
+# Isolation period: the site is being de-originalised and re-written.
+# Crawling is closed until the rewrite is finished and verified.
 User-agent: *
-Allow: /
-
-Sitemap: https://titanium-parts.com/sitemap-index.xml
+Disallow: /
