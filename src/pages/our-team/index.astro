@@ -2,58 +2,29 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import RFQForm from '../../components/RFQForm.astro';
-import { teamRoles, departments } from '../../data/team-data';
+import { applicationContact as contact } from '../../data/team-data';
 ---
 
-<BaseLayout title="Our Team | Titanium Parts" description="Meet the engineering, quality and project roles behind Titanium Parts - titanium materials, anode engineering, PEM hydrogen systems, and OEM/EPC support.">
-  <PageHero eyebrow="Our Team" title="Named Responsibility For Every Titanium Parts Order" description="An engineering-first team covering titanium materials, custom anodes, PEM hydrogen systems and global project coordination." />
+<BaseLayout title="Our Team | Titanium Parts" description="Drawing review, grade and coating selection, sample coordination and order follow-up are handled through one technical contact at Titanium Parts.">
+  <PageHero eyebrow="Contact" title="One Technical Contact For Every Order" description="A single engineering contact covers titanium materials, custom anodes, PEM components and global project coordination." />
   <section class="section section-white">
     <div class="container">
       <div class="section-header">
-        <span class="section-title-eyebrow">Leadership & Engineering</span>
-        <h2 class="section-title">Department Leads &amp; Project Roles</h2>
-        <p class="section-desc">Every Titanium Parts order is owned by a named role with clear responsibility for materials, manufacturing, quality and communication.</p>
+        <span class="section-title-eyebrow">Single Point Of Contact</span>
+        <h2 class="section-title">{contact.heading}</h2>
+        <p class="section-desc">{contact.body}</p>
       </div>
-      <div class="team-grid">
-
-        {teamRoles.map((m) => (
-          <div class="team-card">
-            {m.photo ? (
-              <div class="team-photo"><img src={m.photo} alt={m.name || m.title} loading="lazy" width="400" height="300" /></div>
-            ) : (
-              <div class="team-photo team-photo-initials" aria-hidden="true">{m.initials}</div>
-            )}
-            <div class="team-info">
-              <span class="team-dept">{m.department}</span>
-              <h3>{m.name || m.title}</h3>
-              {m.name && <p class="team-title">{m.title}</p>}
-              <p class="team-bio">{m.scope}</p>
-            </div>
-          </div>
-        ))}
-
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-slate-50">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-title-eyebrow">Departments</span>
-        <h2 class="section-title">Five Specialized Teams, One Engineering System</h2>
-        <p class="section-desc">Each product family at Titanium Parts is supported by a named team with clear ownership of materials, manufacturing, quality and customer communication.</p>
-      </div>
-      <div class="dept-grid">
-        {departments.map((d) => (
-          <div class="dept-card">
-            <h3>{d.key}</h3>
-            <p>{d.desc}</p>
+      <div class="values-grid">
+        {contact.items.map((item, index) => (
+          <div class="value-card">
+            <div class="value-num">{String(index + 1).padStart(2, '0')}</div>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
-
   <section class="section section-slate-50">
     <div class="container">
       <div class="section-header">
@@ -61,10 +32,10 @@ import { teamRoles, departments } from '../../data/team-data';
         <h2 class="section-title">A Named Contact For Every Project</h2>
       </div>
       <div class="values-grid">
-        <div class="value-card"><div class="value-num">01</div><h3>Engineer-to-Engineer Communication</h3><p>Discussions happen between your engineers and ours - not through call centers - so technical detail is preserved.</p></div>
+        <div class="value-card"><div class="value-num">01</div><h3>Engineer-to-Engineer Communication</h3><p>Technical discussions happen with one engineering contact - not through a call center - so detail is preserved.</p></div>
         <div class="value-card"><div class="value-num">02</div><h3>Application-Led Engineering</h3><p>Each project starts with operating conditions, drawings and approval scope, not a generic product catalog quote.</p></div>
         <div class="value-card"><div class="value-num">03</div><h3>Documented Project Trail</h3><p>Reviews, sample reports, FAT plans and shipment records are kept with your project - auditable on request.</p></div>
-        <div class="value-card"><div class="value-num">04</div><h3>Long-Term Partnership</h3><p>Our repeat buyer base is built on long-term supply programs, not one-off transactions.</p></div>
+        <div class="value-card"><div class="value-num">04</div><h3>Long-Term Partnership</h3><p>A repeat buyer base is built on long-term supply programs, not one-off transactions.</p></div>
       </div>
     </div>
   </section>
@@ -73,17 +44,17 @@ import { teamRoles, departments } from '../../data/team-data';
     <div class="container">
       <div class="rfq-grid">
         <div>
-          <span class="section-title-eyebrow" style="color: var(--color-primary-200);">Work With Our Team</span>
-          <h2 class="rfq-title">Tell us your project scope, drawings and approval requirements - we will route you to the right engineer.</h2>
+          <span class="section-title-eyebrow" style="color: var(--color-primary-200);">Work With Our Engineering Contact</span>
+          <h2 class="rfq-title">Tell us your project scope, drawings and approval requirements - we will route you to the right technical contact.</h2>
           <ul class="rfq-benefits">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Direct engineer-to-engineer contact</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> One technical contact for the whole order</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Application and drawing review</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Technical and approval support</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Long-term supply coordination</li>
           </ul>
           <p class="rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
         </div>
-        <RFQForm title="Talk With Our Team" subtitle="A project engineer will respond within 1 business day." variant="team" />
+        <RFQForm title="Talk With Our Technical Contact" subtitle="We respond on China business days." variant="team" />
       </div>
     </div>
   </section>
@@ -98,29 +69,6 @@ import { teamRoles, departments } from '../../data/team-data';
   .section-title { font-size: clamp(1.875rem, 3vw, 2.5rem); font-weight: 700; color: var(--color-slate-900); margin-bottom: 1rem; letter-spacing: -0.025em; }
   .section-dark .section-title { color: #fff; }
   .section-desc { font-size: 1rem; line-height: 1.6; color: var(--color-slate-600); }
-  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 640px) { .team-grid { grid-template-columns: 1fr; } }
-  .team-card { background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; overflow: hidden; transition: all 0.25s; }
-  .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); border-color: var(--color-primary); }
-  .team-photo { aspect-ratio: 4/3; background: var(--color-slate-100); overflow: hidden; }
-  .team-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .team-photo-initials { display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; letter-spacing: 0.05em; color: var(--color-primary); background: var(--color-primary-50); }
-  .team-info { padding: 1.5rem; }
-  .team-dept { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary); background: rgba(37,99,235,0.08); padding: 0.25rem 0.625rem; border-radius: 999px; margin-bottom: 0.625rem; }
-  .team-info h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.25rem; }
-  .team-title { font-size: 0.9375rem; color: var(--color-slate-700); font-weight: 500; margin-bottom: 0.5rem; }
-  .team-exp { font-size: 0.8125rem; color: var(--color-primary); font-weight: 600; margin-bottom: 0.75rem; }
-  .team-bio { font-size: 0.875rem; color: var(--color-slate-600); line-height: 1.6; }
-  .dept-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
-  @media (max-width: 1024px) { .dept-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 640px) { .dept-grid { grid-template-columns: repeat(2, 1fr); } }
-  .dept-card { background: #fff; padding: 1.5rem; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; text-align: center; }
-  .dept-count { font-size: 2rem; font-weight: 800; color: var(--color-primary); margin-bottom: 0.5rem; }
-  .dept-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; }
-  .dept-card p { font-size: 0.8125rem; color: var(--color-slate-600); line-height: 1.5; }
-  .team-photo-banner { border-radius: 0.75rem; overflow: hidden; }
-  .team-photo-banner img { width: 100%; height: auto; display: block; }
   .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
   @media (max-width: 1024px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .values-grid { grid-template-columns: 1fr; } }

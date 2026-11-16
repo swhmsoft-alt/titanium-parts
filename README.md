@@ -58,7 +58,7 @@ All site configuration lives in `src/data/`, one concern per file:
 | `industries-data.ts` | Industry sectors and their detail pages |
 | `anode-coatings.ts` | Anode coating families |
 | `service-steps.ts` | Fabrication and processing services |
-| `team-data.ts` | Team roles |
+| `team-data.ts` | Application & quotation contact |
 | `faqs-data.ts` | FAQ entries |
 | `routes.json` | Generated route list used to filter the menu |
 
