@@ -39,7 +39,7 @@ export const pageMeta: Record<string, PageMeta> = {
   manufacturingCapabilities: {
     title: 'Manufacturing & Capabilities',
     description:
-      'Titanium material processing, CNC machining, MMO anode manufacturing and PEM electrolyzer assembly across our Baoji, Ningbo and Dongguan facilities.',
+      'Titanium processing, machining, MMO anode coating and PEM assembly coordinated through qualified partner workshops in China, with one engineering contact.',
   },
   pemElectrolyzer: {
     title: 'PEM Electrolyzer Manufacturer',

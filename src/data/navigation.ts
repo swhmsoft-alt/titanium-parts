@@ -20,16 +20,6 @@ export interface NavItem {
 export const mainNav: NavItem[] = [
   { label: 'Home', href: '/' },
   {
-    label: 'About',
-    href: '/company/',
-    children: [
-      { label: 'About', href: '/company/', description: 'Company and manufacturing profile' },
-      { label: 'Manufacturing & Capabilities', href: '/manufacturing-capabilities/', description: 'Production network and equipment' },
-      { label: 'Our Team', href: '/our-team/', description: 'Roles and responsibilities' },
-      { label: 'Quality Control', href: '/quality/', description: 'Inspection and testing' },
-    ],
-  },
-  {
     label: 'Titanium Products',
     href: '/titanium-products/',
     children: [
@@ -88,7 +78,17 @@ export const mainNav: NavItem[] = [
       { label: 'FAQ', href: '/faq/', description: 'Common questions' },
     ],
   },
-  { label: 'Contact', href: '/contact/' },
+  {
+    label: 'About',
+    href: '/company/',
+    children: [
+      { label: 'About', href: '/company/', description: 'Company and manufacturing profile' },
+      { label: 'Manufacturing & Capabilities', href: '/manufacturing-capabilities/', description: 'Production network and equipment' },
+      { label: 'Our Team', href: '/our-team/', description: 'Roles and responsibilities' },
+      { label: 'Quality Control', href: '/quality/', description: 'Inspection and testing' },
+      { label: 'Contact', href: '/contact/' },
+    ],
+  },
 ];
 
 /**

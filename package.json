@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/handoff/gate.mjs exec -- astro build",
     "preview": "astro preview",
     "astro": "astro",
     "budget": "node scripts/handoff/budget.mjs",
+    "gate": "node scripts/handoff/gate.mjs",
+    "gate:audit": "node scripts/handoff/gate.mjs audit",
     "newtask": "node scripts/handoff/newtask.mjs",
     "qa": "npm run build && node scripts/qa/run-all.mjs",
     "qa:audit": "node scripts/qa/audit.mjs",

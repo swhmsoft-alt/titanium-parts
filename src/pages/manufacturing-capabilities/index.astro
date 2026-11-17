@@ -14,10 +14,10 @@ const capabilities = [
   { title: 'Final Inspection & Export Packing', image: '/images/quality/export-packing.webp', desc: 'Dimensional inspection, surface review, documentation compilation and export-grade packing.' },
 ];
 
-const hubs = [
-  { name: 'Baoji - Titanium Valley', role: 'Materials, machining, anode production', desc: 'Our materials foundation in Chinas titanium cluster with full traceable feedstock and CNC capacity.' },
-  { name: 'Ningbo - Project Coordination', role: 'Engineering, documentation, export', desc: 'Application engineering, drawing review, quality documentation and global shipment coordination.' },
-  { name: 'Dongguan - PEM Assembly', role: 'Stack and system integration', desc: 'Clean PEM stack assembly, BoP integration, control cabinet assembly and FAT environment.' },
+const partnerNetwork = [
+  { role: 'Materials & Machining', desc: 'Titanium mill products, custom blanks and CNC-machined components are produced by qualified partner workshops and reviewed against the drawing before release.' },
+  { role: 'Anode Coating', desc: 'Substrate preparation, MMO and platinized coating and controlled sintering are carried out by specialist coating partners, with composition records supplied per order.' },
+  { role: 'PEM Assembly & Documentation', desc: 'Stack assembly, balance-of-plant integration and export documentation are coordinated with assembly partners and compiled by our engineering contact.' },
 ];
 
 const meta = pageMeta['manufacturingCapabilities'];
@@ -34,7 +34,7 @@ const meta = pageMeta['manufacturingCapabilities'];
       <div class="section-header">
         <span class="section-title-eyebrow">Six Core Capabilities</span>
         <h2 class="section-title">From Titanium Material to Finished System</h2>
-        <p class="section-desc">Titanium Parts operates the full chain - from traceable titanium feedstock and CNC machining to MMO coating, PEM stack assembly and system integration.</p>
+        <p class="section-desc">Titanium Parts coordinates the full chain - from traceable titanium feedstock and CNC machining to MMO coating, PEM stack assembly and system integration - through qualified partner workshops in China.</p>
       </div>
       <div class="cap-grid">
         {capabilities.map((c) => (
@@ -53,15 +53,14 @@ const meta = pageMeta['manufacturingCapabilities'];
   <section class="section section-slate-50">
     <div class="container">
       <div class="section-header">
-        <span class="section-title-eyebrow">Three Manufacturing Hubs</span>
-        <h2 class="section-title">Coordinated Manufacturing Across China</h2>
-        <p class="section-desc">Titanium Parts coordinates three specialized hubs to keep titanium materials, anode production and PEM system assembly aligned to a single project plan.</p>
+        <span class="section-title-eyebrow">Partner Network</span>
+        <h2 class="section-title">Coordinated Through Qualified Partner Workshops</h2>
+        <p class="section-desc">Titanium Parts does not publish production sites of its own. Titanium materials, anode coating and PEM assembly are coordinated with qualified partner workshops in China, and one engineering contact keeps every stage aligned to a single project plan.</p>
       </div>
       <div class="hub-grid">
-        {hubs.map((h) => (
+        {partnerNetwork.map((h) => (
           <div class="hub-card">
-            <h3>{h.name}</h3>
-            <p class="hub-role">{h.role}</p>
+            <h3 class="hub-role">{h.role}</h3>
             <p class="hub-desc">{h.desc}</p>
           </div>
         ))}
@@ -92,7 +91,7 @@ const meta = pageMeta['manufacturingCapabilities'];
       <div class="rfq-grid">
         <div>
           <span class="section-title-eyebrow" style="color: var(--color-primary-200);">Plan a Project</span>
-          <h2 class="rfq-title">Tell us your product family, scope and approval requirements - we will route you to the right manufacturing hub.</h2>
+          <h2 class="rfq-title">Tell us your product family, scope and approval requirements - we will route you to the right partner workshop and technical contact.</h2>
           <ul class="rfq-benefits">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Material family and application</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Quantity, drawing, and delivery target</li>
@@ -129,8 +128,7 @@ const meta = pageMeta['manufacturingCapabilities'];
   .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   @media (max-width: 768px) { .hub-grid { grid-template-columns: 1fr; } }
   .hub-card { background: #fff; padding: 2rem; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }
-  .hub-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--color-slate-900); margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-primary); }
-  .hub-role { font-size: 0.9375rem; color: var(--color-primary); font-weight: 600; margin-bottom: 0.75rem; }
+  .hub-card h3.hub-role { font-size: 1.0625rem; color: var(--color-primary); font-weight: 700; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-primary); }
   .hub-desc { font-size: 0.9375rem; color: var(--color-slate-600); line-height: 1.6; }
   .insp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   @media (max-width: 1024px) { .insp-grid { grid-template-columns: repeat(2, 1fr); } }

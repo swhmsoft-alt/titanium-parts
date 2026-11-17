@@ -31,6 +31,24 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const STATE_DIR = path.join(ROOT, 'tmp', 'handoff');
 const STATE_FILE = path.join(STATE_DIR, 'budget.json');
 const STATUS_FILE = path.join(STATE_DIR, 'budget.status');
+const GATE_FILE = path.join(STATE_DIR, 'gate.json');
+
+/**
+ * A new atomic task clears the stop-gate as well: the DONE lock and the write
+ * tokens belong to the previous task, never to the next one.
+ */
+function resetGateState() {
+  if (!fs.existsSync(GATE_FILE)) return;
+  fs.writeFileSync(
+    GATE_FILE,
+    `${JSON.stringify(
+      { phase: 'PLAN', task: null, dod: [], tokens: {}, calls: 0, execCalls: 0, startedAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+      null,
+      2
+    )}\n`,
+    'utf8'
+  );
+}
 
 const DEFAULTS = {
   window: 200000,
@@ -202,6 +220,7 @@ function main() {
 
   fs.mkdirSync(STATE_DIR, { recursive: true });
   fs.writeFileSync(STATE_FILE, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  if (args.reset) resetGateState();
   const exitCode = verdict === 'handoff' ? 10 : 0;
   fs.writeFileSync(STATUS_FILE, `EXIT=${exitCode}\n`, 'utf8');
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);

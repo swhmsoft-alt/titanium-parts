@@ -1,16 +1,43 @@
 ---
-import Icon from './Icon.astro';
-interface Props { title?: string; subtitle?: string; variant?: 'default' | 'compact' | 'titanium' | 'anode' | 'pem' | 'team' | 'quality' | 'product'; /** Heading level of the form title. Defaults to h3; use 'p' where the surrounding section already owns the heading structure. */ titleTag?: 'h2' | 'h3' | 'p'; }
-const { title = 'Send a Project Inquiry', subtitle = 'We typically respond within 1 business day.', variant = 'default', titleTag = 'h3' } = Astro.props;
-const productOptions: Record<string, string[]> = {
-  default: ['Titanium Products', 'Titanium Anodes', 'MMO / ICCP Anodes', 'Cathodic Protection Products', 'PEM Electrolyzer Products', 'Custom Titanium Parts', 'Other / Not Sure'],
-  titanium: ['Titanium Plate & Sheet', 'Titanium Coil & Strip', 'Titanium Rod & Bar', 'Titanium Tube & Pipe', 'Titanium Wire', 'Titanium Foil', 'Titanium Mesh', 'Titanium Fasteners', 'Titanium Fittings', 'Titanium Flanges', 'Titanium Forgings', 'Titanium Machined Parts', 'Titanium Balls', 'Titanium Baskets', 'Titanium Diaphragms', 'Titanium-Clad Copper', 'Not Sure / Need Material Review'],
-  anode: ['Ru-Ir MMO Titanium Anode', 'Ir-Ta / Ir-Based MMO Anode', 'Platinized Titanium Anode', 'Specialty Coated Titanium Anode', 'Mesh / Plate Anode', 'Tube / Rod Anode', 'Ribbon / Wire / Disc Anode', 'Drawing-Based Custom Anode', 'Replacement / Recoating Review', 'Not Sure / Need Technical Review'],
-  pem: ['S-Series Compact PEM Electrolyzer', 'H-Series Mid-Range PEM Electrolyzer', 'C-Series Industrial PEM Electrolyzer', 'M-Series High-Capacity PEM Electrolyzer', 'Containerized PEM Electrolyzer', 'Custom Skid / OEM System', 'Replacement / Retrofit Review', 'Not Sure / Need Technical Review'],
-};
-const options = productOptions[variant] || productOptions.default;
+/**
+ * The one inquiry form of the site.
+ *
+ * Every quote request on the site renders this component, so the fields, the
+ * field names and the submit behaviour are identical everywhere. Only three
+ * things are asked for — a name, a business email and the project information
+ * — because those are the only three answers a first technical review needs.
+ *
+ * Props
+ *   title        Heading of the form.
+ *   subtitle     Optional line under the heading.
+ *   titleTag     Heading level of the title: 'h2' | 'h3' | 'p'.
+ *   variant      Styling hook, kept for the callers that already pass one.
+ *   submitLabel  Text of the submit button.
+ *   card         false renders the form without the white card frame, for
+ *                pages that already provide one.
+ *   action       Where the form posts. Defaults to the contact page.
+ */
+interface Props {
+  title?: string;
+  subtitle?: string;
+  variant?: string;
+  titleTag?: 'h2' | 'h3' | 'p';
+  submitLabel?: string;
+  card?: boolean;
+  action?: string;
+}
+
+const {
+  title = 'Send a Project Inquiry',
+  subtitle = '',
+  variant = 'default',
+  titleTag = 'h3',
+  submitLabel = 'Send Inquiry',
+  card = true,
+  action = '/contact/',
+} = Astro.props;
 ---
-<form class="rfq-form" data-variant={variant}>
+<form class:list={['rfq-form', { 'rfq-form--flat': !card }]} data-variant={variant} method="post" action={action}>
   <div class="rfq-form-header">
     {titleTag === 'h2' && <h2 class="rfq-form-title">{title}</h2>}
     {titleTag === 'h3' && <h3 class="rfq-form-title">{title}</h3>}
@@ -18,50 +45,39 @@ const options = productOptions[variant] || productOptions.default;
     {subtitle && <p class="rfq-form-subtitle">{subtitle}</p>}
   </div>
   <div class="rfq-form-grid">
-    <div class="form-group">
-      <label class="form-label">Full Name <span class="required">*</span></label>
-      <input type="text" name="fullName" class="form-input" required />
+    <div class="rfq-form-field">
+      <label class="rfq-form-label">Full Name *
+        <input class="rfq-form-input" type="text" name="fullName" autocomplete="name" required />
+      </label>
     </div>
-    <div class="form-group">
-      <label class="form-label">Work Email <span class="required">*</span></label>
-      <input type="email" name="email" class="form-input" required />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Company (Optional)</label>
-      <input type="text" name="company" class="form-input" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Area of Interest (Optional)</label>
-      <select name="interest" class="form-select">
-        <option value="">Select category</option>
-        {options.map((opt) => <option value={opt}>{opt}</option>)}
-      </select>
+    <div class="rfq-form-field">
+      <label class="rfq-form-label">Business Email *
+        <input class="rfq-form-input" type="email" name="email" autocomplete="email" required />
+      </label>
     </div>
   </div>
-  <div class="form-group">
-    <label class="form-label">Upload Drawing / Datasheet (Optional)</label>
-    <div class="form-file-upload">
-      <Icon name="upload" size={36} className="form-file-upload-icon" />
-      <span class="form-file-upload-text">Click to upload or drag and drop</span>
-      <span class="form-file-upload-hint">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</span>
-      <input type="file" name="attachment" class="rfq-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" />
-    </div>
+  <div class="rfq-form-field">
+    <label class="rfq-form-label">Project Information *
+      <textarea class="rfq-form-textarea" name="message" rows="5" required></textarea>
+    </label>
   </div>
-  <div class="form-group">
-    <label class="form-label">Project Details / Requirements <span class="required">*</span></label>
-    <textarea name="message" class="form-textarea" rows="5" required></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary btn-lg btn-block">Submit RFQ</button>
+  <button type="submit" class="rfq-form-submit">{submitLabel}</button>
   <p class="rfq-form-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
 </form>
 <style>
   .rfq-form { background: #fff; padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+  .rfq-form--flat { background: transparent; padding: 0; border: 0; box-shadow: none; }
   .rfq-form-header { margin-bottom: 2rem; }
   .rfq-form-title { font-size: 1.5rem; font-weight: 700; color: var(--color-heading); margin-bottom: 0.5rem; }
   .rfq-form-subtitle { color: var(--color-text-secondary); font-size: 0.9375rem; }
   .rfq-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   @media (max-width: 640px) { .rfq-form-grid { grid-template-columns: 1fr; } }
-  .rfq-file-input { position: absolute; opacity: 0; width: 0; height: 0; }
-  .form-file-upload { position: relative; }
+  .rfq-form-field { margin-bottom: 1.25rem; }
+  .rfq-form-label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--color-heading); }
+  .rfq-form-input, .rfq-form-textarea { display: block; width: 100%; margin-top: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9375rem; font-family: inherit; color: var(--color-text); background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); }
+  .rfq-form-textarea { resize: vertical; min-height: 130px; }
+  .rfq-form-input:focus, .rfq-form-textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: var(--shadow-focus); }
+  .rfq-form-submit { display: flex; width: 100%; justify-content: center; background: var(--color-primary); color: #fff; border: 1px solid var(--color-primary); border-radius: var(--radius); padding: 0.875rem 1.5rem; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  .rfq-form-submit:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
   .rfq-form-privacy { font-size: 0.8125rem; color: var(--color-text-muted); text-align: center; margin-top: 1rem; }
 </style>
