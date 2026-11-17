@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import RFQForm from '../../components/RFQForm.astro';
 import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Balls & Spheres";
@@ -34,7 +35,6 @@ const controls = [{"title":"Material Identity","body":"Grade, form, specificatio
 
 const faq = [{"q":"What information is needed for a Titanium Balls & Spheres quotation?","a":"Provide the grade, governing specification and revision, condition, dimensions, quantity, surface, processing, inspection, testing and document requirements. A drawing is optional for the first enquiry and especially useful for non-standard or drawing-based items."},{"q":"Which grades can be reviewed for Titanium Balls & Spheres?","a":"Common enquiries include Grades 2, 5, 7 and 23. Other grades may be reviewed. Availability, source form, condition, size and applicable specification are confirmed for the specific quotation."},{"q":"Can custom or drawing-based Titanium Balls & Spheres be supplied?","a":"Yes, drawing-based items can be reviewed against the required geometry, grade, condition, tolerance, machining allowance, processing route and quantity. The accepted process and final scope are stated in the quotation."},{"q":"Are MTC, traceability and third-party inspection included automatically?","a":"No. Required certificates, traceability level, dimensional records, testing, NDT and third-party involvement should be specified before quotation. Only the agreed package is included in the order scope."},{"q":"Does material compliance equal finished-product approval?","a":"No. A raw-material specification does not establish finished-device approval, clinical suitability, sterilization validation, regulatory compliance or application qualification. Those responsibilities remain with the device or system manufacturer."},{"q":"Are stock, MOQ and lead time fixed for Titanium Balls & Spheres?","a":"No. They depend on grade, source form, condition, size, tolerance, processing, inspection, quantity and documentation. Confirm the exact combination during quotation review."}];
 
-const rfqOptions = ["Solid Balls","Hollow Spheres","Hemispheres","Float / Valve Balls","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"/images/titanium-products/grade-2-titanium-ball.webp","alt":"Grade 2 Ball","title":"Grade 2 Titanium","spec":"UNS R50400 · ASTM B348 applicable scope"},{"img":"/images/titanium-products/grade-5-titanium-ball.webp","alt":"Grade 5 Ball","title":"Grade 5 / Ti-6Al-4V","spec":"UNS R56400 · ASTM B348 / AMS 4928"},{"img":"/images/titanium-products/grade-7-titanium-ball.webp","alt":"Grade 7 Ball","title":"Grade 7 Titanium","spec":"UNS R52400 · ASTM B348"},{"img":"/images/titanium-products/grade-23-titanium-ball.webp","alt":"Grade 23 Ball","title":"Grade 23 / Ti-6Al-4V ELI","spec":"UNS R56407 · ASTM B348 / F136"}];
 
 const meta = productMeta['titanium-balls'] ?? { title: M, description: M, sku: 'TITANIUM-BALLS' };
@@ -256,45 +256,7 @@ const meta = productMeta['titanium-balls'] ?? { title: M, description: M, sku: '
         <p class="tp-rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
         <p class="tp-rfq-hq">HQ: Titanium Valley, Baoji City, Shaanxi Province, China</p>
       </aside>
-      <form class="tp-rfq-form" data-variant="titanium-product">
-        <h3 class="tp-rfq-form-title">{M} Inquiry</h3>
-        <div class="tp-rfq-row">
-          <div class="tp-rfq-field">
-            <label>Full Name <span>*</span></label>
-            <input type="text" name="fullName" required />
-          </div>
-          <div class="tp-rfq-field">
-            <label>Business Email <span>*</span></label>
-            <input type="email" name="email" required />
-          </div>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Product of Interest <span>*</span></label>
-          <select name="interest" required>
-            <option value="">Select an option...</option>
-            {rfqOptions.map((opt) => <option value={opt}>{opt}</option>)}
-          </select>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Grade / Specification Review</label>
-          <input type="text" name="grade" placeholder="e.g. Grade 2, ASTM B348, 10mm × 1000mm" />
-        </div>
-        <div class="tp-rfq-field">
-          <label>Drawing / Specification (Optional)</label>
-          <div class="tp-rfq-upload">
-            <Icon name="upload" size={32} className="tp-rfq-upload-icon" />
-            <span class="tp-rfq-upload-text">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</span>
-            <input type="file" name="attachment" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" />
-          </div>
-          <p class="tp-rfq-upload-hint">PDF, image and common CAD formats are accepted.</p>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Message / Specifications <span>*</span></label>
-          <textarea name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="tp-btn-primary tp-btn-block">Send {M} Inquiry</button>
-        <p class="tp-rfq-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
-      </form>
+      <RFQForm title={`${M} Inquiry`} submitLabel={`Send ${M} Inquiry`} variant="titanium-product" />
     </div>
   </section>
 </BaseLayout>

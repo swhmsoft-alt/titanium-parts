@@ -13,6 +13,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
 import type { MmoPage } from '../../data/mmo-family-pages';
+import RFQForm from '../RFQForm.astro';
 import '../../styles/mmo-contrast.css';
 
 interface Props {
@@ -22,6 +23,14 @@ interface Props {
 const { page } = Astro.props;
 const origin = site.url.replace(/\/$/, '');
 const canonicalUrl = new URL(Astro.url.pathname, origin).href;
+
+/**
+ * The quote request of the family: the marketing column, then the one
+ * inquiry form of the site. The form itself is not part of the markup
+ * string — it is the shared component, so the fields are the same on every
+ * page of the site.
+ */
+const rfqParts = page.rfqHtml.split('<!--RFQ_FORM-->');
 
 /**
  * The pictures of the page.
@@ -102,7 +111,14 @@ if (faqItems.length > 0) {
     {
       page.rfqHtml && (
         <section id="rfq" class="scroll-mt-24 bg-slate-950 py-20 text-white lg:py-28">
-          <Fragment set:html={page.rfqHtml} />
+          <Fragment set:html={rfqParts[0]} />
+          <RFQForm
+            title=""
+            submitLabel={page.form.button}
+            card={false}
+            variant="mmo"
+          />
+          <Fragment set:html={rfqParts[1]} />
         </section>
       )
     }

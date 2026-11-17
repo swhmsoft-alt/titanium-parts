@@ -38,12 +38,14 @@ const {
 } = Astro.props;
 ---
 <form class:list={['rfq-form', { 'rfq-form--flat': !card }]} data-variant={variant} method="post" action={action}>
-  <div class="rfq-form-header">
-    {titleTag === 'h2' && <h2 class="rfq-form-title">{title}</h2>}
-    {titleTag === 'h3' && <h3 class="rfq-form-title">{title}</h3>}
-    {titleTag === 'p' && <p class="rfq-form-title">{title}</p>}
-    {subtitle && <p class="rfq-form-subtitle">{subtitle}</p>}
-  </div>
+  {(title || subtitle) && (
+    <div class="rfq-form-header">
+      {title && titleTag === 'h2' && <h2 class="rfq-form-title">{title}</h2>}
+      {title && titleTag === 'h3' && <h3 class="rfq-form-title">{title}</h3>}
+      {title && titleTag === 'p' && <p class="rfq-form-title">{title}</p>}
+      {subtitle && <p class="rfq-form-subtitle">{subtitle}</p>}
+    </div>
+  )}
   <div class="rfq-form-grid">
     <div class="rfq-form-field">
       <label class="rfq-form-label">Full Name *

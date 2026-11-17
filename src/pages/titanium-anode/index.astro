@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import RFQForm from '../../components/RFQForm.astro';
 import { reactionRows, coatings, scopeSteps } from '../../data/titanium-anode-page-1';
 import { forms } from '../../data/titanium-anode-page-2';
 import { risks, processSteps } from '../../data/titanium-anode-page-3';
@@ -393,44 +394,7 @@ const meta = pageMeta['titaniumAnode'];
           </div>
         </div>
         <div class="anode-rfq-card">
-          <form class="anode-form" action="#" method="POST" enctype="multipart/form-data">
-            <div class="anode-form-row">
-              <div class="anode-form-field">
-                <label for="anode-name">Full Name <span class="anode-required">*</span></label>
-                <input id="anode-name" name="full_name" type="text" required autocomplete="name" />
-              </div>
-              <div class="anode-form-field">
-                <label for="anode-email">Business Email <span class="anode-required">*</span></label>
-                <input id="anode-email" name="business_email" type="email" required autocomplete="email" />
-              </div>
-            </div>
-            <div class="anode-form-field">
-              <label for="anode-product">Product of Interest <span class="anode-required">*</span></label>
-              <select id="anode-product" name="product_interest" required>
-                <option value="">Select an option...</option>
-                <option>Ru-Ir MMO Titanium Anode</option>
-                <option>Ir-Ta / Ir-Based MMO Anode</option>
-                <option>Platinized Titanium Anode</option>
-                <option>Specialty Coated Titanium Anode</option>
-                <option>Mesh / Plate Anode</option>
-                <option>Tube / Rod Anode</option>
-                <option>Ribbon / Wire / Disc Anode</option>
-                <option>Drawing-Based Custom Anode</option>
-                <option>Replacement / Recoating Review</option>
-              </select>
-            </div>
-            <div class="anode-form-field">
-              <label for="anode-file">Drawing / Process Specification <span class="anode-optional">(Optional)</span></label>
-              <input id="anode-file" name="file_upload" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.stp,.iges,.igs,.stl,.dwg,.dxf,.zip" class="anode-form-file" />
-              <p class="anode-form-hint">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</p>
-              <p class="anode-form-subhint">PDF, image and common CAD formats are accepted.</p>
-            </div>
-            <div class="anode-form-field">
-              <label for="anode-message">Message / Specifications <span class="anode-required">*</span></label>
-              <textarea id="anode-message" name="message" rows="6" required placeholder="Share the target reaction, electrolyte and impurities, pH, temperature, flow, current/voltage and duty, current-density basis, design life, coating requirement, active area, substrate form, connection, quantity, tests and documents."></textarea>
-            </div>
-            <button type="submit" class="anode-form-submit">Send Titanium Anode Inquiry</button>
-          </form>
+          <RFQForm title="Titanium Anode Inquiry" submitLabel="Send Titanium Anode Inquiry" card={false} variant="anode" />
         </div>
       </div>
     </div>

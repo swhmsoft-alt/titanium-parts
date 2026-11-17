@@ -70,11 +70,6 @@ export interface MloApplicationCard extends MloTextBlock {
 }
 
 /** One product option in the RFQ select. */
-export interface MloProductOption {
-  value: string;
-  label: string;
-}
-
 /** The RFQ block: what to send and where to send it. */
 export interface MloRfq {
   eyebrow: string;
@@ -86,12 +81,8 @@ export interface MloRfq {
   emailLabel: string;
   email: string;
   address: string;
-  /** Product options offered in the select. */
-  options: MloProductOption[];
   /** Submit button label. */
   submitLabel: string;
-  /** Privacy note below the button. */
-  privacy: string;
 }
 
 /** The whole page. */
@@ -750,17 +741,7 @@ export const mmoLinearPage: MloPage = {
     emailLabel: 'Prefer email?',
     email: 'sales@titanium-parts.com',
     address: 'Titanium Valley, Baoji City, Shaanxi Province, China',
-    options: [
-      { value: '82 mA/m MMO Linear Anode', label: '82 mA/m MMO Linear Anode' },
-      { value: '328 mA/m MMO Linear Anode', label: '328 mA/m MMO Linear Anode' },
-      { value: '656 mA/m Custom MMO Linear Anode', label: '656 mA/m Custom MMO Linear Anode' },
-      { value: '984 mA/m MMO Linear Anode', label: '984 mA/m MMO Linear Anode' },
-      { value: '1312 mA/m MMO Linear Anode', label: '1312 mA/m MMO Linear Anode' },
-      { value: 'Custom Output / Configuration', label: 'Custom Output / Configuration' },
-      { value: 'Not Sure — Need Technical Review', label: 'Not Sure — Need Technical Review' },
-    ],
     submitLabel: 'Send MMO Linear Anode Inquiry',
-    privacy: 'Your information will be used only to review and respond to this inquiry.',
   },
 };
 

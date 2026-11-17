@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { mmoLinearPage } from '../../../data/mmo-linear-page';
 import { site } from '../../../data/site';
+import RFQForm from '../../../components/RFQForm.astro';
 
 const page = mmoLinearPage;
 const origin = site.url.replace(/\/$/, '');
@@ -494,58 +495,7 @@ const jsonLd: Record<string, unknown>[] = [
           </div>
         </div>
         <div class="mmo-form-card">
-          <form class="mmo-form" method="post" action="/contact/">
-            <div class="mmo-form-row">
-              <div class="mmo-form-field">
-                <label for="linear-name">Full Name *</label>
-                <input id="linear-name" name="fullName" type="text" class="mmo-input" required />
-              </div>
-              <div class="mmo-form-field">
-                <label for="linear-email">Business Email *</label>
-                <input id="linear-email" name="email" type="email" class="mmo-input" required />
-              </div>
-            </div>
-            <div class="mmo-form-field">
-              <label for="linear-product">Product / Output Direction *</label>
-              <select id="linear-product" name="product" class="mmo-input" required>
-                <option value="">Select an option...</option>
-                {page.rfq.options.map((option) => (
-                  <option value={option.value}>{option.label}</option>
-                ))}
-              </select>
-            </div>
-            <div class="mmo-form-field">
-              <label for="linear-file">
-                Drawing / CP Specification <span class="mmo-optional">(Optional)</span>
-              </label>
-              <input
-                id="linear-file"
-                name="attachment"
-                type="file"
-                multiple
-                accept=".pdf,.jpg,.jpeg,.png,.step,.stp,.iges,.igs,.stl,.dwg,.dxf"
-                class="mmo-file"
-              />
-              <p class="mmo-file-hint">
-                Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)
-              </p>
-              <p class="mmo-file-note">PDF, image and common CAD formats are accepted.</p>
-            </div>
-            <div class="mmo-form-field">
-              <label for="linear-message">Project Requirements *</label>
-              <textarea
-                id="linear-message"
-                name="message"
-                rows="7"
-                class="mmo-input"
-                placeholder="Share the protected structure, CP current, output per meter, active/total length, soil or backfill, layout, cable/feed arrangement, design life, quantity and required documents."
-                required></textarea>
-            </div>
-            <button type="submit" class="mmo-btn mmo-btn-primary mmo-btn-block">
-              {page.rfq.submitLabel}
-            </button>
-            <p class="mmo-form-privacy">{page.rfq.privacy}</p>
-          </form>
+          <RFQForm title="" submitLabel={page.rfq.submitLabel} card={false} variant="mmo" />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import RFQForm from '../../components/RFQForm.astro';
 import { productMeta } from '../../data/product-meta';
 
 const M = "Titanium Bar & Rod";
@@ -34,7 +35,6 @@ const controls = [{"title":"Testing & NDT","body":"Only the methods and criteria
 
 const faq = [{"q":"What information is needed for a titanium bar or rod quotation?","a":"Provide the grade, governing specification and revision, condition, profile, diameter or section, length, quantity, surface, processing, inspection, testing and document requirements. A drawing is helpful for non-round or drawing-based blanks."},{"q":"What is the difference between titanium rod and titanium bar?","a":"The terms describe different production routes and dimensional practice. In general, rod covers smaller round cross-sections and bar covers larger rounds, squares, hex and rectangular sections. State the profile, dimensions and applicable specification."},{"q":"Which grades can be reviewed for titanium bar and rod?","a":"Common enquiries include Grades 2, 5, 7 and 23. Other grades may be reviewed. Availability, source form, condition, size and applicable specification are confirmed for the specific quotation."},{"q":"Can precision-ground titanium bar be supplied?","a":"Ground bar can be reviewed where diameter tolerance, straightness, roundness and surface requirements are defined. Achievable results depend on grade, starting diameter, finished size, length, quantity and process route."},{"q":"Can hollow, square, rectangular or hex titanium bar be supplied?","a":"Non-round and hollow profiles can be reviewed from the required section, grade, condition, length, tolerance, machining allowance and quantity. Supply may use a standard source form or a drawing-based route, as stated in the quotation."},{"q":"Are MTC, NDT and third-party inspection included automatically?","a":"No. Required certificates, traceability, dimensional records, testing, NDT and third-party involvement should be specified before quotation. Only the agreed package is included in the order scope."}];
 
-const rfqOptions = ["Round Titanium Bar / Rod","Precision-Ground Titanium Bar","Titanium Hollow Bar","Square / Rectangular / Hex Bar","Forged or Custom Machining Blank","Grade / Specification Review","Drawing / Specification (Optional)"];
 const grades = [{"img":"/images/titanium-products/titanium-grade-2-round-bar.webp","alt":"Grade 2 Titanium bar and rod","title":"Grade 2 Titanium","spec":"ASTM B348 / B348M when specified · UNS R50400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"/images/titanium-products/grade-5-ti-6al-4v-rod.webp","alt":"Grade 5 / Ti-6Al-4V bar and rod","title":"Grade 5 / Ti-6Al-4V","spec":"ASTM B348 or AMS 4928 as ordered · UNS R56400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"/images/titanium-products/grade-7-ti-pd-alloy-rod.webp","alt":"Grade 7 Titanium bar and rod","title":"Grade 7 Titanium","spec":"ASTM B348 / B348M when specified · UNS R52400","body":"Profile, dimensions, condition and availability: confirmed by quotation."},{"img":"/images/titanium-products/medical-grade-23-eli-rod.webp","alt":"Grade 23 / Ti-6Al-4V ELI bar and rod","title":"Grade 23 / Ti-6Al-4V ELI","spec":"ASTM B348 / B348M when specified · UNS R56407","body":"Profile, dimensions, condition and availability: confirmed by quotation."}];
 
 const meta = productMeta['titanium-rod-bar'] ?? { title: M, description: M, sku: 'TITANIUM-ROD-BAR' };
@@ -256,45 +256,7 @@ const meta = productMeta['titanium-rod-bar'] ?? { title: M, description: M, sku:
         <p class="tp-rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
         <p class="tp-rfq-hq">HQ: Titanium Valley, Baoji City, Shaanxi Province, China</p>
       </aside>
-      <form class="tp-rfq-form" data-variant="titanium-product">
-        <h3 class="tp-rfq-form-title">{M} Inquiry</h3>
-        <div class="tp-rfq-row">
-          <div class="tp-rfq-field">
-            <label>Full Name <span>*</span></label>
-            <input type="text" name="fullName" required />
-          </div>
-          <div class="tp-rfq-field">
-            <label>Business Email <span>*</span></label>
-            <input type="email" name="email" required />
-          </div>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Product of Interest <span>*</span></label>
-          <select name="interest" required>
-            <option value="">Select an option...</option>
-            {rfqOptions.map((opt) => <option value={opt}>{opt}</option>)}
-          </select>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Grade / Specification Review</label>
-          <input type="text" name="grade" placeholder="e.g. Grade 2, ASTM B348, 10mm × 1000mm" />
-        </div>
-        <div class="tp-rfq-field">
-          <label>Drawing / Specification (Optional)</label>
-          <div class="tp-rfq-upload">
-            <Icon name="upload" size={32} className="tp-rfq-upload-icon" />
-            <span class="tp-rfq-upload-text">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</span>
-            <input type="file" name="attachment" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" />
-          </div>
-          <p class="tp-rfq-upload-hint">PDF, image and common CAD formats are accepted.</p>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Message / Specifications <span>*</span></label>
-          <textarea name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="tp-btn-primary tp-btn-block">Send {M} Inquiry</button>
-        <p class="tp-rfq-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
-      </form>
+      <RFQForm title={`${M} Inquiry`} submitLabel={`Send ${M} Inquiry`} variant="titanium-product" />
     </div>
   </section>
 </BaseLayout>

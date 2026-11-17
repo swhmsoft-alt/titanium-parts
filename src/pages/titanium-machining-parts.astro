@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RFQForm from '../components/RFQForm.astro';
 import { company } from '@data/company';
 import { pageMeta } from '../data/page-meta';
 
@@ -81,16 +82,6 @@ const faqList = [
   { q: 'Can aerospace or medical titanium parts be ordered by application name alone?', a: 'No. Application labels do not establish customer approval, regulatory compliance or part qualification. The buyer must provide the applicable drawing, material, process, inspection, documentation and approval requirements.' },
 ];
 
-const productOptions = [
-  'CNC Milled Titanium Part',
-  'CNC Turned Titanium Part',
-  'Bracket / Structural Component',
-  'Shaft / Sleeve / Pin',
-  'Threaded Component',
-  'Valve / Flow-Control Component',
-  'Housing / Disc / Plate Component',
-  'Drawing-Based Custom Part',
-];
 
 const meta = pageMeta['titaniumMachiningParts'];
 ---
@@ -368,47 +359,7 @@ const meta = pageMeta['titaniumMachiningParts'];
         </div>
       </div>
       <div class="mp-rfq-form">
-        <h3>Titanium Machined Parts Inquiry</h3>
-        <form action="/contact/" method="POST" enctype="multipart/form-data" class="mp-form">
-          <div class="mp-form-row">
-            <div class="mp-form-group">
-              <label for="mp-name">Full Name <span>*</span></label>
-              <input id="mp-name" type="text" name="fullName" autocomplete="name" required />
-            </div>
-            <div class="mp-form-group">
-              <label for="mp-email">Work Email <span>*</span></label>
-              <input id="mp-email" type="email" name="email" autocomplete="email" required />
-            </div>
-          </div>
-          <div class="mp-form-row">
-            <div class="mp-form-group">
-              <label for="mp-company">Company (Optional)</label>
-              <input id="mp-company" type="text" name="company" autocomplete="organization" />
-            </div>
-            <div class="mp-form-group">
-              <label for="mp-interest">Area of Interest (Optional)</label>
-              <select id="mp-interest" name="interest">
-                <option value="">Select an option...</option>
-                {productOptions.map((o) => <option value={o}>{o}</option>)}
-              </select>
-            </div>
-          </div>
-          <div class="mp-form-group">
-            <label for="mp-file">Upload Drawing / Datasheet (Optional)</label>
-            <div class="mp-file-upload">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" width="36" height="36"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0l-4 4m4-4l4 4M4 20h16" /></svg>
-              <span>Drawing / CAD File (Optional)</span>
-              <small>Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</small>
-              <input id="mp-file" type="file" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" multiple />
-            </div>
-            <p class="mp-form-hint">PDF, image and common CAD formats are accepted.</p>
-          </div>
-          <div class="mp-form-group">
-            <label for="mp-message">Project Details / Requirements <span>*</span></label>
-            <textarea id="mp-message" name="message" rows="6" required></textarea>
-          </div>
-          <button type="submit" class="mp-btn-primary mp-form-submit">Send CNC Titanium Parts Inquiry</button>
-        </form>
+        <RFQForm title="Titanium Machined Parts Inquiry" submitLabel="Send CNC Titanium Parts Inquiry" card={false} variant="titanium" />
       </div>
     </div>
   </section>

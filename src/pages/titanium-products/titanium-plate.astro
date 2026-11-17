@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import RFQForm from '../../components/RFQForm.astro';
 import { productMeta } from '../../data/product-meta';
 
 const M = 'Titanium Plate & Sheet';
@@ -176,7 +177,6 @@ const faq = [
   { q: 'Are stock, MOQ and lead time fixed?', a: 'No. They depend on grade, standard, condition, dimensions, quantity, processing, inspection and current material availability. Treat them as quotation-specific values.' }
 ];
 
-const rfqOptions = ['Titanium Plate', 'Titanium Sheet', 'Cut-to-Size Blank', 'Grade / Specification Review', 'Drawing / Specification (Optional)'];
 ---
 <BaseLayout
     title={meta.title}
@@ -412,45 +412,7 @@ const rfqOptions = ['Titanium Plate', 'Titanium Sheet', 'Cut-to-Size Blank', 'Gr
         <p class="tp-rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p>
         <p class="tp-rfq-hq">HQ: Titanium Valley, Baoji City, Shaanxi Province, China</p>
       </aside>
-      <form class="tp-rfq-form" data-variant="titanium-plate">
-        <h3 class="tp-rfq-form-title">{M} Inquiry</h3>
-        <div class="tp-rfq-row">
-          <div class="tp-rfq-field">
-            <label>Full Name <span>*</span></label>
-            <input type="text" name="fullName" required />
-          </div>
-          <div class="tp-rfq-field">
-            <label>Business Email <span>*</span></label>
-            <input type="email" name="email" required />
-          </div>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Product of Interest <span>*</span></label>
-          <select name="interest" required>
-            <option value="">Select an option...</option>
-            {rfqOptions.map((opt) => <option value={opt}>{opt}</option>)}
-          </select>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Grade / Specification Review</label>
-          <input type="text" name="grade" placeholder="e.g. Grade 2, ASTM B265, 5mm × 1000 × 2000mm" />
-        </div>
-        <div class="tp-rfq-field">
-          <label>Drawing / Specification (Optional)</label>
-          <div class="tp-rfq-upload">
-            <Icon name="upload" size={32} className="tp-rfq-upload-icon" />
-            <span class="tp-rfq-upload-text">Supported formats: PDF, JPG, PNG, STEP, IGES, STL, DWG (Max 20MB)</span>
-            <input type="file" name="attachment" multiple accept=".pdf,.jpg,.jpeg,.png,.step,.iges,.stl,.dwg" />
-          </div>
-          <p class="tp-rfq-upload-hint">PDF, image and common CAD formats are accepted.</p>
-        </div>
-        <div class="tp-rfq-field">
-          <label>Message / Specifications <span>*</span></label>
-          <textarea name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="tp-btn-primary tp-btn-block">Send Plate & Sheet Inquiry</button>
-        <p class="tp-rfq-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
-      </form>
+      <RFQForm title={`${M} Inquiry`} submitLabel="Send Plate & Sheet Inquiry" variant="titanium-plate" />
     </div>
   </section>
 </BaseLayout>
