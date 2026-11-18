@@ -37,10 +37,17 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const STATE_DIR = path.join(ROOT, 'tmp', 'handoff');
 const GATE_FILE = path.join(STATE_DIR, 'gate.json');
 const BUDGET_FILE = path.join(STATE_DIR, 'budget.json');
+const LOCK_FILE = path.join(STATE_DIR, 'LOCKDOWN');
 
 const PHASES = ['PLAN', 'EDIT', 'VERIFY', 'DONE'];
 const MAX_CALLS = 8;
 const MAX_EXEC_CALLS = 12;
+const MAX_WALL_MINUTES = Number(process.env.GATE_MAX_MINUTES || 20);
+const EXEC_ALLOW = [
+  /^npm run (build|qa|gate|budget|task:verify|gen:products)/,
+  /^astro build/,
+  /^node scripts[\\/](qa|handoff)[\\/]/,
+];
 const IGNORED_DIRS = ['tmp', 'dist', '.astro', 'node_modules', '.git'];
 
 function fail(message, code) {
@@ -156,6 +163,35 @@ function probeFiles(state) {
 }
 
 
+/**
+ * Hard wall #1 - wall clock. An atomic task may not live longer than
+ * MAX_WALL_MINUTES. After that every write and every guarded exec is refused
+ * (EXIT 16), so an unattended run cannot keep spending tokens indefinitely.
+ */
+function wallClockExceeded(state) {
+  const started = Date.parse(state.startedAt);
+  if (!Number.isFinite(started)) return false;
+  const minutes = (Date.now() - started) / 60000;
+  return !(minutes <= MAX_WALL_MINUTES);
+}
+
+/**
+ * Hard wall #2 - readonly lock. Once the context budget reached the readonly
+ * threshold (60%) or budget.mjs dropped a LOCKDOWN file, the gate refuses
+ * further writes (EXIT 17). The agent may still read and report.
+ */
+function readonlyLock() {
+  if (fs.existsSync(LOCK_FILE)) return true;
+  if (!fs.existsSync(BUDGET_FILE)) return false;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(BUDGET_FILE, 'utf8').replace(/^\uFEFF/, ''));
+    const pct = Number(parsed.pct) || 0;
+    return !(pct < 0.6) || parsed.verdict === 'handoff';
+  } catch {
+    return false;
+  }
+}
+
 function cmdStatus(state) {
   console.log(
     JSON.stringify(
@@ -211,6 +247,14 @@ function cmdWrite(state, args) {
     console.error('[gate] Any further write needs a new, explicit instruction from the user.');
     process.exit(11);
   }
+  if (wallClockExceeded(state)) {
+    console.error('[gate] BLOCKED: wall-clock limit exceeded ('+MAX_WALL_MINUTES+' min).');
+    process.exit(16);
+  }
+  if (readonlyLock() && !args.reopen) {
+    console.error('[gate] BLOCKED: readonly mode (60 percent threshold or lockdown file).');
+    process.exit(17);
+  }
   if (effectiveCalls(state) >= MAX_CALLS && !args.reopen) {
     console.error(`[gate] BLOCKED: tool-call budget exhausted (${effectiveCalls(state)} >= ${MAX_CALLS}).`);
     console.error('[gate] Stop, report the state, and wait for a new atomic task.');
@@ -254,6 +298,15 @@ function cmdExec(state, args) {
     console.error('[gate] BLOCKED: this task is DONE.');
     console.error('[gate] Start a new atomic task first: npm run budget -- --reset --task <id>');
     process.exit(15);
+  }
+  if (wallClockExceeded(state)) {
+    console.error('[gate] BLOCKED: wall-clock limit exceeded ('+MAX_WALL_MINUTES+' min).');
+    process.exit(16);
+  }
+  const execLine = command.join(' ');
+  if (!EXEC_ALLOW.some((re) => re.test(execLine))) {
+    console.error('[gate] BLOCKED: command not on the allow-list: '+execLine);
+    process.exit(18);
   }
   if (state.execCalls >= MAX_EXEC_CALLS) {
     console.error(`[gate] BLOCKED: exec budget exhausted (${state.execCalls} >= ${MAX_EXEC_CALLS}).`);

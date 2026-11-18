@@ -15,8 +15,15 @@
  *   submitLabel  Text of the submit button.
  *   card         false renders the form without the white card frame, for
  *                pages that already provide one.
- *   action       Where the form posts. Defaults to the contact page.
+ *   action       Where the form posts. Defaults to the Formspree endpoint, so
+ *                the form still reaches the inbox without JavaScript.
+ *
+ * The form is submitted with fetch and FormData. No Content-Type header is
+ * set, so the browser writes the multipart boundary itself, and the Accept
+ * header asks Formspree for a JSON answer instead of its thank-you page.
  */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjywwegl';
+
 interface Props {
   title?: string;
   subtitle?: string;
@@ -34,10 +41,12 @@ const {
   titleTag = 'h3',
   submitLabel = 'Send Inquiry',
   card = true,
-  action = '/contact/',
+  action = FORMSPREE_ENDPOINT,
 } = Astro.props;
 ---
 <form class:list={['rfq-form', { 'rfq-form--flat': !card }]} data-variant={variant} method="post" action={action}>
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <input type="hidden" name="_subject" value="New Parts Inquiry from Website" />
   {(title || subtitle) && (
     <div class="rfq-form-header">
       {title && titleTag === 'h2' && <h2 class="rfq-form-title">{title}</h2>}
@@ -49,7 +58,7 @@ const {
   <div class="rfq-form-grid">
     <div class="rfq-form-field">
       <label class="rfq-form-label">Full Name *
-        <input class="rfq-form-input" type="text" name="fullName" autocomplete="name" required />
+        <input class="rfq-form-input" type="text" name="name" autocomplete="name" required />
       </label>
     </div>
     <div class="rfq-form-field">
@@ -57,6 +66,21 @@ const {
         <input class="rfq-form-input" type="email" name="email" autocomplete="email" required />
       </label>
     </div>
+    <div class="rfq-form-field">
+      <label class="rfq-form-label">Company
+        <input class="rfq-form-input" type="text" name="company" autocomplete="organization" />
+      </label>
+    </div>
+    <div class="rfq-form-field">
+      <label class="rfq-form-label">Estimated Quantity
+        <input class="rfq-form-input" type="text" name="quantity" placeholder="e.g. 50 pcs, 1 set" />
+      </label>
+    </div>
+  </div>
+  <div class="rfq-form-field">
+    <label class="rfq-form-label">Part Specification
+      <input class="rfq-form-input" type="text" name="part_spec" placeholder="Material grade, size, coating or drawing reference" />
+    </label>
   </div>
   <div class="rfq-form-field">
     <label class="rfq-form-label">Project Information *
@@ -64,6 +88,7 @@ const {
     </label>
   </div>
   <button type="submit" class="rfq-form-submit">{submitLabel}</button>
+  <p class="rfq-form-status" role="status" aria-live="polite" hidden></p>
   <p class="rfq-form-privacy">Your information will only be used to respond to your inquiry and support your project review. We respect your privacy.</p>
 </form>
 <style>
@@ -82,4 +107,70 @@ const {
   .rfq-form-submit { display: flex; width: 100%; justify-content: center; background: var(--color-primary); color: #fff; border: 1px solid var(--color-primary); border-radius: var(--radius); padding: 0.875rem 1.5rem; font-size: 1rem; font-weight: 600; cursor: pointer; }
   .rfq-form-submit:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
   .rfq-form-privacy { font-size: 0.8125rem; color: var(--color-text-muted); text-align: center; margin-top: 1rem; }
+  .rfq-form-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+  .rfq-form-status { margin-top: 1rem; padding: 0.875rem 1rem; border-radius: var(--radius); border: 1px solid var(--color-border); background: #f8fafc; color: var(--color-text); font-size: 0.9375rem; line-height: 1.6; }
+  .rfq-form-status[hidden] { display: none; }
+  .rfq-form-status--ok { border-color: #16a34a; background: #f0fdf4; color: #15803d; }
+  .rfq-form-status--error { border-color: #dc2626; background: #fef2f2; color: #b91c1c; }
 </style>
+<script>
+  /**
+   * Submits the inquiry form of the site to Formspree without leaving the page.
+   *
+   * The form posts with FormData, so no Content-Type header is written and the
+   * browser supplies the multipart boundary. The Accept header asks Formspree
+   * for JSON, which lets the answer be handled here instead of being a
+   * redirect to the Formspree thank-you page.
+   */
+  const FORMS = document.querySelectorAll('form.rfq-form');
+
+  FORMS.forEach((form) => {
+    const button = form.querySelector('.rfq-form-submit');
+    const status = form.querySelector('.rfq-form-status');
+    if (!button || !status) return;
+
+    const idleLabel = button.textContent?.trim() ?? 'Send Inquiry';
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      button.disabled = true;
+      button.textContent = 'Sending...';
+      status.hidden = true;
+      status.className = 'rfq-form-status';
+      status.textContent = '';
+
+      try {
+        const response = await fetch(form.getAttribute('action') ?? '', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        const errors = Array.isArray(payload?.errors) ? payload.errors : [];
+
+        if (!response.ok) {
+          const detail = errors
+            .map((item) => (item && item.message ? item.message : null))
+            .filter(Boolean)
+            .join(' ');
+          throw new Error(detail || 'Your inquiry could not be sent. Please email us directly.');
+        }
+
+        form.reset();
+        status.className = 'rfq-form-status rfq-form-status--ok';
+        status.textContent = 'Thank you — your inquiry has been sent. We will reply to your business email.';
+      } catch (error) {
+        const detail = error instanceof Error ? error.message : 'Your inquiry could not be sent. Please email us directly.';
+        status.className = 'rfq-form-status rfq-form-status--error';
+        status.textContent = detail;
+      } finally {
+        button.disabled = false;
+        button.textContent = idleLabel;
+        status.hidden = false;
+      }
+    });
+  });
+</script>

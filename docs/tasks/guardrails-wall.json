@@ -1,0 +1,44 @@
+{
+  "id": "guardrails-wall",
+  "title": "Unattended-Safety Hard Walls in the Stop-Gate",
+  "summary": "Add machine-enforced hard walls to scripts/handoff so an unattended run cannot burn the token budget: (1) a wall-clock limit per atomic task that refuses further writes and execs, (2) a readonly band and a permanent lockdown triggered by the context percentage, (3) an allow-list for commands executed through `gate -- exec`, and (4) the matching machine-checkable clauses in .clinerules.",
+  "assertions": [
+    {
+      "type": "fileExists",
+      "path": "scripts/handoff/gate.mjs"
+    },
+    {
+      "type": "fileExists",
+      "path": "scripts/handoff/budget.mjs"
+    },
+    {
+      "type": "fileExists",
+      "path": "docs/tasks/guardrails-wall.json"
+    },
+    {
+      "type": "fileContains",
+      "path": "scripts/handoff/gate.mjs",
+      "text": "MAX_WALL_MINUTES"
+    },
+    {
+      "type": "fileContains",
+      "path": "scripts/handoff/gate.mjs",
+      "text": "EXEC_ALLOW"
+    },
+    {
+      "type": "fileContains",
+      "path": "scripts/handoff/gate.mjs",
+      "text": "LOCK_FILE"
+    },
+    {
+      "type": "fileContains",
+      "path": "scripts/handoff/budget.mjs",
+      "text": "LOCKDOWN"
+    },
+    {
+      "type": "fileContains",
+      "path": ".clinerules/.clinerules.md",
+      "text": "## 10."
+    }
+  ]
+}

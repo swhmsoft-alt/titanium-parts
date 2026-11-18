@@ -32,6 +32,8 @@ const STATE_DIR = path.join(ROOT, 'tmp', 'handoff');
 const STATE_FILE = path.join(STATE_DIR, 'budget.json');
 const STATUS_FILE = path.join(STATE_DIR, 'budget.status');
 const GATE_FILE = path.join(STATE_DIR, 'gate.json');
+/** Hard wall #2b - presence of this file locks the gate down for good. */
+const LOCK_FILE = path.join(STATE_DIR, 'LOCKDOWN');
 
 /**
  * A new atomic task clears the stop-gate as well: the DONE lock and the write
@@ -53,7 +55,11 @@ function resetGateState() {
 const DEFAULTS = {
   window: 200000,
   warn: 0.5,
+  /** Hard wall #2a - readonly band: at/above this ratio the gate refuses writes. */
+  readonly: 0.6,
   handoff: 0.7,
+  /** Hard wall #2b - at/above this ratio the gate is locked down entirely. */
+  lockdown: 0.75,
   maxToolCalls: 8,
   maxFileReads: 2,
   charsPerToken: 4,
@@ -191,6 +197,7 @@ function main() {
 
   let verdict = 'ok';
   if (atLeast(pct, DEFAULTS.handoff) || atLeast(state.toolCalls, DEFAULTS.maxToolCalls)) verdict = 'handoff';
+  else if (atLeast(pct, DEFAULTS.readonly)) verdict = 'readonly';
   else if (atLeast(pct, DEFAULTS.warn)) verdict = 'warn';
 
   const report = {
@@ -210,7 +217,9 @@ function main() {
     verdict,
     thresholds: {
       warn: DEFAULTS.warn,
+      readonly: DEFAULTS.readonly,
       handoff: DEFAULTS.handoff,
+      lockdown: DEFAULTS.lockdown,
       maxToolCalls: DEFAULTS.maxToolCalls,
       maxFileReads: DEFAULTS.maxFileReads,
     },
@@ -221,6 +230,13 @@ function main() {
   fs.mkdirSync(STATE_DIR, { recursive: true });
   fs.writeFileSync(STATE_FILE, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   if (args.reset) resetGateState();
+  // Hard wall #2b: at/above the lockdown ratio the gate is closed until the
+  // next `npm run budget -- --reset --task <id>` clears the file.
+  if (atLeast(pct, DEFAULTS.lockdown)) {
+    fs.writeFileSync(LOCK_FILE, `locked at ${new Date().toISOString()}\n`, 'utf8');
+  } else if (args.reset) {
+    if (fs.existsSync(LOCK_FILE)) fs.unlinkSync(LOCK_FILE);
+  }
   const exitCode = verdict === 'handoff' ? 10 : 0;
   fs.writeFileSync(STATUS_FILE, `EXIT=${exitCode}\n`, 'utf8');
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);

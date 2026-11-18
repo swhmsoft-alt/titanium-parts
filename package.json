@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "node scripts/handoff/gate.mjs exec -- astro build",
+    "build:direct": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "budget": "node scripts/handoff/budget.mjs",
