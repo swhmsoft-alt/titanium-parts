@@ -27,7 +27,8 @@
     { "type": "routeContains", "route": "/", "text": "Coordinated Supply" },
     { "type": "routeContains", "route": "/", "text": "We respond on China business days." },
 
-    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"noindex, nofollow\">" },
+    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"index, follow, max-image-preview:large\">" },
+    { "type": "allRoutesLacks", "text": "noindex" },
 
     { "type": "pageCount", "min": 67 }
   ]

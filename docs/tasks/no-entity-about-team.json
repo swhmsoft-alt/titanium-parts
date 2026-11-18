@@ -35,7 +35,8 @@
     { "type": "routeLacks", "route": "/our-team/", "text": "Five Specialized Teams" },
     { "type": "routeContains", "route": "/our-team/", "text": "Application & Quotation Contact" },
 
-    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"noindex, nofollow\">" },
+    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"index, follow, max-image-preview:large\">" },
+    { "type": "allRoutesLacks", "text": "noindex" },
 
     { "type": "pageCount", "min": 67 }
   ]

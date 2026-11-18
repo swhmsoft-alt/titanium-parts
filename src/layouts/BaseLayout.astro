@@ -9,11 +9,6 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonical?: string;
-  /**
-   * Indexing is closed by default while the site is being rewritten.
-   * Set `noindex={false}` only once the de-originalisation work is finished.
-   */
-  noindex?: boolean;
   /** Extra JSON-LD nodes merged into the page graph. */
   jsonLd?: Record<string, unknown>[];
   /** When set, the page is announced as a product with an offer. */
@@ -29,7 +24,6 @@ const {
   description = site.description,
   ogImage = site.seo.ogImage,
   canonical,
-  noindex = true,
   jsonLd = [],
   product,
 } = Astro.props;
@@ -135,7 +129,7 @@ const jsonLdPayload = JSON.stringify({ '@context': 'https://schema.org', '@graph
   <meta name="description" content={description} />
   <title>{fullTitle}</title>
   <link rel="canonical" href={canonicalUrl} />
-  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <meta name="robots" content="index, follow, max-image-preview:large" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />

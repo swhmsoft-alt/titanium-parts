@@ -25,9 +25,9 @@ export const site = {
 
   contact: {
     salesEmail: 'sales@titanium-parts.com',
-    phone: '+86 17719570398',
-    phoneDisplay: '86-17719570398',
-    whatsapp: '+86 17719570398',
+    phone: '+86 15829657627',
+    phoneDisplay: '86-15829657627',
+    whatsapp: '+86 15829657627',
   },
 
   /**

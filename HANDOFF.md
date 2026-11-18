@@ -6,6 +6,32 @@ Task: no-entity-about-team
 
 ## Current Status
 
+### Round 15 — the site is open to crawlers again
+
+Task `reopen-index` — the isolation period is over. Crawling is open and every
+page asks to be indexed.
+
+What changed:
+
+- `public/robots.txt` — `User-agent: *` / `Allow: /`, and the
+  `Sitemap: https://titanium-parts.com/sitemap-index.xml` line is back, so
+  crawlers are pointed at the sitemap the build already generates.
+- `src/layouts/BaseLayout.astro` — the head now carries
+  `<meta name="robots" content="index, follow, max-image-preview:large">` on
+  every built page. The `noindex` prop, its `true` default and its interface
+  field are gone from the layout, so the site cannot be pushed back into an
+  unindexable state by a single leftover switch.
+- `scripts/qa/assertions.mjs` — new `allRoutesLacks` handler, the counterpart
+  of `allRoutesContain`: it proves that no built page still carries a
+  `noindex` directive.
+- `docs/tasks/reopen-index.json` — the task definition for this round.
+- `docs/tasks/no-entity-isolation.json`, `no-entity-about-team.json`,
+  `no-entity-shared-copy.json` — their isolation assertions are inverted:
+  they now require `Allow: /` plus the sitemap line, require the `index`
+  directive on every page, and forbid `noindex` anywhere.
+
+---
+
 ### Round 13 — the shared layer stops advertising a factory
 
 Task `no-entity-shared-copy` — the three remaining "Direct Factory" statements in
@@ -149,9 +175,10 @@ description, email, telephone, sameAs, contactPoint` — no `address`, no
    `titanium-service/` and seven `src/data/*-page.ts` files),
    `no-entity-media` (image renames and EXIF), `no-entity-product-pages`
    (the 31 product pages).
-3. The site stays `noindex` and `Disallow: /` until the whole rewrite is
-   finished. Reopening the index is a separate decision and must be made
-   deliberately, not by accident.
+3. The site is indexable again: `robots.txt` allows crawling and advertises
+   the sitemap, and every page carries the `index` directive. The page-level
+   rounds below still decide what those pages say — being crawled is not the
+   same as being finished.
 
 ## Known Pitfalls
 

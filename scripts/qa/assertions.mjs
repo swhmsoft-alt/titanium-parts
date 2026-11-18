@@ -309,6 +309,26 @@ export const handlers = {
     };
   },
 
+  /**
+   * No built page contains a marker string.
+   *
+   * The counterpart of `allRoutesContain`: used for site-wide guarantees
+   * such as "no page carries a noindex directive" — a per-route assertion
+   * would need one entry per built page.
+   */
+  allRoutesLacks(assertion, ctx) {
+    const found = [];
+    for (const [route, html] of ctx.pages) {
+      if (html.includes(assertion.text)) found.push(route);
+    }
+    return {
+      pass: found.length === 0,
+      detail: found.length
+        ? `${found.length}/${ctx.pages.size} pages still contain "${assertion.text}" (e.g. ${found.slice(0, 3).join(', ')})`
+        : `no page contains "${assertion.text}"`,
+    };
+  },
+
   /** A source file does NOT contain a marker string. */
   fileLacks(assertion, ctx) {
     const file = path.join(ctx.root, assertion.path);
@@ -324,8 +344,8 @@ export const handlers = {
   /**
    * Every built page carries a marker string.
    *
-   * Used for site-wide guarantees such as "every page is noindex during the
-   * isolation period" — a per-route assertion would need 77 entries.
+   * Used for site-wide guarantees such as "every page carries the index
+   * directive" — a per-route assertion would need 77 entries.
    */
   allRoutesContain(assertion, ctx) {
     const missing = [];

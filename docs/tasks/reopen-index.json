@@ -1,0 +1,20 @@
+{
+  "id": "reopen-index",
+  "title": "The site is open to crawlers again: robots allows crawling and every page asks to be indexed",
+  "summary": "The isolation period is over. The crawl block in robots.txt is replaced by an explicit Allow plus the sitemap reference, and the noindex directive that sat in every page head is replaced by an explicit index directive. The noindex prop is removed from the shared layout entirely, so the site cannot be pushed back into the index sandbox by a single leftover switch.",
+  "assertions": [
+    { "type": "fileExists", "path": "docs/tasks/reopen-index.json" },
+
+    { "type": "fileContains", "path": "public/robots.txt", "text": "Allow: /" },
+    { "type": "fileContains", "path": "public/robots.txt", "text": "Sitemap: https://titanium-parts.com/sitemap-index.xml" },
+    { "type": "fileLacks", "path": "public/robots.txt", "text": "Disallow: /" },
+
+    { "type": "fileContains", "path": "src/layouts/BaseLayout.astro", "text": "<meta name=\"robots\" content=\"index, follow, max-image-preview:large\" />" },
+    { "type": "fileLacks", "path": "src/layouts/BaseLayout.astro", "text": "noindex" },
+
+    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"index, follow, max-image-preview:large\">" },
+    { "type": "allRoutesLacks", "text": "noindex" },
+
+    { "type": "pageCount", "min": 67 }
+  ]
+}

@@ -1,17 +1,18 @@
 {
   "id": "no-entity-isolation",
-  "title": "The site is closed to crawlers and carries no entity claim it cannot prove",
-  "summary": "While the company is not registered, the site must not be indexed and must not claim facilities, addresses or a history it cannot document. This round closes crawling, adds noindex to every built page, removes the three self-owned site addresses from the shared configuration, the Organization schema and every page that printed them, and rewrites the shared positioning into an independent engineering and sourcing resource coordinated with qualified production partners in China. The site stays isolated until the de-originalisation and rewrite work is finished.",
+  "title": "The site carries no entity claim it cannot prove, and its crawl policy follows the rewrite state",
+  "summary": "While the company is not registered, the site must not claim facilities, addresses or a history it cannot document. This round removes the three self-owned site addresses from the shared configuration, the Organization schema and every page that printed them, and rewrites the shared positioning into an independent engineering and sourcing resource coordinated with qualified production partners in China. The crawl block and the site-wide noindex directive are lifted again once the de-originalisation work is finished, so search engines can crawl and index the rewritten site.",
   "assertions": [
     { "type": "fileExists", "path": "docs/tasks/no-entity-isolation.json" },
 
-    { "type": "fileContains", "path": "public/robots.txt", "text": "Disallow: /" },
-    { "type": "fileLacks", "path": "public/robots.txt", "text": "Allow: /" },
-    { "type": "fileLacks", "path": "public/robots.txt", "text": "Sitemap:" },
+    { "type": "fileContains", "path": "public/robots.txt", "text": "Allow: /" },
+    { "type": "fileContains", "path": "public/robots.txt", "text": "Sitemap: https://titanium-parts.com/sitemap-index.xml" },
+    { "type": "fileLacks", "path": "public/robots.txt", "text": "Disallow: /" },
 
-    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"noindex, nofollow\">" },
+    { "type": "allRoutesContain", "text": "<meta name=\"robots\" content=\"index, follow, max-image-preview:large\">" },
+    { "type": "allRoutesLacks", "text": "noindex" },
 
-    { "type": "fileContains", "path": "src/layouts/BaseLayout.astro", "text": "noindex = true" },
+    { "type": "fileLacks", "path": "src/layouts/BaseLayout.astro", "text": "noindex" },
     { "type": "fileLacks", "path": "src/layouts/BaseLayout.astro", "text": "site.locations" },
     { "type": "fileLacks", "path": "src/layouts/BaseLayout.astro", "text": "addressCountry" },
     { "type": "fileLacks", "path": "src/layouts/BaseLayout.astro", "text": "foundingDate:" },
