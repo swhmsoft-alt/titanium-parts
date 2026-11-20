@@ -1,0 +1,202 @@
+---
+/**
+ * Renders a product parameter comparison table.
+ *
+ * The markup is deliberately built for extraction, not for decoration:
+ *
+ *   <caption>       states what is compared and under which conditions
+ *   <th scope="col"> marks every column header
+ *   <th scope="row"> marks every parameter name in the first column
+ *   units           live in the header, never inside the value
+ *
+ * A retrieval system can read this table row by row; a human can scan it.
+ * The same model also produces the `additionalProperty` block of the Product
+ * schema, so the visible table and the structured data never disagree.
+ */
+import type { ComparisonTable as ComparisonTableModel } from '../data/comparison-table-model';
+
+interface Props {
+  table: ComparisonTableModel;
+  /** Heading level of the table title. */
+  headingLevel?: 2 | 3 | 4;
+  /** Extra class on the wrapping element. */
+  class?: string;
+}
+
+const { table, headingLevel = 3, class: className = '' } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
+
+/** Column header text: label, optional subtitle, and the unit that applies. */
+function headerText(subject: { label: string; subtitle?: string }, unit?: string): string {
+  const parts = [subject.label];
+  if (subject.subtitle) parts.push(subject.subtitle);
+  if (unit) parts.push(`(${unit})`);
+  return parts.join(' · ');
+}
+---
+
+<div class={`tp-comparison ${className}`} id={table.id}>
+  <Heading class="tp-comparison-title">{table.title}</Heading>
+
+  <div class="tp-comparison-scroll">
+    <table class="tp-comparison-table">
+      <caption>{table.caption}</caption>
+      <thead>
+        <tr>
+          <th scope="col" class="tp-comparison-param">Parameter</th>
+          {table.subjects.map((subject) => (
+            <th scope="col">{headerText(subject)}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {table.rows.map((row) => (
+          <tr>
+            <th scope="row" class="tp-comparison-param">
+              {row.label}
+              {row.unit && <span class="tp-comparison-unit"> ({row.unit})</span>}
+            </th>
+            {table.subjects.map((subject, index) => {
+              const cell = row.cells[index];
+              return (
+                <td>
+                  {cell ? (
+                    <>
+                      <span class="tp-comparison-value">{cell.value}</span>
+                      {cell.condition && (
+                        <span class="tp-comparison-condition"> ({cell.condition})</span>
+                      )}
+                      {cell.sourceRef && (
+                        <span class="tp-comparison-source"> — {cell.sourceRef}</span>
+                      )}
+                    </>
+                  ) : (
+                    '—'
+                  )}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {table.rows.some((row) => row.note) && (
+    <ul class="tp-comparison-notes">
+      {table.rows
+        .filter((row) => row.note)
+        .map((row) => (
+          <li><strong>{row.label}:</strong> {row.note}</li>
+        ))}
+    </ul>
+  )}
+
+  {table.sources && table.sources.length > 0 && (
+    <div class="tp-comparison-sources">
+      <h4 class="tp-comparison-sources-title">Sources</h4>
+      <ul>
+        {table.sources.map((source) => (
+          <li>{source}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>
+
+<style>
+  .tp-comparison {
+    margin: 0 0 2.5rem;
+  }
+  .tp-comparison-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.75rem;
+  }
+  .tp-comparison-scroll {
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+  }
+  .tp-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .tp-comparison-table caption {
+    caption-side: top;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    color: #475569;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .tp-comparison-table thead th {
+    background: #f8fafc;
+    text-align: left;
+    font-weight: 700;
+    color: #0f172a;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 2px solid #e2e8f0;
+    vertical-align: bottom;
+  }
+  .tp-comparison-table tbody th,
+  .tp-comparison-table tbody td {
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+    text-align: left;
+    line-height: 1.6;
+  }
+  .tp-comparison-table tbody tr:last-child th,
+  .tp-comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .tp-comparison-param {
+    color: #0f172a;
+    font-weight: 600;
+    white-space: nowrap;
+    width: 1%;
+  }
+  .tp-comparison-unit {
+    font-weight: 400;
+    color: #64748b;
+  }
+  .tp-comparison-value {
+    color: #0f172a;
+  }
+  .tp-comparison-condition {
+    color: #475569;
+    font-size: 0.875rem;
+  }
+  .tp-comparison-source {
+    color: #2563eb;
+    font-size: 0.8125rem;
+  }
+  .tp-comparison-notes {
+    margin: 0.75rem 0 0;
+    padding-left: 1.25rem;
+    color: #64748b;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .tp-comparison-sources {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+  .tp-comparison-sources-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #334155;
+    margin: 0 0 0.35rem;
+  }
+  .tp-comparison-sources ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    line-height: 1.7;
+  }
+</style>

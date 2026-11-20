@@ -18,6 +18,7 @@
     "qa:seo": "node scripts/qa/verify-seo.mjs",
     "qa:links": "node scripts/qa/list-dead-links.mjs",
     "qa:routes": "node scripts/qa/build-routes.mjs",
+    "qa:geo": "node scripts/seo/geo-audit.mjs",
     "task:verify": "node scripts/qa/run.mjs verify-task -- node scripts/qa/verify-task.mjs",
     "task:list": "node scripts/qa/verify-task.mjs --list",
     "media:scan": "node scripts/media/scan-slots.mjs",

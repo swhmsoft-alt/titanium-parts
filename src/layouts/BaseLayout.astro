@@ -28,6 +28,22 @@ const {
   product,
 } = Astro.props;
 
+/**
+ * Google Tag is optional and environment-gated.
+ *
+ * With no container and no measurement ID configured, nothing is emitted:
+ * no third-party script, no `dataLayer`, no cookie. The built HTML stays
+ * identical to a build without analytics, so a new site with no traffic yet
+ * carries no consent or performance cost.
+ *
+ * Set both variables to enable it:
+ *   PUBLIC_GTM_ID=GTM-XXXXXX
+ *   PUBLIC_GA4_ID=G-XXXXXXXXXX
+ */
+const gtmId = import.meta.env.PUBLIC_GTM_ID || '';
+const ga4Id = import.meta.env.PUBLIC_GA4_ID || '';
+const hasAnalytics = Boolean(gtmId && ga4Id);
+
 const brandName = site.name;
 // The brand already appears as a title segment — don't append it twice.
 const hasBrand = title
@@ -155,6 +171,21 @@ const jsonLdPayload = JSON.stringify({ '@context': 'https://schema.org', '@graph
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <script type="application/ld+json" is:inline set:html={jsonLdPayload} />
+
+  {hasAnalytics && (
+    <>
+      {/* Google Tag Manager container. */}
+      <script is:inline define:vars={{ gtmId }}>
+        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`}
+      </script>
+      {/* Google Analytics 4. The referrer host is recorded so AI assistant
+          traffic can be separated from ordinary organic search. */}
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+      <script is:inline define:vars={{ ga4Id }}>
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ga4Id}');gtag('set','ai_referrer_host',(document.referrer||'').split('/')[2]||'direct');`}
+      </script>
+    </>
+  )}
 </head>
 <body>
   <Header />

@@ -1,0 +1,31 @@
+{
+  "id": "seo-geo-audit",
+  "title": "SEO + GEO Joint Audit",
+  "summary": "Audit every built page against the November core update and the AI Overviews / AI Mode / Bing Copilot citation rules, then deliver an executable remediation list, a GEO gain list, an AI traffic attribution hook and a reusable comparison-table template.",
+  "assertions": [
+    { "type": "fileExists", "path": "scripts/seo/geo-audit.mjs" },
+    { "type": "fileExists", "path": "docs/seo/geo-audit-findings.md" },
+    { "type": "fileExists", "path": "docs/seo/ai-traffic-attribution.md" },
+    { "type": "fileExists", "path": "docs/seo/product-comparison-table-template.md" },
+    { "type": "fileExists", "path": "src/data/comparison-table-model.ts" },
+    { "type": "fileExists", "path": "src/components/ComparisonTable.astro" },
+
+    { "type": "fileContains", "path": "package.json", "text": "qa:geo" },
+    { "type": "fileContains", "path": "src/layouts/BaseLayout.astro", "text": "PUBLIC_GTM_ID" },
+    { "type": "fileContains", "path": "src/layouts/BaseLayout.astro", "text": "PUBLIC_GA4_ID" },
+    { "type": "fileContains", "path": "src/layouts/BaseLayout.astro", "text": "ai_referrer_host" },
+
+    { "type": "fileContains", "path": "docs/seo/geo-audit-findings.md", "text": "风险整改清单" },
+    { "type": "fileContains", "path": "docs/seo/geo-audit-findings.md", "text": "GEO 正向优化清单" },
+    { "type": "fileContains", "path": "docs/seo/geo-audit-findings.md", "text": "Schema 审计结果" },
+    { "type": "fileContains", "path": "docs/seo/geo-audit-findings.md", "text": "AI 流量归因埋点校验与配置步骤" },
+    { "type": "fileContains", "path": "docs/seo/product-comparison-table-template.md", "text": "产品参数对比表模板" },
+
+    { "type": "fileContains", "path": "src/components/ComparisonTable.astro", "text": "scope=\"col\"" },
+    { "type": "fileContains", "path": "src/components/ComparisonTable.astro", "text": "scope=\"row\"" },
+    { "type": "fileContains", "path": "src/components/ComparisonTable.astro", "text": "<caption>" },
+    { "type": "fileContains", "path": "src/data/comparison-table-model.ts", "text": "toSchemaProperties" },
+
+    { "type": "pageCount", "min": 77 }
+  ]
+}

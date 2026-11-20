@@ -1,42 +1,141 @@
 # HANDOFF
 
 <!-- newtask -->
-Task: no-entity-about-team
+Task: seo-geo-execution
 <!-- /newtask -->
 
 ## Current Status
 
-### Round 15 — the site is open to crawlers again
+### Round 18 — EX-A1 金丝雀已执行，信号不成立（落点是死代码）
 
-Task `reopen-index` — the isolation period is over. Crawling is open and every
-page asks to be indexed.
+Task `seo-geo-execution` — 按 plan 的「A1 是金丝雀」规则实跑了一遍，**信号没有成立**，
+因此**没有推进 A2**。
 
-What changed:
+结论（全部来自 `dist` 实测，非推测）：
 
-- `public/robots.txt` — `User-agent: *` / `Allow: /`, and the
-  `Sitemap: https://titanium-parts.com/sitemap-index.xml` line is back, so
-  crawlers are pointed at the sitemap the build already generates.
-- `src/layouts/BaseLayout.astro` — the head now carries
-  `<meta name="robots" content="index, follow, max-image-preview:large">` on
-  every built page. The `noindex` prop, its `true` default and its interface
-  field are gone from the layout, so the site cannot be pushed back into an
-  unindexable state by a single leftover switch.
-- `scripts/qa/assertions.mjs` — new `allRoutesLacks` handler, the counterpart
-  of `allRoutesContain`: it proves that no built page still carries a
-  `noindex` directive.
-- `docs/tasks/reopen-index.json` — the task definition for this round.
-- `docs/tasks/no-entity-isolation.json`, `no-entity-about-team.json`,
-  `no-entity-shared-copy.json` — their isolation assertions are inverted:
-  they now require `Allow: /` plus the sitemap line, require the `index`
-  directive on every page, and forbid `noindex` anywhere.
+- `src/components/mmo/patterns/MmoTable.astro` 只被 `src/components/mmo/patterns/MmoPart.astro` 引用，
+  而 `MmoPart.astro` **没有任何页面导入**——整条 pattern 组件链是死代码。
+  本轮已按 DoD 1–3 改好（`scope="col"` / 首列 `scope="row"` / `<caption>`），
+  `npm run build` 77 页通过，但该组件**从未进入任何产物页**，
+  `qa:geo` 的 `tablesExtractable` 仍是 **1**（基线值，未动）。
+- MMO 家族页真正的表格是 `src/data/mmo-family-pages.ts` 里 **21 处内联 `<table>` HTML 字符串**，
+  由 `MmoProductPage.astro` 的 `page.sections[].html` 输出 → 属 **EX-A5** 落点。
+- 全站 87 张表实测：全部 `rows > 2`；`scope` 已有 36 张；`<caption>` **只有 1 张**；
+  **22 页**只缺 `<caption>` 就能翻转 extractable。
+  判定式是 `captions > 0 && scoped > 0 && rows > 2`（`scripts/seo/geo-audit.mjs:245`），
+  所以**真实杠杆是 caption，不是 scope**。
 
----
+已落地：
+- `src/components/mmo/patterns/MmoTable.astro` — 三项语义改动已保留（语义正确，但当前无渲染路径）
+- `docs/seo/execution-plan.md` — EX-A1 状态 `[ ]` → `[~]`，条目补「本轮实测」与重定级依据
+- `docs/seo/execution-log.md` — 追加 2026-11-20 一段（含计数前后对照与踩坑）
 
-### Round 13 — the shared layer stops advertising a factory
+### Round 17 — SEO/GEO 执行计划已建立为项目内的唯一执行事实源
 
-Task `no-entity-shared-copy` — the three remaining "Direct Factory" statements in
-the shared layer are gone, and the footer's response promise is now one the
-company can actually keep while it is being set up.
+Task `seo-geo-execution` — 巡检清单已转化为**可接棒、可验证、不可跑偏**的执行体系。
+本轮只建文档与机器可校验锚点，**未改动任何构建产物**。
+
+已落地：
+
+- `docs/seo/execution-plan.md` — **唯一执行事实源**。含：恢复指引（置顶）、
+  状态标记字典（`[ ]` / `[~]` / `[x]` / `[!]`）、防幻觉条款、30 个任务的总表
+  （EX-A1 … EX-X4）与逐任务条目（DoD / 落点 / 验收命令 / 期望计数变化 / 回滚方式 /
+  上下游）、2026-11-19 基线计数表、10 条禁止事项红线、变更记录。
+- `docs/seo/execution-log.md` — 追加式执行日志。每批一段，固定记录改动文件、
+  DoD 勾选、计数变化、验证结果、踩坑、遗留。
+- `docs/tasks/seo-geo-execution.json` — 机器可校验锚点：断言 plan/log 文件存在、
+  恢复指引与状态标记字典未被删、30 个任务 ID 齐备、基线与红线在位、页面数不回退。
+  作用是让"忘记执行计划"变成 `task:verify` 的可检出失败。
+
+**防跑偏设计**：任何会话在动手前必须先读 plan 的「0. 恢复指引」，
+从任务总表里找**第一个 `[ ]`** 作为下一步；`[~]` 表示上次中断在此处，接手者必须
+先决定继续或回退，不得跳过。每批结束把 `tmp/geo-audit/geo-audit.json` 的关键计数
+抄进日志，形成前后对照链；任何一项计数**倒退**即停手定位，不推进下一批。
+
+### Round 16 — SEO + GEO 联合巡检已完成，清单已交付
+
+Task `seo-geo-audit` — 全站 77 页按 Google 11 月核心更新与 AI Overviews / AI Mode /
+Bing Copilot 引用规则巡检完毕，产出两份可执行清单 + 埋点接入点 + 对比表模板。
+
+已落地：
+
+- `scripts/seo/geo-audit.mjs` — 巡检脚本，扫描 `dist/` 全部 77 页，输出
+  `tmp/geo-audit/geo-audit.json` 与 `geo-audit.md`；`npm run qa:geo` 运行。
+  判定规则：`scaled-content`（同源模板）、`unsourced-spec`（参数无溯源）、
+  `faq-unstructured`、`table-unquotable`、`schema-incomplete`、`no-eeat-signals`、
+  `thin-page`；并输出 5 类 GEO 机会。
+- `docs/seo/geo-audit-findings.md` — **风险整改清单 + GEO 增益清单**（人工成文，含 URL、
+  相似度数值、修复动作、推荐 Schema 属性）。
+- `docs/seo/ai-traffic-attribution.md` — AI 流量归因埋点校验结论与配置步骤。
+- `docs/seo/product-comparison-table-template.md` — 参数对比表 Markdown 模板 +
+  语义 HTML 规范 + 排版规范 + Schema 映射 + 自检清单。
+- `src/data/comparison-table-model.ts` — 对比表类型定义 + `toSchemaProperties()`
+  （同一份数据同时产出页面表格与 `Product.additionalProperty`）。
+- `src/components/ComparisonTable.astro` — 语义化对比表渲染器（caption + th scope +
+  单位进表头 + 出处）。**已产出但未接入任何页面**，接入属下一轮。
+- `src/layouts/BaseLayout.astro` — env 门控的 Google Tag 接入点：读 `PUBLIC_GTM_ID` 与
+  `PUBLIC_GA4_ID`，两者都为空时**不输出任何脚本、不初始化 dataLayer、不写 Cookie**。
+  已双向验证：配 ID → 脚本出现；未配 → 全站 0 命中。
+- `package.json` — 新增 `qa:geo` 脚本。
+
+关键实测结论（详见 `docs/seo/geo-audit-findings.md`）：
+
+1. **竞品复刻已从外部传导到内部**：16 个 `/titanium-products/*` 页面彼此正文相似度
+   58.5%–68.4%（最高 `/titanium-products/titanium-bolts/` vs `titanium-forgings/` 68.4%）。
+   这是本次核心更新的第一高危项。
+2. 27 个产品/技术页 **0 个标准号锚点**（`/titanium-anode/*`、`/titanium-service/*` 等）。
+3. 87 个表格仅 **1 个**可被 LLM 按行抽取；46 个页面有表但不可抽取。
+4. 31 个 Product 页 `additionalProperty` **0** 个；37 页有可见 FAQ 却无 FAQPage 节点；
+   48 页缺 WebPage 节点。
+5. 站内 42 组跨页重复段落（已排除导航/页脚通用块），最广一组覆盖 9 个 `/industries/*` spoke 页。
+6. 埋点全库检索 `gtag`/`GTM-`/`dataLayer` **0 命中**，此前无法区分自然搜索与 AI 进站流量。
+
+## Next Step
+
+**EX-A1 处于 `[~]`，接手者必须先裁定，不得跳过。** 三个选项：
+
+1. **改落点重跑金丝雀**：把 A1 指向真实渲染链的表格文件——
+   `src/components/anode/PageBlocks.astro`（EX-A2 落点，被 `PageBand.astro` 引用）或
+   `src/components/grade/GradePage.astro`（EX-A4 落点，被 `[grade]/index.astro` 引用）。
+2. **直接进入 EX-A5**：改 `src/data/mmo-family-pages.ts` 里 21 处内联 `<table>` 的 HTML 字符串
+   （补 `<caption>` + 首列 `scope="row"`），一次覆盖 7 个 MMO 家族页。
+3. **只补 caption**：22 个页面已有 `scope` 且 `rows > 2`，仅缺 `<caption>`；
+   逐页补 caption 是成本最低、翻转最快的路径（涉及
+   `src/components/anode/PageBlocks.astro`、`src/components/industry/IndustrySpoke.astro`、
+   `src/components/grade/GradePage.astro`、`src/components/grade/GradeHub.astro` 与各
+   `src/data/*-sections.ts` 的内联表）。
+
+之后按 plan 的既定优先级推进：
+
+1. **P0 差异化** `/titanium-products/*` 16 页：每页补独有的工艺路线 / 失效模式 /
+   检测项差异，并用 `ComparisonTable.astro` 加一张"与相邻形态的差别"对比表
+   （同一动作同时解决 scaled-content 与 GEO 可抽取性）。
+2. **P0 溯源** 27 个产品/技术页：每个参数值补出处（ASTM / NACE / ISO / EN / AWS + 版本、
+   UNS、EN 10204 3.1/3.2、"按订单确认"四选一）。
+3. **P0 FAQPage** 37 页：用可见 FAQ 原文生成 `FAQPage` 节点，逐字一致。
+4. **P1 接入对比表组件**到 46 个含表页面，同步产出 `Product.additionalProperty`。
+5. **P1 WebPage 节点** 48 页，在 `BaseLayout` 的 `@graph` 统一补。
+6. **P2 埋点启用**：拿到 `GTM-` 与 `G-` ID 后写 `.env` 重新构建，
+   按 `docs/seo/ai-traffic-attribution.md` 建 GA4 自定义维度与 GTM 查找表。
+7. **P2 一手实测数据**：XRF/截面涂层厚度分布、电位窗口曲线、加速寿命、第三方报告编号，
+   需业务侧提供。
+
+## Known Pitfalls
+
+- **本次巡检脚本已修正 3 处误判逻辑**（勿回退）：
+  ① 文本抽取只取 `<main>`，此前把 header/footer 计入导致相似度虚高；
+  ② `/404.html` 不参与相似度比对（无 `<main>`，内容极少，比对无意义）；
+  ③ 重复段落排除出现于 ≥80% 页面的站点通用块（RFQ 引导语等）。
+  阈值常量在 `scripts/seo/geo-audit.mjs` 顶部：`CLONE_THRESHOLD = 0.55`、`MIN_TRACE_ANCHORS = 2`。
+- `docs/seo/` 目录下的 3 个 md 已 `git add -N`（intent-to-add），否则 `gate -- audit`
+  因未跟踪目录折叠而报 "no write token for docs/seo/"。
+- `ComparisonTable.astro` **未被任何页面引用**，Astro 不会为其报错；
+  接入时需注意 `toSchemaProperties()` 产出的 `name` 格式为 `{参数} — {主体}`。
+- Google AI Overviews / AI Mode 的内部点击 referrer 仍是 `google`，
+  **无法**与普通自然搜索区分，只能靠落地页路径 + Search Console 查询词间接拆解。
+- 站点当前**无 Cookie 同意层**，欧盟/英国流量进来前需补（Consent Mode v2）。
+- `docs/seo/geo-audit-findings.md` §6 列出的"本轮不做的事"均**未执行**，
+  需用户在新一轮显式点名后才动手。
 
 What changed:
 
