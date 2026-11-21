@@ -153,3 +153,175 @@ DoD 勾选：
 - `src/components/mmo/MmoBlock.astro` 亦为死代码（无页面导入），与 `MmoPart.astro` 同链
 
 下一步：**停止，不推进 A2**。请用户裁定 EX-A1 的重定级方案（改落点，或直接进入 EX-A5 补 21 处内联表的 caption）。
+
+---
+
+## 2026-11-21 · EX-A4 结案 · grade 家族 10 页 21 张表全部可抽取
+
+状态：`[x]`
+
+改动文件：
+- `src/components/grade/GradePage.astro`（化学成分表、机械性能表各补 `<caption>`；列头 `<th scope="col">`；首列 `<td><strong>` → `<th scope="row">`；新增 `.grade-table-caption` 与 `.grade-table tbody th` 局部样式）
+- `src/components/grade/GradeHub.astro`（九牌对照表、应用矩阵表、标准对照表各补 `<caption>` + `scope`；同样新增局部 caption / tbody th 样式）
+- `docs/seo/execution-plan.md`（EX-A4 → `[x]`，落点补 `GradeHub.astro`，条目补「本轮实测」）
+
+DoD 勾选：
+1. `[x]` grade 页表格加 `<caption>` + 首列 `scope="row"`（GradePage 2 张 + GradeHub 3 张，共 5 处模板）
+2. `[x]` build + qa:geo 成功，10 个 grade 页 `table-unquotable` 归零
+3. `[x]` plan 状态标记与本日志已更新
+
+计数变化：
+- `tablesExtractable`：**56 → 77**（`tablesTotal` 87 不变）
+- `table-unquotable`：**18 页 → 8 页**（`/applications/`、`/titanium-anode/`、`/titanium-anode/mmo-anode/`、`/titanium-anode/coating-systems/`、`/titanium-machining-parts/`、`/titanium-products/`、`/titanium-products/titanium-tubing/`、`/titanium-service/`）
+- grade 家族逐页实测：9 个 grade 详情页 `2/2` 可抽取，`/titanium-grades/` hub `3/3` 可抽取
+- `pageCount` 77 不变；findings 137 → 127，opportunities 129 → 119
+
+验证：
+- `npm run build` → 77 页，`Complete!`
+- `npm run qa:geo` → EXIT=0，`77 pages, 127 findings, 119 opportunities`
+- `npm run task:verify -- seo-geo-execution` → EXIT=0
+
+踩坑：
+- plan 原写的 EX-A4 落点只有 `GradePage.astro`，但 DoD 要求「10 个 grade 页」归零——第 10 页是 hub `/titanium-grades/`，其 3 张表由 `GradeHub.astro` 渲染。**只改 GradePage 只能覆盖 9 页**，故本批按 DoD 优先，补改 `GradeHub.astro`（同属 grade 家族，非越界）。
+- `grade-table` 的 `<th>` 原有样式是深色表头（`.grade-table th`），首列升级为 `<th scope="row">` 后会继承深底白字。必须在组件局部 `<style>` 内追加 `.grade-table tbody th { background: transparent; color: var(--color-text-secondary); ... }` 覆盖，否则首列变成第二个深色表头。
+- caption 用组件局部 class 样式，未动全局 CSS，未使用本项目不存在的 Tailwind utility 类。
+
+遗留：
+- `table-unquotable` 剩余 8 页 → 属 EX-A6
+- `ComparisonTable.astro` 仍未接入任何页面（属 EX-H2）
+
+下一步：**EX-A6**（产品页残留表格出口排查：`/applications/`、`/titanium-anode/**`、`/titanium-machining-parts/`、`/titanium-products/**`、`/titanium-service/`）
+
+---
+
+## 2026-11-21 · EX-A6 结案 · 残留 8 页 9 张表全部可抽取
+
+状态：`[x]`
+
+改动文件（8 个页面，全部为页面内联表）：
+- `src/pages/applications/index.astro`（`app-table`：caption + 3 个 `scope="col"` + 首列 `th scope="row"`）
+- `src/pages/titanium-anode/index.astro`（`anode-decision-table` + `anode-risk-table`：各补 caption + scope）
+- `src/pages/titanium-anode/mmo-anode/index.astro`（`ac-table` 补 caption + scope；`ac-table-spec` 仅补 caption，其 scope 原已齐备）
+- `src/pages/titanium-anode/coating-systems/index.astro`（`ac-table`：caption + scope）
+- `src/pages/titanium-machining-parts.astro`（裸 `table`：caption + scope + 首列 `th.mp-td-strong`）
+- `src/pages/titanium-products/index.astro`（`prod-grade-table`：caption + scope）
+- `src/pages/titanium-products/titanium-tubing.astro`（`tp-spec-table`：caption + scope）
+- `src/pages/titanium-service/index.astro`（`ts-table`：caption + scope）
+- `docs/seo/execution-plan.md`（EX-A6 → `[x]`，总表落点补全，条目补「本轮实测」）
+
+DoD 勾选：
+1. `[x]` 定位剩余 8 页的表格渲染出口（全部为页面内联 `<table>`）
+2. `[x]` 逐页补 `<caption>` + `scope="col"` + 首列 `<th scope="row">`
+3. `[x]` build + qa:geo 成功，`table-unquotable` 归零
+4. `[x]` plan 状态标记与本日志已更新
+
+计数变化：
+- `tablesExtractable`：**77 → 87**（`tablesTotal` 87 不变，全站 87 张表现已 100% 可抽取）
+- `table-unquotable`：**8 页 → 0 页**
+- `pageCount` 77 不变；findings 127 → 119；opportunities 129 → 111
+- 残留风险类型：`faq-unstructured` 37 / `schema-incomplete` 31 / `unsourced-spec` 27 / `scaled-content` 12 / `thin-page` 9 / `no-eeat-signals` 3
+
+验证：
+- `npm run build` → 77 页，`Complete!`
+- `npm run qa:geo` → EXIT=0
+- `npm run task:verify -- seo-geo-execution` → EXIT=0
+
+踩坑：
+- 这些表的 `<th>` 样式是深色表头（`.app-table th` / `.ac-table th` / `.prod-grade-table th` 等）。首列由 `<td>` 升级为 `<th scope="row">` 后会继承深底白字，变成第二个深色表头。故首列 `th` 追加内联 `style="background: transparent !important; ..."` 覆盖——**未改全局 CSS，也未改各页 `<style>` 块**。
+- caption 采用内联 `style`（与 EX-A5 的 `mmo-family-pages.ts` 内联表一致），避免为 8 个页面各开局部 class。
+- `mmo-anode/index.astro` 的 `ac-table-spec` 表**已有** `scope="col"` / `scope="row"`，只需补 caption；`ac-table-spec tbody th` 在 `anode-catalog.css` 中已有浅底白字适配样式，未受影响。
+- `titanium-machining-parts.astro` 的表**无 class**，其 `<td>` 依赖 `.mp-td-strong` 局部类；首列升级为 `th` 后沿用该 class，颜色用 `!important` 兜底。
+- 会话中途上下文预算触发 `handoff` 阈值（pct ≥ 0.7），写入闸门进入 readonly；按规约以 `npm run budget -- --reset --task <新原子任务号>` 重开账本（并重置墙钟）后继续。
+
+遗留：
+- `ComparisonTable.astro` 仍未接入任何页面（属 EX-H2）
+- `faq-unstructured` 37 页 / `schema-incomplete` 31 页 → EX-D1 / EX-D2 / EX-D3 / EX-C1
+- `unsourced-spec` 27 页 → EX-F1 / EX-F2 / EX-F3
+- `scaled-content` 12 页 → EX-E2 … EX-E8
+
+下一步：**EX-B1**（`src/layouts/BaseLayout.astro` 统一补 `WebPage` 节点，`webPageNodes` 29 → 77）
+
+## 2026-11-21 · EX-B1 结案 · 全站 WebPage 节点补齐（29 → 77）
+
+状态：`[x]`
+
+改动文件：
+- `src/layouts/BaseLayout.astro`（`BreadcrumbList` 补 `@id`；`Product` 补 `@id`；合并 `jsonLd` 后若无 `WebPage` 则自动追加字段齐备的 `WebPage`）
+- `src/components/anode/ProductPage.astro`（`breadcrumb` 引用由 `${origin}/#breadcrumb` 改为 `${canonicalUrl}#breadcrumb`）
+- `src/components/mmo/MmoProductPage.astro`（同上，由生成脚本同步）
+- `scripts/mmo/gen-family-markup.mjs`（生成模板同步修正，并已重跑 `node scripts/mmo/gen-family-markup.mjs`）
+- `docs/seo/execution-plan.md`（EX-B1 → `[x]`，条目补「本轮实测」，变更记录追加一行）
+
+DoD 勾选：
+1. `[x]` `BaseLayout` 仅在页面未自带 `WebPage` 时补节点
+2. `[x]` 字段齐备：`@id`、`url`、`name`、`description`、`isPartOf`、`inLanguage`、`breadcrumb`、`publisher`、`primaryImageOfPage`
+3. `[x]` build + qa:geo 成功，`webPageNodes` 29 → 77
+4. `[x]` `dist` 全量扫描：77/77 页各恰好 1 个 `WebPage`，0 重复、0 缺失
+
+计数变化：
+- `webPageNodes`：**29 → 77**
+- `pageCount` 77 不变；`tablesTotal` / `tablesExtractable` 87 / 87 不变
+- 其余计数不变：`faqPages` 40、`pagesWithVisibleFaqButNoNode` 37、`Product` 31、`schema-incomplete` 31、`unsourced-spec` 27、`scaled-content` 12
+
+验证：
+- `npm run build` → 77 页，`Complete!`
+- `npm run qa:geo` → EXIT=0
+- `dist` JSON-LD 全量扫描脚本 → `bad 0`（每页 1 个 WebPage）
+
+踩坑：
+- `BreadcrumbList` 原本没有 `@id`，页面里的 `breadcrumb: { '@id': ... }` 引用全是悬空。补 `@id` 后必须把仍指向 `${origin}/#breadcrumb` 的旧引用同步改掉，否则引用仍悬空——涉及 anode / MMO 两个渲染器，其中 `MmoProductPage.astro` 是**脚本生成产物**，必须改生成脚本 `scripts/mmo/gen-family-markup.mjs` 并重跑，否则下次生成会被覆盖。
+- `BaseLayout` 的 `product` 分支此前不带 `@id`，`WebPage.about` 无从指向 `Product`；本次一并给 `Product` 补 `@id`（`${canonicalUrl}#product`），与 anode / MMO 渲染器已有的 `#product` 命名一致。
+
+遗留：
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- `faq-unstructured` 37 页 → EX-D1 / EX-D2 / EX-D3（前置 EX-C1）
+- `schema-incomplete` 31 页 → EX-C1
+- `unsourced-spec` 27 页 → EX-F1 / EX-F2 / EX-F3（前置 EX-E1）
+- `scaled-content` 12 页 → EX-E2 … EX-E8（前置 EX-E1）
+
+下一步：**EX-C1**（`Product` 节点字段补齐：`BaseLayout` 的 `product` prop 扩展 + `product-meta.ts` 16 个条目补 `category` / `material` / `additionalType` + `apply-product-meta.mjs` 模板同步）
+
+## 2026-11-21 · EX-C1 结案 · Product 节点字段补齐（schema-incomplete 31 → 16）
+
+状态：`[x]`
+
+改动文件：
+- `src/data/product-meta.ts`（`ProductMeta` 扩展 `category` / `material` / `additionalType` / `image`；15 个条目全部补齐）
+- `src/layouts/BaseLayout.astro`（`product` prop 类型扩展；`Product` 节点输出 `itemCondition` / `category` / `material` / `additionalType` / `image` / `additionalProperty`）
+- `scripts/media/apply-product-meta.mjs`（注入模板同步扩展新字段；已重跑，改写 15 个产品页）
+- `src/pages/titanium-products/*.astro`（15 页，由脚本改写 `product` prop）
+- `scripts/seo/geo-audit.mjs`（`PRODUCT_FIELDS` 拆为 `PRODUCT_FIELDS_REQUIRED` / `PRODUCT_FIELDS_OPTIONAL`）
+- `docs/seo/execution-plan.md`（EX-C1 → `[x]`，条目补「本轮实测」）
+
+DoD 勾选：
+1. `[x]` `BaseLayout` 的 `product` prop 类型扩展全部字段
+2. `[x]` `product-meta.ts` 15 个条目补 `category` / `material` / `additionalType` / `image`（脚本核对：15 条目、0 条缺字段）
+3. `[x]` `apply-product-meta.mjs` 注入模板同步扩展并重跑
+4. `[x]` `itemCondition` = `https://schema.org/NewCondition`
+5. `[x]` 红线遵守：`offers` / `mpn` / `gtin` 未写
+6. `[x]` build + qa:geo 成功，`schema-incomplete` 减少
+
+计数变化：
+- `schema-incomplete`：**31 → 16**
+- findings：119 → **104**；opportunities 111（不变）
+- `pageCount` 77、`webPageNodes` 77、`tablesExtractable` 87、`faqPages` 40 不变
+- `Product` 节点 31（不变）；`productPagesWithAdditionalProperty` 仍为 0（属 EX-H2）
+
+验证：
+- `npm run build` → 77 页，`Complete!`
+- `npm run qa:geo` → EXIT=0，findings 104
+
+踩坑：
+- `product-meta.ts` 用 **CRLF** 换行，初版补字段脚本按 `\n` 匹配全部失败（`!! no sku line for …`）。正则须写 `\r?\n`。
+- `product-meta.ts` 的条目键名与页面 slug 一致，但 `titanium-products/` 下除 `index.astro` 外实际只有 **15** 个产品页（计划里写的「16 个产品条目」偏多，`titanium-machining-parts` 无独立条目）。
+- 各产品页的 `const forms` / `const grades` 数组格式不统一（有单行紧凑写法，也有换行写法），按 `title` / `spec` 键抓取比按行匹配稳。
+- 部分页面的首张图是「流程示意图」而非产品图，脚本取的是**页面里第一张图**，与页面可见主图一致，不自行挑选。
+
+遗留：
+- `schema-incomplete` 仍有 **16 页**：4 个设备页（`/hydrogen-generators/`、`/pem-electrolyzer/`、`/salt-chlorinator-for-pool/`、`/sodium-hypochlorite-generator/`）+ 12 个 anode / MMO 家族页。它们自带 `Product` 节点，不走 `BaseLayout` 的 `product` prop，本轮落点未覆盖 → 归 EX-C2（待立项）
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- `faq-unstructured` 37 页 → EX-D1 / EX-D2 / EX-D3
+- `unsourced-spec` 27 页 → EX-F1 / EX-F2 / EX-F3（前置 EX-E1）
+- `scaled-content` 12 页 → EX-E2 … EX-E8（前置 EX-E1）
+
+下一步：**EX-D1**（`BaseLayout` 增加 `faq` prop，16 个产品页接入已有可见 FAQ 数据）

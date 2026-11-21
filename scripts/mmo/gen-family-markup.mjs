@@ -71,7 +71,7 @@ const jsonLd: Record<string, unknown>[] = [
     inLanguage: site.locale,
     primaryImageOfPage: { '@id': \`\${canonicalUrl}#primaryimage\` },
     about: { '@id': \`\${canonicalUrl}#product\` },
-    breadcrumb: { '@id': \`\${origin}/#breadcrumb\` },
+    breadcrumb: { '@id': \`\${canonicalUrl}#breadcrumb\` },
   },
   {
     '@type': 'Product',

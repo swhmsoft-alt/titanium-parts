@@ -46,19 +46,20 @@ import '../../../styles/anode-catalog.css';
       </div>
       <div class="ac-table-wrap" role="region" aria-label="Coating system comparison" tabindex="0">
         <table class="ac-table">
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Coating system comparison: coating family, target reaction, media, current basis and the factor that normally limits service life</caption>
           <thead>
             <tr>
-              <th>Coating Family</th>
-              <th>Commonly Reviewed For</th>
-              <th>Media</th>
-              <th>Current Basis</th>
-              <th>What Limits The Life</th>
+              <th scope="col">Coating Family</th>
+              <th scope="col">Commonly Reviewed For</th>
+              <th scope="col">Media</th>
+              <th scope="col">Current Basis</th>
+              <th scope="col">What Limits The Life</th>
             </tr>
           </thead>
           <tbody>
             {coatingHub.comparisonRows.map((row) => (
               <tr>
-                <td><a href={row.href}>{row.family}</a></td>
+                <th scope="row" style="background: transparent !important; color: inherit; font-weight: 700; text-align: left;"><a href={row.href}>{row.family}</a></th>
                 <td>{row.targetReaction}</td>
                 <td>{row.media}</td>
                 <td>{row.currentBasis}</td>

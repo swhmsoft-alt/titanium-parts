@@ -16,6 +16,16 @@ interface Props {
     name: string;
     description: string;
     sku?: string;
+    /** Product family, e.g. "Titanium Plate & Sheet". */
+    category?: string;
+    /** Grades and UNS numbers, e.g. "Grade 2 Titanium / UNS R50400". */
+    material?: string;
+    /** The shape sold, e.g. "Plate & Sheet". */
+    additionalType?: string;
+    /** The product picture, absolute or site-relative. */
+    image?: string;
+    /** Parameters of the product, one entry per value. */
+    additionalProperty?: { name: string; value: string; unitText?: string }[];
   };
 }
 
@@ -97,6 +107,7 @@ const graph: Record<string, unknown>[] = [
   },
   {
     '@type': 'BreadcrumbList',
+    '@id': `${canonicalUrl}#breadcrumb`,
     itemListElement: (() => {
       const path = Astro.url.pathname.replace(/\/$/, '');
       const segments = path.split('/').filter(Boolean);
@@ -123,16 +134,61 @@ const graph: Record<string, unknown>[] = [
 if (product) {
   graph.push({
     '@type': 'Product',
+    '@id': `${canonicalUrl}#product`,
     name: product.name,
     description: product.description,
     url: canonicalUrl,
     brand: { '@type': 'Brand', name: brandName },
     manufacturer: { '@id': organizationId },
     ...(product.sku ? { sku: product.sku } : {}),
+    // The condition is the same for every product we make: new, not used.
+    itemCondition: 'https://schema.org/NewCondition',
+    ...(product.category ? { category: product.category } : {}),
+    ...(product.material ? { material: product.material } : {}),
+    ...(product.additionalType ? { additionalType: product.additionalType } : {}),
+    ...(product.image
+      ? { image: new URL(product.image, origin).href }
+      : {}),
+    ...(product.additionalProperty
+      ? {
+          additionalProperty: product.additionalProperty.map((property) => ({
+            '@type': 'PropertyValue',
+            name: property.name,
+            value: property.value,
+            ...(property.unitText ? { unitText: property.unitText } : {}),
+          })),
+        }
+      : {}),
   });
 }
 
 for (const node of jsonLd) graph.push(node);
+
+/**
+ * Every page is a WebPage. Pages that publish their own WebPage node keep it —
+ * a second node with the same meaning would make the graph ambiguous — and
+ * only the pages without one get it here.
+ */
+const hasWebPage = graph.some((node) => {
+  const type = node['@type'];
+  return Array.isArray(type) ? type.includes('WebPage') : type === 'WebPage';
+});
+
+if (!hasWebPage) {
+  graph.push({
+    '@type': 'WebPage',
+    '@id': `${canonicalUrl}#webpage`,
+    url: canonicalUrl,
+    name: fullTitle,
+    description,
+    isPartOf: { '@id': websiteId },
+    inLanguage: site.locale,
+    breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+    publisher: { '@id': organizationId },
+    primaryImageOfPage: { '@type': 'ImageObject', url: ogImageUrl },
+    ...(product ? { about: { '@id': `${canonicalUrl}#product` } } : {}),
+  });
+}
 
 const jsonLdPayload = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
 ---

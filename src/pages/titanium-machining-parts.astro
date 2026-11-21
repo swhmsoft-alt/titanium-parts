@@ -204,13 +204,14 @@ const meta = pageMeta['titaniumMachiningParts'];
       </div>
       <div class="mp-table-wrap">
         <table>
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Machining standards map: what each reference can control and what it does not replace</caption>
           <thead>
-            <tr><th>Reference</th><th>What it can control</th><th>What it does not replace</th></tr>
+            <tr><th scope="col">Reference</th><th scope="col">What it can control</th><th scope="col">What it does not replace</th></tr>
           </thead>
           <tbody>
             {standardsRows.map((r) => (
               <tr>
-                <td class="mp-td-strong">{r.ref}</td>
+                <th scope="row" class="mp-td-strong" style="background: transparent !important; color: #0f172a !important; text-align: left;">{r.ref}</th>
                 <td>{r.can}</td>
                 <td>{r.cant}</td>
               </tr>

@@ -83,18 +83,22 @@ const siblings = grades.filter((g) => g.slug !== grade.slug);
     </div>
     <div class="grade-table-wrap" role="region" aria-label={`${grade.grade} chemical composition`} tabindex="0">
       <table class="grade-table">
+        <caption class="grade-table-caption">
+          Chemical composition window for {grade.grade}, in mass percent unless the cell states
+          otherwise. The measured composition on the certificate is the one that governs.
+        </caption>
         <thead>
           <tr>
-            <th>Element</th>
-            <th>Minimum</th>
-            <th>Maximum</th>
-            <th>What it controls</th>
+            <th scope="col">Element</th>
+            <th scope="col">Minimum</th>
+            <th scope="col">Maximum</th>
+            <th scope="col">What it controls</th>
           </tr>
         </thead>
         <tbody>
           {grade.chemistry.map((row) => (
             <tr>
-              <td><strong>{row.element}</strong></td>
+              <th scope="row">{row.element}</th>
               <td>{row.min ?? '—'}</td>
               <td>{row.max ?? '—'}</td>
               <td>{row.note ?? '—'}</td>
@@ -122,17 +126,22 @@ const siblings = grades.filter((g) => g.slug !== grade.slug);
     </div>
     <div class="grade-table-wrap" role="region" aria-label={`${grade.grade} mechanical properties`} tabindex="0">
       <table class="grade-table">
+        <caption class="grade-table-caption">
+          Mechanical property reference window for {grade.grade}. These are minimums in the
+          annealed condition; the minimum that governs an order is the one in the standard
+          revision named on the certificate, for the product form being supplied.
+        </caption>
         <thead>
           <tr>
-            <th>Property</th>
-            <th>Reference window</th>
-            <th>Condition</th>
+            <th scope="col">Property</th>
+            <th scope="col">Reference window</th>
+            <th scope="col">Condition</th>
           </tr>
         </thead>
         <tbody>
           {grade.mechanical.map((row) => (
             <tr>
-              <td><strong>{row.property}</strong></td>
+              <th scope="row">{row.property}</th>
               <td>{row.value}</td>
               <td>{row.note ?? '—'}</td>
             </tr>
@@ -326,6 +335,29 @@ const siblings = grades.filter((g) => g.slug !== grade.slug);
   .grade-table td { padding: 0.9375rem 1.125rem; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; line-height: 1.6; color: var(--color-text-secondary); }
   .grade-table tbody tr:last-child td { border-bottom: none; }
   .grade-table tbody tr:nth-child(even) { background: var(--color-slate-50); }
+  .grade-table-caption {
+    caption-side: top;
+    padding: 0.875rem 1.125rem;
+    text-align: left;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .grade-table tbody th {
+    padding: 0.9375rem 1.125rem;
+    border-bottom: 1px solid var(--color-slate-200);
+    vertical-align: top;
+    line-height: 1.6;
+    text-align: left;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    white-space: normal;
+    color: var(--color-text-secondary);
+    background: transparent;
+  }
+  .grade-table tbody tr:last-child th { border-bottom: none; }
 
   .grade-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   @media (max-width: 960px) { .grade-three { grid-template-columns: 1fr; } }

@@ -153,11 +153,12 @@ const meta = pageMeta['titaniumProducts'];
       </div>
       <div class="prod-grade-wrap">
         <table class="prod-grade-table">
-          <thead><tr><th>Grade</th><th>Material family</th><th>Selection note</th></tr></thead>
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Titanium grade guide: grade, material family and the selection note that applies to the ordered product form</caption>
+          <thead><tr><th scope="col">Grade</th><th scope="col">Material family</th><th scope="col">Selection note</th></tr></thead>
           <tbody>
             {grades.map((g) => (
               <tr>
-                <td><strong>{g.grade}</strong></td>
+                <th scope="row" style="background: transparent !important; color: inherit; font-weight: 700; text-align: left;"><strong>{g.grade}</strong></th>
                 <td>{g.family}</td>
                 <td>{g.note}</td>
               </tr>

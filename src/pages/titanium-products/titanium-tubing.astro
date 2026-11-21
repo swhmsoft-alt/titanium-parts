@@ -175,7 +175,7 @@ const meta = productMeta['titanium-tubing'] ?? { title: M, description: M, sku: 
 <BaseLayout
     title={meta.title}
     description={meta.description}
-    product={{ name: M, description: meta.description, sku: meta.sku }}
+    product={{ name: M, description: meta.description, sku: meta.sku, category: meta.category, material: meta.material, additionalType: meta.additionalType, image: meta.image }}
   >
   <!-- HERO -->
   <section class="tp-hero">
@@ -242,18 +242,19 @@ const meta = productMeta['titanium-tubing'] ?? { title: M, description: M, sku: 
       <h2 class="tp-h2">Match the Standard to the Ordered Product</h2>
       <div class="tp-spec-table-wrap">
         <table class="tp-spec-table">
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Tubing specification mapping: product route, typical order dimensions, the specification applied when required and the scope boundary</caption>
           <thead>
             <tr>
-              <th>Product route</th>
-              <th>Typical order dimensions</th>
-              <th>Specification when required</th>
-              <th>Scope boundary</th>
+              <th scope="col">Product route</th>
+              <th scope="col">Typical order dimensions</th>
+              <th scope="col">Specification when required</th>
+              <th scope="col">Scope boundary</th>
             </tr>
           </thead>
           <tbody>
             {specMapping.map((row) => (
               <tr>
-                <td><strong>{row.route}</strong></td>
+                <th scope="row" style="background: transparent !important; color: inherit; font-weight: 700; text-align: left;"><strong>{row.route}</strong></th>
                 <td>{row.dimensions}</td>
                 <td>{row.spec}</td>
                 <td>{row.scope}</td>

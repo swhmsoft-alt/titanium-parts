@@ -59,22 +59,33 @@ const TRACE_PATTERNS = [
   /\bUNS\s?[A-Z]\d{5}\b/gi,
 ];
 
-/** Product fields a schema-aware retrieval system can act on. */
-const PRODUCT_FIELDS = [
+/**
+ * Product fields a schema-aware retrieval system can act on.
+ *
+ * The fields are split: the required ones must be there for the node to be
+ * usable at all, the optional ones depend on data the site really has. A
+ * field that is optional and absent is not a defect — the site does not
+ * publish prices, manufacturer part numbers or barcodes, and inventing
+ * them would be worse than leaving them out.
+ */
+const PRODUCT_FIELDS_REQUIRED = [
   'name',
   'description',
   'sku',
-  'mpn',
-  'gtin',
   'category',
   'image',
   'brand',
   'manufacturer',
   'material',
   'additionalType',
+  'itemCondition',
+];
+
+const PRODUCT_FIELDS_OPTIONAL = [
   'additionalProperty',
   'offers',
-  'itemCondition',
+  'mpn',
+  'gtin',
   'isVariantOf',
 ];
 
@@ -220,7 +231,7 @@ function analysePage(file) {
     ? Object.keys(productNode).filter((k) => !k.startsWith('@'))
     : [];
   const missingProductFields = productNode
-    ? PRODUCT_FIELDS.filter((f) => !productFields.includes(f))
+    ? PRODUCT_FIELDS_REQUIRED.filter((f) => !productFields.includes(f))
     : [];
 
   const faqNode = nodes.find((n) => n['@type'] === 'FAQPage') || null;

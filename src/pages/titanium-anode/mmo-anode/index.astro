@@ -114,13 +114,14 @@ const jsonLd: Record<string, unknown>[] = [
       </div>
       <div class="ac-table-wrap" role="region" aria-label="MMO anode geometry selection matrix" tabindex="0">
         <table class="ac-table">
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">MMO anode geometry selection: anode form, its normal use and the constraint that limits the choice</caption>
           <thead>
-            <tr><th>Geometry</th><th>Form</th><th>Normally Used For</th><th>What Limits The Choice</th></tr>
+            <tr><th scope="col">Geometry</th><th scope="col">Form</th><th scope="col">Normally Used For</th><th scope="col">What Limits The Choice</th></tr>
           </thead>
           <tbody>
             {mmoHub.selectionRows.map((row) => (
               <tr>
-                <td><a href={row.href}>{row.geometry}</a></td>
+                <th scope="row" style="background: transparent !important; color: inherit; font-weight: 700; text-align: left;"><a href={row.href}>{row.geometry}</a></th>
                 <td>{row.form}</td>
                 <td>{row.bestFor}</td>
                 <td>{row.constraint}</td>
@@ -146,6 +147,7 @@ const jsonLd: Record<string, unknown>[] = [
           </div>
           <div class="ac-table-wrap" role="region" aria-label="What has to be defined for the quotation" tabindex="0">
             <table class="ac-table ac-table-spec">
+              <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Order basis for an MMO anode quotation: the inputs that must be defined and what the order has to state for each</caption>
               <thead>
                 <tr><th scope="col">Order Input</th><th scope="col">What The Order Has To State</th></tr>
               </thead>

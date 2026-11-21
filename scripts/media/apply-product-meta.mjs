@@ -52,20 +52,27 @@ for (const file of files) {
   }
 
   // 2. Replace the BaseLayout opening tag with the explicit metadata.
+  //    The product prop carries every field the Product schema node needs:
+  //    the family, the grades, the form and the product picture all come
+  //    from `product-meta.ts`, so the page and the schema never disagree.
+  const PRODUCT_PROP = `product={{ name: M, description: meta.description, sku: meta.sku, category: meta.category, material: meta.material, additionalType: meta.additionalType, image: meta.image }}`;
   const layoutRe = /<BaseLayout\s+title=\{[^}]*\}\s+description=\{[^}]*\}\s*>/;
-  if (layoutRe.test(original)) {
+  const staticRe = /<BaseLayout\s+title="([^"]*)"\s+description="([^"]*)"\s*>/;
+  if (layoutRe.test(original) || staticRe.test(original)) {
     original = original.replace(
       layoutRe,
-      `<BaseLayout\n    title={meta.title}\n    description={meta.description}\n    product={{ name: M, description: meta.description, sku: meta.sku }}\n  >`
+      `<BaseLayout\n    title={meta.title}\n    description={meta.description}\n    ${PRODUCT_PROP}\n  >`,
+    );
+    original = original.replace(
+      staticRe,
+      `<BaseLayout\n    title={meta.title}\n    description={meta.description}\n    ${PRODUCT_PROP}\n  >`,
     );
   } else {
-    // Pages that already use a static title string.
-    const staticRe = /<BaseLayout\s+title="([^"]*)"\s+description="([^"]*)"\s*>/;
-    if (staticRe.test(original)) {
-      original = original.replace(
-        staticRe,
-        `<BaseLayout\n    title={meta.title}\n    description={meta.description}\n    product={{ name: M, description: meta.description, sku: meta.sku }}\n  >`
-      );
+    // The page already uses the metadata pattern: only the product prop is
+    // rewritten, so that a new field of `product-meta.ts` reaches the schema.
+    const propRe = /product=\{\{[^{}]*\}\}/;
+    if (propRe.test(original)) {
+      original = original.replace(propRe, PRODUCT_PROP);
     } else {
       console.warn(`! could not match BaseLayout in ${file} — skipped`);
       continue;

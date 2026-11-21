@@ -68,22 +68,27 @@ import {
     </div>
     <div class="grade-table-wrap" role="region" aria-label="Titanium grade comparison table" tabindex="0">
       <table class="grade-table">
+        <caption class="grade-table-caption">
+          The nine titanium grades in this library compared on designation, family and minimum
+          mechanical windows. These are reference windows from the published standard families;
+          the full composition table and standard reference sit on each grade page.
+        </caption>
         <thead>
           <tr>
-            <th>Grade</th>
-            <th>Designation</th>
-            <th>Family</th>
-            <th>Tensile strength</th>
-            <th>Elongation</th>
-            <th>What decides it</th>
+            <th scope="col">Grade</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Family</th>
+            <th scope="col">Tensile strength</th>
+            <th scope="col">Elongation</th>
+            <th scope="col">What decides it</th>
           </tr>
         </thead>
         <tbody>
           {gradeComparisonRows.map((row) => (
             <tr>
-              <td>
+              <th scope="row">
                 <a href={row.href} class="grade-table-link">{row.grade}</a>
-              </td>
+              </th>
               <td>{row.designation}</td>
               <td>{row.family}</td>
               <td>{row.tensile}</td>
@@ -187,19 +192,24 @@ import {
     </div>
     <div class="grade-table-wrap" role="region" aria-label="Titanium grade application matrix" tabindex="0">
       <table class="grade-table">
+        <caption class="grade-table-caption">
+          Application matrix: the titanium grade normally written for a duty, the grade to review
+          when the duty is more severe than usual, and the reason for the choice. Confirm the
+          grade against the standard revision named on the certificate before ordering.
+        </caption>
         <thead>
           <tr>
-            <th>Application</th>
-            <th>Grade normally written</th>
-            <th>Review when</th>
-            <th>Why</th>
-            <th>Products</th>
+            <th scope="col">Application</th>
+            <th scope="col">Grade normally written</th>
+            <th scope="col">Review when</th>
+            <th scope="col">Why</th>
+            <th scope="col">Products</th>
           </tr>
         </thead>
         <tbody>
           {applicationMatrix.map((row) => (
             <tr>
-              <td><strong>{row.application}</strong></td>
+              <th scope="row">{row.application}</th>
               <td>{row.primary}</td>
               <td>{row.review}</td>
               <td>{row.reason}</td>
@@ -226,18 +236,23 @@ import {
     </div>
     <div class="grade-table-wrap" role="region" aria-label="Titanium standards cross-reference" tabindex="0">
       <table class="grade-table">
+        <caption class="grade-table-caption">
+          Standards cross-reference: which standard carries which titanium grade, and what the
+          revision named on the certificate governs. The revision and the product form decide the
+          strength window.
+        </caption>
         <thead>
           <tr>
-            <th>Standard</th>
-            <th>Covers</th>
-            <th>Grades in this library</th>
-            <th>Note</th>
+            <th scope="col">Standard</th>
+            <th scope="col">Covers</th>
+            <th scope="col">Grades in this library</th>
+            <th scope="col">Note</th>
           </tr>
         </thead>
         <tbody>
           {standardRows.map((row) => (
             <tr>
-              <td><strong>{row.standard}</strong></td>
+              <th scope="row">{row.standard}</th>
               <td>{row.covers}</td>
               <td>{row.grades}</td>
               <td>{row.note}</td>
@@ -399,6 +414,29 @@ import {
   .grade-table td { padding: 0.9375rem 1.125rem; border-bottom: 1px solid var(--color-slate-200); vertical-align: top; line-height: 1.6; color: var(--color-text-secondary); }
   .grade-table tbody tr:last-child td { border-bottom: none; }
   .grade-table tbody tr:nth-child(even) { background: var(--color-slate-50); }
+  .grade-table-caption {
+    caption-side: top;
+    padding: 0.875rem 1.125rem;
+    text-align: left;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .grade-table tbody th {
+    padding: 0.9375rem 1.125rem;
+    border-bottom: 1px solid var(--color-slate-200);
+    vertical-align: top;
+    line-height: 1.6;
+    text-align: left;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    white-space: normal;
+    color: var(--color-text-secondary);
+    background: transparent;
+  }
+  .grade-table tbody tr:last-child th { border-bottom: none; }
   .grade-table-link { color: var(--color-primary-700); font-weight: 600; text-decoration: none; }
   .grade-table-link:hover { text-decoration: underline; }
 

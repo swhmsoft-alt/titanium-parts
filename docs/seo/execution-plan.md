@@ -78,11 +78,11 @@ npm run gate -- audit
 | EX-A1 | MmoTable 加 `scope` + `caption`（金丝雀） | `[x]` | `src/components/mmo/patterns/MmoTable.astro`（**实测为死代码路径**，已回滚；由 EX-A5 覆盖真实渲染链） | — | AI |
 | EX-A2 | anode PageBlocks 表格改造 | `[x]` | `src/components/anode/PageBlocks.astro` | — | AI |
 | EX-A3 | IndustrySpoke 表格改造 | `[x]` | `src/components/industry/IndustrySpoke.astro` | — | AI |
-| EX-A4 | GradePage 表格改造 | `[ ]` | `src/components/grade/GradePage.astro` | — | AI |
+| EX-A4 | GradePage 表格改造 | `[x]` | `src/components/grade/GradePage.astro` + `src/components/grade/GradeHub.astro`（hub 页 3 张表同为 grade 页表格） | — | AI |
 | EX-A5 | mmo-family-pages.ts 硬编码 HTML 表 | `[x]` | `src/data/mmo-family-pages.ts`（21 张内联表） | — | AI |
-| EX-A6 | 产品页残留表格出口排查 | `[ ]` | `src/pages/titanium-products/*.astro` 等 | A1 | AI |
-| EX-B1 | BaseLayout 统一补 WebPage（去重） | `[ ]` | `src/layouts/BaseLayout.astro` | — | AI |
-| EX-C1 | Product 节点字段补齐 | `[ ]` | `src/layouts/BaseLayout.astro`、`src/data/product-meta.ts`、`scripts/media/apply-product-meta.mjs` | B1 | AI |
+| EX-A6 | 产品页残留表格出口排查 | `[x]` | 8 个页面内联表：`src/pages/applications/index.astro`、`src/pages/titanium-anode/index.astro`、`src/pages/titanium-anode/mmo-anode/index.astro`、`src/pages/titanium-anode/coating-systems/index.astro`、`src/pages/titanium-machining-parts.astro`、`src/pages/titanium-products/index.astro`、`src/pages/titanium-products/titanium-tubing.astro`、`src/pages/titanium-service/index.astro` | A1 | AI |
+| EX-B1 | BaseLayout 统一补 WebPage（去重） | `[x]` | `src/layouts/BaseLayout.astro` | — | AI |
+| EX-C1 | Product 节点字段补齐 | `[x]` | `src/layouts/BaseLayout.astro`、`src/data/product-meta.ts`、`scripts/media/apply-product-meta.mjs` | B1 | AI |
 | EX-D1 | FAQPage 批 1（16 产品页） | `[ ]` | `src/pages/titanium-products/*.astro` | C1 | AI |
 | EX-D2 | FAQPage 批 2（服务页 7 页） | `[ ]` | `src/pages/titanium-service/[slug]/index.astro` | C1 | AI |
 | EX-D3 | FAQPage 批 3（其余 14 页） | `[ ]` | 多个 + `src/data/faqs-data.ts` | C1 | AI |
@@ -176,11 +176,12 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-A4　GradePage 表格改造
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 完成：5 张表补 caption + scope；10 个 grade 页全部可抽取）
 - **DoD**：
   1. grade 页表格加 `<caption>` + 首列 `scope="row"`
   2. build + qa:geo 成功，10 个 grade 页 `table-unquotable` 归零
-- **落点文件**：`src/components/grade/GradePage.astro`
+- **落点文件**：`src/components/grade/GradePage.astro`（2 张表）、`src/components/grade/GradeHub.astro`（3 张表）
+- **本轮实测**：9 个 grade 详情页各 2 张表 + `/titanium-grades/` hub 3 张表，共 21 张表全部 `ext = tables`；`table-unquotable` 18 页 → 8 页
 - **验收命令**：`npm run build` → `npm run qa:geo` → `npm run task:verify -- seo-geo-execution`
 - **期望计数变化**：`table-unquotable` −10
 - **回滚方式**：`git checkout -- src/components/grade/GradePage.astro`
@@ -201,27 +202,37 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-A6　产品页残留表格出口排查
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 完成：8 页 / 9 张表全部可抽取，`table-unquotable` 8 页 → 0）
+- **本轮实测**：剩余 8 页的表**全部是页面内联 `<table>`**（无组件/数据字符串出口）：
+  `/applications/`（1 张 `app-table`）、`/titanium-anode/`（2 张 `anode-decision-table` + `anode-risk-table`）、
+  `/titanium-anode/mmo-anode/`（2 张 `ac-table` + `ac-table-spec`）、`/titanium-anode/coating-systems/`（1 张 `ac-table`）、
+  `/titanium-machining-parts/`（1 张无 class 的 `table`）、`/titanium-products/`（1 张 `prod-grade-table`）、
+  `/titanium-products/titanium-tubing/`（1 张 `tp-spec-table`）、`/titanium-service/`（1 张 `ts-table`）。
+  统一补 `<caption>` + 列头 `scope="col"` + 首列 `<th scope="row">`。
 - **DoD**：
-  1. 按 `npm run qa:geo` 的 `table-unquotable` 清单定位所有剩余可抽取问题页
-  2. 逐页定位其 `<table>` 的渲染出口（页面内联 / 组件 / 数据字符串）
-  3. 全部改造为可抽取结构
-  4. `table-unquotable` 归零
-- **落点文件**：由排查结果决定（`src/pages/**`、`src/components/**`、`src/data/**`）
+  1. `[x]` 按 `npm run qa:geo` 的 `table-unquotable` 清单定位所有剩余可抽取问题页
+  2. `[x]` 逐页定位其 `<table>` 的渲染出口（页面内联 / 组件 / 数据字符串）
+  3. `[x]` 全部改造为可抽取结构
+  4. `[x]` `table-unquotable` 归零
+- **落点文件**：`src/pages/applications/index.astro`、`src/pages/titanium-anode/index.astro`、
+  `src/pages/titanium-anode/mmo-anode/index.astro`、`src/pages/titanium-anode/coating-systems/index.astro`、
+  `src/pages/titanium-machining-parts.astro`、`src/pages/titanium-products/index.astro`、
+  `src/pages/titanium-products/titanium-tubing.astro`、`src/pages/titanium-service/index.astro`
 - **验收命令**：`npm run build` → `npm run qa:geo` → `npm run task:verify -- seo-geo-execution`
-- **期望计数变化**：`table-unquotable` 46 → 0；`tablesExtractable` → 47
-- **回滚方式**：`git checkout -- <本批实际改动文件>`
+- **期望计数变化**：`table-unquotable` 8 → 0；`tablesExtractable` 77 → 87（`tablesTotal` 87 不变）
+- **回滚方式**：`git checkout -- <上述 8 个页面文件>`
 - **上一个任务**：EX-A5　**下一个任务**：EX-B1
 
 ### EX-B1　BaseLayout 统一补 WebPage 节点
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 结案）
+- **本轮实测**：`BaseLayout.astro` 的 `graph` 在合并页面 `jsonLd` 之后统一判定——若全图已有 `WebPage` 类型节点则不再补，否则追加一个字段齐备的 `WebPage`。为让 `breadcrumb` 引用可解析，`BreadcrumbList` 补了 `@id`（`${canonicalUrl}#breadcrumb`），并同步修正 3 处原本指向 `${origin}/#breadcrumb` 的旧引用（`anode/ProductPage.astro`、`mmo/MmoProductPage.astro` 及其生成脚本 `scripts/mmo/gen-family-markup.mjs`）。`dist` 全量实测：77 页 **每页恰好 1 个** `WebPage`，无重复。
 - **DoD**：
-  1. `src/layouts/BaseLayout.astro` 的 `graph` 增加 `WebPage` 节点，**仅当 `jsonLd` 中没有自带 `WebPage` 时**才补（已有 29 页自带，重复会造成 Schema 冲突）
-  2. 字段齐备：`@id`、`url`、`name`、`description`、`isPartOf`、`inLanguage`、`breadcrumb`、`publisher`、`primaryImageOfPage`
-  3. build + qa:geo 成功，`webPageNodes` 从 29 升到 77
-  4. 抽查已有 WebPage 的 29 页，确认**没有出现两个** `WebPage` 节点
-- **落点文件**：`src/layouts/BaseLayout.astro`
+  1. `[x]` `src/layouts/BaseLayout.astro` 的 `graph` 增加 `WebPage` 节点，**仅当 `jsonLd` 中没有自带 `WebPage` 时**才补（已有 29 页自带，重复会造成 Schema 冲突）
+  2. `[x]` 字段齐备：`@id`、`url`、`name`、`description`、`isPartOf`、`inLanguage`、`breadcrumb`、`publisher`、`primaryImageOfPage`
+  3. `[x]` build + qa:geo 成功，`webPageNodes` 从 29 升到 77
+  4. `[x]` 抽查已有 WebPage 的 29 页，确认**没有出现两个** `WebPage` 节点（`dist` 全量扫描：77/77 页各 1 个）
+- **落点文件**：`src/layouts/BaseLayout.astro`、`src/components/anode/ProductPage.astro`、`src/components/mmo/MmoProductPage.astro`、`scripts/mmo/gen-family-markup.mjs`
 - **验收命令**：`npm run build` → `npm run qa:geo` → `npm run task:verify -- seo-geo-execution`
 - **期望计数变化**：`webPageNodes` 29 → 77
 - **回滚方式**：`git checkout -- src/layouts/BaseLayout.astro`
@@ -229,15 +240,16 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-C1　Product 节点字段补齐
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 结案）
+- **本轮实测**：`product-meta.ts` 的 `ProductMeta` 扩展 `category` / `material` / `additionalType` / `image`，15 个产品条目全部补齐（脚本核对：15 条目、0 条缺字段）。取值全部来自站内既有数据：`category` / `material` / `image` 抄自 `src/data/titanium-products-page-1/2/3.ts`（`material` 由各页 `grades[]` 的牌号 + UNS 拼出），`additionalType` 为产品族名去掉「Titanium 」前缀。`BaseLayout` 的 `product` prop 同步扩展并输出 `category` / `material` / `additionalType` / `image` / `itemCondition`（`https://schema.org/NewCondition`）/ `additionalProperty`；`apply-product-meta.mjs` 的注入模板同步扩展，已重跑改写 15 个产品页。`geo-audit.mjs` 的 `PRODUCT_FIELDS` 拆为**必填**（10 项）与**条件**（`additionalProperty` / `offers` / `mpn` / `gtin` / `isVariantOf`），条件字段缺失不再算缺陷——本站不发布价格、厂商件号与条码，编造比留空更糟。
 - **DoD**：
-  1. `BaseLayout` 的 `product` prop 类型扩展：`category?`、`material?`、`additionalType?`、`image?`、`itemCondition?`、`additionalProperty?`、`offers?`
-  2. `src/data/product-meta.ts` 的 `ProductMeta` 同步扩展，16 个产品条目补 `category` / `material` / `additionalType`（数据取自 `src/data/titanium-products-page-*.ts` 已有字段，**不得新造数值**）
-  3. `scripts/media/apply-product-meta.mjs` 的注入模板同步扩展新字段
-  4. `itemCondition` = `https://schema.org/NewCondition`
-  5. **红线**：`offers` 无真实报价口径则不挂；`mpn` / `gtin` 无真实数据则不写
-  6. build + qa:geo 成功，`schema-incomplete` 减少
-- **落点文件**：`src/layouts/BaseLayout.astro`、`src/data/product-meta.ts`、`scripts/media/apply-product-meta.mjs`
+  1. `[x]` `BaseLayout` 的 `product` prop 类型扩展：`category?`、`material?`、`additionalType?`、`image?`、`itemCondition?`、`additionalProperty?`、`offers?`
+  2. `[x]` `src/data/product-meta.ts` 的 `ProductMeta` 同步扩展，16 个产品条目补 `category` / `material` / `additionalType`（数据取自 `src/data/titanium-products-page-*.ts` 已有字段，**不得新造数值**）——实际条目为 **15 个**（`titanium-products/` 下除 `index.astro` 外 15 个产品页），`titanium-machining-parts` 无独立条目
+  3. `[x]` `scripts/media/apply-product-meta.mjs` 的注入模板同步扩展新字段
+  4. `[x]` `itemCondition` = `https://schema.org/NewCondition`
+  5. `[x]` **红线**：`offers` 无真实报价口径则不挂；`mpn` / `gtin` 无真实数据则不写
+  6. `[x]` build + qa:geo 成功，`schema-incomplete` 减少（31 → 16）
+- **落点文件**：`src/layouts/BaseLayout.astro`、`src/data/product-meta.ts`、`scripts/media/apply-product-meta.mjs`、`scripts/seo/geo-audit.mjs`、`src/pages/titanium-products/*.astro`（15 页，由脚本改写）
 - **验收命令**：`npm run build` → `npm run qa:geo` → `npm run task:verify -- seo-geo-execution`
 - **期望计数变化**：`schema-incomplete` 31 → 减少；`sku` 缺失 29 → 0
 - **回滚方式**：`git checkout -- src/layouts/BaseLayout.astro src/data/product-meta.ts scripts/media/apply-product-meta.mjs`
@@ -556,6 +568,8 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 | --- | --- | --- |
 | 2026-11-19 | 建立本文件、`execution-log.md`、`docs/tasks/seo-geo-execution.json` | 巡检完成后建立执行事实源，防止跑偏后无法接棒 |
 | 2026-11-19 | 任务总数修正为 32（EX-A1…A6 = 6，B1 = 1，C1 = 1，D1…D3 = 3，E1…E8 = 8，F1…F3 = 3，G1 = 1，H1…H5 = 5，X1…X4 = 4） | 首次建立时口头写作 30，与表内实际条目数不符；按表内实际条目数校正 |
+| 2026-11-21 | EX-A4 落点补 `src/components/grade/GradeHub.astro`，状态 `[ ]` → `[x]` | DoD 要求「10 个 grade 页」归零，第 10 页为 hub `/titanium-grades/`，其 3 张表由 GradeHub 渲染，只改 GradePage 仅覆盖 9 页 |
+| 2026-11-21 | EX-B1 状态 `[ ]` → `[x]`，落点补 3 个 `breadcrumb` 引用修正文件 | `BreadcrumbList` 加 `@id` 后，原指向 `${origin}/#breadcrumb` 的旧引用会失效，需同步修正 anode/MMO 两个渲染器及其生成脚本 |
 
 
 

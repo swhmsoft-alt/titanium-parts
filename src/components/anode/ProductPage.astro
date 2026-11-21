@@ -43,7 +43,7 @@ const jsonLd: Record<string, unknown>[] = [
     ...(page.product
       ? { about: { '@id': `${canonicalUrl}#product` } }
       : { about: { '@id': `${origin}/#organization` } }),
-    breadcrumb: { '@id': `${origin}/#breadcrumb` },
+    breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
   },
 ];
 

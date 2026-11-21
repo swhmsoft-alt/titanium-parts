@@ -141,17 +141,18 @@ const meta = pageMeta['applications'];
       </div>
       <div class="app-table-wrap">
         <table class="app-table">
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Application routing matrix: each required outcome mapped to the technical path and the first inputs needed for an engineering review</caption>
           <thead>
             <tr>
-              <th>Required Outcome</th>
-              <th>Start Here</th>
-              <th>First Inputs</th>
+              <th scope="col">Required Outcome</th>
+              <th scope="col">Start Here</th>
+              <th scope="col">First Inputs</th>
             </tr>
           </thead>
           <tbody>
             {routingMatrix.map((row) => (
               <tr>
-                <td>{row[0]}</td>
+                <th scope="row" style="background: transparent !important; color: inherit; font-weight: 700; text-align: left;">{row[0]}</th>
                 <td><strong>{row[1]}</strong></td>
                 <td>{row[2]}</td>
               </tr>

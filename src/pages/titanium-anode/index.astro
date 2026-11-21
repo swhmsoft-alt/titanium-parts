@@ -68,11 +68,12 @@ const meta = pageMeta['titaniumAnode'];
       </header>
       <div class="anode-table-wrap" role="region" aria-label="Anode selection by target reaction" tabindex="0">
         <table class="anode-decision-table">
-          <thead><tr><th>Target reaction or process</th><th>Candidate family for review</th><th>Inputs that change the decision</th><th>Common geometry and connection questions</th><th>Qualification to agree</th></tr></thead>
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Anode selection guide: candidate titanium anode families by target reaction, with the inputs that change the decision and the qualification to agree</caption>
+          <thead><tr><th scope="col">Target reaction or process</th><th scope="col">Candidate family for review</th><th scope="col">Inputs that change the decision</th><th scope="col">Common geometry and connection questions</th><th scope="col">Qualification to agree</th></tr></thead>
           <tbody>
             {reactionRows.map((r) => (
               <tr>
-                <td><strong>{r.target}</strong></td>
+                <th scope="row" style="background: transparent !important; color: inherit; font-weight: 700; text-align: left;"><strong>{r.target}</strong></th>
                 <td>{r.family}</td>
                 <td>{r.inputs}</td>
                 <td>{r.geometry}</td>
@@ -204,13 +205,14 @@ const meta = pageMeta['titaniumAnode'];
       </header>
       <div class="anode-table-wrap" role="region" aria-label="Titanium anode risk review table" tabindex="0">
         <table class="anode-risk-table">
+          <caption style="caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a;">Anode risk review before order release: the risk seen in projects, the typical specification gap, the titanium parts review and the customer or system responsibility</caption>
           <thead>
-            <tr><th>Risk seen in projects</th><th>Typical specification gap</th><th>Titanium Parts review before order release</th><th>Customer or system responsibility</th></tr>
+            <tr><th scope="col">Risk seen in projects</th><th scope="col">Typical specification gap</th><th scope="col">Titanium Parts review before order release</th><th scope="col">Customer or system responsibility</th></tr>
           </thead>
           <tbody>
             {risks.map((r) => (
               <tr>
-                <td><strong>{r.risk}</strong></td>
+                <th scope="row" style="background: transparent !important; color: inherit; font-weight: 700; text-align: left;"><strong>{r.risk}</strong></th>
                 <td>{r.gap}</td>
                 <td>{r.review}</td>
                 <td>{r.customer}</td>
