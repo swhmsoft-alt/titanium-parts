@@ -25,9 +25,17 @@ const groups = [
     items: anodeFAQs,
   },
 ];
+
+// The FAQPage node is built from the very same arrays the page renders, so the
+// structured answer is word-for-word the answer a reader sees.
+const faqEntries = groups.flatMap((group) =>
+  group.items.map((item) => ({ q: item.question, a: item.answer }))
+);
 ---
 
-<BaseLayout title="Frequently Asked Questions | Titanium Parts" description="Answers to common questions about titanium grades, processing scope, MMO and platinized anode coatings, documentation, lead times and how to submit an inquiry.">
+<BaseLayout title="Frequently Asked Questions | Titanium Parts" description="Answers to common questions about titanium grades, processing scope, MMO and platinized anode coatings, documentation, lead times and how to submit an inquiry."
+  faq={faqEntries}
+>
   <PageHero eyebrow="FAQ" title="Frequently Asked Questions" description="Straight answers on how requirements are reviewed, what is confirmed in a quotation, and what stays the buyer's responsibility." />
 
   <section class="section section-white">

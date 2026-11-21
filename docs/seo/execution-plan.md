@@ -84,8 +84,8 @@ npm run gate -- audit
 | EX-B1 | BaseLayout 统一补 WebPage（去重） | `[x]` | `src/layouts/BaseLayout.astro` | — | AI |
 | EX-C1 | Product 节点字段补齐 | `[x]` | `src/layouts/BaseLayout.astro`、`src/data/product-meta.ts`、`scripts/media/apply-product-meta.mjs` | B1 | AI |
 | EX-D1 | FAQPage 批 1（16 产品页） | `[x]` | `src/pages/titanium-products/*.astro` | C1 | AI |
-| EX-D2 | FAQPage 批 2（服务页 7 页） | `[ ]` | `src/pages/titanium-service/[slug]/index.astro` | C1 | AI |
-| EX-D3 | FAQPage 批 3（其余 14 页） | `[ ]` | 多个 + `src/data/faqs-data.ts` | C1 | AI |
+| EX-D2 | FAQPage 批 2（服务页 7 页） | `[x]` | `src/pages/titanium-service/[slug]/index.astro`、`src/pages/titanium-service/index.astro` | C1 | AI |
+| EX-D3 | FAQPage 批 3（站点页 6 个） | `[x]` | `src/pages/{index,faq/index,applications/index,titanium-anode/index,titanium-anode/coating-systems/index,titanium-machining-parts}.astro` + `scripts/seo/geo-audit.mjs` | C1 | AI |
 | EX-E1 | 抽 ProductPage 组件（产品页） | `[ ]` | 新 `src/components/product/ProductPage.astro` + `src/data/product-pages/*` | D1 | AI |
 | EX-E2 | 差异化金丝雀（titanium-plate） | `[ ]` | `src/pages/titanium-products/titanium-plate.astro` | E1 | AI + **人工读** |
 | EX-E3 | 差异化批 1（bolts, forgings） | `[ ]` | `src/pages/titanium-products/*` | E2 | AI + **人工抽检** |
@@ -272,29 +272,52 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-D2　FAQPage 批 2（服务页 7 页）
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 完成：6 个服务详情页 + `/titanium-service/` hub 全部生成 FAQPage 节点，答案与页面可见答案同源逐字一致）
 - **DoD**：
-  1. `src/pages/titanium-service/[slug]/index.astro` 与 `/titanium-service/` 的可见 FAQ 接入 `BaseLayout` 的 `faq` prop
-  2. 答案逐字一致
-  3. build + qa:geo 成功，对应页面 `faq-unstructured` 归零
-- **落点文件**：`src/pages/titanium-service/[slug]/index.astro`、`src/pages/titanium-service/index.astro`、`src/data/service-steps.ts`
+  1. `[x]` `src/pages/titanium-service/[slug]/index.astro` 与 `/titanium-service/` 的可见 FAQ 接入 `BaseLayout` 的 `faq` prop
+  2. `[x]` 答案逐字一致
+  3. `[x]` build + qa:geo 成功，对应页面 `faq-unstructured` 归零
+- **落点文件**：`src/pages/titanium-service/[slug]/index.astro`、`src/pages/titanium-service/index.astro`
+- **本轮实现**：
+  - 6 个服务详情页：用 `step.scope` / `step.reviewBasis` / `step.outputs` **派生** 3 条 Q&A（`scope`、报价前确认项、典型产出），
+    同一数组既渲染页面可见的 `<details class="svc-faq-item">` FAQ 区块，又作为 `BaseLayout` 的 `faq` prop → JSON-LD 答案逐字等于可见答案
+  - `/titanium-service/` hub：直接复用页面已有的 `faqs` 数组（10 条）传入 `faq` prop，未改一字可见文案
+  - 未新增任何未经证实的技术断言：可见 FAQ 的答案全部来自 `src/data/service-steps.ts` 既有字段
+- **本轮实测**：`faqPages` 56 → **63**；`pagesWithVisibleFaqButNoNode` 21 → **14**；
+  `thin-page` 9 → 3（6 个服务详情页正文词数由 ~270 升至 ~400）；`pageCount` 77、`tablesExtractable` 87、
+  `webPageNodes` 77、`scaled-content` 12、`unsourced-spec` 27、`no-eeat-signals` 3、跨页重复段落组 42 均未倒退
 - **验收命令**：`npm run build` → `npm run qa:geo` → `npm run task:verify -- seo-geo-execution`
-- **期望计数变化**：`pagesWithVisibleFaqButNoNode` 继续下降
-- **回滚方式**：`git checkout -- src/pages/titanium-service/ src/data/service-steps.ts`
+- **期望计数变化**：`pagesWithVisibleFaqButNoNode` 21 → 14
+- **回滚方式**：`git checkout -- src/pages/titanium-service/`
 - **上一个任务**：EX-D1　**下一个任务**：EX-D3
 
-### EX-D3　FAQPage 批 3（其余 14 页）
+### EX-D3　FAQPage 批 3（站点页 6 个）
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 完成：6 个含**真实可见 FAQ** 的站点页接入 FAQPage 节点，答案与页面可见答案逐字一致）
+- **本轮实测（2026-11-21）**：
+  - 计划原文列的 15 个路由里，只有 **6 个**页面在 `<main>` 内真的有可见 FAQ：
+    `/`、`/faq/`、`/applications/`、`/titanium-anode/`、`/titanium-anode/coating-systems/`、`/titanium-machining-parts/`。
+  - 其余 9 个（`/404.html`、`/company/`、`/contact/`、`/knowledge-center/`、`/manufacturing-capabilities/`、
+    `/our-team/`、`/quality/`、`/terms/`、`/titanium-products/`）**页面上没有任何可见 FAQ**：
+    它们的 `visibleFaqBlocks=9` 全部来自 `Header.astro` 移动菜单的 9 个 `<details>`（全站公共噪声，非页面 FAQ）。
+    故 DoD 原文的「15 页接入」按实测收敛为 **6 页**，其余页面**不做任何注入**（不制造无对应可见内容的 Schema）。
+  - 修正 `scripts/seo/geo-audit.mjs` 的 `visibleFaqBlocks` 口径：**只统计 `<main>` 内容区**，
+    把全站 Header 导航菜单排除在外。修正后 `pagesWithVisibleFaqButNoNode` **14 → 0**。
 - **DoD**：
-  1. `/`、`/404.html`、`/applications/`、`/company/`、`/contact/`、`/faq/`、`/knowledge-center/`、`/manufacturing-capabilities/`、`/our-team/`、`/quality/`、`/terms/`、`/titanium-anode/`、`/titanium-anode/coating-systems/`、`/titanium-machining-parts/`、`/titanium-products/` 的可见 FAQ 接入
-  2. 先核对 `src/data/faqs-data.ts` 是否为唯一来源；是则复用，不是则各自传入
-  3. 答案逐字一致
-  4. build + qa:geo 成功，`pagesWithVisibleFaqButNoNode` 归零
-- **落点文件**：上述页面 + `src/data/faqs-data.ts`
+  1. `[x]` 6 个含可见 FAQ 的页面把**已有可见 FAQ 数据**通过 `BaseLayout` 的 `faq` prop 传入（每页 1 行）
+  2. `[x]` 复用既有唯一来源：`/faq/` 用 `src/data/faqs-data.ts`（`homeFAQs` / `titaniumFAQs` / `anodeFAQs`），
+     `/applications/` 用本页 `faqs` 数组，`/titanium-anode/` 用 `faqItems` + `faqItemsExtra`，
+     `/titanium-anode/coating-systems/` 用 `coatingHub.faq`，`/titanium-machining-parts/` 用本页 `faqList`，
+     `/` 把原 `faqTitles` 字符串数组改为 `faqs` 对象数组（**可见文案一字未改**）
+  3. `[x]` 答案逐字一致（`dist` 实测：6 页 `answerMismatch=0`、`questionMismatch=0`）
+  4. `[x]` build + qa:geo 成功，`pagesWithVisibleFaqButNoNode` **14 → 0**
+  5. `[x]` `geo-audit.mjs` 的 `visibleFaqBlocks` 只统计 `<main>` 内容区
+- **落点文件**：`src/pages/index.astro`、`src/pages/faq/index.astro`、`src/pages/applications/index.astro`、
+  `src/pages/titanium-anode/index.astro`、`src/pages/titanium-anode/coating-systems/index.astro`、
+  `src/pages/titanium-machining-parts.astro`、`scripts/seo/geo-audit.mjs`
 - **验收命令**：`npm run build` → `npm run qa:geo` → `npm run task:verify -- seo-geo-execution`
-- **期望计数变化**：`pagesWithVisibleFaqButNoNode` 37 → 0
-- **回滚方式**：`git checkout -- <本批实际改动文件>`
+- **期望计数变化**：`pagesWithVisibleFaqButNoNode` 14 → 0；`faqPages` 63 → ≥69
+- **回滚方式**：`git checkout -- src/pages/index.astro src/pages/faq/index.astro src/pages/applications/index.astro src/pages/titanium-anode/index.astro src/pages/titanium-anode/coating-systems/index.astro src/pages/titanium-machining-parts.astro scripts/seo/geo-audit.mjs`
 - **上一个任务**：EX-D2　**下一个任务**：EX-E1
 
 ## 5. 任务条目（P1：内容差异化与溯源）
@@ -572,6 +595,8 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 | 2026-11-21 | EX-A4 落点补 `src/components/grade/GradeHub.astro`，状态 `[ ]` → `[x]` | DoD 要求「10 个 grade 页」归零，第 10 页为 hub `/titanium-grades/`，其 3 张表由 GradeHub 渲染，只改 GradePage 仅覆盖 9 页 |
 | 2026-11-21 | EX-B1 状态 `[ ]` → `[x]`，落点补 3 个 `breadcrumb` 引用修正文件 | `BreadcrumbList` 加 `@id` 后，原指向 `${origin}/#breadcrumb` 的旧引用会失效，需同步修正 anode/MMO 两个渲染器及其生成脚本 |
 | 2026-11-21 | EX-D1 状态 `[ ]` → `[x]` | 16 个产品页（hub + 15 个单品页）接入 `BaseLayout` 的 `faq` prop，FAQPage 节点与页面可见 FAQ 同源 |
+| 2026-11-21 | EX-D2 状态 `[ ]` → `[x]`，落点去掉 `src/data/service-steps.ts` | 服务详情页 FAQ 由 `service-steps.ts` 既有字段**派生**渲染，数据文件无需改动；仅 `[slug]/index.astro` 与 `index.astro` 两处落点 |
+| 2026-11-21 | EX-D3 状态 `[ ]` → `[x]`，标题「其余 14 页」改为「站点页 6 个」，落点收敛为 6 个页面 + `scripts/seo/geo-audit.mjs` | 实测只有 6 个页面在 `<main>` 内有真实可见 FAQ；其余页面的 `visibleFaqBlocks` 全为 Header 移动菜单噪声。修正 `geo-audit.mjs` 的统计口径（只计 `<main>`）后计数才真实归零 |
 
 
 

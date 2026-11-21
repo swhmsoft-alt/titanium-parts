@@ -20,11 +20,23 @@ interface Props {
 const { step } = Astro.props;
 
 const others = serviceSteps.filter((s) => s.slug !== step.slug);
+
+/**
+ * The visible FAQ is derived from the step data already on the page, and the
+ * same array feeds the FAQPage node through the layout, so the structured
+ * answer is word-for-word the answer the reader sees.
+ */
+const faqs = [
+  { q: `What does ${step.title} cover?`, a: step.scope },
+  { q: `What is confirmed before ${step.title} is quoted?`, a: step.reviewBasis.join('; ') },
+  { q: `What outputs are typical for ${step.title}?`, a: step.outputs.join('; ') },
+];
 ---
 
 <BaseLayout
   title={step.title}
   description={step.description}
+  faq={faqs}
 >
   <PageHero eyebrow="Titanium Services" title={step.title} description={step.summary} />
 
@@ -56,6 +68,16 @@ const others = serviceSteps.filter((s) => s.slug !== step.slug);
               code compliance and final application approval stay with the buyer or
               system integrator unless they are expressly included in the quotation.
             </p>
+          </div>
+
+          <h2 class="svc-h2">Frequently Asked Questions</h2>
+          <div class="svc-faq">
+            {faqs.map((item) => (
+              <details class="svc-faq-item">
+                <summary>{item.q}</summary>
+                <p class="svc-faq-body">{item.a}</p>
+              </details>
+            ))}
           </div>
         </div>
 
@@ -128,6 +150,11 @@ const others = serviceSteps.filter((s) => s.slug !== step.slug);
   .svc-note { margin-top: 2.5rem; padding: 1.5rem; border-left: 3px solid var(--color-primary); background: var(--color-primary-50); border-radius: 0 0.5rem 0.5rem 0; }
   .svc-note h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-slate-900); margin: 0 0 0.5rem; }
   .svc-note p { margin: 0; font-size: 0.875rem; line-height: 1.7; color: var(--color-slate-600); }
+
+  .svc-faq { display: flex; flex-direction: column; gap: 0.75rem; }
+  .svc-faq-item { border: 1px solid var(--color-slate-200); border-radius: 0.75rem; background: #fff; padding: 1rem 1.25rem; }
+  .svc-faq-item summary { cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--color-slate-900); }
+  .svc-faq-body { margin: 0.75rem 0 0; font-size: 0.9375rem; line-height: 1.7; color: var(--color-slate-600); }
 
   .svc-side { display: flex; flex-direction: column; gap: 1.5rem; }
   .svc-card { padding: 1.75rem; background: #fff; border: 1px solid var(--color-slate-200); border-radius: 0.75rem; }

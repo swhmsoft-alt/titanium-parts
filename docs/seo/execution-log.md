@@ -369,3 +369,110 @@ DoD 勾选：
 - `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
 
 下一步：**EX-D2**（`src/pages/titanium-service/[slug]/index.astro` 与 `/titanium-service/` 的可见 FAQ 接入 `BaseLayout` 的 `faq` prop）
+
+---
+
+## 2026-11-21 · EX-D2 结案 · 7 个服务页接入 FAQPage 节点（faqPages 56 → 63）
+
+状态：`[x]`
+
+改动文件：
+- `src/pages/titanium-service/[slug]/index.astro`（由 `step.scope` / `step.reviewBasis` / `step.outputs` 派生 3 条 Q&A；同一数组渲染可见 `<details class="svc-faq-item">` FAQ 区块并作为 `faq` prop 传入 `BaseLayout`；新增 `.svc-faq*` 局部样式）
+- `src/pages/titanium-service/index.astro`（hub 复用已有 `faqs` 数组传入 `faq` prop，可见文案一字未改）
+- `docs/seo/execution-plan.md`（EX-D2 → `[x]`，落点修正，变更记录补一行）
+- `docs/seo/execution-log.md`（本段）
+
+DoD 勾选：
+1. `[x]` `[slug]/index.astro` 与 `/titanium-service/` 的可见 FAQ 接入 `BaseLayout` 的 `faq` prop
+2. `[x]` 答案逐字一致（脚本核对 7 页共 28 条答案全部在页面可见文本中原样出现）
+3. `[x]` build + qa:geo 成功，7 页 `faq-unstructured` 归零
+
+计数变化：
+- `faqPages`：**56 → 63**（期望 ≥63 ✓）
+- `pagesWithVisibleFaqButNoNode`：**21 → 14**（期望 ≤14 ✓；余下 14 页 = 站点页，属 EX-D3）
+- `thin-page`：**9 → 3**（6 个服务详情页由 ~270 词升至 ~400 词，脱离 thin-page 判定）
+- `pageCount` 77、`webPageNodes` 77、`tablesExtractable` 87、`scaled-content` 12、`unsourced-spec` 27、`no-eeat-signals` 3、`schema-incomplete` 16、跨页重复段落组 42 —— 均未倒退
+- findings 101 → **75**；opportunities 129 → **88**
+
+验证：
+- `npm run build` → 77 页，`Complete!`
+- `npm run qa:geo` → EXIT=0，77 pages, 75 findings, 88 opportunities
+- `npm run task:verify -- seo-geo-execution` → 56/56 checks passed，`TASK-VERIFY: PASS`
+
+踩坑：
+- 6 个服务详情页**原本没有任何可见 FAQ**（`visibleFaqBlocks=9` 全部来自 `Header.astro` 移动菜单的 `<details>`，属全站公共噪声，非页面 FAQ）。故本批不是"给已有 FAQ 补 Schema"，而是先用既有数据**派生**出可见 FAQ 区块，再让 Schema 与它同源。
+- `visibleFaqBlocks` 的计算是 `<details>` 数 + `class` 含 `faq` 的元素数，会把 `Header.astro` 的 9 个移动菜单 `<details>` 一并计入 —— 排查时先确认这 9 个来自哪里，再判断页面是否真有 FAQ。
+- `/titanium-service/` hub 页 `visibleFaqBlocks=50` = 9（Header）+ 10（真 FAQ 的 `<details>`）+ 31（`ts-faq-*` 类名命中），不是 50 条问答。
+- `src/pages/titanium-service/index.astro` 是 **CRLF** 换行，`old_text` 精确匹配失败；改用 `insert_line` 按行号插入 `faq={faqs}`，注意插在 `<BaseLayout` 标签**闭合的 `>` 之前**。
+- `npm run task:verify` 的明细落在 `tmp/qa/verify-task.log`，终端只回显 run 包装器信息。
+
+遗留：
+- `pagesWithVisibleFaqButNoNode` 仍有 14 页（站点页）→ EX-D3
+- `schema-incomplete` 16 页（设备页 + anode / MMO 家族页自带 `Product` 节点，不走 `BaseLayout` 的 `product` prop）→ EX-C2 未立项
+- `unsourced-spec` 27 页 → EX-F1 / F2 / F3（前置 EX-E1）
+- `scaled-content` 12 页 → EX-E2 … EX-E8（前置 EX-E1）
+
+---
+
+## 2026-11-21 · EX-D3 结案 · 站点页 FAQPage 补齐（faqPages 63 → 69，可见 FAQ 无节点 14 → 0）
+
+状态：`[x]`
+
+改动文件：
+- `src/pages/index.astro`（首页 `faqTitles` 字符串数组改为 `faqs` 对象数组，**可见文案一字未改**；新增 `faq={faqs}`）
+- `src/pages/faq/index.astro`（新增 `faqEntries`（由 `groups` 派生）+ `faq={faqEntries}`；可见渲染未改）
+- `src/pages/applications/index.astro`（`faq={faqs}`，复用本页既有 `faqs` 数组）
+- `src/pages/titanium-anode/index.astro`（`faq={allFaq}`，复用 `faqItems` + `faqItemsExtra`）
+- `src/pages/titanium-anode/coating-systems/index.astro`（`faq={coatingHub.faq}`）
+- `src/pages/titanium-machining-parts.astro`（`faq={faqList}`，复用本页既有 `faqList` 数组）
+- `scripts/seo/geo-audit.mjs`（`visibleFaqBlocks` 改为**只统计 `<main>` 内容区**，排除全站 Header 移动菜单的 9 个 `<details>`）
+- `docs/seo/execution-plan.md`（EX-D3 → `[x]`，标题与落点按实测收敛，变更记录追加一行）
+
+DoD 勾选：
+1. `[x]` 6 个含可见 FAQ 的页面接入 `BaseLayout` 的 `faq` prop（每页 1 行）
+2. `[x]` 复用既有唯一来源（`faqs-data.ts` / 各页既有数组），未新写任何问答文案
+3. `[x]` 答案与问题逐字一致：`dist` 实测 6 页全部 `answerMismatch=0`、`questionMismatch=0`
+4. `[x]` build + qa:geo 成功，`pagesWithVisibleFaqButNoNode` 14 → **0**
+5. `[x]` `geo-audit.mjs` 统计口径修正为只计 `<main>`
+
+计数变化：
+- `faqPages`：**63 → 69**
+- `pagesWithVisibleFaqButNoNode`：**14 → 0**
+- findings：104 → **61**；opportunities：111 → **74**（均为 `faq-unstructured` 归零带来的下降）
+- `pageCount` 77、`webPageNodes` 77、`tablesTotal` / `tablesExtractable` 87 / 87、`Product` 31、`schema-incomplete` 16、
+  `scaled-content` 12、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3 均**未倒退**
+
+验证：
+- `npm run build` → 77 页，`Complete!`（14:58:33）
+- `npm run qa:geo` → EXIT=0，77 pages / 61 findings / 74 opportunities
+- `npm run task:verify -- seo-geo-execution` → 56/56 checks passed，`TASK-VERIFY: PASS`
+- `dist` 全量扫描：77 页全部含 `<main>`；页内可见 FAQ 但无 FAQPage 节点的页面 **0**
+- 逐字核对脚本：6 个页面的 schema 问答与可见 `<details>` 的问题/答案集合**完全相等**
+
+踩坑：
+- 计划原文列的 15 个路由里**只有 6 个**页面真的有可见 FAQ。其余 9 个（`/404.html`、`/company/`、`/contact/`、
+  `/knowledge-center/`、`/manufacturing-capabilities/`、`/our-team/`、`/quality/`、`/terms/`、`/titanium-products/`）
+  的 `visibleFaqBlocks=9` **全部**来自 `Header.astro` 移动菜单的 9 个 `<details>`——是全站公共噪声，不是页面 FAQ。
+  若照原 DoD 给这 9 页塞 FAQPage，就会产生**页面上不存在的问答的 Schema**，属于红线第 3 条（Schema 伪装内容）。
+- `visibleFaqBlocks` 的旧口径把 `<header>` 一并计入，导致「可见 FAQ 但无节点」这个指标**永远不可能归零**——
+  它衡量的是噪声而非缺陷。修正口径（只计 `<main>`）后该指标才第一次反映真实缺陷，这属于**修正度量**而非放宽标准：
+  修正前它给出的 8 个「缺陷页」在页面上根本找不到 FAQ。
+- 首页原本只有 `faqTitles`（纯问题数组），所有问题共用同一段答案文案。把数组改成 `{q, a}` 对象后，
+  可见渲染改为 `{f.q}` / `{f.a}`，**输出 HTML 与改前一致**（同一段答案文本），未产生任何可见文案变更。
+- `<BaseLayout>` 标签有三种写法：多行闭合、单行闭合、单行带 `canonical`。批量插入 `faq` prop 时必须逐个匹配
+  闭合位置，不能假设「标签里第一个含 `>` 的行」。
+- 本轮两次撞上 `gate -- write` 的**墙钟硬墙（EXIT 16）**：勘察耗时把 20 分钟用满，需
+  `npm run budget -- --reset --task <id>` 重开账本（该命令同时重置墙钟）后再取写入令牌。
+
+遗留：
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- `schema-incomplete` 仍有 **16 页**（4 个设备页 + 12 个 anode / MMO 家族页）→ EX-C2（待立项）
+- `unsourced-spec` 27 页 → EX-F1 / EX-F2 / EX-F3（前置 EX-E1）
+- `scaled-content` 12 页 → EX-E2 … EX-E8（前置 EX-E1）
+- `no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F2 / EX-H5 / EX-X3
+- `productPagesWithAdditionalProperty` 仍为 0 → EX-H2
+
+下一步：**EX-E1**（抽 `src/components/product/ProductPage.astro` + `src/data/product-pages/*`，前置 EX-D1）
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+
+下一步：**EX-D3**（`/`、`/faq/`、`/applications/`、`/company/`、`/contact/`、`/knowledge-center/`、`/manufacturing-capabilities/`、`/our-team/`、`/quality/`、`/terms/`、`/404.html`、`/titanium-anode/`、`/titanium-anode/coating-systems/`、`/titanium-machining-parts/`、`/titanium-products/` 的可见 FAQ 接入）

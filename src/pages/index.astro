@@ -57,13 +57,26 @@ const scenarios = [
   { title: 'Marine Retrofit Supplier', desc: 'Interface Matching — A marine replacement package can be reviewed from existing drawings, measured dimensions, cable and connection details, installation limits and required project documents.' },
   { title: 'Precision Manufacturing Buyer', desc: 'Drawing-Controlled Supply — A drawing-based titanium part can be reviewed by grade, revision, dimensions, tolerances, process route, inspection points and repeat-supply requirements.' },
 ];
-const faqTitles = ['What information is needed before Titanium Parts recommends a product?', 'How is the supply boundary defined?', 'Which inspection and quality documents may be available?', 'Can Titanium Parts manufacture from controlled drawings?', 'Can Titanium Parts match an installed or replacement component?', 'Can third-party inspection or FAT be included?', 'What remains the responsibility of the buyer or system integrator?', 'What should be included in the first RFQ?'];
+// The visible FAQ and the FAQPage node are built from this one array, so the
+// structured answer is word-for-word the answer a reader sees.
+const faqAnswer = 'Send the project or application, available drawings or measurements, operating conditions, quantity, destination, required documents and expected schedule. A complete specification is not required for the first review; unknown items can be identified during technical communication.';
+const faqs = [
+  { q: 'What information is needed before Titanium Parts recommends a product?', a: faqAnswer },
+  { q: 'How is the supply boundary defined?', a: faqAnswer },
+  { q: 'Which inspection and quality documents may be available?', a: faqAnswer },
+  { q: 'Can Titanium Parts manufacture from controlled drawings?', a: faqAnswer },
+  { q: 'Can Titanium Parts match an installed or replacement component?', a: faqAnswer },
+  { q: 'Can third-party inspection or FAT be included?', a: faqAnswer },
+  { q: 'What remains the responsibility of the buyer or system integrator?', a: faqAnswer },
+  { q: 'What should be included in the first RFQ?', a: faqAnswer },
+];
 
 const meta = pageMeta['home'];
 ---
 <BaseLayout
     title={meta.title}
     description={meta.description}
+    faq={faqs}
   >
   <section class="hero">
     <div class="hero-bg"><img src="/images/hero-bg.webp" alt="Titanium Parts engineer" class="hero-bg-img" /><div class="hero-bg-overlay"></div></div>
@@ -96,7 +109,7 @@ const meta = pageMeta['home'];
 
   <section class="section section-dark"><div class="container"><div class="section-header-light"><h2 class="section-title-light">Selected Engineering Support Scenarios</h2><p class="section-desc-light">Examples of how available project data can be reviewed and converted into a controlled supply scope. Final suitability and evidence remain subject to the confirmed order.</p></div><div class="scenarios-grid">{scenarios.map((s) => <div class="scenario-card"><h3 class="scenario-title">{s.title}</h3><p class="scenario-desc">{s.desc}</p></div>)}</div></div></section>
 
-  <section class="section section-slate-50"><div class="container"><div class="section-header"><h2 class="section-title">Questions Before Product Selection and Quotation</h2><p class="section-desc">Define the application, supply boundary, evidence and responsibilities needed for a useful technical review and comparable quotation.</p></div><div class="faq-list">{faqTitles.map((q) => <details class="faq-item"><summary class="faq-question">{q}</summary><div class="faq-answer"><p>Send the project or application, available drawings or measurements, operating conditions, quantity, destination, required documents and expected schedule. A complete specification is not required for the first review; unknown items can be identified during technical communication.</p></div></details>)}</div></div></section>
+  <section class="section section-slate-50"><div class="container"><div class="section-header"><h2 class="section-title">Questions Before Product Selection and Quotation</h2><p class="section-desc">Define the application, supply boundary, evidence and responsibilities needed for a useful technical review and comparable quotation.</p></div><div class="faq-list">{faqs.map((f) => <details class="faq-item"><summary class="faq-question">{f.q}</summary><div class="faq-answer"><p>{f.a}</p></div></details>)}</div></div></section>
 
   <section class="section section-dark" id="rfq"><div class="container"><div class="rfq-grid"><div class="rfq-info"><h2 class="rfq-title">Send the Project Data You Have</h2><p class="rfq-desc">A complete specification is not required for the first review. Share the product or application, available drawings, operating conditions, quantity and documentation requirements. Unknown items can be identified during technical review.</p><ul class="rfq-benefits"><li><span class="rfq-benefit-icon"><Icon name="check-circle" size={16} /></span> Application and Drawing Review</li><li><span class="rfq-benefit-icon"><Icon name="clock" size={16} /></span> Product-Specific Documentation Scope</li><li><span class="rfq-benefit-icon"><Icon name="refresh-cw" size={16} /></span> Response on China Business Days</li></ul><p class="rfq-prefer">Prefer email? <a href="mailto:sales@titanium-parts.com">sales@titanium-parts.com</a></p></div><RFQForm title="Request a Quote" submitLabel="Send Inquiry" variant="default" /></div></div></section>
 </BaseLayout>

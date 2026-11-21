@@ -237,8 +237,15 @@ function analysePage(file) {
   const faqNode = nodes.find((n) => n['@type'] === 'FAQPage') || null;
   const faqCount = faqNode && Array.isArray(faqNode.mainEntity) ? faqNode.mainEntity.length : 0;
   // FAQ that a reader can see but that is not declared as structured data.
-  const visibleFaqBlocks = (html.match(/<details\b/gi) || []).length +
-    (html.match(/class="[^"]*\bfaq\b[^"]*"/gi) || []).length;
+  // Only the main content counts: the site header renders its mobile menu with
+  // <details> elements, and those are navigation, not a page FAQ.
+  const mainStart = html.indexOf('<main');
+  const mainEnd = html.lastIndexOf('</main>');
+  const content = mainStart >= 0 && mainEnd > mainStart
+    ? html.slice(mainStart, mainEnd)
+    : html;
+  const visibleFaqBlocks = (content.match(/<details\b/gi) || []).length +
+    (content.match(/class="[^"]*\bfaq\b[^"]*"/gi) || []).length;
 
   const tables = (html.match(/<table\b[\s\S]*?<\/table>/gi) || []).map((table) => {
     const rows = (table.match(/<tr\b/gi) || []).length;
