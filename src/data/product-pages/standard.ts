@@ -78,6 +78,7 @@ export type ExtraBlock =
   | { kind: 'boundary'; tone?: 'plain' | 'alt'; eyebrow: string; heading: string; lede: string; links: BoundaryLink[] }
   | { kind: 'cutPrep'; tone?: 'plain' | 'alt'; eyebrow: string; heading: string; lede: string; items: string[]; note: string; img: string; alt: string }
   | { kind: 'specTable'; tone?: 'plain' | 'alt'; eyebrow: string; heading: string; caption: string; columns: string[]; rows: string[][]; footnote?: string }
+  | { kind: 'detailSections'; tone?: 'plain' | 'alt'; eyebrow: string; heading: string; lede: string; groups: { title: string; items: { title: string; body: string }[] }[] }
   | { kind: 'engineeringInputs'; tone?: 'plain' | 'alt'; eyebrow: string; heading: string; lede: string; items: { title: string; body: string }[] };
 
 export interface StandardRaw {

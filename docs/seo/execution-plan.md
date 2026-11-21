@@ -87,7 +87,7 @@ npm run gate -- audit
 | EX-D2 | FAQPage 批 2（服务页 7 页） | `[x]` | `src/pages/titanium-service/[slug]/index.astro`、`src/pages/titanium-service/index.astro` | C1 | AI |
 | EX-D3 | FAQPage 批 3（站点页 6 个） | `[x]` | `src/pages/{index,faq/index,applications/index,titanium-anode/index,titanium-anode/coating-systems/index,titanium-machining-parts}.astro` + `scripts/seo/geo-audit.mjs` | C1 | AI |
 | EX-E1 | 抽 ProductPage 组件（产品页） | `[x]` | 新 `src/components/product/ProductPage.astro` + `src/data/product-pages/*` | D1 | AI |
-| EX-E2 | 差异化金丝雀（titanium-plate） | `[ ]` | `src/pages/titanium-products/titanium-plate.astro` | E1 | AI + **人工读** |
+| EX-E2 | 差异化金丝雀（titanium-plate） | `[x]` | `src/pages/titanium-products/titanium-plate.astro` + `src/data/product-pages/titanium-plate.ts` + `src/data/product-pages/standard.ts` + `src/components/product/ProductExtras.astro` | E1 | AI + **人工读** |
 | EX-E3 | 差异化批 1（bolts, forgings） | `[ ]` | `src/pages/titanium-products/*` | E2 | AI + **人工抽检** |
 | EX-E4 | 差异化批 2（diaphragm, foil-2） | `[ ]` | `src/pages/titanium-products/*` | E2 | AI + **人工抽检** |
 | EX-E5 | 差异化批 3（fittings, flanges） | `[ ]` | `src/pages/titanium-products/*` | E2 | AI + **人工抽检** |
@@ -338,17 +338,22 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-E2　差异化金丝雀（titanium-plate）
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 完成：titanium-plate 的通用壳文案改写为轧制/板材专有表述，新增「Four Points That Are Decided Differently for Flat Titanium」四类专有内容小节 + 「How Plate Differs from the Adjacent Forms」对比表）
+- **本轮实测（2026-11-21）**：
+  - **期望计数变化的实测修正**：原文写「`scaled-content` 12 → 11」，实测**不成立**——`titanium-plate` 在改动前就不在 `scaled-content` 的 12 页名单里（改前 `topSimilar` 0.21、无 `scaled-content` 标记），因此该页的判定只会是「保持无标记」。本轮实测 `scaled-content` 仍为 **12**（成员未变：balls / baskets / bolts / clad-copper / coil / diaphragm / fittings / flanges / foil-2 / forgings / mesh / wire）。
+  - **本页 `topSimilar`**：0.21（peer `/titanium-products/titanium-bolts/`）→ **0.089**，远低于 `CLONE_THRESHOLD` 0.55，页面继续无 `scaled-content` 标记。
+  - **本页词数**：约 1600 → **1997**；新增对比表 1 张（`tablesTotal` 87 → **88**，`tablesExtractable` 88，全部可抽取）。
+  - **其余计数未倒退**：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3。
 - **DoD**：
-  1. 把该页共用壳文案（orderBasis 4 卡 / processSteps 5 步 / evidence / controls）**每组压到 ≤3 句**
-  2. 腾出的篇幅换成本页专有内容：**工艺路线**、**失效模式**、**检测项差异**、**供货形态**四类，缺一不可
-  3. 新增「与相邻形态的差别」小节 + 一张 2–4 列对比表
-  4. **红线**：不为降相似度而改写通用句式；不引入未经验证的数值
-  5. build + qa:geo 成功，该页 `topSimilar` 下降
-- **落点文件**：`src/pages/titanium-products/titanium-plate.astro`（或 `src/data/product-pages/` 中对应条目）
+  1. `[x]` 共用壳文案（orderBasis 4 卡 / processSteps 5 步 / evidence / controls）改写为板材专有表述并压缩到每组 ≤3 句
+  2. `[x]` 新增四类专有内容：**工艺路线** / **失效模式** / **检测项差异** / **供货形态**（`detailSections` 区块，4 组 × 3 条）
+  3. `[x]` 新增「与相邻形态的差别」小节 + 1 张 4 列对比表（`specTable`：Plate / Sheet / Cut blanks）
+  4. `[x]` **红线**：未为降分改写通用句式（改写后仍是完整技术陈述），未引入未经验证的数值（无新增具体参数）
+  5. `[x]` build + qa:geo 成功，该页 `topSimilar` 下降（0.21 → 0.089）
+- **落点文件**：`src/data/product-pages/titanium-plate.ts`（数据）、`src/data/product-pages/standard.ts`（新增 `detailSections` 区块类型）、`src/components/product/ProductExtras.astro`（新增 `detailSections` 渲染与样式）；页面壳 `src/pages/titanium-products/titanium-plate.astro` 未改
 - **验收命令**：`npm run build` → `npm run qa:geo` → `npm run task:verify -- seo-geo-execution`
-- **期望计数变化**：`scaled-content` 12 → 11；该页 `topSimilar` < 0.55
-- **回滚方式**：`git checkout -- src/pages/titanium-products/titanium-plate.astro`
+- **期望计数变化**：**实测修正**——`scaled-content` 保持 **12**（`titanium-plate` 本就不在名单内）；本页 `topSimilar` 0.21 → 0.089；`tablesTotal` / `tablesExtractable` 87 → 88
+- **回滚方式**：`git checkout -- src/data/product-pages/titanium-plate.ts src/data/product-pages/standard.ts src/components/product/ProductExtras.astro`
 - **人工确认**：**必须人工通读一遍**该页成品，确认没有"为降分而删实质内容"
 - **上一个任务**：EX-E1　**下一个任务**：EX-E3
 
@@ -597,6 +602,7 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 | 2026-11-21 | EX-D1 状态 `[ ]` → `[x]` | 16 个产品页（hub + 15 个单品页）接入 `BaseLayout` 的 `faq` prop，FAQPage 节点与页面可见 FAQ 同源 |
 | 2026-11-21 | EX-D2 状态 `[ ]` → `[x]`，落点去掉 `src/data/service-steps.ts` | 服务详情页 FAQ 由 `service-steps.ts` 既有字段**派生**渲染，数据文件无需改动；仅 `[slug]/index.astro` 与 `index.astro` 两处落点 |
 | 2026-11-21 | EX-D3 状态 `[ ]` → `[x]`，标题「其余 14 页」改为「站点页 6 个」，落点收敛为 6 个页面 + `scripts/seo/geo-audit.mjs` | 实测只有 6 个页面在 `<main>` 内有真实可见 FAQ；其余页面的 `visibleFaqBlocks` 全为 Header 移动菜单噪声。修正 `geo-audit.mjs` 的统计口径（只计 `<main>`）后计数才真实归零 |
+| 2026-11-21 | EX-E2 状态 `[ ]` → `[x]`，落点补 `src/data/product-pages/titanium-plate.ts`、`standard.ts`、`src/components/product/ProductExtras.astro` | 本轮内容落在数据层与共享区块渲染器（新增 `detailSections` 区块类型），页面壳 `titanium-plate.astro` 未改；同时把 EX-E2 的「期望计数变化」按实测修正（见条目） |
 
 
 

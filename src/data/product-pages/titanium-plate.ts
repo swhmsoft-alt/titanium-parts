@@ -19,19 +19,19 @@ const raw: StandardRaw = {
   orderBasis: [
     {
       title: "Material",
-      body: "Grade, UNS, specification and revision, condition and supplementary requirements."
+      body: "Grade, UNS, governing specification and revision, rolled or annealed condition, thickness range and supplementary requirements."
     },
     {
       title: "Geometry",
-      body: "Thickness, width, length, quantity, flatness, tolerance and machining allowance."
+      body: "Thickness, width, length, quantity, flatness class, thickness tolerance, edge condition and machining allowance."
     },
     {
       title: "Processing",
-      body: "Full-size material or blanks, cut route, edge condition, surface and downstream fabrication."
+      body: "Hot-rolled and cold-rolled plate route, cut-to-size or full-size supply, surface class, protective handling and the downstream fabrication step."
     },
     {
       title: "Evidence",
-      body: "MTC, traceability, inspection, testing, marking, packing and release documents."
+      body: "MTC tied to the heat or lot, dimensional report, inspection and NDT scope, marking, packing and release documents."
     }
   ],
   grades: [
@@ -89,33 +89,33 @@ const raw: StandardRaw = {
   processSteps: [
     {
       img: "/images/titanium-products/titanium-slab-preparation-scaled.webp",
-      alt: "Requirement Review for titanium flat products",
-      title: "Requirement Review",
-      body: "Grade, specification revision, condition, dimensions, quantity and document scope are aligned before supply."
+      alt: "Requirement review for titanium plate and sheet",
+      title: "Order Basis Review",
+      body: "Specification revision, grade, thickness range, delivery condition, flatness class and inspection scope are fixed before any plate is scheduled. Only the dimensions and acceptance criteria confirmed in the quotation enter production."
     },
     {
       img: "/images/titanium-products/rolling-precision.webp",
-      alt: "Material and Route Confirmation for titanium flat products",
-      title: "Material and Route Confirmation",
-      body: "The source material, preparation and processing route are confirmed against the accepted quotation."
+      alt: "Hot rolling of titanium plate",
+      title: "Hot Rolling to Size",
+      body: "Slab preparation and hot rolling bring the plate close to the ordered thickness. Hot rolling is carried out in our own facility, and the rolling record stays with the lot documentation."
     },
     {
       img: "/images/titanium-products/thermal-surface-integrity.webp",
-      alt: "Cutting and Surface Control for titanium flat products",
-      title: "Cutting and Surface Control",
-      body: "Cut method, allowance, edge condition and surface requirements are controlled to the agreed scope."
+      alt: "Cold rolling and delivery condition of titanium plate",
+      title: "Cold Rolling and Condition",
+      body: "Cold rolling and the selected delivery condition — annealed, cold rolled or as-rolled — determine the mechanical property and surface result. Condition and surface class follow the order rather than a default."
+    },
+    {
+      img: "/images/titanium-products/precision-processing-cutting.webp",
+      alt: "Cut-to-size preparation of titanium plate",
+      title: "Cut-to-Size and Edge Preparation",
+      body: "Plate is cut to the ordered width and length, or supplied as full-size material. Edge condition, cut tolerance and the machining allowance left for the customer are stated on the order."
     },
     {
       img: "/images/titanium-products/inspection-documentation.webp",
-      alt: "Inspection and Records for titanium flat products",
-      title: "Inspection and Records",
-      body: "Order-specific dimensional, surface, material or third-party checks are completed as agreed."
-    },
-    {
-      img: "/images/titanium-products/final-dimension-packaging.webp",
-      alt: "Marking, Packing and Release for titanium flat products",
-      title: "Marking, Packing and Release",
-      body: "Identification, document set, protective packing and delivery basis are checked before release."
+      alt: "Inspection of titanium plate and sheet",
+      title: "Inspection and Release",
+      body: "Thickness, width, length, flatness, surface condition and edge condition are inspected against the ordered scope. The dimensional record, MTC and any agreed NDT result are released with the shipment."
     }
   ],
   mfgVideo: {
@@ -154,45 +154,45 @@ const raw: StandardRaw = {
   ],
   evidence: [
     {
-      title: "Material identity",
-      body: "Grade, heat or lot reference, product form and certificate link.",
+      title: "Rolling and heat traceability",
+      body: "Melting route, heat or lot number and the rolling record that ties the plate back to the certificate.",
       icon: "tag"
     },
     {
-      title: "Dimensional evidence",
-      body: "Characteristics, method, sampling, tolerance and report format.",
+      title: "Thickness and flatness record",
+      body: "Measured thickness, width, length and flatness against the tolerance stated on the order, with the measuring method named.",
       icon: "ruler"
     },
     {
-      title: "Additional testing",
-      body: "Only tests and acceptance criteria stated in the agreed scope.",
+      title: "Surface and edge condition",
+      body: "Surface class, pickling or as-rolled finish, edge condition and the protection applied before packing.",
       icon: "flask"
     },
     {
-      title: "Document release",
-      body: "Required index, language, approval route and delivery timing.",
+      title: "Inspection and release documents",
+      body: "Only the dimensional report, NDT result, third-party involvement and release documents named in the agreed scope.",
       icon: "file-text"
     }
   ],
   controls: [
     {
-      title: "Material Identity",
-      body: "Grade, form, specification revision, condition and heat or lot basis.",
+      title: "Delivery condition",
+      body: "Annealed, cold rolled or as-rolled, with the surface class that goes with it.",
       icon: "shield"
     },
     {
-      title: "Dimensions & Processing",
-      body: "Size, tolerance, surface, allowance, cut route and responsibility.",
+      title: "Dimensional scope",
+      body: "Thickness range, width and length, flatness class, thickness tolerance and machining allowance.",
       icon: "settings"
     },
     {
-      title: "Evidence & Acceptance",
-      body: "Certificates, inspection, tests, hold points and acceptance criteria.",
+      title: "Cut and edge scope",
+      body: "Full-size or cut-to-size supply, cut tolerance, edge condition and the downstream fabrication step.",
       icon: "badge-check"
     },
     {
-      title: "Commercial & Delivery",
-      body: "Quantity basis, exclusions, packing, Incoterm and schedule assumptions.",
+      title: "Commercial basis",
+      body: "Quantity, exclusions, packing method, protective handling, Incoterm and schedule assumptions.",
       icon: "truck"
     }
   ],
@@ -235,6 +235,25 @@ const raw: StandardRaw = {
     }
   },
   copy: {
+    orderBasis: {
+      eyebrow: "Plate Order Basis",
+      heading: "State the Plate Order Basis Before Comparing Price"
+    },
+    catalog: {
+      lede: "Grades and forms below are reviewed for titanium plate and sheet against ASTM / ASME / project specifications. Availability is confirmed per order."
+    },
+    evidence: {
+      heading: "Specify the Plate Release Package",
+      lede: "A plate certificate does not describe thickness, flatness, surface or edge condition. The release package for flat product states which of those are measured, which are witnessed and which documents travel with the shipment."
+    },
+    controls: {
+      heading: "Confirm Four Points Before Ordering Plate",
+      lede: "Delivery condition, dimensional scope, cut scope and commercial basis. Each one changes the price more than the grade name does, and each one is written down before production starts."
+    },
+    applications: {
+      eyebrow: "Service Context",
+      lede: "Flat titanium is chosen against the media, the temperature and the downstream fabrication step. Grade, condition and inspection scope follow from that service context, not from the section name."
+    },
     process: {
       lede: "Plate and sheet are hot and cold rolled in our own facility. Cutting, surface preparation, inspection scope and documentation are confirmed by quotation against the approved order basis."
     },
@@ -342,6 +361,118 @@ raw.extras = [
       "Surface and protective handling"
     ],
     img: "/images/titanium-products/precision-processing-cutting.webp"
+  },
+  {
+    kind: "detailSections",
+    tone: "alt",
+    eyebrow: "Plate & Sheet Specifics",
+    heading: "Four Points That Are Decided Differently for Flat Titanium",
+    lede: "Plate and sheet share the rolling route but not the failure modes, the inspection set or the supply form. Each of the four points below is stated on the order basis rather than assumed from the product name.",
+    groups: [
+      {
+        title: "Process Route",
+        items: [
+          {
+            title: "Rolling, then finishing",
+            body: "Slab preparation, hot rolling and cold rolling bring the material to the ordered thickness; the delivery condition — annealed, cold rolled or as-rolled — is selected together with the surface class it produces."
+          },
+          {
+            title: "Flatness and residual stress",
+            body: "Flatness class and residual stress level decide whether a plate can be formed, machined or used as a vessel shell without further correction."
+          },
+          {
+            title: "Cut versus full size",
+            body: "Full-size plate, cut-to-size plate and cut blanks are three different order bases: cut scope, cut tolerance and the machining allowance left for the customer change with each."
+          }
+        ]
+      },
+      {
+        title: "Failure Modes",
+        items: [
+          {
+            title: "Hydrogen and stress",
+            body: "Hydrogen pickup and tensile stress are the classic flat-product failure pair. The material condition, the pickling or annealing route and the residual stress level belong in the order basis."
+          },
+          {
+            title: "Lamination and delamination",
+            body: "Rolling defects such as lamination and delamination are invisible on the surface, which is why the NDT scope and its acceptance criteria have to be named with the material."
+          },
+          {
+            title: "Crevice and galvanic attack",
+            body: "In chloride service, crevice conditions and galvanic coupling to dissimilar metals affect grade selection and joint design, so the media and the joint arrangement are quoted with the material."
+          }
+        ]
+      },
+      {
+        title: "Inspection Differences",
+        items: [
+          {
+            title: "Thickness and flatness record",
+            body: "Thickness, width, length and flatness are measured against the tolerance stated on the order, and the measuring method is named so the record can be compared with the incoming specification."
+          },
+          {
+            title: "Surface and edge condition",
+            body: "Surface class, mill or pickled finish, edge condition and the protective handling applied before packing are inspected separately from the material certificate."
+          },
+          {
+            title: "Volumetric inspection",
+            body: "Ultrasonic testing and other volumetric methods are quoted only where the specification or the service condition calls for them, together with the acceptance class and the third-party involvement."
+          }
+        ]
+      },
+      {
+        title: "Supply Form",
+        items: [
+          {
+            title: "Mill form",
+            body: "Mill plate and sheet are supplied in the sizes the rolling route produces, with the protective film and packing needed for handling and storage."
+          },
+          {
+            title: "Cut-to-size",
+            body: "Cut-to-size plate is supplied against the ordered width and length, with the cut tolerance and edge condition defined on the order."
+          },
+          {
+            title: "Blanks and machined parts",
+            body: "Blanks, rings and machined parts are reviewed as a separate scope with their own drawing, datum scheme, allowance and inspection record."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    kind: "specTable",
+    tone: "plain",
+    eyebrow: "Form Boundaries",
+    heading: "How Plate Differs from the Adjacent Forms",
+    caption: "Plate, sheet and cut blanks compared on the points that actually change between them.",
+    columns: ["Comparison point", "Plate", "Sheet", "Cut blanks"],
+    rows: [
+      [
+        "Where it is used",
+        "Heavier flat section for machining, vessels and fabricated equipment",
+        "Thinner flat section for forming, panels and cladding",
+        "Geometry defined by the customer drawing rather than by the mill"
+      ],
+      [
+        "Dimensional emphasis",
+        "Thickness, width, length and flatness class",
+        "Thickness and width, with forming allowance in mind",
+        "Blank outline, cut tolerance, datum and machining allowance"
+      ],
+      [
+        "Inspection emphasis",
+        "Thickness and flatness record plus the agreed NDT scope",
+        "Thickness and surface condition, with forming trials where relevant",
+        "Cut geometry, edge condition and the dimensional report for each blank"
+      ],
+      [
+        "Supply form",
+        "Mill plate or cut-to-size plate",
+        "Mill sheet or cut sheet",
+        "Blanks supplied ready for the customer's machining step"
+      ]
+    ],
+    footnote: "The thickness boundary between plate, sheet and foil follows the governing specification and market practice, so state the exact thickness, grade, condition and specification in the inquiry rather than relying on the product name."
   }
 ];
 

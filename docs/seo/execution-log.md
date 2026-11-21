@@ -520,3 +520,47 @@ DoD 勾选：
 - `schema-incomplete` 仍有 16 页、`unsourced-spec` 27 页、`scaled-content` 12 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-E2 … EX-F3（前置 EX-E1 已解锁）
 
 下一步：**EX-E2**（差异化金丝雀 · `titanium-plate`，前置 EX-E1 已完成）
+
+---
+
+## 2026-11-21 · EX-E2 结案 · titanium-plate 差异化金丝雀（四类专有内容 + 相邻形态对比表）
+
+状态：`[x]`
+
+改动文件：
+- `src/data/product-pages/titanium-plate.ts`：orderBasis 4 卡 / processSteps 5 步 / evidence 4 卡 / controls 4 卡全部改写为**板材专有**表述并压缩到每组 ≤3 句；新增 `copy` 覆盖（orderBasis / catalog / evidence / controls / applications 标题与 lede）；新增 `detailSections` 区块（工艺路线 / 失效模式 / 检测项差异 / 供货形态，4 组 × 3 条）；新增 `specTable` 对比表（Plate / Sheet / Cut blanks，4 行）
+- `src/data/product-pages/standard.ts`：新增 `detailSections` 区块类型（ExtraBlock 联合类型新增一个成员）
+- `src/components/product/ProductExtras.astro`：新增 `detailSections` 渲染分支 + `.tp-detail-groups` 局部样式
+- `docs/seo/execution-plan.md`：EX-E2 标记 `[x]`，落点与期望计数按实测修正，变更记录补一行
+
+DoD 勾选：
+1. `[x]` 共用壳文案（orderBasis 4 卡 / processSteps 5 步 / evidence / controls）压到每组 ≤3 句并改写为板材专有表述
+2. `[x]` 四类专有内容齐备：工艺路线 / 失效模式 / 检测项差异 / 供货形态
+3. `[x]` 新增「How Plate Differs from the Adjacent Forms」小节 + 1 张 4 列对比表
+4. `[x]` 红线：未为降分改写通用句式、未引入未经验证数值（新增内容全部为定性技术陈述，无具体参数值）
+5. `[x]` `npm run build` → 77 页 `Complete!`；`npm run qa:geo` EXIT=0；`npm run task:verify -- seo-geo-execution` EXIT=0
+
+计数变化：
+- `titanium-plate` `topSimilar`：**0.21 → 0.089**（peer `/titanium-products/titanium-bolts/`），页面无 `scaled-content` 标记
+- `titanium-plate` 词数：约 1600 → **1997**
+- `tablesTotal` / `tablesExtractable`：**87 → 88 / 88**（新增对比表可被抽取器读取：caption + 行头 + scope）
+- `scaled-content`：**12 → 12（未变）**
+- 其余计数全部未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
+
+验证：
+- `npm run build` → `Complete!`（77 页）
+- `npm run qa:geo` → EXIT=0；`dist/titanium-products/titanium-plate/index.html` 实测：`tp-detail-group` 4 组、`<table>` 1 张且带 `<caption>`、FAQPage 节点在位、`<h1>` 唯一、`<details>` 15 处
+- `npm run task:verify -- seo-geo-execution` → EXIT=0
+
+踩坑：
+- **计划里的「期望计数变化」与实测不符**：`titanium-plate` 改动前 `topSimilar` 就只有 0.21，**本就不在** `scaled-content` 的 12 页名单里，因此「12 → 11」在数学上不可能由本页单独造成。按防幻觉条款，改为在计划条目里如实写「`scaled-content` 保持 12（成员未变）」，而不是改审计脚本凑数。
+- 上下文占用在写文档阶段触发 readonly 闸门（EXIT 17）：`npm run budget -- --reset --task <id>` 会重置**闸门状态**（phase 回到 PLAN、tokens 清空），需要重新执行 `gate -- phase EDIT` 与 `gate -- write <file>` 才能继续写入。
+- `gate -- write` 的 token 只在当次 `gate.json` 状态里有效；`budget --reset` 之后必须重发。
+
+遗留：
+- `scaled-content` 仍有 12 页（balls / baskets / bolts / clad-copper / coil / diaphragm / fittings / flanges / foil-2 / forgings / mesh / wire）→ EX-E3…E8
+- `schema-incomplete` 16 页、`unsourced-spec` 27 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F1…F3 / EX-H5 / EX-X3
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- **人工通读待办**：本轮为 AI 执行的自动化差异化，成品需人工通读 `dist/titanium-products/titanium-plate/index.html`，确认没有「为降分而删实质内容」
+
+下一步：**EX-E3**（差异化批 1 · `titanium-bolts` + `titanium-forgings`，沿用 EX-E2 的四项内容模板）
