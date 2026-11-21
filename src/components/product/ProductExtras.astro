@@ -1,0 +1,135 @@
+---
+/**
+ * The page-specific blocks of a titanium product page.
+ *
+ * A product page may add its own sections to the shared skeleton:
+ * - `boundary`        : a scope statement with links to the neighbouring range
+ * - `cutPrep`         : the cutting and preparation options of the product
+ * - `specTable`       : a specification mapping table
+ * - `engineeringInputs`: the inputs a designer has to define
+ *
+ * The wording and the content live in `src/data/product-pages/<slug>.ts`.
+ */
+import Icon from '../Icon.astro';
+import type { ExtraBlock } from '../../data/product-pages/standard';
+
+interface Props {
+  extras: ExtraBlock[];
+}
+
+const { extras } = Astro.props;
+---
+
+{extras.map((x) => (
+  <Fragment>
+    {x.kind === 'boundary' && (
+      <section class="tp-section tp-blue-bg">
+        <div class="tp-inner">
+          <p class="tp-eyebrow">{x.eyebrow}</p>
+          <h2 class="tp-h2">{x.heading}</h2>
+          <p class="tp-lede">{x.lede}</p>
+          <div class="tp-boundary-links">
+            {x.links.map((l) => (
+              <a href={l.href} class={l.primary ? 'btn btn-primary' : 'tp-boundary-link'}>{l.label}</a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+    {x.kind === 'cutPrep' && (
+      <section class="tp-section">
+        <div class="tp-inner tp-cutprep-grid">
+          <div>
+            <p class="tp-eyebrow">{x.eyebrow}</p>
+            <h2 class="tp-h2">{x.heading}</h2>
+            <p class="tp-lede">{x.lede}</p>
+            <ul class="tp-cutprep-list">
+              {x.items.map((item) => (
+                <li><Icon name="check" size={20} className="tp-icon-blue" /> {item}</li>
+              ))}
+            </ul>
+            <p class="tp-cutprep-note" set:html={x.note}></p>
+          </div>
+          <div class="tp-cutprep-img">
+            <img src={x.img} alt={x.alt} loading="lazy" />
+          </div>
+        </div>
+      </section>
+    )}
+    {x.kind === 'specTable' && (
+      <section class="tp-section tp-alt">
+        <div class="tp-inner">
+          <p class="tp-eyebrow">{x.eyebrow}</p>
+          <h2 class="tp-h2">{x.heading}</h2>
+          <div class="tp-spec-table-wrap">
+            <table class="tp-spec-table">
+              <caption class="tp-spec-caption">{x.caption}</caption>
+              <thead>
+                <tr>
+                  {x.columns.map((c) => <th scope="col">{c}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {x.rows.map((row) => (
+                  <tr>
+                    <th scope="row" class="tp-spec-rowhead"><strong>{row[0]}</strong></th>
+                    {row.slice(1).map((cell) => <td>{cell}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {x.footnote && <p class="tp-lede tp-spec-footnote">{x.footnote}</p>}
+        </div>
+      </section>
+    )}
+    {x.kind === 'engineeringInputs' && (
+      <section class="tp-section">
+        <div class="tp-inner">
+          <p class="tp-eyebrow">{x.eyebrow}</p>
+          <h2 class="tp-h2">{x.heading}</h2>
+          <p class="tp-lede">{x.lede}</p>
+          <div class="tp-grid-4">
+            {x.items.map((c) => (
+              <article class="tp-card">
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </Fragment>
+))}
+
+<style>
+  .tp-boundary-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+  .tp-boundary-link { font-weight: 700; color: #2563eb; text-decoration: none; }
+  .tp-boundary-link:hover { text-decoration: underline; }
+
+  .tp-cutprep-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 2.5rem; align-items: center; }
+  @media (max-width: 1024px) { .tp-cutprep-grid { grid-template-columns: 1fr; } }
+  .tp-cutprep-list { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .tp-cutprep-list li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.9375rem; color: #334155; line-height: 1.5; }
+  .tp-cutprep-list :global(svg) { margin-top: 2px; }
+  .tp-cutprep-note { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1.25rem; border-radius: 0 12px 12px 0; font-size: 0.9375rem; color: #334155; line-height: 1.6; margin: 1.25rem 0 0; }
+  .tp-cutprep-note :global(strong) { color: #0f172a; }
+  .tp-cutprep-img { border-radius: 20px; overflow: hidden; box-shadow: 0 18px 50px -24px rgba(15,23,42,0.28); aspect-ratio: 4/3; }
+  .tp-cutprep-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .tp-spec-table-wrap { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 12px -2px rgba(15,23,42,0.04); }
+  .tp-spec-table { width: 100%; border-collapse: collapse; }
+  .tp-spec-table thead th { background: #f1f5f9; padding: 1rem 1.25rem; text-align: left; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #475569; border-bottom: 1px solid #e2e8f0; }
+  .tp-spec-table tbody td { padding: 1.25rem; font-size: 0.9375rem; color: #334155; line-height: 1.55; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  .tp-spec-table tbody tr:last-child td { border-bottom: none; }
+  .tp-spec-table tbody tr:hover { background: #f8fafc; }
+  .tp-spec-table strong { color: #0f172a; font-weight: 700; }
+  .tp-spec-caption { caption-side: top; text-align: left; padding: 0.75rem 1rem 0.5rem; font-size: 0.875rem; font-weight: 600; color: #0f172a; }
+  .tp-spec-rowhead { background: transparent !important; color: inherit; font-weight: 700; text-align: left; }
+  .tp-spec-footnote { margin-top: 1.5rem; }
+  @media (max-width: 768px) {
+    .tp-spec-table-wrap { overflow-x: auto; }
+    .tp-spec-table { min-width: 720px; }
+  }
+</style>

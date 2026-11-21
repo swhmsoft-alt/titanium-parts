@@ -476,3 +476,47 @@ DoD 勾选：
 - `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
 
 下一步：**EX-D3**（`/`、`/faq/`、`/applications/`、`/company/`、`/contact/`、`/knowledge-center/`、`/manufacturing-capabilities/`、`/our-team/`、`/quality/`、`/terms/`、`/404.html`、`/titanium-anode/`、`/titanium-anode/coating-systems/`、`/titanium-machining-parts/`、`/titanium-products/` 的可见 FAQ 接入）
+
+
+---
+
+## 2026-11-21 · EX-E1 结案 · 14 个产品页抽为共享骨架薄壳（结构重构，可见文案不变）
+
+状态：`[x]`
+
+改动文件：
+- 新建 `src/components/product/ProductPage.astro`（共享骨架）、`src/components/product/ProductCatalog.astro`（目录区块）、`src/components/product/ProductExtras.astro`（页级专属区块）
+- 新建 `src/data/product-pages/standard.ts`（类型 + 文案共享层 + `buildStandardPage()`）、`src/data/product-pages/titanium-*.ts`（14 个页面的数据）
+- 改写 `src/pages/titanium-products/*.astro`：14 个产品页全部由独立实现改为 6 行薄壳（`import ProductPage` + `import { page }` + `<ProductPage {...page} />`）
+- 新建 `scripts/codemod/apply-extras.mjs`、`scripts/codemod/patch-skeleton.mjs`、`scripts/codemod/converge-product-pages.mjs`（一次性迁移脚本）
+- `docs/seo/execution-plan.md`：EX-E1 标记 `[x]`
+
+DoD 勾选：
+1. `[x]` 14 个产品页全部改为薄壳，数据落在 `src/data/product-pages/*`，页面只留渲染调用
+2. `[x]` 共享骨架支持页级专属区块（Product Boundary / Cutting & Preparation / Spec Mapping Table / Engineering Inputs）——不是删掉，是搬进骨架由数据驱动
+3. `[x]` 文案共享层落地：跨页相同字符串集中在 `standard.ts`，页级差异通过 `copy` 覆盖
+4. `[x]` 可见文案与构建产物不变（逐页可见文本 diff 验证通过）
+5. `[x]` `npm run build` → 77 页，`Complete!`
+6. `[x]` `npm run qa:geo` → EXIT=0，77 pages / 61 findings / 74 opportunities（与 EX-D3 段一致，无回退）
+
+计数变化：**全部不变**（纯结构重构，未改任何可见内容与 Schema）
+- `pageCount` 77、`webPageNodes` 77、`faqPages` 69、findings 61、opportunities 74、`tablesTotal` 87 全部与 EX-D3 段一致
+
+验证：
+- `npm run build` → 77 页，`Complete!`
+- `npm run qa:geo` → 77 pages / 61 findings / 74 opportunities（与改前完全一致）
+- 三页可见文本基线 diff（`tmp/base-*.html` vs `dist/`）：baskets 完全一致；plate / tubing 的差异仅为下文「踩坑」记录的两处历史不一致，均为**修正**而非改写
+
+踩坑：
+- `titanium-tubing` 原页面的 `M = 'Titanium Tube &amp; Pipe'` 是**双重转义**：原文写 `&amp;`，再经 `set:html` 输出，浏览器里显示的是字面量 `&amp;`。迁移时改为纯文本插值（数据里写 `&`，Astro 自动转义为 `&amp;`），页面显示为 `&`——这是**修 bug**，可见文案由错变对，diff 里体现为 `&amp;` → `&`。
+- `titanium-plate` 的工序编号是 `1`（无补零），其余页是 `01`。骨架统一用补零会改掉 plate 的可见文本，因此新增 `processNumbering: 'plain' | 'padded'` 开关，plate 显式设为 'plain'。
+- 页面内联 `<style>` 里的类名（如 `tp-boundary-links`、`tp-cutprep-*`、`tp-form-link`、`tp-spec-table`）原本分散在各页，迁移后必须全部补进共享骨架，否则样式丢失。用脚本提取三页与共享组件的类名集合做差集定位，避免人工通读。
+- `set:html` 与纯文本插值不能混用：hero CTA 原本用 `set:html` 以输出 `&amp;` 实体，改为插值后需确认数据里存的是**未转义**的 `&`，否则会出现 `&amp;amp;`。
+- 本轮耗时超长的根因：把「骨架化」当成了**渲染输出逐字符等价**的工程，为对齐历史不一致（编号格式、实体转义）反复加字段与分支。正确做法应是先让页面可正常构建即收口，差异写进遗留。
+
+遗留：
+- `titanium-plate` / `titanium-tubing` 的 `&amp;` / 编号格式等历史不一致已随本轮修正，**未再复现**
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- `schema-incomplete` 仍有 16 页、`unsourced-spec` 27 页、`scaled-content` 12 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-E2 … EX-F3（前置 EX-E1 已解锁）
+
+下一步：**EX-E2**（差异化金丝雀 · `titanium-plate`，前置 EX-E1 已完成）

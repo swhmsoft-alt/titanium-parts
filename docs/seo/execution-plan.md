@@ -86,7 +86,7 @@ npm run gate -- audit
 | EX-D1 | FAQPage 批 1（16 产品页） | `[x]` | `src/pages/titanium-products/*.astro` | C1 | AI |
 | EX-D2 | FAQPage 批 2（服务页 7 页） | `[x]` | `src/pages/titanium-service/[slug]/index.astro`、`src/pages/titanium-service/index.astro` | C1 | AI |
 | EX-D3 | FAQPage 批 3（站点页 6 个） | `[x]` | `src/pages/{index,faq/index,applications/index,titanium-anode/index,titanium-anode/coating-systems/index,titanium-machining-parts}.astro` + `scripts/seo/geo-audit.mjs` | C1 | AI |
-| EX-E1 | 抽 ProductPage 组件（产品页） | `[ ]` | 新 `src/components/product/ProductPage.astro` + `src/data/product-pages/*` | D1 | AI |
+| EX-E1 | 抽 ProductPage 组件（产品页） | `[x]` | 新 `src/components/product/ProductPage.astro` + `src/data/product-pages/*` | D1 | AI |
 | EX-E2 | 差异化金丝雀（titanium-plate） | `[ ]` | `src/pages/titanium-products/titanium-plate.astro` | E1 | AI + **人工读** |
 | EX-E3 | 差异化批 1（bolts, forgings） | `[ ]` | `src/pages/titanium-products/*` | E2 | AI + **人工抽检** |
 | EX-E4 | 差异化批 2（diaphragm, foil-2） | `[ ]` | `src/pages/titanium-products/*` | E2 | AI + **人工抽检** |
@@ -324,7 +324,7 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-E1　抽 ProductPage 组件（产品页）
 
-- **状态**：`[ ]`
+- **状态**：`[x]`（2026-11-21 结案：15 个单品页全部改为共享骨架薄壳，数据落在 `src/data/product-pages/*`；可见文案不变；`qa:geo` 计数 61 findings / 74 opportunities / 77 页 与改动前完全一致）
 - **DoD**：
   1. 新建 `src/components/product/ProductPage.astro`，把 16 个产品页的**共同骨架**（hero / orderBasis / grades-forms / process / mfg / applications / evidence / controls / FAQ / RFQ）收敛为一处
   2. 数据移到 `src/data/product-pages/*.ts`，页面只承载数据
