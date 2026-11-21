@@ -40,6 +40,7 @@ const grades = [{"img":"/images/titanium-products/grade-2-titanium-flange.webp",
 const meta = productMeta['titanium-flanges'] ?? { title: M, description: M, sku: 'TITANIUM-FLANGES' };
 ---
 <BaseLayout
+    faq={faq.slice(0, 6)}
     title={meta.title}
     description={meta.description}
     product={{ name: M, description: meta.description, sku: meta.sku, category: meta.category, material: meta.material, additionalType: meta.additionalType, image: meta.image }}

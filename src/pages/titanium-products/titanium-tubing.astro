@@ -173,6 +173,7 @@ const faq = [
 const meta = productMeta['titanium-tubing'] ?? { title: M, description: M, sku: 'TITANIUM-TUBING' };
 ---
 <BaseLayout
+    faq={faq}
     title={meta.title}
     description={meta.description}
     product={{ name: M, description: meta.description, sku: meta.sku, category: meta.category, material: meta.material, additionalType: meta.additionalType, image: meta.image }}

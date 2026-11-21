@@ -40,6 +40,7 @@ const grades = [{"img":"/images/titanium-products/titanium-grade-2-round-bar.web
 const meta = productMeta['titanium-rod-bar'] ?? { title: M, description: M, sku: 'TITANIUM-ROD-BAR' };
 ---
 <BaseLayout
+    faq={faq.slice(0, 6)}
     title={meta.title}
     description={meta.description}
     product={{ name: M, description: meta.description, sku: meta.sku, category: meta.category, material: meta.material, additionalType: meta.additionalType, image: meta.image }}

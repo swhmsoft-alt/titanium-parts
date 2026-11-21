@@ -11,6 +11,12 @@ interface Props {
   canonical?: string;
   /** Extra JSON-LD nodes merged into the page graph. */
   jsonLd?: Record<string, unknown>[];
+  /**
+   * The visible FAQ of the page. The same array renders the FAQ and builds the
+   * FAQPage node, so the structured answers are word-for-word the answers a
+   * reader sees.
+   */
+  faq?: { q: string; a: string }[];
   /** When set, the page is announced as a product with an offer. */
   product?: {
     name: string;
@@ -35,6 +41,7 @@ const {
   ogImage = site.seo.ogImage,
   canonical,
   jsonLd = [],
+  faq = [],
   product,
 } = Astro.props;
 
@@ -163,6 +170,24 @@ if (product) {
 }
 
 for (const node of jsonLd) graph.push(node);
+
+/**
+ * The FAQPage node is built from the same array the page renders, so the
+ * structured answer is word-for-word the answer visible on the page.
+ */
+if (faq.length > 0) {
+  graph.push({
+    '@type': 'FAQPage',
+    '@id': `${canonicalUrl}#faq`,
+    url: canonicalUrl,
+    isPartOf: { '@id': websiteId },
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  });
+}
 
 /**
  * Every page is a WebPage. Pages that publish their own WebPage node keep it —

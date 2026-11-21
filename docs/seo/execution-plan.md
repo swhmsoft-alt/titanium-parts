@@ -83,7 +83,7 @@ npm run gate -- audit
 | EX-A6 | 产品页残留表格出口排查 | `[x]` | 8 个页面内联表：`src/pages/applications/index.astro`、`src/pages/titanium-anode/index.astro`、`src/pages/titanium-anode/mmo-anode/index.astro`、`src/pages/titanium-anode/coating-systems/index.astro`、`src/pages/titanium-machining-parts.astro`、`src/pages/titanium-products/index.astro`、`src/pages/titanium-products/titanium-tubing.astro`、`src/pages/titanium-service/index.astro` | A1 | AI |
 | EX-B1 | BaseLayout 统一补 WebPage（去重） | `[x]` | `src/layouts/BaseLayout.astro` | — | AI |
 | EX-C1 | Product 节点字段补齐 | `[x]` | `src/layouts/BaseLayout.astro`、`src/data/product-meta.ts`、`scripts/media/apply-product-meta.mjs` | B1 | AI |
-| EX-D1 | FAQPage 批 1（16 产品页） | `[ ]` | `src/pages/titanium-products/*.astro` | C1 | AI |
+| EX-D1 | FAQPage 批 1（16 产品页） | `[x]` | `src/pages/titanium-products/*.astro` | C1 | AI |
 | EX-D2 | FAQPage 批 2（服务页 7 页） | `[ ]` | `src/pages/titanium-service/[slug]/index.astro` | C1 | AI |
 | EX-D3 | FAQPage 批 3（其余 14 页） | `[ ]` | 多个 + `src/data/faqs-data.ts` | C1 | AI |
 | EX-E1 | 抽 ProductPage 组件（产品页） | `[ ]` | 新 `src/components/product/ProductPage.astro` + `src/data/product-pages/*` | D1 | AI |
@@ -257,7 +257,8 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-D1　FAQPage 批 1（16 个产品页）
 
-- **状态**：`[ ]`
+- **状态**：`[x]`
+- **本轮实测（2026-11-21）**：`src/pages/titanium-products/` 实为 **16 个文件**（`index.astro` hub + 15 个单品页），全部接入 `faq` prop。可见 FAQ 渲染 `faq.slice(0, 6)` 的 13 页与 `titanium-plate` / `titanium-tubing` / hub 三页用整组数组，JSON-LD 与页面渲染共用同一份数组，答案逐字一致。计数：`faqPages` 40 → **56**；`pagesWithVisibleFaqButNoNode` 37 → **21**（余下 21 页为服务页 / 站点页，归 EX-D2 / EX-D3）
 - **DoD**：
   1. `BaseLayout` 增加 `faq?: { q: string; a: string }[]` prop，统一生成 `FAQPage` 节点
   2. 16 个 `src/pages/titanium-products/*.astro` 把**已有可见 FAQ 数据**通过该 prop 传入（每页 1 行）
@@ -570,6 +571,7 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 | 2026-11-19 | 任务总数修正为 32（EX-A1…A6 = 6，B1 = 1，C1 = 1，D1…D3 = 3，E1…E8 = 8，F1…F3 = 3，G1 = 1，H1…H5 = 5，X1…X4 = 4） | 首次建立时口头写作 30，与表内实际条目数不符；按表内实际条目数校正 |
 | 2026-11-21 | EX-A4 落点补 `src/components/grade/GradeHub.astro`，状态 `[ ]` → `[x]` | DoD 要求「10 个 grade 页」归零，第 10 页为 hub `/titanium-grades/`，其 3 张表由 GradeHub 渲染，只改 GradePage 仅覆盖 9 页 |
 | 2026-11-21 | EX-B1 状态 `[ ]` → `[x]`，落点补 3 个 `breadcrumb` 引用修正文件 | `BreadcrumbList` 加 `@id` 后，原指向 `${origin}/#breadcrumb` 的旧引用会失效，需同步修正 anode/MMO 两个渲染器及其生成脚本 |
+| 2026-11-21 | EX-D1 状态 `[ ]` → `[x]` | 16 个产品页（hub + 15 个单品页）接入 `BaseLayout` 的 `faq` prop，FAQPage 节点与页面可见 FAQ 同源 |
 
 
 

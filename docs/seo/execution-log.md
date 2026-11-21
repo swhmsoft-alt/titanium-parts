@@ -325,3 +325,47 @@ DoD 勾选：
 - `scaled-content` 12 页 → EX-E2 … EX-E8（前置 EX-E1）
 
 下一步：**EX-D1**（`BaseLayout` 增加 `faq` prop，16 个产品页接入已有可见 FAQ 数据）
+
+---
+
+## 2026-11-21 · EX-D1 结案 · 16 个产品页接入 FAQPage 节点（faqPages 40 → 56）
+
+状态：`[x]`
+
+改动文件：
+- `src/layouts/BaseLayout.astro`（新增 `faq` prop；`faq.length > 0` 时向 `@graph` 追加 `FAQPage` 节点，`mainEntity` = `Question` / `acceptedAnswer`）
+- `src/pages/titanium-products/index.astro`（`faq={allFaq}`）
+- `src/pages/titanium-products/titanium-balls.astro`、`titanium-baskets.astro`、`titanium-bolts.astro`、`titanium-clad-copper.astro`、`titanium-coil.astro`、`titanium-diaphragm.astro`、`titanium-fittings.astro`、`titanium-flanges.astro`、`titanium-foil-2.astro`、`titanium-forgings.astro`、`titanium-mesh.astro`、`titanium-rod-bar.astro`、`titanium-wire.astro`（`faq={faq.slice(0, 6)}`）
+- `src/pages/titanium-products/titanium-plate.astro`、`titanium-tubing.astro`（`faq={faq}`）
+- `docs/seo/execution-plan.md`（EX-D1 → `[x]`，条目补「本轮实测」，变更记录补一行）
+- `docs/seo/execution-log.md`（本段）
+
+DoD 勾选：
+1. `[x]` `BaseLayout` 增加 `faq?: { q: string; a: string }[]` prop，统一生成 `FAQPage` 节点
+2. `[x]` 16 个 `src/pages/titanium-products/*.astro` 把已有可见 FAQ 数据通过该 prop 传入（每页 1 行）
+3. `[x]` JSON-LD 答案文本与页面可见答案逐字一致（同一份数组，未重新措辞）
+4. `[x]` build + qa:geo 成功，16 个产品页 `faq-unstructured` 全部归零
+
+计数变化：
+- `faqPages`：**40 → 56**（期望 ≥56 ✓）
+- `pagesWithVisibleFaqButNoNode`：**37 → 21**（期望 ≤21 ✓；余下 21 页 = 7 个服务页 + 1 个服务 hub + 12 个站点页，全部不在本批落点）
+- `tablesExtractable` 87（不变）、`pageCount` 77（不变）、`schema-incomplete` 16（不变）
+- findings 104 → **101**（`faq-unstructured` 减少 16 条，其余计数不变）
+
+验证：
+- `npm run build` → 77 页，`Complete!`
+- `npm run qa:geo` → EXIT=0，findings 101
+- `npm run task:verify -- seo-geo-execution` → 56/56 checks passed，`TASK-VERIFY: PASS`
+- 产物抽查：`dist/titanium-products/titanium-balls/index.html`、`titanium-plate`、`titanium-wire`、`titanium-products/index.html` 均含 `FAQPage`
+
+踩坑：
+- 批量插 prop 时若以「标签里第一个含 `>` 的行」定位闭合位置，会插到 frontmatter 结束线 `---` 之后（标签外），页面会照常构建但 `FAQPage` 不生成，且页面上多出 `faq=` 字样。**定位必须用「`<BaseLayout` 行的下一行」**。
+- `src/pages/titanium-products/` 实为 **16 个文件**（hub + 15 个单品页），计划文字里的「16 个产品页」按此理解，未新增文件。
+
+遗留：
+- `pagesWithVisibleFaqButNoNode` 仍有 21 页 → EX-D2（服务页 7 页 + hub）/ EX-D3（其余站点页）
+- `scaled-content` 12 页 → EX-E2 … EX-E8（前置 EX-E1）；`unsourced-spec` 27 页 → EX-F1 / F2 / F3（前置 EX-E1）
+- `schema-incomplete` 16 页 → 设备页与 anode / MMO 家族页自带 `Product` 节点，不走 `BaseLayout` 的 `product` prop（EX-C2 未立项）
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+
+下一步：**EX-D2**（`src/pages/titanium-service/[slug]/index.astro` 与 `/titanium-service/` 的可见 FAQ 接入 `BaseLayout` 的 `faq` prop）
