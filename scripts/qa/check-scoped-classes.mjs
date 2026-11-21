@@ -10,8 +10,13 @@
  *
  * Usage: node scripts/qa/check-scoped-classes.mjs [file ...]
  * With no arguments the pages of the current expansion are checked.
+ *
+ * The second half of the script checks the built pages in `dist`: every class
+ * has to be styled for the scope it is rendered in — either by a global rule
+ * or by a rule scoped to the `data-astro-cid` of the element that carries it.
+ * A class that only exists under another component's scope is dead CSS.
  */
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -144,13 +149,150 @@ for (const target of targets) {
   }
 }
 
-if (missing.size === 0) {
-  console.log(`OK: every scoped class is defined (${known.size} classes in the utility layer).`);
-  process.exit(0);
+/**
+ * Checks that every class of the built pages is styled for the scope it is
+ * rendered in.
+ *
+ * Astro scopes a component's `<style>` to the elements of that component, so a
+ * rule of one component never reaches the markup of another. A class that only
+ * exists under another component's `data-astro-cid` is silently dead: the page
+ * builds, the class is in the stylesheet, and nothing is styled. Reading the
+ * class names alone cannot see this — the scope attribute has to be compared
+ * with the scope of the rule.
+ */
+const DIST = resolve(root, 'dist');
+
+/** Marker classes that intentionally carry no rule of their own. */
+const UNSTYLED_MARKERS = new Set([
+  'footer-brand',
+  'logo-default',
+  'logo-white',
+  'tp-app-card',
+]);
+
+/** Reads the class names a stylesheet styles, per scope. */
+function collectStyles(css) {
+  const globalClasses = new Set();
+  const cidClasses = new Map();
+
+  for (const match of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    const selector = match[1];
+    const cids = [...selector.matchAll(/\[data-astro-cid-([A-Za-z0-9_-]+)\]/g)].map((m) => m[1]);
+    const classes = [...selector.matchAll(/\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g)].map((m) => m[1]);
+
+    if (cids.length === 0) {
+      for (const name of classes) globalClasses.add(name);
+      continue;
+    }
+    for (const cid of cids) {
+      if (!cidClasses.has(cid)) cidClasses.set(cid, new Set());
+      for (const name of classes) cidClasses.get(cid).add(name);
+    }
+  }
+
+  return { globalClasses, cidClasses };
 }
 
-console.log(`MISSING ${missing.size} class(es):`);
-for (const [token, files] of [...missing.entries()].sort()) {
-  console.log(`  ${token}  <- ${[...files].join(', ')}`);
+/** Merges the styles of one stylesheet into the collected styles. */
+function mergeStyles(target, source) {
+  for (const name of source.globalClasses) {
+    target.globalClasses.add(name);
+    target.allDefined.add(name);
+  }
+  for (const [cid, names] of source.cidClasses) {
+    if (!target.cidClasses.has(cid)) target.cidClasses.set(cid, new Set());
+    for (const name of names) {
+      target.cidClasses.get(cid).add(name);
+      target.allDefined.add(name);
+    }
+  }
 }
-process.exit(1);
+
+/** Checks one built page against the collected styles. */
+function checkPage(html, pagePath, styles, problems, markers) {
+  for (const match of html.matchAll(/<([a-zA-Z][a-zA-Z0-9-]*)((?:\s[^<>]*?)?)\/?>/g)) {
+    const attributes = match[2] || '';
+    const cid = attributes.match(/data-astro-cid-([A-Za-z0-9_-]+)/);
+    const className = attributes.match(/class="([^"]*)"/);
+    if (!cid || !className) continue;
+
+    const scoped = styles.cidClasses.get(cid[1]) || new Set();
+    for (const token of className[1].split(/\s+/)) {
+      if (!token || UNSTYLED_MARKERS.has(token)) continue;
+      if (styles.globalClasses.has(token) || scoped.has(token)) continue;
+      const line = `  ${token}  <- ${pagePath}`;
+      // A class that is styled somewhere else but not in this scope is a dead
+      // rule: the page renders unstyled. A class that is styled nowhere is a
+      // marker class, not a defect.
+      const bucket = styles.allDefined.has(token) ? problems : markers;
+      if (!bucket.has(line)) bucket.set(line, token);
+    }
+  }
+}
+
+/** Lists the built pages of the site. */
+function listPages(directory) {
+  const pages = [];
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const full = resolve(directory, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name === '_astro') continue;
+      pages.push(...listPages(full));
+    } else if (entry.name.endsWith('.html')) {
+      pages.push({ path: full, relative: full.slice(DIST.length + 1) });
+    }
+  }
+  return pages;
+}
+
+const styles = { globalClasses: new Set(), cidClasses: new Map(), allDefined: new Set() };
+const scopeProblems = new Map();
+const markerUses = new Map();
+let pagesChecked = 0;
+
+if (existsSync(DIST)) {
+  const astroDir = resolve(DIST, '_astro');
+  if (existsSync(astroDir)) {
+    for (const name of readdirSync(astroDir).filter((file) => file.endsWith('.css'))) {
+      mergeStyles(styles, collectStyles(readFileSync(resolve(astroDir, name), 'utf8')));
+    }
+  }
+
+  for (const page of listPages(DIST)) {
+    const html = readFileSync(page.path, 'utf8');
+    // Styles Astro inlined into the page carry their scope with them.
+    for (const match of html.matchAll(/<style>([\s\S]*?)<\/style>/g)) {
+      mergeStyles(styles, collectStyles(match[1]));
+    }
+    checkPage(html, page.relative, styles, scopeProblems, markerUses);
+    pagesChecked += 1;
+  }
+}
+
+if (missing.size === 0) {
+  console.log(`OK: every scoped class is defined (${known.size} classes in the utility layer).`);
+} else {
+  console.log(`MISSING ${missing.size} class(es):`);
+  for (const [token, files] of [...missing.entries()].sort()) {
+    console.log(`  ${token}  <- ${[...files].join(', ')}`);
+  }
+}
+
+const scopeLines = [...scopeProblems.keys()].sort();
+
+const markerLines = [...markerUses.keys()].sort();
+
+if (pagesChecked === 0) {
+  console.log('SKIP: no built pages found, the scope check did not run.');
+} else if (scopeLines.length === 0) {
+  console.log(`OK: every class of the built pages is styled for the scope it is rendered in (${pagesChecked} pages checked).`);
+} else {
+  console.log(`UNSCOPED ${scopeLines.length} class use(s):`);
+  for (const line of scopeLines) console.log(line);
+}
+
+if (markerLines.length > 0) {
+  console.log(`NOTE: ${markerLines.length} class use(s) carry no rule at all (markers, not defects).`);
+}
+
+process.exit(missing.size === 0 && scopeLines.length === 0 ? 0 : 1);

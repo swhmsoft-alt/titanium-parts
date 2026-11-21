@@ -1,0 +1,67 @@
+/* =================================================================
+   SHARED LAYER OF THE TITANIUM PRODUCT PAGES
+   =================================================================
+   The product page is assembled from three components:
+   `ProductPage.astro` (the skeleton), `ProductCatalog.astro` (the
+   grade and form blocks) and `ProductExtras.astro` (the page
+   specific blocks).
+
+   Astro scopes a component's `<style>` to the elements of that
+   component: a rule of the skeleton only reaches the markup the
+   skeleton itself renders. A class that the catalog or the extras
+   blocks use therefore never matches a rule of the skeleton — the
+   class is in the stylesheet and nothing is styled.
+
+   The rules the three components share live here, unscoped, so every
+   one of them reaches the markup of all three. The `.tp-` prefix is
+   used by the product pages only, so the layer stays inside the
+   product family.
+
+   The skeleton keeps its own scoped copy of these rules: a scoped
+   rule is more specific than an unscoped one, so the skeleton is
+   rendered exactly as before.
+   ================================================================= */
+
+.tp-section { padding: 5rem 0; background: #fff; }
+.tp-section.tp-alt { background: #f8fafc; }
+.tp-section.tp-blue-bg { background: #eff6ff; }
+.tp-section.tp-dark { background: #020617; color: #fff; }
+
+.tp-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+.tp-h2 { font-size: clamp(1.75rem, 3.2vw, 2.625rem); font-weight: 800; color: #0f172a; margin: 0.5rem 0 1rem; line-height: 1.15; letter-spacing: -0.02em; }
+.tp-h-light { color: #fff; }
+.tp-lede { font-size: 1.0625rem; color: #475569; line-height: 1.65; margin: 0 0 2.5rem; max-width: 800px; }
+.tp-lede-light { color: #cbd5e1; }
+.tp-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #2563eb; margin: 0 0 0.5rem; }
+.tp-eyebrow-light { color: #93c5fd; }
+
+.tp-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.tp-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.tp-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.25rem; }
+@media (max-width: 1280px) { .tp-grid-5 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1024px) { .tp-grid-4 { grid-template-columns: repeat(2, 1fr); } .tp-grid-5 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .tp-grid-4, .tp-grid-2, .tp-grid-5 { grid-template-columns: 1fr; } }
+
+.tp-card { padding: 0; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; transition: all 0.2s; display: flex; flex-direction: column; }
+.tp-card:hover { box-shadow: 0 10px 25px -5px rgba(15,23,42,0.08); }
+
+.tp-icon-blue { color: #2563eb; flex-shrink: 0; }
+.tp-icon-light { color: #93c5fd; flex-shrink: 0; }
+
+.tp-form-card { padding: 0; }
+.tp-form-img { aspect-ratio: 4/3; background: #f1f5f9; overflow: hidden; }
+.tp-form-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.tp-form-card:hover .tp-form-img img { transform: scale(1.05); }
+.tp-form-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.tp-form-body h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-form-spec { font-size: 0.8125rem; color: #475569; line-height: 1.5; margin: 0 0 0.5rem; }
+.tp-form-spec strong { color: #0f172a; }
+.tp-form-text { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin: 0; }
+.tp-app-link { display: inline-flex; align-items: center; font-size: 0.875rem; font-weight: 700; color: #2563eb; margin-top: 0.85rem; text-decoration: none; }
+.tp-app-link:hover { color: #1d4ed8; }
+
+.tp-form-pure { background: #fff; padding: 1.5rem; border-radius: 16px; border: 1px solid #e2e8f0; transition: all 0.2s; }
+.tp-form-pure:hover { box-shadow: 0 10px 25px -5px rgba(15,23,42,0.08); }
+.tp-form-pure h3 { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.5rem; }
+.tp-form-pure p { font-size: 0.9375rem; color: #475569; line-height: 1.6; margin: 0 0 0.85rem; }
