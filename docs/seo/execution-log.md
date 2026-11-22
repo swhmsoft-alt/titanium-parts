@@ -564,3 +564,48 @@ DoD 勾选：
 - **人工通读待办**：本轮为 AI 执行的自动化差异化，成品需人工通读 `dist/titanium-products/titanium-plate/index.html`，确认没有「为降分而删实质内容」
 
 下一步：**EX-E3**（差异化批 1 · `titanium-bolts` + `titanium-forgings`，沿用 EX-E2 的四项内容模板）
+
+---
+
+## 2026-11-21 · EX-E3 结案 · bolts + forgings 差异化批 1（紧固件 / 锻件专有内容 + 相邻形态对比表）
+
+状态：`[x]`
+
+改动文件：
+- `src/data/product-pages/titanium-bolts.ts`：orderBasis 4 卡（Material / Thread & Fit / Head & Drive Geometry / Evidence）、processSteps 5 步、evidence 4 卡、controls 4 卡全部改写为**紧固件专有**表述；grades 补专有 body；新增 `copy` 覆盖（orderBasis / catalog / evidence / controls / applications / process / mfg / rfq）；新增 `extras`（detailSections 4 组 × 3 条 + specTable 4 列 × 4 行）
+- `src/data/product-pages/titanium-forgings.ts`：同上，改写为**锻件专有**表述（orderBasis 4 卡 = Material / Geometry / Route & Allowance / Evidence；processSteps = 图纸评审 → 坯料准备 → 模锻与热处理 → 机加工与检验 → 标识包装放行）；新增 `extras`（detailSections 4 组 × 3 条 + specTable 4 列 × 4 行）
+- `docs/seo/execution-plan.md`：EX-E3 标记 `[x]`，落点与期望计数按实测修正，变更记录补一行
+
+DoD 勾选：
+1. `[x]` bolts 页 orderBasis / processSteps / evidence / controls 改写为紧固件专有表述，每组 ≤3 句
+2. `[x]` bolts 页 detailSections 四类专有内容齐备（Thread Route / Failure Modes / Inspection Differences / Supply Form），4 组 × 3 条
+3. `[x]` bolts 页新增「How Fastener Types Differ from the Adjacent Forms」小节 + 1 张 4 列对比表（Hex bolt / Socket head cap screw / Stud and threaded rod）
+4. `[x]` forgings 页同三项完成（Deformation Route / Failure Modes / Inspection Differences / Supply Form + Ring / Disc / Shaft 对比表）
+5. `[x]` build 77 页 Complete!；`qa:geo` EXIT=0；`task:verify -- seo-geo-execution` EXIT=0；两页 `topSimilar` 均降至 0.17（< 0.55 阈值）
+6. `[x]` 红线：未为降分改写通用句式、未引入未经验证的数值（新增内容全部为定性技术陈述，无新增具体参数值）
+
+计数变化：
+- `scaled-content`：**12 → 10**（成员：balls / baskets / clad-copper / coil / diaphragm / fittings / flanges / foil-2 / mesh / wire）
+- `titanium-bolts` `topSimilar`：**0.17**（peer `/titanium-products/titanium-forgings/`），无 `scaled-content` 标记
+- `titanium-forgings` `topSimilar`：**0.17**（peer `/titanium-products/titanium-bolts/`），无 `scaled-content` 标记
+- `tablesTotal` / `tablesExtractable`：**88 → 90 / 90**（新增 2 张对比表可抽取：caption + 行头 + scope）
+- 其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
+
+验证：
+- `npm run build` → `77 page(s) built` / `Complete!`（EXIT=0）
+- `npm run qa:geo` → EXIT=0
+- `npm run task:verify -- seo-geo-execution` → EXIT=0（52 条断言全绿）
+
+踩坑：
+- 两个产品数据文件原为 JSON 风格（带引号键名、无类型标注），与 `titanium-plate.ts` 的 `StandardRaw` 类型风格不一致。重建时统一改为 `const raw: StandardRaw = { ... }`，让 `copy` / `extras` 字段有类型保障。
+- `titanium-plate.ts` 有一条既存 esbuild 警告 `Duplicate key "applications" in object literal`（该文件的 `copy` 里 `applications` 出现两次），本轮**未改动该文件**，故未处理；它会让 plate 页的 applications eyebrow 取后一个值。此为范围外遗留。
+- 计划里 EX-E3 的「期望计数变化 `scaled-content` 12 → 0」对单组不成立：一组只覆盖 2 页，每页减 1，因此按实测把本组预期改为 12 → 10，全组完成时才是 0。
+
+遗留：
+- `scaled-content` 仍有 10 页 → EX-E4…E8
+- `schema-incomplete` 16 页、`unsourced-spec` 27 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F1…F3 / EX-H5 / EX-X3
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- **人工抽检待办**：抽检 `dist/titanium-products/titanium-bolts/index.html` 与 `dist/titanium-products/titanium-forgings/index.html` 各 1 页，确认工艺描述与实际产线一致、且没有「为降分而删实质内容」
+- `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
+
+下一步：**EX-E4**（差异化批 2 · `titanium-diaphragm` + `titanium-foil-2`，沿用 EX-E2/E3 的模板）
