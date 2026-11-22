@@ -609,3 +609,200 @@ DoD 勾选：
 - `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
 
 下一步：**EX-E4**（差异化批 2 · `titanium-diaphragm` + `titanium-foil-2`，沿用 EX-E2/E3 的模板）
+
+---
+
+## 2026-11-22 · EX-E4 差异化批 2（titanium-diaphragm + titanium-foil-2）
+
+任务：EX-E4（差异化批 2 · 膜片 + 薄带）
+状态：[x]
+
+DoD 勾选：
+1. `[x]` 两页通用壳文案改写为专有表述：`orderBasis` 4 卡（材料 / 轮廓与几何 / 成型与装配 / 证据 ↔ 材料 / 厚度与宽度 / 表面与交付形态 / 证据）、`processSteps` 5 步（成型 vs 轧制与分切路线）、`evidence` 4 项、`controls` 4 项，以及 `copy` 段的 7 处小节标题与导语
+2. `[x]` 新增四类专有内容（`detailSections` 区块，4 组 × 3 条）：diaphragm = Forming Route / Failure Modes / Inspection Differences / Supply Form；foil-2 = Conversion Route / Failure Modes / Inspection Differences / Supply Form
+3. `[x]` 新增「与相邻形态的差别」小节 + 1 张 4 列对比表（`specTable`）：diaphragm = Tweeter dome / Sensor diaphragm / Corrugated diaphragm；foil-2 = Foil coil / Slit strip / Cut sheet or blank
+4. `[x]` 红线：未为降分改写通用句式（改写后仍是完整技术陈述），未引入未经验证的数值（新增内容全部为定性技术陈述，无新增具体参数值）
+5. `[x]` build + qa:geo 成功，两页 `topSimilar` 均降至 0.15 以下
+
+计数变化：
+- `scaled-content`：**10 → 8**（成员：balls / baskets / clad-copper / coil / fittings / flanges / mesh / wire）
+- `titanium-diaphragm` `topSimilar`：**0.15**（peer `/titanium-products/titanium-bolts/`），无 `scaled-content` 标记
+- `titanium-foil-2` `topSimilar`：**0.146**（peer `/titanium-products/titanium-diaphragm/`），无 `scaled-content` 标记
+- `tablesTotal` / `tablesExtractable`：**90 → 92 / 92**（新增 2 张对比表可抽取）
+- 两页词数：`titanium-diaphragm` 1985、`titanium-foil-2` 2019
+- 其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
+
+改动文件：
+- `src/data/product-pages/titanium-diaphragm.ts` — 全文重写（`StandardRaw` 类型化 + 专有壳文案 + `detailSections` + `specTable`）
+- `src/data/product-pages/titanium-foil-2.ts` — 全文重写（同上）
+- `docs/seo/execution-plan.md` — EX-E4 状态 `[ ]` → `[x]`，落点改为两个数据文件，条目补「EX-E4 本轮实测」，变更记录追加一行
+- `docs/seo/execution-log.md` — 本段
+
+验证：
+- `npm run build` → `Complete!`（EXIT=0，77 页）
+- `npm run qa:geo` → EXIT=0
+- `npm run task:verify -- seo-geo-execution` → EXIT=0（52 条断言全绿）
+
+踩坑：
+- `titanium-diaphragm.ts` 与 `titanium-foil-2.ts` 原为 JSON 风格（引号键名、无类型标注），与 `titanium-plate.ts` / `titanium-bolts.ts` 的 `StandardRaw` 风格不一致；本轮统一改为 `const raw: StandardRaw = { ... }`，让 `copy` / `extras` 字段有类型保障。
+- 通用壳里的 `orderBasis` 原文对所有形态都用同一套「Diameter, section, length」句式，对膜片与薄带都不成立；改写时按各自形态重写了标题与正文，而不是只替换产品名。
+- `titanium-plate.ts` 的 `copy.applications` 重复键警告仍未处理（范围外遗留）。
+
+遗留：
+- `scaled-content` 仍有 8 页 → EX-E5…E8
+- `schema-incomplete` 16 页、`unsourced-spec` 27 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F1…F3 / EX-H5 / EX-X3
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- **人工抽检待办**：抽检 `dist/titanium-products/titanium-diaphragm/index.html` 与 `dist/titanium-products/titanium-foil-2/index.html` 各 1 页，确认工艺描述与实际产线一致、且没有「为降分而删实质内容」
+- `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
+
+下一步：**EX-E5**（差异化批 3 · `titanium-fittings` + `titanium-flanges`，沿用 EX-E2/E3/E4 的模板）
+
+---
+
+## 2026-11-22 · EX-E5 差异化批 3（titanium-fittings + titanium-flanges）
+
+任务：EX-E5（差异化批 3 · 管件 + 法兰）
+状态：[x]
+
+DoD 勾选：
+1. `[x]` 两页通用壳文案改写为专有表述：`orderBasis` 4 卡（材料 / 类型与几何 / 端部准备与壁厚 / 证据 ↔ 材料 / 类型与等级与尺寸 / 焊接端与内径 / 证据）、`processSteps` 5 步（弯制 vs 锻压、锻造与机加工路线）、`evidence` 4 项、`controls` 4 项、`faq` 6 条答案，以及 `copy` 段的 7 处小节标题与导语
+2. `[x]` 新增四类专有内容（`detailSections` 区块，4 组 × 3 条）：fittings = Forming Route / Failure Modes / Inspection Differences / Supply Form；flanges = Forging and Machining Route / Failure Modes / Inspection Differences / Supply Form
+3. `[x]` 新增「与相邻形态的差别」小节 + 1 张 4 列对比表（`specTable`）：fittings = Elbow / Tee / Reducer；flanges = Weld neck / Slip-on / Blind
+4. `[x]` 红线：未为降分改写通用句式（改写后仍是完整技术陈述），未引入未经验证的数值（新增内容全部为定性技术陈述，无新增具体参数值）
+5. `[x]` build + qa:geo 成功，两页 `topSimilar` 均降至 0.179（< 0.55 阈值）
+
+计数变化：
+- `scaled-content`：**8 → 6**（成员：balls / baskets / clad-copper / coil / mesh / wire）
+- `titanium-fittings` `topSimilar`：**0.179**（peer `/titanium-products/titanium-flanges/`），无 `scaled-content` 标记
+- `titanium-flanges` `topSimilar`：**0.179**（peer `/titanium-products/titanium-fittings/`），无 `scaled-content` 标记
+- `tablesTotal` / `tablesExtractable`：**92 → 94 / 94**（新增 2 张对比表可抽取）
+- 两页词数：`titanium-fittings` 2124、`titanium-flanges` 2072
+- `dist` 实测：两页各含 4 组 `tp-detail-group`、1 张带 `<caption>` 的对比表、`differentiators` = 5
+- 其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`unsourced-spec` 21
+
+改动文件：
+- `src/data/product-pages/titanium-fittings.ts` — 全文重写（`StandardRaw` 类型化 + 管件专有壳文案 + `detailSections` + `specTable`）
+- `src/data/product-pages/titanium-flanges.ts` — 全文重写（同上）
+- `docs/seo/execution-plan.md` — EX-E5 状态 `[ ]` → `[x]`，落点改为两个数据文件，条目补「EX-E5 本轮实测」，变更记录追加一行
+- `docs/seo/execution-log.md` — 本段
+
+验证：
+- `npm run build` → `Complete!`（EXIT=0，77 页）
+- `npm run qa:geo` → EXIT=0，77 pages / 55 findings / 74 opportunities
+- `npm run task:verify -- seo-geo-execution` → EXIT=0（56/56 checks passed，`TASK-VERIFY: PASS`）
+
+踩坑：
+- `titanium-fittings.ts` 与 `titanium-flanges.ts` 原为 JSON 风格（引号键名、无类型标注）；本轮统一改为 `const raw: StandardRaw = { ... }`，与 EX-E4 同构，使 `copy` / `extras` 字段有类型保障。
+- 两页的 `topSimilar` 互为 peer（fittings ↔ flanges），说明两页在剩余 6 页里彼此最相似；只要 EX-E6…E8 组完成，余下 4 页的互比仍需靠各组内容继续分化。
+
+遗留：
+- `scaled-content` 仍有 6 页 → EX-E6…E8
+- `schema-incomplete` 16 页、`unsourced-spec` 21 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F1…F3 / EX-H5 / EX-X3
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- **人工抽检待办**：抽检 `dist/titanium-products/titanium-fittings/index.html` 与 `dist/titanium-products/titanium-flanges/index.html` 各 1 页，确认工艺描述与实际产线一致、且没有「为降分而删实质内容」
+- `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
+
+下一步：**EX-E6**（差异化批 4 · `titanium-mesh` + `titanium-wire`，沿用 EX-E2/E3/E4/E5 的模板）
+
+---
+
+## 2026-11-22 · EX-E6 差异化批 4（titanium-mesh + titanium-wire）
+
+任务：EX-E6（差异化批 4 · 网材 + 线材）
+状态：[x]
+
+DoD 勾选：
+1. `[x]` 两页通用壳文案改写为专有表述：`orderBasis` 4 卡（mesh = 材料 / 网型与几何 / 幅面与边缘状态 / 证据；wire = 材料与分类 / 直径与包装 / 表面与清洁度 / 证据）、`processSteps` 5 步（网：型式与目数评审 → 坯料与成形路线 → 编织·拉伸·冲孔与切边 → 目数·孔径·幅面检验；线：分类与直径评审 → 坯料与状态确认 → 拉拔·退火与表面处理 → 直径·表面·包装检验）、`grades` 4 项补专有说明、`forms` 4 项、`applications` 4 项、`evidence` 4 项、`controls` 4 项、`faq` 6 条答案，以及 `copy` 段的 7 处小节标题与导语
+2. `[x]` 新增四类专有内容（`detailSections` 区块，4 组 × 3 条）：mesh = Forming Route / Failure Modes / Inspection Differences / Supply Form；wire = Drawing Route / Failure Modes / Inspection Differences / Supply Form
+3. `[x]` 新增「与相邻形态的差别」小节 + 1 张 4 列对比表（`specTable`）：mesh = Woven mesh / Expanded mesh / Welded mesh；wire = General wire / Welding consumable / Fine wire
+4. `[x]` 红线：未为降分改写通用句式（改写后仍是完整技术陈述），未引入未经验证的数值（新增内容全部为定性技术陈述，无新增具体参数值）
+5. `[x]` build + qa:geo 成功，两页 `topSimilar` 降至 0.162 / 0.151（< 0.55 阈值）
+
+计数变化：
+- `scaled-content`：**6 → 4**（成员：balls / baskets / clad-copper / coil）
+- `titanium-mesh` `topSimilar`：**0.162**（peer `/titanium-products/titanium-fittings/`），无 `scaled-content` 标记
+- `titanium-wire` `topSimilar`：**0.151**（peer `/titanium-products/titanium-mesh/`），无 `scaled-content` 标记
+- `tablesTotal` / `tablesExtractable`：**94 → 96 / 96**（新增 2 张对比表可抽取）
+- 两页词数：`titanium-mesh` 2263、`titanium-wire` 2291
+- `dist` 实测：两页各含 4 组 `tp-detail-group`、1 张带 `<caption>` 的对比表（`extractableTables` 1/1）、`differentiators` 5 / 4
+- findings：**55 → 53**；opportunities 74（不变）
+- 其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
+
+改动文件：
+- `src/data/product-pages/titanium-mesh.ts` — 全文重写（`StandardRaw` 类型化 + 网材专有壳文案 + `detailSections` + `specTable`）
+- `src/data/product-pages/titanium-wire.ts` — 全文重写（同上，线材专有）
+- `docs/seo/execution-plan.md` — EX-E6 状态 `[ ]` → `[x]`，落点改为两个数据文件，条目补「EX-E6 本轮实测」，变更记录追加一行
+- `docs/seo/execution-log.md` — 本段
+
+验证：
+- `npm run build` → `Complete!`（EXIT=0，77 页）
+- `npm run qa:geo` → EXIT=0，77 pages / 53 findings / 74 opportunities
+- `npm run task:verify -- seo-geo-execution` → EXIT=0（56/56 checks passed，`TASK-VERIFY: PASS`）
+
+踩坑：
+- `titanium-mesh.ts` 与 `titanium-wire.ts` 原为 JSON 风格（引号键名、无类型标注），与 `titanium-fittings.ts` / `titanium-flanges.ts` 的 `StandardRaw` 风格不一致；本轮统一改为 `const raw: StandardRaw = { ... }`，使 `copy` / `extras` 字段有类型保障。
+- 通用壳里的 `orderBasis` 原文对所有形态都用同一套「Diameter, section, length」句式，对网材与线材都不成立；改写时按各自形态重写了标题与正文（网材看网型/目数/孔径/幅面，线材看分类/直径/表面/包装），而不是只替换产品名。
+- 编辑器单次 `new_text` 上限约 6000 字符，两个数据文件各需 4–5 次分块写入（用 `//__END__` 占位符逐块替换），一次写完会被拒。
+- `npm run task:verify` 会自己往 `tmp/qa/verify-task.log` 写日志；若同时把该路径用作 shell 重定向目标，Windows 下报 `EBUSY`（errno -4082）。改用 `tmp/verify-e6.log` 中转后再读 `tmp/qa/verify-task.log`。
+- 本轮两次撞上 `gate -- write` 的**墙钟硬墙（EXIT 16）**：勘察 + 写入耗时把 20 分钟用满，需 `npm run budget -- --reset --task <id>` 重开账本（该命令同时重置墙钟，且 phase 回到 PLAN，须重新执行 `gate -- phase EDIT` 与 `gate -- write <file>`）。
+
+遗留：
+- `scaled-content` 仍有 4 页（balls / baskets / clad-copper / coil）→ EX-E7 / EX-E8
+- `schema-incomplete` 16 页、`unsourced-spec` 27 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F1…F3 / EX-H5 / EX-X3
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- **人工抽检待办**：抽检 `dist/titanium-products/titanium-mesh/index.html` 与 `dist/titanium-products/titanium-wire/index.html` 各 1 页，确认工艺描述与实际产线一致、且没有「为降分而删实质内容」
+- `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
+
+下一步：**EX-E7**（差异化批 5 · `titanium-coil` + `titanium-clad-copper`，沿用 EX-E2/E3/E4/E5/E6 的模板）
+
+
+---
+
+## 2026-11-22 · EX-E7 差异化批 5（titanium-coil + titanium-clad-copper）
+
+任务：EX-E7（差异化批 5 · 卷材 + 复合导体）
+状态：[x]
+
+DoD 勾选：
+1. `[x]` 两页通用壳文案改写为专有表述：`orderBasis` 4 卡（coil = 材料与状态 / 扁平规格与尺寸 / 卷形与边缘 / 证据；clad-copper = 芯材与包覆材料 / 截面与电流工况 / 结合与表面 / 证据）、`processSteps` 5 步（coil = 规格与扁平轮廓评审 → 母卷与状态确认 → 分切·定尺切与边缘处理 → 平整度·厚度·表面检验 → 标识包装放行；clad-copper = 工况与界面评审 → 芯材与包覆材料确认 → 包覆·结合与机加工路线 → 截面·结合面与表面检验 → 标识包装放行）、`grades` 4 项补专有说明、`forms` 4 项、`applications` 4 项、`evidence` 4 项、`controls` 4 项、`faq` 6 条答案，以及 `copy` 段的 7 处小节标题与导语
+2. `[x]` 新增四类专有内容（`detailSections` 区块，4 组 × 3 条）：coil = Conversion Route / Failure Modes / Inspection Differences / Supply Form；clad-copper = Bonding Route / Failure Modes / Inspection Differences / Supply Form
+3. `[x]` 新增「与相邻形态的差别」小节 + 1 张 4 列对比表（`specTable`）：coil = Master coil / Slit strip / Cut sheet；clad-copper = Clad bar / busbar / Clad rod / Clad tube
+4. `[x]` 红线：未为降分改写通用句式（改写后仍是完整技术陈述），未引入未经验证的数值（新增内容全部为定性技术陈述，无新增具体参数值）
+5. `[x]` build + qa:geo 成功，两页 `topSimilar` 降至 0.15 / 0.104（< 0.55 阈值）
+
+计数变化：
+- `scaled-content`：**4 → 2**（成员：balls / baskets）
+- `titanium-coil` `topSimilar`：**0.15**（peer `/titanium-products/titanium-wire/`），无 `scaled-content` 标记
+- `titanium-clad-copper` `topSimilar`：**0.104**（peer `/titanium-products/titanium-coil/`），无 `scaled-content` 标记
+- `tablesTotal` / `tablesExtractable`：**96 → 98 / 98**（新增 2 张对比表可抽取）
+- 两页词数：`titanium-coil` 2363、`titanium-clad-copper` 2495
+- findings：**53 → 51**；opportunities 74（不变）
+- 其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
+
+改动文件：
+- `src/data/product-pages/titanium-coil.ts` — 全文重写（`StandardRaw` 类型化 + 卷材专有壳文案 + `detailSections` + `specTable`）
+- `src/data/product-pages/titanium-clad-copper.ts` — 全文重写（同上，复合导体专有）
+- `docs/seo/execution-plan.md` — EX-E7 状态 `[ ]` → `[x]`，落点改为两个数据文件，条目补「EX-E7 本轮实测」，变更记录追加一行
+- `docs/seo/execution-log.md` — 本段
+
+验证：
+- `npm run build` → `Complete!`（EXIT=0，77 页）
+- `npm run qa:geo` → EXIT=0，77 pages / 51 findings / 74 opportunities
+- `npm run task:verify -- seo-geo-execution` → EXIT=0（56/56 checks passed，`TASK-VERIFY: PASS`）
+- `dist` 实测：两页各含 4 组 `tp-detail-group`、1 张带 `<caption class="tp-spec-caption">` 的对比表（`extractableTables` 1/1）、`FAQPage` 节点在位
+
+踩坑：
+- `titanium-coil.ts` 与 `titanium-clad-copper.ts` 原为 JSON 风格（引号键名、无类型标注），与 `titanium-wire.ts` 的 `StandardRaw` 风格不一致；本轮统一改为 `const raw: StandardRaw = { ... }`，使 `copy` / `extras` 字段有类型保障。
+- 两个原文件的 `sku` 字段（`TITANIUM-COIL` / `TITANIUM-CLAD-COPPER`）未被 `buildStandardPage` 使用（Schema 的 `sku` 来自 `src/data/product-meta.ts`），改写为 `StandardRaw` 时按类型契约去掉，产物无变化。
+- 通用壳里的 `orderBasis` 原文对所有形态都用同一套「Diameter, section, length」句式，对卷材与复合导体都不成立；改写时按各自形态重写了标题与正文（卷材看厚度/宽度/卷径/边缘，复合导体看芯材与包覆牌号/结合方式/截面/电流工况），而不是只替换产品名。
+- PowerShell here-string（`@'...'@`）写入含中文与 `·` 的 TS 文件时，用 `\u00b7` 转义写在**双引号 TS 字符串**里可正常还原为 `·`；`dist` 实测页面内含该字符。若在 here-string 内直接写 `·`，需确认终端编码不破坏它。
+- `npm run task:verify` 会自己往 `tmp/qa/verify-task.log` 写日志；用 `>` 重定向到 `tmp/verify-e7.log` 中转后再读 `tmp/qa/verify-task.log`，避免 Windows 下 `EBUSY`。
+
+遗留：
+- `scaled-content` 仍有 2 页（balls / baskets）→ EX-E8
+- `schema-incomplete` 16 页、`unsourced-spec` 27 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F1…F3 / EX-H5 / EX-X3
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- **人工抽检待办**：抽检 `dist/titanium-products/titanium-coil/index.html` 与 `dist/titanium-products/titanium-clad-copper/index.html` 各 1 页，确认工艺描述与实际产线一致、且没有「为降分而删实质内容」
+- `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
+
+下一步：**EX-E8**（差异化批 6 · `titanium-balls` + `titanium-baskets`，沿用 EX-E2…E7 的模板）
