@@ -194,6 +194,52 @@ const navRender = navItems.map((item) => ({ item, layout: megaMenuLayout(item) }
   const menu = document.getElementById('mobile-menu');
   toggle?.addEventListener('click', () => { menu?.classList.add('is-open'); document.body.style.overflow = 'hidden'; });
   close?.addEventListener('click', () => { menu?.classList.remove('is-open'); document.body.style.overflow = ''; });
+
+  /*
+   * Mega menu 保活：宽幅五列菜单挂在页头底部，触发项与面板之间存在一段
+   * 间隙（页头内边距）。纯 CSS 的 :hover 在鼠标跨过间隙时立刻断开，面板
+   * 瞬间消失。这里用 JS 记录打开项，并在指针位于「触发项 + 面板 + 二者
+   * 之间间隙」三段区域内时保持面板可见，任意移动速度都能进入并点击分类。
+   */
+  const dropdowns = Array.from(document.querySelectorAll('.main-nav-item.has-dropdown'));
+  let active: { item: HTMLElement; menu: HTMLElement } | null = null;
+
+  const inside = (r: DOMRect, x: number, y: number) =>
+    x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+
+  const open = (item: HTMLElement, panel: HTMLElement) => {
+    if (active?.item === item) return;
+    active?.item.classList.remove('is-open');
+    active = { item, menu: panel };
+    item.classList.add('is-open');
+  };
+
+  const closeActive = () => {
+    active?.item.classList.remove('is-open');
+    active = null;
+  };
+
+  dropdowns.forEach((item) => {
+    const panel = item.querySelector<HTMLElement>('.mega-menu');
+    if (!panel) return;
+    item.addEventListener('mouseenter', () => open(item, panel));
+    panel.addEventListener('mouseenter', () => open(item, panel));
+  });
+
+  document.addEventListener('mousemove', (event) => {
+    if (!active) return;
+    const triggerRect = active.item.getBoundingClientRect();
+    const panelRect = active.menu.getBoundingClientRect();
+    const { clientX: x, clientY: y } = event;
+    if (inside(triggerRect, x, y) || inside(panelRect, x, y)) return;
+    // 触发项下沿与面板上沿之间的间隙同样属于下拉区域
+    const inBridge =
+      y > triggerRect.bottom && y < panelRect.top &&
+      x >= Math.min(triggerRect.left, panelRect.left) &&
+      x <= Math.max(triggerRect.right, panelRect.right);
+    if (inBridge) return;
+    closeActive();
+  });
 </script>
 
 <style>
@@ -227,25 +273,30 @@ const navRender = navItems.map((item) => ({ item, layout: megaMenuLayout(item) }
   .has-dropdown:hover .nav-chevron { transform: rotate(180deg); }
   /* Mega menu */
   .mega-menu {
-    position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+    position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
     min-width: 720px; max-width: 900px;
     background: #fff; border: 1px solid var(--color-border);
     border-top: 3px solid var(--color-primary);
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     opacity: 0; visibility: hidden; pointer-events: none;
-    transition: all 0.2s; padding: 1.5rem 0;
+    transition: opacity 0.2s, visibility 0.2s; padding: 1.5rem 0;
   }
-  .has-dropdown:hover .mega-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .has-dropdown:hover .mega-menu { opacity: 1; visibility: visible; pointer-events: auto; }
+  /* 位移只作用在内容层，外框保持贴合触发项，避免外框位移产生悬停死区 */
+  .mega-menu > .container { transform: translateY(8px); transition: transform 0.2s; }
+  .has-dropdown:hover .mega-menu > .container { transform: translateY(0); }
   .mega-menu-wide { min-width: 1100px; max-width: 1280px; }
   /* 五列产品菜单：整幅铺开，内容仍由 .container 限宽居中 */
   .mega-menu-cols-5 {
     left: 0; right: 0; top: 100%;
     min-width: 0; max-width: none; width: auto;
     border-left: none; border-right: none; border-radius: 0;
-    transform: translateY(8px);
+    transform: none;
   }
-  .has-dropdown:hover .mega-menu-cols-5 { transform: translateY(0); }
+  /* JS 打开状态：鼠标跨越触发项与面板之间的间隙时保持可见 */
+  .has-dropdown.is-open .mega-menu { opacity: 1; visibility: visible; pointer-events: auto; }
+  .has-dropdown.is-open .mega-menu > .container { transform: translateY(0); }
   .mega-menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
   .mega-menu-wide .mega-menu-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
   .mega-menu-cols-5 .mega-menu-grid { grid-template-columns: repeat(5, 1fr); gap: 1rem; }

@@ -1,0 +1,22 @@
+{
+  "id": "nav-mega-menu-hover",
+  "title": "Navigation Mega Menu Hover Continuity",
+  "summary": "Keep the Titanium Products mega menu open while the pointer travels from the trigger link down to the panel, so the five process-based product columns stay clickable.",
+  "assertions": [
+    { "type": "fileContains", "path": "src/components/Header.astro", "text": ".has-dropdown.is-open .mega-menu" },
+    { "type": "fileContains", "path": "src/components/Header.astro", "text": ".mega-menu > .container" },
+    { "type": "fileContains", "path": "src/components/Header.astro", "text": "inBridge" },
+    { "type": "fileLacks", "path": "src/components/Header.astro", "text": "translateX(-50%) translateY(8px)" },
+    {
+      "type": "navGroups",
+      "menu": "Titanium Products",
+      "groups": [
+        { "label": "Mill Products", "childCount": 6 },
+        { "label": "Forgings & Clad Materials", "childCount": 2 },
+        { "label": "Piping Components", "childCount": 2 },
+        { "label": "Electrochemical & Mesh Fabrications", "childCount": 3 },
+        { "label": "Fasteners & Precision Machined Parts", "childCount": 3 }
+      ]
+    }
+  ]
+}
