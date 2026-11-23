@@ -93,7 +93,7 @@ npm run gate -- audit
 | EX-E5 | 差异化批 3（fittings, flanges） | `[x]` | `src/data/product-pages/titanium-fittings.ts`、`src/data/product-pages/titanium-flanges.ts` | E2 | AI + **人工抽检** |
 | EX-E6 | 差异化批 4（mesh, wire） | `[x]` | `src/data/product-pages/titanium-mesh.ts`、`src/data/product-pages/titanium-wire.ts` | E2 | AI + **人工抽检** |
 | EX-E7 | 差异化批 5（coil, clad-copper） | `[x]` | `src/data/product-pages/titanium-coil.ts`、`src/data/product-pages/titanium-clad-copper.ts` | E2 | AI + **人工抽检** |
-| EX-E8 | 差异化批 6（balls, baskets） | `[ ]` | `src/pages/titanium-products/*` | E2 | AI + **人工抽检** |
+| EX-E8 | 差异化批 6（balls, baskets） | `[x]` | `src/data/product-pages/titanium-balls.ts`、`src/data/product-pages/titanium-baskets.ts` | E2 | AI + **人工抽检** |
 | EX-F1 | 溯源批 1（anode 19 页） | `[ ]` | `src/data/anode-*.ts` | E1 | AI + **工程抽检** |
 | EX-F2 | 溯源批 2（service 7 页） | `[ ]` | `src/data/service-steps.ts` | E1 | AI + **工程抽检** |
 | EX-F3 | 溯源批 3（设备 4 页） | `[ ]` | `src/data/*-sections.ts` | E1 | AI + **工程抽检** |
@@ -359,7 +359,7 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 
 ### EX-E3 … EX-E8　其余 15 个产品页差异化
 
-- **状态**：EX-E3 `[x]`（2026-11-21 完成：bolts + forgings 通用壳文案改写为紧固件/锻件专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 12 → **10**，两页 `topSimilar` 降至 0.17）· EX-E4 `[x]`（2026-11-22 完成：diaphragm + foil-2 通用壳文案改写为膜片/薄带专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 10 → **8**，两页 `topSimilar` 降至 0.15 / 0.146）· EX-E5 `[x]`（2026-11-22 完成：fittings + flanges 通用壳文案改写为管件/法兰专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 8 → **6**，两页 `topSimilar` 均降至 0.179）· EX-E6 `[x]`（2026-11-22 完成：mesh + wire 通用壳文案改写为网材/线材专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 6 → **4**，两页 `topSimilar` 降至 0.162 / 0.151）· EX-E7 `[x]`（2026-11-22 完成：coil + clad-copper 通用壳文案改写为卷材/复合导体专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 4 → **2**，两页 `topSimilar` 降至 0.15 / 0.104）· EX-E8 `[ ]`
+- **状态**：EX-E3 `[x]`（2026-11-21 完成：bolts + forgings 通用壳文案改写为紧固件/锻件专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 12 → **10**，两页 `topSimilar` 降至 0.17）· EX-E4 `[x]`（2026-11-22 完成：diaphragm + foil-2 通用壳文案改写为膜片/薄带专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 10 → **8**，两页 `topSimilar` 降至 0.15 / 0.146）· EX-E5 `[x]`（2026-11-22 完成：fittings + flanges 通用壳文案改写为管件/法兰专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 8 → **6**，两页 `topSimilar` 均降至 0.179）· EX-E6 `[x]`（2026-11-22 完成：mesh + wire 通用壳文案改写为网材/线材专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 6 → **4**，两页 `topSimilar` 降至 0.162 / 0.151）· EX-E7 `[x]`（2026-11-22 完成：coil + clad-copper 通用壳文案改写为卷材/复合导体专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 4 → **2**，两页 `topSimilar` 降至 0.15 / 0.104）· EX-E8 `[x]`（2026-11-22 完成：balls + baskets 通用壳文案改写为球体/篮筐专有表述，新增四类专有内容小节 + 各自「与相邻形态的差别」对比表；`scaled-content` 2 → **0**）
 - **分组**：E3 = bolts + forgings；E4 = diaphragm + foil-2；E5 = fittings + flanges；E6 = mesh + wire；E7 = coil + clad-copper；E8 = balls + baskets
 - **DoD**（每组）：
   1. 与 EX-E2 完全相同的四项内容补齐（壳压缩 + 四类专有内容 + 差别小节 + 对比表）
@@ -374,9 +374,10 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 - **EX-E5 本轮实测（2026-11-22）**：`titanium-fittings` `topSimilar` **0.179**（peer `/titanium-products/titanium-flanges/`）、`titanium-flanges` **0.179**（peer `/titanium-products/titanium-fittings/`），两页均低于 `CLONE_THRESHOLD` 0.55，`scaled-content` 成员由 8 减为 **6**（balls / baskets / clad-copper / coil / mesh / wire）；`tablesTotal` 92 → **94**、`tablesExtractable` 94（新增 2 张对比表全部可抽取）；两页词数分别 **2124 / 2072**；`dist` 实测两页各含 4 组 `tp-detail-group` 与 1 张带 `<caption>` 的对比表；其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`unsourced-spec` 21、`scaled-content` 6
 - **EX-E3 本轮实测（2026-11-21）**：`titanium-bolts` `topSimilar` **0.17**（peer `titanium-forgings`）、`titanium-forgings` **0.17**（peer `titanium-bolts`），两页均低于 `CLONE_THRESHOLD` 0.55，`scaled-content` 成员由 12 减为 **10**（balls / baskets / clad-copper / coil / diaphragm / fittings / flanges / foil-2 / mesh / wire）；`tablesTotal` 88 → **90**、`tablesExtractable` 90（新增 2 张对比表全部可抽取）；其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
 - **EX-E7 本轮实测（2026-11-22）**：`titanium-coil` `topSimilar` **0.15**（peer `/titanium-products/titanium-wire/`）、`titanium-clad-copper` `topSimilar` **0.104**（peer `/titanium-products/titanium-coil/`），两页均低于 `CLONE_THRESHOLD` 0.55，`scaled-content` 成员由 4 减为 **2**（balls / baskets）；`tablesTotal` 96 → **98**、`tablesExtractable` 98（新增 2 张对比表全部可抽取）；两页词数分别 **2363 / 2495**；`dist` 实测两页各含 4 组 `tp-detail-group` 与 1 张带 `<caption>` 的对比表（`extractableTables` 1/1）；其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
+- **EX-E8 本轮实测（2026-11-22）**：`titanium-balls` `topSimilar` **0.15**、`titanium-baskets` `topSimilar` **0.118**，两页均低于 `CLONE_THRESHOLD` 0.55，`scaled-content` 成员由 2 减为 **0**（全站清零）；`tablesTotal` 98 → **100**、`tablesExtractable` 100（新增 2 张对比表全部可抽取）；两页词数分别 **2314 / 2379**；`dist` 实测两页各含 4 组 `tp-detail-group` 与 1 张带 `<caption>` 的对比表（`extractableTables` 1/1）；findings 51 → **49**；其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
 - **回滚方式**：`git checkout -- <本组实际改动文件>`
 - **人工抽检**：每组完成后抽检 1 页，确认工艺描述与实际产线一致
-- **上一个任务**：EX-E2　**下一个任务**：EX-E3 → EX-E4 → EX-E5 → EX-E6 → EX-E7 → EX-E8 → EX-F1
+- **上一个任务**：EX-E2　**下一个任务**：EX-E3 → EX-E4 → EX-E5 → EX-E6 → EX-E7 → EX-E8 ✅ → **EX-F1**
 
 ### EX-F1　溯源批 1（anode 19 页）
 
@@ -613,6 +614,7 @@ A1 是金丝雀：**只改一个文件**，build 后看 `tablesExtractable` 是�
 | 2026-11-22 | EX-E5 状态 `[ ]` → `[x]`，落点改为 `src/data/product-pages/titanium-fittings.ts` + `titanium-flanges.ts` | 与 EX-E3/E4 同构：通用壳文案改写为管件/法兰专有表述 + `detailSections` 四组 + `specTable` 对比表，共享渲染器无需再改；实测 `scaled-content` 8 → 6，两页 `topSimilar` 0.179 |
 | 2026-11-22 | EX-E6 状态 `[ ]` → `[x]`，落点改为 `src/data/product-pages/titanium-mesh.ts` + `titanium-wire.ts` | 与 EX-E3/E4/E5 同构：通用壳文案改写为网材/线材专有表述 + `detailSections` 四组 + `specTable` 对比表，共享渲染器无需再改；实测 `scaled-content` 6 → 4，两页 `topSimilar` 0.162 / 0.151 |
 | 2026-11-22 | EX-E7 状态 `[ ]` → `[x]`，落点改为 `src/data/product-pages/titanium-coil.ts` + `titanium-clad-copper.ts` | 与 EX-E3/E4/E5/E6 同构：通用壳文案改写为卷材/复合导体专有表述 + `detailSections` 四组 + `specTable` 对比表，共享渲染器无需再改；实测 `scaled-content` 4 → 2，两页 `topSimilar` 0.15 / 0.104 |
+| 2026-11-22 | EX-E8 状态 `[ ]` → `[x]`，落点改为 `src/data/product-pages/titanium-balls.ts` + `titanium-baskets.ts` | 与 EX-E3…E7 同构：通用壳文案改写为球体/阳极篮专有表述 + `detailSections` 四组 + `specTable` 对比表，共享渲染器无需再改；实测 `scaled-content` 2 → **0**（全站清零），两页 `topSimilar` 0.15 / 0.118 |
 
 
 

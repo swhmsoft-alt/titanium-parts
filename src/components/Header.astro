@@ -13,6 +13,27 @@ const navItems = filterAvailable(
 );
 
 const currentPath = Astro.url.pathname;
+
+/**
+ * Layout of one mega menu.
+ *
+ * A menu whose children carry children of their own is rendered as
+ * grouped columns: one column per group, the group heading linking to
+ * the group's first product page.
+ *
+ * Five columns are wider than the navigation item that triggers them,
+ * so that menu is anchored to the header instead of the item.
+ */
+function megaMenuLayout(item: (typeof navItems)[number]) {
+  const columns = item.columns ?? 0;
+  if (columns >= 5) {
+    return { menuClass: 'mega-menu mega-menu-cols-5', hostClass: 'mega-host-wide' };
+  }
+  if (columns === 4) return { menuClass: 'mega-menu mega-menu-wide', hostClass: '' };
+  return { menuClass: 'mega-menu', hostClass: '' };
+}
+
+const navRender = navItems.map((item) => ({ item, layout: megaMenuLayout(item) }));
 ---
 
 <header class="site-header" id="site-header">
@@ -45,15 +66,15 @@ const currentPath = Astro.url.pathname;
         <Logo />
         <nav class="main-nav" aria-label="Main navigation">
           <ul class="main-nav-list">
-            {navItems.map((item) => (
-              <li class={`main-nav-item ${item.children ? 'has-dropdown' : ''}`}>
+          {navRender.map(({ item, layout }) => (
+              <li class={`main-nav-item ${item.children ? 'has-dropdown' : ''} ${layout.hostClass}`}>
                 {item.children ? (
                   <>
                     <a href={item.href} class="main-nav-link">
                       {item.label}
                       <Icon name="chevron-down" size={14} className="nav-chevron" />
                     </a>
-                    <div class={`mega-menu ${item.label === 'Titanium Anodes' ? 'mega-menu-wide' : ''}`}>
+                    <div class={layout.menuClass}>
                       <div class="container">
                         <div class="mega-menu-grid">
                           {item.children.map((child) => (
@@ -63,6 +84,9 @@ const currentPath = Astro.url.pathname;
                                   {child.label}
                                   <Icon name="chevron-right" size={12} />
                                 </a>
+                                {child.description && (
+                                  <p class="mega-menu-group-desc">{child.description}</p>
+                                )}
                                 <div class="mega-menu-sub">
                                   {child.children.map((sub) => (
                                     <a href={sub.href} class={`mega-menu-sub-item ${currentPath === sub.href ? 'is-active' : ''}`}>
@@ -187,6 +211,8 @@ const currentPath = Astro.url.pathname;
   .main-nav { flex: 1; display: flex; justify-content: center; }
   .main-nav-list { display: flex; gap: 0.25rem; align-items: center; }
   .main-nav-item { position: relative; }
+  /* 五列宽菜单挂在页头容器上，而不是窄的导航项上 */
+  .main-nav-item.mega-host-wide { position: static; }
   /* 导航紧凑排布（14px / 10px 内边距），为宽幅品牌标识留出横向空间 */
   .main-nav-link {
     display: inline-flex; align-items: center; gap: 0.25rem;
@@ -212,8 +238,17 @@ const currentPath = Astro.url.pathname;
   }
   .has-dropdown:hover .mega-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
   .mega-menu-wide { min-width: 1100px; max-width: 1280px; }
+  /* 五列产品菜单：整幅铺开，内容仍由 .container 限宽居中 */
+  .mega-menu-cols-5 {
+    left: 0; right: 0; top: 100%;
+    min-width: 0; max-width: none; width: auto;
+    border-left: none; border-right: none; border-radius: 0;
+    transform: translateY(8px);
+  }
+  .has-dropdown:hover .mega-menu-cols-5 { transform: translateY(0); }
   .mega-menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
   .mega-menu-wide .mega-menu-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .mega-menu-cols-5 .mega-menu-grid { grid-template-columns: repeat(5, 1fr); gap: 1rem; }
   .mega-menu-item {
     display: flex; flex-direction: column; gap: 0.25rem;
     padding: 0.75rem 1rem; border-radius: var(--radius);
@@ -236,6 +271,10 @@ const currentPath = Astro.url.pathname;
   .mega-menu-group-label :global(svg) { opacity: 0.5; flex-shrink: 0; }
   .mega-menu-group-label:hover :global(svg) { opacity: 1; }
   .mega-menu-sub { display: flex; flex-direction: column; gap: 0.125rem; padding-left: 0.5rem; }
+  .mega-menu-group-desc {
+    font-size: 0.75rem; line-height: 1.45; color: var(--color-text-muted);
+    padding: 0 0.75rem 0.35rem;
+  }
   .mega-menu-sub-item {
     display: block; padding: 0.5rem 0.75rem; font-size: 0.8125rem;
     color: var(--color-text-secondary); border-radius: 4px;

@@ -806,3 +806,54 @@ DoD 勾选：
 - `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
 
 下一步：**EX-E8**（差异化批 6 · `titanium-balls` + `titanium-baskets`，沿用 EX-E2…E7 的模板）
+
+---
+
+## 2026-11-22 · EX-E8 差异化批 6（titanium-balls + titanium-baskets）
+
+任务：EX-E8（差异化批 6 · 钛球与钛球体 + 钛阳极篮）
+状态：[x]
+
+DoD 勾选：
+1. `[x]` 两页通用壳文案改写为专有表述：`orderBasis` 4 卡（balls = 材料与状态 / 球体几何 / 空心壁厚与封口 / 证据；baskets = 材料与状态 / 篮型与几何 / 挂钩·接触与电流路径 / 证据）、`processSteps` 5 步（balls = 需求与几何评审 → 坯料与毛坯确认 → 机加工·成型与封口 → 形位·表面与尺寸检验 → 标识包装放行；baskets = 需求与产线评审 → 网材·板材与框架材料确认 → 成型·焊接与装配 → 网面·框架与接触检验 → 标识包装放行）、`grades` 4 项补专有 body、`forms` 4 项、`applications` 4 项、`evidence` 4 项、`controls` 4 项、`faq` 6 条答案，以及 `copy` 段的 7 处小节标题与导语
+2. `[x]` 新增四类专有内容（`detailSections` 区块，4 组 × 3 条）：balls = Forming & Machining Route / Failure Modes / Inspection Differences / Supply Form；baskets = Fabrication Route / Failure Modes / Inspection Differences / Supply Form
+3. `[x]` 新增「与相邻形态的差别」小节 + 1 张 4 列对比表（`specTable`）：balls = Solid ball / Hollow sphere / Hemispherical shell；baskets = Mesh basket / Perforated basket / Framed basket
+4. `[x]` 红线：未为降分改写通用句式（改写后仍是完整技术陈述），未引入未经验证的数值（新增内容全部为定性技术陈述，无新增具体参数值）
+5. `[x]` build + qa:geo 成功，两页 `topSimilar` 降至 0.15 / 0.118（< 0.55 阈值）
+
+计数变化：
+- `scaled-content`：**2 → 0**（成员清零，全站 12 页自 EX-E2 起全部完成）
+- `titanium-balls` `topSimilar`：**0.15**，无 `scaled-content` 标记
+- `titanium-baskets` `topSimilar`：**0.118**，无 `scaled-content` 标记
+- `tablesTotal` / `tablesExtractable`：**98 → 100 / 100**（新增 2 张对比表可抽取）
+- 两页词数：`titanium-balls` 2314、`titanium-baskets` 2379
+- findings：**51 → 49**；opportunities 74（不变）
+- 其余计数未倒退：`pageCount` 77、`webPageNodes` 77、`faqPages` 69、`pagesWithVisibleFaqButNoNode` 0、`Product` 31、`schema-incomplete` 16、`unsourced-spec` 27、`no-eeat-signals` 3、`thin-page` 3
+
+改动文件：
+- `src/data/product-pages/titanium-balls.ts` — 全文重写（`StandardRaw` 类型化 + 球体专有壳文案 + `detailSections` + `specTable`）
+- `src/data/product-pages/titanium-baskets.ts` — 全文重写（同上，阳极篮专有；保留原 `catalogSections` 与 Product Boundary 区块，新增 `detailSections` + `specTable`）
+- `docs/seo/execution-plan.md` — EX-E8 状态 `[ ]` → `[x]`，落点改为两个数据文件，条目补「EX-E8 本轮实测」，变更记录追加一行
+- `docs/seo/execution-log.md` — 本段
+
+验证：
+- `npm run build` → `Complete!`（EXIT=0，77 页）
+- `npm run qa:geo` → EXIT=0，77 pages / 49 findings / 74 opportunities
+- `npm run task:verify -- seo-geo-execution` → EXIT=0（56/56 checks passed，`TASK-VERIFY: PASS`）
+- `dist` 实测：两页各含 4 组 `tp-detail-group`、1 张带 `<caption>` 的对比表（`extractableTables` 1/1）、`FAQPage` 节点在位
+
+踩坑：
+- `titanium-balls.ts` 原为 JSON 风格（引号键名、无类型标注），与 `titanium-coil.ts` 的 `StandardRaw` 风格不一致；本轮统一改为 `const raw: StandardRaw = { ... }`，使 `copy` / `extras` 字段有类型保障。
+- `titanium-balls.ts` 的 `sku` 字段（`TITANIUM-BALLS`）未被 `buildStandardPage` 使用（Schema 的 `sku` 来自 `src/data/product-meta.ts`），改写为 `StandardRaw` 时按类型契约去掉，产物无变化。
+- `titanium-baskets.ts` 原有 `raw.catalogSections`（自建 Grades 区块）与 `raw.extras` 的 Product Boundary 区块属于**既有可见内容**，改写时必须原样保留，只在其后追加 `detailSections` / `specTable`；直接整文件重写会静默丢掉这两个区块。
+- 通用壳里的 `orderBasis` 原文对所有形态都用同一套「Diameter, section, length」句式，对球体与篮筐都不成立；改写时按各自形态重写了标题与正文（球体看直径/球度/壁厚/封口，篮筐看网型/开孔率/框架/挂钩与电流路径），而不是只替换产品名。
+- PowerShell here-string（`@'...'@`）写入含中文与 `·` 的 TS 文件时，用 `\u00b7` / `\u2014` / `\u2192` 转义写在**双引号 TS 字符串**里可正常还原；`dist` 实测页面内含该字符。
+- `npm run task:verify` 会自己往 `tmp/qa/verify-task.log` 写日志；用 `>` 重定向到 `tmp/verify-e8.log` 中转后再读 `tmp/qa/verify-task.log`，避免 Windows 下 `EBUSY`。
+
+遗留：
+- `schema-incomplete` 16 页、`unsourced-spec` 27 页、`no-eeat-signals` 3 页、`thin-page` 3 页 → EX-F1…F3 / EX-H5 / EX-X3
+- `ComparisonTable.astro` 仍未接入任何页面（EX-H2）
+- **人工抽检待办**：抽检 `dist/titanium-products/titanium-balls/index.html` 与 `dist/titanium-products/titanium-baskets/index.html` 各 1 页，确认工艺描述与实际产线一致、且没有「为降分而删实质内容」
+- `titanium-plate.ts` 的 `copy.applications` 重复键警告（范围外，未动手）
+
+下一步：**EX-F1**（溯源批 1 · anode 家族 19 页，标准号 / UNS / 证书类型溯源，前置 EX-E1 已完成）

@@ -9,12 +9,19 @@
  */
 
 import { anodeNavGroups } from './anode-catalog';
+import { titaniumProductNavGroups } from './titanium-products-catalog';
 
 export interface NavItem {
   label: string;
   href: string;
   description?: string;
   children?: NavItem[];
+  /**
+   * Number of mega-menu columns this menu renders. Menus with grouped
+   * children (children that carry children of their own) use it to size
+   * the grid; menus without it keep the default two-column layout.
+   */
+  columns?: number;
 }
 
 export const mainNav: NavItem[] = [
@@ -22,25 +29,21 @@ export const mainNav: NavItem[] = [
   {
     label: 'Titanium Products',
     href: '/titanium-products/',
-    children: [
-      { label: 'Titanium Products', href: '/titanium-products/', description: 'Industrial titanium forms' },
-      { label: 'Plate & Sheet', href: '/titanium-products/titanium-plate/' },
-      { label: 'Rod & Bar', href: '/titanium-products/titanium-rod-bar/' },
-      { label: 'Tube & Pipe', href: '/titanium-products/titanium-tubing/' },
-      { label: 'Wire', href: '/titanium-products/titanium-wire/' },
-      { label: 'Mesh', href: '/titanium-products/titanium-mesh/' },
-      { label: 'Foil', href: '/titanium-products/titanium-foil-2/' },
-      { label: 'Coil & Strip', href: '/titanium-products/titanium-coil/' },
-      { label: 'Fittings', href: '/titanium-products/titanium-fittings/' },
-      { label: 'Flanges', href: '/titanium-products/titanium-flanges/' },
-      { label: 'Balls & Spheres', href: '/titanium-products/titanium-balls/' },
-      { label: 'Baskets', href: '/titanium-products/titanium-baskets/' },
-      { label: 'Diaphragms', href: '/titanium-products/titanium-diaphragm/' },
-      { label: 'Forgings', href: '/titanium-products/titanium-forgings/' },
-      { label: 'Clad Copper', href: '/titanium-products/titanium-clad-copper/' },
-      { label: 'Fasteners', href: '/titanium-products/titanium-bolts/' },
-      { label: 'Machined Parts', href: '/titanium-machining-parts/' },
-    ],
+    // Five groups, one per process route and degree of finishing:
+    // mill products, forgings and clad material, piping components,
+    // electrochemical fabrications, and fasteners with precision parts.
+    // The mega menu renders five columns, so the grouping matches the
+    // layout exactly.
+    columns: 5,
+    children: titaniumProductNavGroups.map((group) => ({
+      label: group.label,
+      href: group.href,
+      description: group.description,
+      children: group.children.map((child) => ({
+        label: child.label,
+        href: child.href,
+      })),
+    })),
   },
   {
     label: 'Titanium Anodes',
@@ -48,6 +51,7 @@ export const mainNav: NavItem[] = [
     // Four groups, one per taxonomy dimension: geometry, coating system,
     // application and supporting components. The mega menu renders four
     // columns, so the grouping matches the layout exactly.
+    columns: 4,
     children: anodeNavGroups.map((group) => ({
       label: group.label,
       href: group.href,

@@ -1,0 +1,50 @@
+{
+  "id": "titanium-products-taxonomy",
+  "title": "Titanium Products Navigation Taxonomy",
+  "summary": "Group the sixteen titanium product pages in the main navigation into five process-based columns — mill products, forgings and clad material, piping components, electrochemical fabrications, and fasteners with precision parts — without adding a single new route.",
+  "assertions": [
+    { "type": "routeExists", "route": "/titanium-products/titanium-plate/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-coil/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-foil-2/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-rod-bar/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-tubing/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-wire/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-forgings/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-clad-copper/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-fittings/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-flanges/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-mesh/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-baskets/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-diaphragm/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-bolts/" },
+    { "type": "routeExists", "route": "/titanium-products/titanium-balls/" },
+    { "type": "routeExists", "route": "/titanium-machining-parts/" },
+
+    {
+      "type": "navGroups",
+      "menu": "Titanium Products",
+      "groups": [
+        { "label": "Mill Products", "childCount": 6 },
+        { "label": "Forgings & Clad Materials", "childCount": 2 },
+        { "label": "Piping Components", "childCount": 2 },
+        { "label": "Electrochemical & Mesh Fabrications", "childCount": 3 },
+        { "label": "Fasteners & Precision Machined Parts", "childCount": 3 }
+      ]
+    },
+
+    {
+      "type": "dataEntries",
+      "module": "src/data/titanium-products-catalog.ts",
+      "export": "titaniumProductNavGroups",
+      "count": 5,
+      "idField": "key",
+      "slugs": ["mill", "forgings", "piping", "electrochemical", "fasteners"]
+    },
+    { "type": "dataExportExists", "module": "src/data/titanium-products-catalog.ts", "export": "titaniumProductNavGroups" },
+
+    { "type": "routeLinksTo", "route": "/", "href": "/titanium-products/titanium-plate/" },
+    { "type": "routeLinksTo", "route": "/", "href": "/titanium-products/titanium-foil-2/" },
+    { "type": "routeLinksTo", "route": "/", "href": "/titanium-products/titanium-mesh/" },
+    { "type": "routeLinksTo", "route": "/", "href": "/titanium-machining-parts/" }
+  ]
+}
