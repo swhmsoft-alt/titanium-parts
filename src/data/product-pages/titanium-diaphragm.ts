@@ -231,10 +231,10 @@ const raw: StandardRaw = {
       lede: "A diaphragm is chosen against the media, the pressure, the cycle and the assembly it works in. Grade, thickness, forming route and inspection scope follow from that service context, not from the product name."
     },
     process: {
-      lede: "Diaphragms are cut, formed and inspected in our own facility. The forming route, the functional test scope and the documentation are confirmed by quotation against the approved order basis."
+      lede: "Diaphragms are cut, formed and inspected through qualified partner workshops coordinated for the order. The forming route, the functional test scope and the documentation are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Blank preparation, forming and profile inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Blank preparation, forming and profile inspection are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

@@ -230,10 +230,10 @@ const raw: StandardRaw = {
       lede: "Foil is chosen against the end use, the conversion route and the surface the part has to present. Grade, thickness, protection and inspection scope follow from that service context, not from the product name."
     },
     process: {
-      lede: "Foil is slit, cut and inspected in our own facility. The conversion route, the inspection scope and the documentation are confirmed by quotation against the approved order basis."
+      lede: "Foil is slit, cut and inspected through qualified partner workshops coordinated for the order. The conversion route, the inspection scope and the documentation are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Slitting, cut-part preparation and surface control are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Slitting, cut-part preparation and surface control are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

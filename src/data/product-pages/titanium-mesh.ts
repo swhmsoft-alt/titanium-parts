@@ -230,10 +230,10 @@ const raw: StandardRaw = {
       lede: "Mesh is chosen against the medium, the aperture requirement and the panel it has to survive in service. Type, geometry, edge condition and inspection scope follow from that context, not from the product name."
     },
     process: {
-      lede: "Mesh is woven, expanded, punched or welded in our own facility. The forming route, the edge preparation and the inspection scope are confirmed by quotation against the approved order basis."
+      lede: "Mesh is woven, expanded, punched or welded through qualified partner workshops coordinated for the order. The forming route, the edge preparation and the inspection scope are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Forming, edge preparation and geometric inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Forming, edge preparation and geometric inspection are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

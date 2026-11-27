@@ -231,10 +231,10 @@ const raw: StandardRaw = {
       lede: "A titanium forging is chosen against the load, the media and the design code that governs the part. Grade, route and inspection scope follow from that service context, not from the section name."
     },
     process: {
-      lede: "Forgings are forged, heat treated, machined and inspected in our own facility. Route, allowance, inspection scope and documentation are confirmed by quotation against the approved order basis."
+      lede: "Forgings are forged, heat treated, machined and inspected through qualified partner workshops coordinated for the order. Route, allowance, inspection scope and documentation are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Forging, heat treatment, machining and inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Forging, heat treatment, machining and inspection are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

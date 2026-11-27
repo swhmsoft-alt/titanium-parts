@@ -231,10 +231,10 @@ const raw: StandardRaw = {
       lede: "A clad conductor is chosen against the cell it serves. An electroplating hanger, a chlor-alkali busbar, an electrowinning contact and a cathodic protection anode are reviewed on different media, duties and interface conditions, and the order basis follows from that role."
     },
     process: {
-      lede: "Clad copper is bonded, machined, inspected and packed in our own facility. The bonding route, the machining allowance and the inspection scope are confirmed by quotation against the approved order basis."
+      lede: "Clad copper is bonded, machined, inspected and packed through qualified partner workshops coordinated for the order. The bonding route, the machining allowance and the inspection scope are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Bonding, interface preparation, machining, surface protection and packaging are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Bonding, interface preparation, machining, surface protection and packaging are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

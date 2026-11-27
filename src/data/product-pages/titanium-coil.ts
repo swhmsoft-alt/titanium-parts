@@ -230,10 +230,10 @@ const raw: StandardRaw = {
       lede: "Coil is chosen against the process it enters, not only against the grade. A tube mill feed, a plate forming line and a cut-to-length shop floor are reviewed on different flat-profile and edge conditions, and the order basis follows from that role."
     },
     process: {
-      lede: "Coil is slitted, cut, edge-prepared and inspected in our own facility. The conversion route, the edge treatment and the inspection scope are confirmed by quotation against the approved order basis."
+      lede: "Coil is slitted, cut, edge-prepared and inspected through qualified partner workshops coordinated for the order. The conversion route, the edge treatment and the inspection scope are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Slitting, cut-to-length, edge preparation, flatness control and packaging are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Slitting, cut-to-length, edge preparation, flatness control and packaging are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

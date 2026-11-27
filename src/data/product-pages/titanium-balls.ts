@@ -229,10 +229,10 @@ const raw: StandardRaw = {
       lede: "A ball is chosen against the service it enters, not only against the grade. A valve trim, a bearing race, a buoyancy body and an implant component are reviewed on different roundness, surface and interface conditions, and the order basis follows from that role."
     },
     process: {
-      lede: "Balls are machined, formed, closed and inspected in our own facility. The route, the closure method and the inspection scope are confirmed by quotation against the approved order basis."
+      lede: "Balls are machined, formed, closed and inspected through qualified partner workshops coordinated for the order. The route, the closure method and the inspection scope are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Spherical machining, hemispherical forming, welding, dimensional and surface inspection and protective packing are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Spherical machining, hemispherical forming, welding, dimensional and surface inspection and protective packing are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

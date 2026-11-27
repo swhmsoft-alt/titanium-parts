@@ -231,10 +231,10 @@ const raw: StandardRaw = {
       lede: "Wire is chosen against the process it enters, not only against the grade. A welding consumable, a spring wire and a fine device wire are reviewed on different conditions, and the order basis follows from that role."
     },
     process: {
-      lede: "Wire is drawn, annealed, cleaned and packaged in our own facility. The drawing route, the surface treatment and the inspection scope are confirmed by quotation against the approved order basis."
+      lede: "Wire is drawn, annealed, cleaned and packaged through qualified partner workshops coordinated for the order. The drawing route, the surface treatment and the inspection scope are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Drawing, annealing, surface preparation and packaging are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Drawing, annealing, surface preparation and packaging are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

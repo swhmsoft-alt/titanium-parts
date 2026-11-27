@@ -97,7 +97,7 @@ const raw: StandardRaw = {
       img: "/images/titanium-products/rolling-precision.webp",
       alt: "Hot rolling of titanium plate",
       title: "Hot Rolling to Size",
-      body: "Slab preparation and hot rolling bring the plate close to the ordered thickness. Hot rolling is carried out in our own facility, and the rolling record stays with the lot documentation."
+      body: "Slab preparation and hot rolling bring the plate close to the ordered thickness. Hot rolling is carried out through qualified partner workshops coordinated for the order, and the rolling record travels with the lot documentation."
     },
     {
       img: "/images/titanium-products/thermal-surface-integrity.webp",
@@ -255,10 +255,10 @@ const raw: StandardRaw = {
       lede: "Flat titanium is chosen against the media, the temperature and the downstream fabrication step. Grade, condition and inspection scope follow from that service context, not from the section name."
     },
     process: {
-      lede: "Plate and sheet are hot and cold rolled in our own facility. Cutting, surface preparation, inspection scope and documentation are confirmed by quotation against the approved order basis."
+      lede: "Plate and sheet are hot and cold rolled through qualified partner workshops coordinated for the order. Cutting, surface preparation, inspection scope and documentation are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Plate and sheet rolling, cutting, surface preparation and inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Plate and sheet rolling, cutting, surface preparation and inspection are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     applications: {
       eyebrow: "Industry Context"

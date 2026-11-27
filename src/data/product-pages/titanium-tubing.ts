@@ -208,7 +208,7 @@ const raw: StandardRaw = {
     },
     {
       q: "Can Titanium Parts supply both seamless and welded products?",
-      a: "Yes. Seamless tube and pipe are produced by hot extrusion and welded tube and pipe by TIG welding, both in our own factory. Sizes, grades, condition, testing scope and lead time are confirmed per order"
+      a: "Yes. Seamless tube and pipe are produced by hot extrusion and welded tube and pipe by TIG welding, both through qualified partner workshops coordinated for the order. Sizes, grades, condition, testing scope and lead time are confirmed per order"
     },
     {
       q: "How is the pressure rating of titanium tube or pipe determined?",
@@ -236,10 +236,10 @@ const raw: StandardRaw = {
     },
     process: {
       heading: "Coordinate the Order from Definition to Release",
-      lede: "Seamless and welded tube and pipe are produced in our own factory. Sizing, fabrication, the inspection route and the document package are confirmed for each order."
+      lede: "Seamless and welded tube and pipe are produced through qualified partner workshops coordinated for the order. Sizing, fabrication, the inspection route and the document package are confirmed for each order."
     },
     mfg: {
-      lede: "Seamless extrusion, TIG welding, sizing and inspection are carried out in our own factory. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Seamless extrusion, TIG welding, sizing and inspection are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     applications: {
       heading: "Match the Product Route to the Service and System",

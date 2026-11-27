@@ -231,10 +231,10 @@ const raw: StandardRaw = {
       lede: "A titanium fastener is chosen against the media, the temperature and the joint it clamps. Grade, thread class and inspection scope follow from that service context, not from the section name."
     },
     process: {
-      lede: "Fasteners are formed, machined and inspected in our own facility. Thread route, surface treatment, inspection scope and documentation are confirmed by quotation against the approved order basis."
+      lede: "Fasteners are formed, machined and inspected through qualified partner workshops coordinated for the order. Thread route, surface treatment, inspection scope and documentation are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Fastener forming, threading, head machining and inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Fastener forming, threading, head machining and inspection are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

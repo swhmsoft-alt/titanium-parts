@@ -11,7 +11,7 @@ export const faqItemsExtra = [
 ];
 
 export const rfqBenefits = [
-  'Factory-Direct Titanium Product Supply',
+  'Order-Basis Product Supply',
   'Grade & Standard Selection Guidance',
   'Custom Size & Manufacturing Support',
   'Testing, Documentation & Export Support',

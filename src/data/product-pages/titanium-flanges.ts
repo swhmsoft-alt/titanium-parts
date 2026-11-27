@@ -231,10 +231,10 @@ const raw: StandardRaw = {
       lede: "A flange is chosen against the medium, the pressure, the bolting and the joint it belongs to. Grade, class, facing, bore and inspection scope follow from that service context, not from the product name."
     },
     process: {
-      lede: "Flanges are forged, machined and inspected in our own facility. The forging route, the machining scope and the documentation are confirmed by quotation against the approved order basis."
+      lede: "Flanges are forged, machined and inspected through qualified partner workshops coordinated for the order. The forging route, the machining scope and the documentation are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Forging, machining of the face and bore, and the dimensional records are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Forging, machining of the face and bore, and the dimensional records are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

@@ -34,6 +34,26 @@ const STATUS_FILE = path.join(STATE_DIR, 'budget.status');
 const GATE_FILE = path.join(STATE_DIR, 'gate.json');
 /** Hard wall #2b - presence of this file locks the gate down for good. */
 const LOCK_FILE = path.join(STATE_DIR, 'LOCKDOWN');
+/** The scope declared with `npm run gate -- scope`; read outside it is a violation. */
+const MAX_SCOPE_READS = 8;
+
+function loadScope() {
+  if (!fs.existsSync(GATE_FILE)) return null;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(GATE_FILE, 'utf8').replace(/^\uFEFF/, ''));
+    return parsed.scope ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** True when `rel` is the entry itself or lives under it. */
+function withinScope(rel, entries) {
+  return entries.some((entry) => {
+    const clean = entry.replace(/\\/g, '/').replace(/\/+$/, '');
+    return rel === clean || rel.startsWith(`${clean}/`);
+  });
+}
 
 /**
  * A new atomic task clears the stop-gate as well: the DONE lock and the write
@@ -166,16 +186,23 @@ function main() {
   if (args.pct !== null) state.reportedPct = parsePct(args.pct);
 
   const violations = [];
+  const scope = loadScope();
+  const scopeRead = scope && Array.isArray(scope.read) ? scope.read : [];
   for (const rel of args.read) {
     const abs = path.resolve(ROOT, rel);
     if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) {
       violations.push(`read-missing:${rel}`);
       continue;
     }
+    if (scopeRead.length > 0 && !withinScope(rel.replace(/\\/g, '/'), scopeRead)) {
+      violations.push(`scope-read:${rel}`);
+    }
     state.bytesRead += fs.statSync(abs).size;
     state.fileReads[rel] = (state.fileReads[rel] ?? 0) + 1;
     if (atLeast(state.fileReads[rel], DEFAULTS.maxFileReads + 1)) violations.push(`file-read-limit:${rel}`);
   }
+  const totalReads = Object.keys(state.fileReads).length;
+  if (totalReads > MAX_SCOPE_READS) violations.push(`read-budget:${totalReads} distinct files read (max ${MAX_SCOPE_READS})`);
   for (const label of args.log) {
     const logPath = path.join(ROOT, 'tmp', 'qa', `${label}.log`);
     if (!fs.existsSync(logPath)) {
@@ -199,6 +226,9 @@ function main() {
   if (atLeast(pct, DEFAULTS.handoff) || atLeast(state.toolCalls, DEFAULTS.maxToolCalls)) verdict = 'handoff';
   else if (atLeast(pct, DEFAULTS.readonly)) verdict = 'readonly';
   else if (atLeast(pct, DEFAULTS.warn)) verdict = 'warn';
+  // A read outside the declared scope is a hard stop: the gate then refuses
+  // further writes until the scope is declared again.
+  if (violations.some((v) => v.startsWith('scope-read:'))) verdict = 'readonly';
 
   const report = {
     task: state.task,

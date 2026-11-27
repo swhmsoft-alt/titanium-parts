@@ -231,10 +231,10 @@ const raw: StandardRaw = {
       lede: "A fitting is chosen against the medium, the pressure and the joint it sits in. Grade, wall, radius, end preparation and inspection scope follow from that service context, not from the product name."
     },
     process: {
-      lede: "Fittings are formed, machined and inspected in our own facility. The forming route, the machining scope and the documentation are confirmed by quotation against the approved order basis."
+      lede: "Fittings are formed, machined and inspected through qualified partner workshops coordinated for the order. The forming route, the machining scope and the documentation are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Forming, end preparation and dimensional inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Forming, end preparation and dimensional inspection are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [

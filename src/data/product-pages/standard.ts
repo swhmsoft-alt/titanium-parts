@@ -192,7 +192,7 @@ export function buildStandardPage(d: StandardRaw): StandardPage {
     mfg: {
       eyebrow: mfgCopy.eyebrow ?? 'Inside Titanium Parts',
       heading: mfgCopy.heading ?? `${d.M} Manufacturing Environment`,
-      lede: mfgCopy.lede ?? `${d.M} preparation, processing and inspection are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation.`,
+      lede: mfgCopy.lede ?? `${d.M} preparation, processing and inspection are coordinated with qualified partner workshops and released against the confirmed order basis. The inspection scope and documentation for a specific order are agreed in the quotation.`,
       video: d.mfgVideo,
     },
     applications: {

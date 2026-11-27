@@ -10,6 +10,7 @@
  * Commands
  *   node scripts/handoff/gate.mjs status
  *   node scripts/handoff/gate.mjs phase <PLAN|EDIT|VERIFY|DONE> [--dod "a; b"] [--task id]
+ *   node scripts/handoff/gate.mjs scope --scope "read=a,b;write=c;grep=dir"
  *   node scripts/handoff/gate.mjs write <file> [<file> ...]   -- pre-flight a write
  *   node scripts/handoff/gate.mjs audit                        -- receipt pre-flight
  *   node scripts/handoff/gate.mjs exec -- <cmd> [args...]      -- guarded build / verify
@@ -23,6 +24,7 @@
  *   13  audit failed: a modified file has no write token
  *   14  audit failed: probe files are still in tmp/
  *   15  exec blocked: same locks as write
+ *   19  blocked: the file or the search path is outside the declared scope
  *
  * State: tmp/handoff/gate.json   (phase, DoD checklist, write tokens)
  * Budget: tmp/handoff/budget.json (tool-call counter owned by budget.mjs)
@@ -61,6 +63,7 @@ function emptyState() {
     task: null,
     dod: [],
     tokens: {},
+    scope: { read: [], write: [], grep: [] },
     calls: 0,
     execCalls: 0,
     startedAt: new Date().toISOString(),
@@ -74,10 +77,40 @@ function loadState() {
   try {
     const parsed = JSON.parse(fs.readFileSync(GATE_FILE, 'utf8').replace(/^\uFEFF/, ''));
     for (const key of Object.keys(base)) if (parsed[key] !== undefined) base[key] = parsed[key];
+    if (!base.scope) base.scope = { read: [], write: [], grep: [] };
+    for (const key of ['read', 'write', 'grep']) {
+      if (!Array.isArray(base.scope[key])) base.scope[key] = [];
+    }
     return base;
   } catch {
     return base;
   }
+}
+
+/**
+ * The scope of the current atomic task: the only files that may be read,
+ * written and searched. An empty list means "not restricted".
+ *
+ * Format: `read=a,b;write=c;grep=src/data/product-pages`
+ */
+function parseScope(raw) {
+  const scope = { read: [], write: [], grep: [] };
+  if (!raw) return scope;
+  for (const part of String(raw).split(';')) {
+    const [key, values] = part.split('=');
+    if (!key || values === undefined) continue;
+    const list = values.split(',').map((s) => s.trim().replace(/\\/g, '/')).filter(Boolean);
+    if (key === 'read' || key === 'write' || key === 'grep') scope[key] = list;
+  }
+  return scope;
+}
+
+/** True when `rel` is the entry itself or lives under it. */
+function withinScope(rel, entries) {
+  return entries.some((entry) => {
+    const clean = entry.replace(/\/+$/, '');
+    return rel === clean || rel.startsWith(`${clean}/`);
+  });
 }
 
 function saveState(state) {
@@ -101,7 +134,7 @@ function effectiveCalls(state) {
 }
 
 function parseArgs(argv) {
-  const args = { command: null, positional: [], dod: null, task: null, reopen: false, after: [] };
+  const args = { command: null, positional: [], dod: null, task: null, reopen: false, after: [], scope: null };
   const rest = [...argv];
   const sep = rest.indexOf('--');
   const head = sep === -1 ? rest : rest.slice(0, sep);
@@ -118,6 +151,7 @@ function parseArgs(argv) {
       case '--dod': args.dod = value(); break;
       case '--task': args.task = value(); break;
       case '--reopen': args.reopen = true; break;
+      case '--scope': args.scope = value(); break;
       default:
         if (flag.startsWith('--')) fail(`unknown flag ${flag}`, 2);
         if (args.command === null) args.command = flag;
@@ -238,6 +272,13 @@ function cmdPhase(state, args) {
   console.log(`[gate] phase=${state.phase} dod=${state.dod.length} task=${state.task ?? '-'}`);
 }
 
+function cmdScope(state, args) {
+  const scope = parseScope(args.scope);
+  state.scope = scope;
+  saveState(state);
+  console.log(`[gate] scope set: read=[${scope.read.join(', ')}] write=[${scope.write.join(', ')}] grep=[${scope.grep.join(', ')}]`);
+}
+
 function cmdWrite(state, args) {
   const files = args.positional.map(relPath);
   if (files.length === 0) fail('write needs at least one file path', 2);
@@ -246,6 +287,16 @@ function cmdWrite(state, args) {
     console.error('[gate] BLOCKED: this task is already DONE.');
     console.error('[gate] Any further write needs a new, explicit instruction from the user.');
     process.exit(11);
+  }
+  // Scope wall: a file outside the declared write scope is refused.
+  if (state.scope.write.length > 0) {
+    const outside = files.filter((f) => !withinScope(f, state.scope.write));
+    if (outside.length > 0) {
+      console.error('[gate] BLOCKED: file(s) outside the declared write scope: ' + outside.join(', '));
+      console.error('[gate] Declared write scope: ' + state.scope.write.join(', '));
+      console.error('[gate] Widen it with: npm run gate -- scope --scope "read=...;write=...;grep=..."');
+      process.exit(19);
+    }
   }
   if (wallClockExceeded(state)) {
     console.error('[gate] BLOCKED: wall-clock limit exceeded ('+MAX_WALL_MINUTES+' min).');
@@ -272,6 +323,12 @@ function cmdAudit(state) {
   const problems = [];
   const startedAt = Date.parse(state.startedAt) || 0;
 
+  // The whitelist is not optional: a task that never declared its scope has
+  // no boundary, so the receipt is refused.
+  if (!state.scope || state.scope.write.length === 0) {
+    problems.push('scope-not-declared: run npm run gate -- scope --scope "read=...;write=...;grep=..."');
+  }
+
   for (const rel of gitStatus()) {
     if (isIgnored(rel)) continue;
     const abs = path.resolve(ROOT, rel);
@@ -286,7 +343,7 @@ function cmdAudit(state) {
   if (problems.length > 0) {
     console.error('[gate] AUDIT FAILED');
     for (const problem of problems) console.error(`[gate]   - ${problem}`);
-    process.exit(problems.some((p) => p.startsWith('no write token')) ? 13 : 14);
+    process.exit(problems.some((p) => p.startsWith('no write token') || p.startsWith('scope-not-declared')) ? 13 : 14);
   }
   console.log(`[gate] AUDIT OK (phase=${state.phase}, ${Object.keys(state.tokens).length} token(s))`);
 }
@@ -338,6 +395,7 @@ function main() {
   switch (args.command) {
     case 'status': cmdStatus(state); break;
     case 'phase': cmdPhase(state, args); break;
+    case 'scope': cmdScope(state, args); break;
     case 'write': cmdWrite(state, args); break;
     case 'audit': cmdAudit(state); break;
     case 'exec': cmdExec(state, args); break;

@@ -230,10 +230,10 @@ const raw: StandardRaw = {
       lede: "A basket is chosen against the line it runs in, not only against the grade. A plating tank, an electrowinning cell, a finishing bath and a pickling tank are reviewed on different opening area, loading and current conditions, and the order basis follows from that role."
     },
     process: {
-      lede: "Baskets are formed, welded, assembled and inspected in our own facility. The fabrication route, the hook and contact design and the inspection scope are confirmed by quotation against the approved order basis."
+      lede: "Baskets are formed, welded, assembled and inspected through qualified partner workshops coordinated for the order. The fabrication route, the hook and contact design and the inspection scope are confirmed by quotation against the approved order basis."
     },
     mfg: {
-      lede: "Forming, frame welding, hook assembly, mesh and frame inspection and protective packing are carried out in our own facility. The inspection scope and documentation for a specific order are agreed in the quotation."
+      lede: "Forming, frame welding, hook assembly, mesh and frame inspection and protective packing are carried out through qualified partner workshops coordinated for the order. The inspection scope and documentation for a specific order are agreed in the quotation."
     },
     rfq: {
       checks: [
